@@ -3,9 +3,9 @@
 **Doctoral dissertation (official title, ES):** *Análisis de redes inteligentes para la distribución de claves cuánticas*  
 **Working English title:** *Analysis of intelligent networks for quantum key distribution*
 
-This repository collects **Python scripts** used in the thesis work: build graphs from adjacency matrices, compute network metrics (centrality, clustering, connectivity), detect communities (Louvain, Girvan–Newman), describe degree distributions, and simulate **resilience** under random failures and centrality-based targeted attacks. The empirical layer uses **named nodes** (e.g. places / regions) and, where coordinates exist, **geo-referenced** layouts.
+This repository collects **Python scripts** used in the thesis work: build graphs from adjacency matrices (including **weighted** links if the CSV is non-binary), compute network metrics (centrality, clustering, connectivity, path length, global efficiency, assortativity, Louvain modularity), compare against **null models** (Erdős–Rényi `G(n,m)` and configuration), detect communities (Louvain, Girvan–Newman), describe degree distributions, and simulate **resilience** — random and targeted **node** attacks (static and **adaptive**), random and targeted **edge** attacks, full **S(p)** curves with Monte Carlo bands, and **Schneider-style R** summaries. Named nodes (e.g. places / regions) and **geo-referenced** layouts are used where coordinate CSVs exist.
 
-> **Resumen (ES):** código de apoyo para la tesis *Análisis de redes inteligentes para la distribución de claves cuánticas*: análisis de grafos (métricas, comunidades, distribución de grado) y simulaciones de resiliencia ante fallos y ataques dirigidos, con visualizaciones y exportación de resultados a CSV y figuras.
+> **Resumen (ES):** código para la tesis *Análisis de redes inteligentes para la distribución de claves cuánticas*: métricas extendidas, modularidad Louvain, modelos nulos, curvas de robustez S(p) para nodos y aristas (aleatorio, estático, adaptativo), métricas R, y scripts anteriores de visualización y ataques incrementales.
 
 ---
 
@@ -53,12 +53,24 @@ pip install -r requirements.txt
 | `analis_redes_complejas.py` | `AdjacencyMatrixNamed45.csv` | `hj_biplot_clusters.pdf`, `Node_Specific_Network_Measures.csv`, console stats |
 | `generar_grado_distribucion.py` | `AdjacencyMatrixNamed45.csv` | `distribucion_grado_grafo.{png,pdf,svg}` |
 | `girvan_newmancyl.py` | `AdjacencyMatrixNamed45.csv`, `cyl_1000.csv` | `girvan_newman_cyl_9.{png,pdf,svg}`, community listing |
-| `ataques_aleatorios_nodos_fault.py` | Same as above | `random_failure_results.csv`, summary stats |
+| `ataques_aleatorios_nodos_fault.py` | Same as above | `random_failure_results.csv`, summary stats (`RNG_SEED` fixed for reproducibility) |
 | `ataques_dirigidos_nodos_fault.py` | Same | `incremental_targeted_attack_results.csv`, disconnection threshold |
+| `metricas_extendidas.py` | `AdjacencyMatrixNamed45.csv` | `extended_network_metrics.csv` |
+| `modelos_nulos.py` | Same | `null_model_comparison.csv` (observed + random `G(n,m)` + configuration samples) |
+| `robustez_avanzada.py` | Same (CLI flags) | `robustez_output/robustness_curves.csv`, `robustness_R_metrics.csv`, `robustness_nodes.png`, `robustness_edges.png` |
+| `grafo_io.py` | — | Shared loader (`load_named_adjacency`); not run standalone |
 | `conectividad.py` | `adjacency_matrix.80.csv` | `node_connectivity_visualization.png` |
-| `centralidad.py` | Graph **`G`** supplied by you | `centrality_measures_visualization.png` |
-| `coeficiente.py` | **`G`** + complete imports (see below) | `clustering_coefficient_distribution.png` |
-| `comunidad.py` | **`G`** + Louvain | `community_structure_visualization.png` |
+| `centralidad.py` | `AdjacencyMatrixNamed45.csv` | `centrality_measures_visualization.png` |
+| `coeficiente.py` | `AdjacencyMatrixNamed45.csv` | `clustering_coefficient_distribution.png` |
+| `comunidad.py` | `AdjacencyMatrixNamed45.csv` | `community_structure_visualization.png` |
+
+**Advanced robustness CLI (example):**
+
+```bash
+python robustez_avanzada.py --adjacency AdjacencyMatrixNamed45.csv --out-dir robustez_output --seed 42 --trials 80
+```
+
+Document `--seed` and `--trials` in the thesis when you report uncertainty bands.
 
 ---
 
@@ -106,9 +118,41 @@ Scripts assume **relative paths** to the current working directory.
 
 ### `ataques_aleatorios_nodos_fault.py`
 
-**EN:** **Random removal** of 13% of nodes per trial, 300 trials; records largest connected component size, component count, and diameter of the largest component; writes `random_failure_results.csv` and descriptive statistics.
+**EN:** **Random removal** of 13% of nodes per trial, 300 trials; records largest connected component size, component count, and diameter of the largest component; writes `random_failure_results.csv` and descriptive statistics. Uses a fixed **`RNG_SEED`** (see script) for reproducibility.
 
-**ES:** Simulación Monte Carlo de fallos aleatorios (13 % de nodos); métricas de fragmentación y CSV.
+**ES:** Monte Carlo al 13 %; CSV y estadísticos; semilla fija documentada.
+
+---
+
+### `metricas_extendidas.py`
+
+**EN:** On the giant component: average shortest path length, diameter, **global efficiency** (supports weighted edges), average clustering, **degree assortativity**, **Louvain modularity** and community count. Writes one-row `extended_network_metrics.csv`.
+
+**ES:** Métricas de camino/eficiencia, asortatividad, modularidad Louvain; CSV resumen.
+
+---
+
+### `modelos_nulos.py`
+
+**EN:** Draws **Erdős–Rényi** `G(n,m)` graphs with the same `n` and `m` as the observed network, and **configuration-model** simple graphs from the observed degree sequence (multiple samples). Compares the same extended metrics to the **observed** graph; writes `null_model_comparison.csv`.
+
+**ES:** Comparación con `G(n,m)` y configuración; CSV con observado + muestras.
+
+---
+
+### `robustez_avanzada.py`
+
+**EN:** Builds **S(p)** curves: **random node** removal (mean ± std over trials), **static** and **adaptive** targeted removal by **degree, closeness, and betweenness**; **random edge** removal; **static** and **adaptive** removal by **edge betweenness**. Exports long-format `robustness_curves.csv`, aggregated **R_mean** (mean of S over the grid) and **R_integral** (trapezoidal ∫S(f)df) per scenario in `robustness_R_metrics.csv`, and two figures (`robustness_nodes.png`, `robustness_edges.png`). See module docstring for the Schneider-style interpretation.
+
+**ES:** Curvas completas; nodos aleatorio + estático/adaptativo (grado, cercanía, intermediación); aristas; métricas R; CSV y figuras en `--out-dir`.
+
+---
+
+### `grafo_io.py`
+
+**EN:** `load_named_adjacency(path)` — single entry point for the named-matrix CSV used across scripts.
+
+**ES:** Carga unificada de la matriz de adyacencia nombrada.
 
 ---
 
@@ -130,33 +174,33 @@ Scripts assume **relative paths** to the current working directory.
 
 ### `centralidad.py`
 
-**EN:** **Template:** `G` is not defined — assign a graph before running. Computes degree, betweenness, closeness; plots top-10 bar charts per metric.
+**EN:** Loads the named adjacency graph; degree, betweenness, closeness; top-10 bar charts per metric.
 
-**ES:** **Plantilla:** define `G` antes de ejecutar; barras de los 10 nodos con mayor centralidad.
+**ES:** Carga la matriz nombrada; barras top-10 por centralidad.
 
 ---
 
 ### `coeficiente.py`
 
-**EN:** **Snippet:** average and per-node clustering plus a histogram. **Missing** imports (`networkx`, `matplotlib.pyplot`, `numpy`) and graph `G`. Last line `plt.show(), avg_clustering_coefficient` should be cleaned up when you promote this to a full script.
+**EN:** Average and per-node clustering; histogram; saves PNG.
 
-**ES:** **Fragmento:** faltan imports y `G`; revisar la última línea al integrarlo.
+**ES:** Distribución del coeficiente de agrupamiento.
 
 ---
 
 ### `comunidad.py`
 
-**EN:** **Snippet:** requires predefined `G`. **Louvain** `best_partition`, community-coloured layout, community count.
+**EN:** **Louvain** `best_partition`, community-coloured layout, prints community count.
 
-**ES:** **Fragmento:** Louvain sobre `G` ya definido.
+**ES:** Louvain y visualización por comunidades.
 
 ---
 
 ## Next steps | Próximos pasos sugeridos
 
-**EN:** Centralise data paths (`data/`, env vars, or `config.yaml`); complete the three snippets with loaders and `if __name__ == "__main__":`; add minimal tests or a reproducibility notebook; fix or document the random **seed** for `ataques_aleatorios_nodos_fault.py` if you report confidence intervals.
+**EN:** Centralise data paths (`data/`, env vars, or `config.yaml`); add a minimal reproducibility notebook; tie **edge weights** to QKD capacities in the CSV when the thesis model is ready.
 
-**ES:** Unificar datos y rutas; completar plantillas; tests o notebook; semilla aleatoria documentada para intervalos de confianza.
+**ES:** Rutas centralizadas; notebook; pesos QKD cuando el modelo lo defina.
 
 ---
 

@@ -1,23 +1,41 @@
+# SPDX-License-Identifier: GPL-3.0-only
+"""Louvain communities on the named adjacency graph."""
+from __future__ import annotations
+
 import community as community_louvain
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
 
-# Use the Louvain method to find the best partition
-partition = community_louvain.best_partition(G)
-
-# Visualization of the community structure
-plt.figure(figsize=(12, 10))
-# Generate a color palette with enough colors for each community
-cmap = plt.cm.get_cmap('hsv', max(partition.values()) + 1)
-# Draw the nodes with colors according to their partition
-nx.draw_networkx(G, node_color=[cmap(partition[node]) for node in G], node_size=50, with_labels=False, edge_color='lightgray')
-plt.title('Community Structure in the Network')
-plt.axis('off')
-plt.tight_layout()
-
-plt.savefig('community_structure_visualization.png')
-plt.show()
-
-# Count the number of communities detected
-num_communities = len(set(partition.values()))
-num_communities
+from grafo_io import DEFAULT_NAMED_ADJACENCY, load_named_adjacency
 
 
+def main() -> None:
+    G = load_named_adjacency(DEFAULT_NAMED_ADJACENCY)
+
+    partition = community_louvain.best_partition(G)
+    n_comm = len(set(partition.values()))
+
+    plt.figure(figsize=(12, 10))
+    palette = plt.cm.tab20(np.linspace(0, 1, max(n_comm, 1)))
+    node_color = [palette[partition[node] % len(palette)] for node in G.nodes()]
+
+    nx.draw_networkx(
+        G,
+        node_color=node_color,
+        node_size=50,
+        with_labels=False,
+        edge_color="lightgray",
+    )
+    plt.title("Community structure (Louvain)")
+    plt.axis("off")
+    plt.tight_layout()
+
+    plt.savefig("community_structure_visualization.png", dpi=200)
+    plt.show()
+
+    print(f"Detected communities: {n_comm}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,23 +1,17 @@
 # Para analizar qué sucede en la red si se eliminan nodos de forma aleatoria (13%). Cuando tiene más de un componente, la red no permite la conexión de todos los nodos
 
-import pandas as pd
-import networkx as nx
 import random
-import matplotlib.pyplot as plt
 
-# Load the adjacency matrix from the uploaded CSV file
-file_path = 'AdjacencyMatrixNamed45.csv'
-adjacency_matrix = pd.read_csv(file_path, index_col=0)
+import networkx as nx
+import pandas as pd
 
-# Convert the adjacency matrix to a NetworkX graph
-G = nx.from_pandas_adjacency(adjacency_matrix)
+from grafo_io import DEFAULT_NAMED_ADJACENCY, load_named_adjacency
 
-# Load the node coordinates from the uploaded CSV file
-coordinates_file_path = 'cyl_1000.csv'
-coordinates_df = pd.read_csv(coordinates_file_path, delimiter=';')
+# Document this seed in the thesis when reporting confidence intervals / reproducibility.
+RNG_SEED = 42
+random.seed(RNG_SEED)
 
-# Create a dictionary of node positions using the coordinates
-node_positions = {row['Población']: (row['Longitud'], row['Latitud']) for idx, row in coordinates_df.iterrows()}
+G = load_named_adjacency(DEFAULT_NAMED_ADJACENCY)
 
 # Function to simulate random failures
 def random_failure_simulation(G, removal_fraction=0.13):
@@ -46,9 +40,11 @@ for _ in range(num_simulations):
 random_failure_df = pd.DataFrame(random_failure_data, columns=['Largest Connected Component Size', 'Number of Components', 'Diameter of Largest Component'])
 
 # Save results to CSV
-random_failure_df.to_csv('random_failure_results.csv', index=False)
+random_failure_df.to_csv("random_failure_results.csv", index=False)
 
 # Print summaries
+print(f"RNG_SEED = {RNG_SEED} (set in script for reproducibility)")
+print(f"Adjacency file: {DEFAULT_NAMED_ADJACENCY}")
 print("Random Failure Simulation Results Summary:")
 print(random_failure_df.describe())
 
