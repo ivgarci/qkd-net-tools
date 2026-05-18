@@ -21,9 +21,30 @@ qkd-net-tools/
 ├── adif/              ADIF dark-fibre case study: junction graph, resilience, figures, maps
 ├── generacion/        Topology generation: k-medoids (R/PAM), network builder (Python)
 ├── datos/             Input data files
+│   ├── cyl/           Castile and León: adjacency matrix, node measures, failure/attack results
+│   │   ├── cyl_1000.csv                          — 267 candidate municipalities
+│   │   ├── AdjacencyMatrixNamed45.csv             — 100×100 adjacency (Δ=45 km)
+│   │   ├── AdjacencyMatrixNamed45_exp.csv         — alternative parameter experiment
+│   │   ├── Node_Specific_Network_Measures.csv     — per-node centrality, clustering, community
+│   │   ├── Node_Specific_Network_Measures_exp.csv — same, alternative experiment
+│   │   ├── random_failure_results.csv             — S(p) over R=300 random failure trials
+│   │   ├── random_failure_results_exp.csv         — same, alternative experiment
+│   │   ├── incremental_targeted_attack_results.csv     — targeted attack curve (0–49%, step 1%)
+│   │   ├── incremental_targeted_attack_results_exp.csv — same, alternative experiment
+│   │   └── targeted_attack_results.csv            — targeted attack (alternative format)
+│   ├── espana/        Peninsular Spain: adjacency matrix, node measures, failure/attack results
+│   │   ├── peninsula_1000.csv                     — 3,102 candidate municipalities
+│   │   ├── AdjacencyMatrixNamed45.csv             — 950×950 adjacency (Δ=45 km)
+│   │   ├── componentes_parametros.csv             — connected components by parameter sweep
+│   │   ├── Node_Specific_Network_Measures.csv     — per-node centrality, clustering, community
+│   │   ├── random_failure_results.csv             — S(p) over R=3,000 random failure trials
+│   │   └── incremental_targeted_attack_results.csv — targeted attack curve (0–49%, step 1%)
 │   ├── adif/          ADIF railway network data and analysis results
-│   ├── cyl_1000.csv   Castile and León municipalities (267 candidates)
-│   └── peninsula_1000.csv  Peninsular Spain municipalities (3,102 candidates)
+│   │   ├── nodos_red_adif.csv                     — 3,085 ADIF dependencies with coordinates
+│   │   ├── adyacencia_red_adif.csv                — 3,099 fibre segments with lengths (km)
+│   │   └── resultados_adif_junctions.json         — pre-computed metrics, failure/attack curves
+│   ├── cyl_1000.csv          — (legacy path) Castile and León municipalities
+│   └── peninsula_1000.csv    — (legacy path) Peninsular Spain municipalities
 ├── requirements.txt
 └── LICENSE
 ```
