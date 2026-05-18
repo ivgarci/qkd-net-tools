@@ -45,6 +45,10 @@ qkd-net-tools/
 │   │   └── resultados_adif_junctions.json         — pre-computed metrics, failure/attack curves
 │   ├── cyl_1000.csv          — (legacy path) Castile and León municipalities
 │   └── peninsula_1000.csv    — (legacy path) Peninsular Spain municipalities
+├── figuras/           Generated figures for all three case studies
+│   ├── cyl/           CyL: degree distribution, Girvan-Newman communities, HJ-biplot, medoid map, network topology
+│   ├── espana/        España: degree distribution, Girvan-Newman communities, HJ-biplot, medoid map, network topology, connected-components sweep
+│   └── adif/          ADIF: georeferenced junction graph map, resilience curves S(p)
 ├── requirements.txt
 └── LICENSE
 ```
