@@ -1,18 +1,38 @@
-# Intelligent networks for quantum key distribution — PhD research code
+# qkd-net-tools — QKD Network Analysis Toolkit
 
-**Doctoral dissertation (official title, ES):** *Análisis de redes inteligentes para la distribución de claves cuánticas*  
-**Working English title:** *Analysis of intelligent networks for quantum key distribution*
+**Doctoral dissertation (ES):** *Generación y validación de redes QKD a gran escala bajo restricciones físicas y tecnológicas*  
+**English title:** *Generating and validating large-scale QKD networks under realistic physical and technological constraints*
 
-This repository collects **Python scripts** used in the thesis work: build graphs from adjacency matrices, compute network metrics (centrality, clustering, connectivity), detect communities (Louvain, Girvan–Newman), describe degree distributions, and simulate **resilience** under random failures and centrality-based targeted attacks. The empirical layer uses **named nodes** (e.g. places / regions) and, where coordinates exist, **geo-referenced** layouts.
+**Author:** Iván García Cobo · Universidad de Salamanca · 2025–2026  
+**Related publication:** García-Cobo, I. & Menéndez, H.D. (2021). *Designing large quantum key distribution networks via medoid-based algorithms.* Future Generation Computer Systems, 115, 814–824.
 
-> **Resumen (ES):** código de apoyo para la tesis *Análisis de redes inteligentes para la distribución de claves cuánticas*: análisis de grafos (métricas, comunidades, distribución de grado) y simulaciones de resiliencia ante fallos y ataques dirigidos, con visualizaciones y exportación de resultados a CSV y figuras.
+---
+
+This repository contains all Python and R scripts used across three case studies in the thesis: generation of trusted-relay QKD network topologies from territorial data (Castile and León, Peninsular Spain), analysis of real dark-fibre infrastructure (ADIF railway network), and structural validation via complex network analysis.
+
+---
+
+## Repository structure | Estructura del repositorio
+
+```
+qkd-net-tools/
+├── analisis/          Network metrics: centrality, clustering, connectivity, degree distribution
+├── ataques/           Resilience simulations: random failures and targeted attacks
+├── adif/              ADIF dark-fibre case study: junction graph, resilience, figures, maps
+├── generacion/        Topology generation: k-medoids (R/PAM), network builder (Python)
+├── datos/             Input data files
+│   ├── adif/          ADIF railway network data and analysis results
+│   ├── cyl_1000.csv   Castile and León municipalities (267 candidates)
+│   └── peninsula_1000.csv  Peninsular Spain municipalities (3,102 candidates)
+├── requirements.txt
+└── LICENSE
+```
 
 ---
 
 ## Requirements | Requisitos
 
-- **Python** 3.10+ recommended.
-- Install dependencies:
+**Python 3.10+** and **R 4.x** (for generation scripts only).
 
 ```bash
 pip install -r requirements.txt
@@ -23,153 +43,140 @@ pip install -r requirements.txt
 | `networkx` | Graphs and algorithms |
 | `pandas` | CSV / adjacency matrices |
 | `matplotlib` | Figures |
-| `numpy` | Histograms (e.g. clustering) |
-| `scikit-learn` | PCA, KMeans in `analis_redes_complejas.py` |
-| `scipy` | ANOVA (`f_oneway`) |
-| `python-louvain` | `comunidad.py` (`import community`) |
-
-*Paquetes equivalentes en español:* mismos nombres (`pip install -r requirements.txt`).
+| `numpy` | Numerical operations |
+| `scikit-learn` | PCA, KMeans in `analisis/` |
+| `scipy` | Statistical tests |
+| `python-louvain` | Louvain community detection |
+| `geopandas` | Geospatial operations (ADIF map) |
+| `folium` | Interactive HTML maps (optional) |
 
 ---
 
-## Expected input files | Datos de entrada
+## Case studies and scripts | Casos de estudio y scripts
+
+### Case I & II — CyL and Peninsular Spain (generated topologies)
+
+| Script | Directory | Description |
+|--------|-----------|-------------|
+| `medoids.R` | `generacion/` | PAM k-medoids clustering; produces medoid assignments and adjacency matrix |
+| `components.R` | `generacion/` | Connectivity verification of backbone graph |
+| `plots.R` | `generacion/` | Topology visualisation |
+| `generar_red.py` | `generacion/` | Python pipeline: Haversine distances, Δ-threshold edge formation, backbone construction |
+| `analis_redes_complejas.py` | `analisis/` | Full structural analysis: centrality, PCA/KMeans, community detection, global metrics |
+| `generar_grado_distribucion.py` | `analisis/` | Degree distribution histogram |
+| `girvan_newmancyl.py` | `analisis/` | Girvan–Newman community detection with geo-layout |
+| `centralidad.py` | `analisis/` | Degree / betweenness / closeness centrality charts |
+| `coeficiente.py` | `analisis/` | Clustering coefficient distribution |
+| `comunidad.py` | `analisis/` | Louvain community detection |
+| `conectividad.py` | `analisis/` | Connectivity visualisation |
+| `ataques_aleatorios_nodos_fault.py` | `ataques/` | Monte Carlo random-failure simulation (default: 13% of nodes, R=300) |
+| `ataques_dirigidos_nodos_fault.py` | `ataques/` | Incremental targeted attack by centrality (degree/betweenness/closeness), 0–49% in 1% steps |
+
+**Input files** (place in `datos/` or update paths in scripts):
+
+| File | Used by |
+|------|---------|
+| `datos/cyl_1000.csv` | `girvan_newmancyl.py`, `generar_red.py` |
+| `datos/peninsula_1000.csv` | `generar_red.py` (Peninsular Spain case) |
+| `AdjacencyMatrixNamed45.csv` | `analis_redes_complejas.py`, `ataques/`, `analisis/` |
+
+---
+
+### Case III — ADIF dark-fibre network (real infrastructure)
+
+| Script | Directory | Description |
+|--------|-----------|-------------|
+| `analisis_adif_junctions.py` | `adif/` | Main analysis pipeline: load ADIF CSVs → junction graph contraction (degree-2 chain reduction) → structural metrics → random failures (R=1000) → targeted attacks by degree and betweenness → JSON output |
+| `generar_figura_adif.py` | `adif/` | Generates `adif_resiliencia.pdf/.png` — S(p) curves for both attack strategies |
+| `generar_mapa_adif_static.py` | `adif/` | Generates georeferenced static map of junction graph (matplotlib); blue edges ≤50 km, orange >50 km, red nodes degree≥5 |
+| `generar_mapa_adif.py` | `adif/` | Generates interactive HTML map (folium) — browser-only, not for LaTeX |
+| `generar_matriz_adif.py` | `adif/` | Distance matrix between primary junctions |
+| `generar_matriz_extendida.py` | `adif/` | Extended distance matrix with secondary junctions |
+
+**Input files** (in `datos/adif/`):
 
 | File | Description |
 |------|-------------|
-| `AdjacencyMatrixNamed45.csv` | Symmetric adjacency matrix with **row and column names** as node IDs (used by several scripts). |
-| `adjacency_matrix.80.csv` | Matrix **without** a header row (`header=None`) for `conectividad.py`. |
-| `cyl_1000.csv` | Geographic coordinates: columns `Población`, `Longitud`, `Latitud` (separator `;`). |
+| `datos/adif/nodos_red_adif.csv` | ADIF node catalogue: 3,085 dependencies with geo-coordinates, category (P/S), connection status |
+| `datos/adif/adyacencia_red_adif.csv` | ADIF adjacency: 3,099 fibre segments with lengths (km) |
+| `datos/adif/resultados_adif_junctions.json` | Pre-computed analysis results: metrics, random failure statistics, attack curves, top-10 betweenness nodes |
 
-**Note:** CSV files are **not** shipped with the repo; place them in the working directory or update paths inside each script.
+**Key parameters (ADIF case):**
 
-*Nota (ES):* los CSV no se incluyen en el repositorio; colócalos en el directorio de ejecución o ajusta las rutas en cada script.
-
----
-
-## Scripts and main outputs | Scripts y salidas
-
-| Script | Main input | Main outputs |
-|--------|------------|--------------|
-| `analis_redes_complejas.py` | `AdjacencyMatrixNamed45.csv` | `hj_biplot_clusters.pdf`, `Node_Specific_Network_Measures.csv`, console stats |
-| `generar_grado_distribucion.py` | `AdjacencyMatrixNamed45.csv` | `distribucion_grado_grafo.{png,pdf,svg}` |
-| `girvan_newmancyl.py` | `AdjacencyMatrixNamed45.csv`, `cyl_1000.csv` | `girvan_newman_cyl_9.{png,pdf,svg}`, community listing |
-| `ataques_aleatorios_nodos_fault.py` | Same as above | `random_failure_results.csv`, summary stats |
-| `ataques_dirigidos_nodos_fault.py` | Same | `incremental_targeted_attack_results.csv`, disconnection threshold |
-| `conectividad.py` | `adjacency_matrix.80.csv` | `node_connectivity_visualization.png` |
-| `centralidad.py` | Graph **`G`** supplied by you | `centrality_measures_visualization.png` |
-| `coeficiente.py` | **`G`** + complete imports (see below) | `clustering_coefficient_distribution.png` |
-| `comunidad.py` | **`G`** + Louvain | `community_structure_visualization.png` |
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| `Δ_eff` | 50 km | Operational threshold (absorbs <7% margin on AVE segments) |
+| `R` | 1,000 | Random failure replications |
+| `p_0` | 13% | Fraction removed per trial |
+| `p*` (degree attack) | 5% | Fragmentation threshold |
+| `p*` (betweenness) | 10% | Fragmentation threshold |
+| `\|V_J\|` | 485 | Junction nodes after degree-2 contraction |
+| `\|E_J\|` | 633 | Edges in junction graph |
+| Bridges | 138 | 21.8% of edges |
+| Articulation points | 123 | 25.4% of nodes |
 
 ---
 
 ## How to run | Cómo ejecutar
 
-From the project root, with the required CSV files present (or after editing paths):
+### ADIF full pipeline
 
 ```bash
-python analis_redes_complejas.py
-python generar_grado_distribucion.py
-# …
+cd adif/
+# 1. Build junction graph, compute all metrics and resilience curves
+python analisis_adif_junctions.py
+# → writes ../datos/adif/resultados_adif_junctions.json
+
+# 2. Generate resilience figure
+python generar_figura_adif.py
+# → writes adif_resiliencia.pdf / .png
+
+# 3. Generate static georeferenced map
+python generar_mapa_adif_static.py
+# → writes adif_junctions_mapa.pdf / .png
 ```
 
-Scripts assume **relative paths** to the current working directory.
+### CyL / España analysis pipeline
 
-*En español:* ejecuta desde la raíz del proyecto con los CSV en la misma carpeta o cambiando rutas en el código.
+```bash
+# Step 1: generate topology (R)
+cd generacion/
+Rscript medoids.R          # produces medoid assignments
+Rscript components.R       # verifies connectivity
+# → AdjacencyMatrixNamed45.csv (copy to working directory)
 
----
+# Step 2: structural analysis (Python)
+cd ../analisis/
+python analis_redes_complejas.py
+python girvan_newmancyl.py
 
-## Code walkthrough | Explicación del código
-
-### `analis_redes_complejas.py`
-
-**EN:** Loads the named adjacency matrix, builds an undirected `networkx` graph, and computes degree / closeness / betweenness / eigenvector centrality (with non-convergence handling), per-node clustering, edge count, diameter (if connected), and density. Node-level measures are assembled in a DataFrame; **PCA** (2D, referred in-code as an HJ-Biplot-style view) and **KMeans** (3 clusters) follow, plus one-way **ANOVA** on degree centrality across clusters. Saves a PCA scatter coloured by cluster and a CSV of all measures and cluster labels.
-
-**ES:** Carga la matriz nombrada, calcula centralidades, agrupamiento y propiedades globales; PCA + KMeans (3 grupos) + ANOVA sobre centralidad de grado; guarda figura y `Node_Specific_Network_Measures.csv`.
-
----
-
-### `generar_grado_distribucion.py`
-
-**EN:** Degree sequence histogram; figure exported to PNG, PDF, and SVG. (Plot title in the script still refers to a specific regional case — adjust for your chapter.)
-
-**ES:** Histograma de la distribución de grado; exporta PNG, PDF y SVG.
+# Step 3: resilience
+cd ../ataques/
+python ataques_aleatorios_nodos_fault.py
+python ataques_dirigidos_nodos_fault.py
+```
 
 ---
 
-### `girvan_newmancyl.py`
+## Reproducibility notes | Reproducibilidad
 
-**EN:** Loads graph and node coordinates, runs **Girvan–Newman**, advances the partition generator, picks a multi-community split for colouring, draws the graph at lon/lat positions, exports figures, prints a community–nodes table.
-
-**ES:** Girvan–Newman con posiciones geográficas y tablas de comunidades por consola.
-
----
-
-### `ataques_aleatorios_nodos_fault.py`
-
-**EN:** **Random removal** of 13% of nodes per trial, 300 trials; records largest connected component size, component count, and diameter of the largest component; writes `random_failure_results.csv` and descriptive statistics.
-
-**ES:** Simulación Monte Carlo de fallos aleatorios (13 % de nodos); métricas de fragmentación y CSV.
-
----
-
-### `ataques_dirigidos_nodos_fault.py`
-
-**EN:** **Incremental targeted attack:** sort nodes by centrality (degree, closeness, or betweenness), remove 0–49% in 1% steps, track largest component, component count, diameter; saves CSV and reports the minimum removal fraction where the graph is no longer connected (`Number of Components > 1`).
-
-**ES:** Ataque dirigido incremental por centralidad; umbral de desconexión y CSV.
-
----
-
-### `conectividad.py`
-
-**EN:** Loads headerless adjacency matrix, draws a labelled network sketch.
-
-**ES:** Visualización básica de conectividad desde matriz sin cabecera.
-
----
-
-### `centralidad.py`
-
-**EN:** **Template:** `G` is not defined — assign a graph before running. Computes degree, betweenness, closeness; plots top-10 bar charts per metric.
-
-**ES:** **Plantilla:** define `G` antes de ejecutar; barras de los 10 nodos con mayor centralidad.
-
----
-
-### `coeficiente.py`
-
-**EN:** **Snippet:** average and per-node clustering plus a histogram. **Missing** imports (`networkx`, `matplotlib.pyplot`, `numpy`) and graph `G`. Last line `plt.show(), avg_clustering_coefficient` should be cleaned up when you promote this to a full script.
-
-**ES:** **Fragmento:** faltan imports y `G`; revisar la última línea al integrarlo.
-
----
-
-### `comunidad.py`
-
-**EN:** **Snippet:** requires predefined `G`. **Louvain** `best_partition`, community-coloured layout, community count.
-
-**ES:** **Fragmento:** Louvain sobre `G` ya definido.
-
----
-
-## Next steps | Próximos pasos sugeridos
-
-**EN:** Centralise data paths (`data/`, env vars, or `config.yaml`); complete the three snippets with loaders and `if __name__ == "__main__":`; add minimal tests or a reproducibility notebook; fix or document the random **seed** for `ataques_aleatorios_nodos_fault.py` if you report confidence intervals.
-
-**ES:** Unificar datos y rutas; completar plantillas; tests o notebook; semilla aleatoria documentada para intervalos de confianza.
+- **ADIF junction graph**: fully deterministic given the input CSVs (no random seed needed for the graph structure itself).
+- **Random failures**: seed fixed via `numpy.random.seed(42)` in `analisis_adif_junctions.py`.
+- **PAM clustering**: seed fixed in `medoids.R` — see inline comment.
+- **Girvan–Newman**: deterministic given the graph.
 
 ---
 
 ## License and citation | Licencia y citación
 
-**License | Licencia:** this repository is distributed under the [**GNU General Public License v3.0**](https://www.gnu.org/licenses/gpl-3.0.html) (GPL-3.0). Full legal text: [`LICENSE`](LICENSE).
+**License:** [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html) — `SPDX-License-Identifier: GPL-3.0-only`
 
-`SPDX-License-Identifier: GPL-3.0-only`
-
-**Copyright | Titularidad del copyright:**
-
-```text
+```
 Copyright (C) 2020-2026 Iván García Cobo
 ```
 
+**Citation (thesis):**
+> García-Cobo, I. (2026). *Generación y validación de redes QKD a gran escala bajo restricciones físicas y tecnológicas*. Tesis doctoral, Universidad de Salamanca.
 
+**Citation (related paper):**
+> García-Cobo, I. & Menéndez, H.D. (2021). Designing large quantum key distribution networks via medoid-based algorithms. *Future Generation Computer Systems*, 115, 814–824.
