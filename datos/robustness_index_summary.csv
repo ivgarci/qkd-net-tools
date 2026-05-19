@@ -1,0 +1,3 @@
+Caso,R_grado,R_betweenness,p*_grado,p*_betweenness
+CyL (|V|=100),0.3067,0.2353,35,21
+España (|V|=950),0.3752,0.3455,48,38
