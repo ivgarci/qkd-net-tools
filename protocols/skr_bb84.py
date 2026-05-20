@@ -197,7 +197,7 @@ def skr_for_graph_edges(G: nx.Graph, case_name: str) -> pd.DataFrame:
 
 def compute_skr_from_adjacency(adj_csv: str, case_name: str,
                                 coords_csv: str = None,
-                                coords_sep: str = ',') -> pd.DataFrame:
+                                coords_sep: str = ';') -> pd.DataFrame:
     """
     Carga una matriz de adyacencia binaria y asigna distancias haversine
     desde el archivo de coordenadas si se proporciona.
@@ -206,9 +206,10 @@ def compute_skr_from_adjacency(adj_csv: str, case_name: str,
     G = nx.from_pandas_adjacency(adj)
 
     if coords_csv and os.path.exists(coords_csv):
-        coords_df = pd.read_csv(coords_csv, delimiter=coords_sep)
+        coords_df = pd.read_csv(coords_csv, delimiter=coords_sep, decimal=',')
+        coords_df.columns = [c.strip().lstrip('﻿') for c in coords_df.columns]
         col_pob = 'Población' if 'Población' in coords_df.columns else coords_df.columns[0]
-        coords = {row[col_pob]: (row['Latitud'], row['Longitud'])
+        coords = {row[col_pob]: (float(row['Latitud']), float(row['Longitud']))
                   for _, row in coords_df.iterrows()
                   if row[col_pob] in G.nodes()}
 
@@ -261,7 +262,7 @@ if __name__ == '__main__':
         ('CyL',    os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv'),
                    os.path.join(DATA_CYL, 'cyl_1000.csv'), ';'),
         ('España', os.path.join(DATA_ESP, 'AdjacencyMatrixNamed45.csv'),
-                   os.path.join(DATA_ESP, 'peninsula_1000.csv'), ','),
+                   os.path.join(DATA_ESP, 'peninsula_1000.csv'), ';'),
     ]
 
     for name, adj_csv, coords_csv, sep in casos_adj:

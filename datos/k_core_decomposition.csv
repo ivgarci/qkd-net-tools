@@ -1,0 +1,1536 @@
+caso,nodo,k_core_index
+CyL (|V|=100),Adrada (La),3
+CyL (|V|=100),Mombeltrán,3
+CyL (|V|=100),Arévalo,4
+CyL (|V|=100),Ávila,3
+CyL (|V|=100),Barco de Ávila (El),3
+CyL (|V|=100),Navaluenga,3
+CyL (|V|=100),Candeleda,3
+CyL (|V|=100),Cebreros,3
+CyL (|V|=100),Carpio,4
+CyL (|V|=100),Espinar (El),3
+CyL (|V|=100),Piedrahíta,3
+CyL (|V|=100),Burgos,3
+CyL (|V|=100),Aranda de Duero,3
+CyL (|V|=100),Belorado,3
+CyL (|V|=100),Briviesca,3
+CyL (|V|=100),Miranda de Ebro,3
+CyL (|V|=100),Villarcayo de Merindad de Castilla la Vieja,2
+CyL (|V|=100),Huerta de Rey,3
+CyL (|V|=100),Lerma,3
+CyL (|V|=100),Melgar de Fernamental,3
+CyL (|V|=100),Merindad de Río Ubierna,3
+CyL (|V|=100),Trespaderne,3
+CyL (|V|=100),Duruelo de la Sierra,3
+CyL (|V|=100),Roa,3
+CyL (|V|=100),Salas de los Infantes,3
+CyL (|V|=100),Villadiego,3
+CyL (|V|=100),Valle de Mena,2
+CyL (|V|=100),San Justo de la Vega,4
+CyL (|V|=100),Bañeza (La),4
+CyL (|V|=100),Folgoso de la Ribera,4
+CyL (|V|=100),Santa Marina del Rey,5
+CyL (|V|=100),Sabero,4
+CyL (|V|=100),Cubillos del Sil,4
+CyL (|V|=100),Villadecanes,4
+CyL (|V|=100),Santovenia de la Valdoncina,5
+CyL (|V|=100),Villaquilambre,5
+CyL (|V|=100),Vega de Espinareda,4
+CyL (|V|=100),Gradefes,5
+CyL (|V|=100),Villamañán,5
+CyL (|V|=100),Villasabariego,5
+CyL (|V|=100),Pola de Gordón (La),5
+CyL (|V|=100),Palacios del Sil,4
+CyL (|V|=100),Puente de Domingo Flórez,3
+CyL (|V|=100),Villada,4
+CyL (|V|=100),Valderas,4
+CyL (|V|=100),Velilla del Río Carrión,3
+CyL (|V|=100),Barruelo de Santullán,2
+CyL (|V|=100),Herrera de Pisuerga,3
+CyL (|V|=100),Torquemada,4
+CyL (|V|=100),Carrión de los Condes,4
+CyL (|V|=100),Cervera de Pisuerga,3
+CyL (|V|=100),Venta de Baños,4
+CyL (|V|=100),Palencia,4
+CyL (|V|=100),Paredes de Nava,4
+CyL (|V|=100),Saldaña,4
+CyL (|V|=100),Terradillos,4
+CyL (|V|=100),Alberca (La),3
+CyL (|V|=100),Aldeadávila de la Ribera,3
+CyL (|V|=100),Salamanca,4
+CyL (|V|=100),Béjar,3
+CyL (|V|=100),Villoria,4
+CyL (|V|=100),Ciudad Rodrigo,3
+CyL (|V|=100),Fuente de San Esteban (La),3
+CyL (|V|=100),Fuentes de Oñoro,2
+CyL (|V|=100),Guijuelo,3
+CyL (|V|=100),Ledesma,3
+CyL (|V|=100),Lumbrales,3
+CyL (|V|=100),Peñaranda de Bracamonte,4
+CyL (|V|=100),Vitigudino,3
+CyL (|V|=100),Mozoncillo,3
+CyL (|V|=100),Cantalejo,3
+CyL (|V|=100),Carbonero el Mayor,4
+CyL (|V|=100),Nava de la Asunción,4
+CyL (|V|=100),Campaspero,4
+CyL (|V|=100),San Cristóbal de Segovia,3
+CyL (|V|=100),Ólvega,1
+CyL (|V|=100),Almazán,2
+CyL (|V|=100),Arcos de Jalón,1
+CyL (|V|=100),Berlanga de Duero,2
+CyL (|V|=100),Burgo de Osma-Ciudad de Osma,3
+CyL (|V|=100),Soria,2
+CyL (|V|=100),San Leonardo de Yagüe,3
+CyL (|V|=100),Pedraja de Portillo (La),6
+CyL (|V|=100),Zaratán,6
+CyL (|V|=100),Viana de Cega,6
+CyL (|V|=100),Santovenia de Pisuerga,6
+CyL (|V|=100),Pedrajas de San Esteban,6
+CyL (|V|=100),Seca (La),6
+CyL (|V|=100),Villabrágima,4
+CyL (|V|=100),Traspinedo,6
+CyL (|V|=100),Trabazos,1
+CyL (|V|=100),Benavente,4
+CyL (|V|=100),Bermillo de Sayago,3
+CyL (|V|=100),Villaralbo,3
+CyL (|V|=100),Fermoselle,3
+CyL (|V|=100),Fuentesaúco,4
+CyL (|V|=100),Puebla de Sanabria,1
+CyL (|V|=100),Toro,4
+CyL (|V|=100),Santibáñez de Vidriales,3
+CyL (|V|=100),Villalpando,4
+España (|V|=950),Abrucena,7
+España (|V|=950),Berja,7
+España (|V|=950),Arboleas,7
+España (|V|=950),Benahadux,7
+España (|V|=950),Vera,7
+España (|V|=950),Turre,7
+España (|V|=950),Canjáyar,7
+España (|V|=950),Olula del Río,7
+España (|V|=950),Carboneras,6
+España (|V|=950),Oria,7
+España (|V|=950),Ejido (El),7
+España (|V|=950),Gérgal,7
+España (|V|=950),Nevada,7
+España (|V|=950),Uleila del Campo,7
+España (|V|=950),Vélez-Blanco,7
+España (|V|=950),Roquetas de Mar,7
+España (|V|=950),Níjar,7
+España (|V|=950),Pulpí,7
+España (|V|=950),Tíjola,7
+España (|V|=950),Tabernas,7
+España (|V|=950),Alcalá de los Gazules,5
+España (|V|=950),Setenil de las Bodegas,8
+España (|V|=950),Algar,6
+España (|V|=950),San Roque,4
+España (|V|=950),Zahara,8
+España (|V|=950),Bornos,6
+España (|V|=950),Vejer de la Frontera,4
+España (|V|=950),Benalup-Casas Viejas,4
+España (|V|=950),Bosque (El),6
+España (|V|=950),Puerto de Santa María (El),4
+España (|V|=950),San Fernando,4
+España (|V|=950),Sanlúcar de Barrameda,4
+España (|V|=950),Jimena de la Frontera,5
+España (|V|=950),Paterna de Rivera,5
+España (|V|=950),Puerto Serrano,8
+España (|V|=950),Tarifa,3
+España (|V|=950),Lebrija,5
+España (|V|=950),Carpio (El),7
+España (|V|=950),Monturque,7
+España (|V|=950),Añora,6
+España (|V|=950),Priego de Córdoba,7
+España (|V|=950),Posadas,7
+España (|V|=950),Doña Mencía,7
+España (|V|=950),Belalcázar,6
+España (|V|=950),Peñarroya-Pueblonuevo,6
+España (|V|=950),Benamejí,8
+España (|V|=950),Cañete de las Torres,7
+España (|V|=950),Cardeña,6
+España (|V|=950),Guadalcázar,7
+España (|V|=950),Espejo,7
+España (|V|=950),Victoria (La),7
+España (|V|=950),Villanueva del Rey,6
+España (|V|=950),Rambla (La),7
+España (|V|=950),Cuevas de San Marcos,8
+España (|V|=950),Villa del Río,7
+España (|V|=950),Obejo,6
+España (|V|=950),Peñaflor,7
+España (|V|=950),Pedroche,6
+España (|V|=950),Casariche,8
+España (|V|=950),Villanueva de Córdoba,6
+España (|V|=950),Villaralto,6
+España (|V|=950),Villaviciosa de Córdoba,6
+España (|V|=950),Pulianas,8
+España (|V|=950),Polopos,7
+España (|V|=950),Dúrcal,8
+España (|V|=950),Arenas del Rey,8
+España (|V|=950),Ogíjares,8
+España (|V|=950),Itrabo,8
+España (|V|=950),Cádiar,7
+España (|V|=950),Vegas del Genil,8
+España (|V|=950),Caniles,7
+España (|V|=950),Pinos Genil,8
+España (|V|=950),Purullena,7
+España (|V|=950),Colomera,7
+España (|V|=950),Cortes de Baza,7
+España (|V|=950),Noalejo,7
+España (|V|=950),Galera,7
+España (|V|=950),Castril,7
+España (|V|=950),Cijuela,8
+España (|V|=950),Freila,7
+España (|V|=950),Cúllar,7
+España (|V|=950),Montejícar,7
+España (|V|=950),Valle del Zalabí,7
+España (|V|=950),Huétor Tájar,8
+España (|V|=950),Pinar (El),7
+España (|V|=950),Jerez del Marquesado,7
+España (|V|=950),Órgiva,8
+España (|V|=950),Motril,7
+España (|V|=950),Pedro Martínez,7
+España (|V|=950),Puebla de Don Fadrique,6
+España (|V|=950),Alcaucín,8
+España (|V|=950),Huelva,5
+España (|V|=950),Jabugo,7
+España (|V|=950),Bollullos Par del Condado,7
+España (|V|=950),San Bartolomé de la Torre,6
+España (|V|=950),Higuera de la Sierra,7
+España (|V|=950),Aroche,6
+España (|V|=950),Arroyomolinos de León,8
+España (|V|=950),Ayamonte,3
+España (|V|=950),Trigueros,6
+España (|V|=950),Bonares,6
+España (|V|=950),Cerro de Andévalo (El),6
+España (|V|=950),Minas de Riotinto,7
+España (|V|=950),Lepe,4
+España (|V|=950),Manzanilla,8
+España (|V|=950),Higuera la Real,8
+España (|V|=950),Encinasola,8
+España (|V|=950),Pilas,8
+España (|V|=950),Paymogo,6
+España (|V|=950),Puebla de Guzmán,6
+España (|V|=950),Rosal de la Frontera,6
+España (|V|=950),Santa Bárbara de Casa,6
+España (|V|=950),Real de la Jara (El),7
+España (|V|=950),Valverde del Camino,6
+España (|V|=950),Albanchez de Mágina,7
+España (|V|=950),Castillo de Locubín,7
+España (|V|=950),Arjonilla,7
+España (|V|=950),Arquillos,6
+España (|V|=950),Arroyo del Ojanco,6
+España (|V|=950),Ibros,7
+España (|V|=950),Baños de la Encina,6
+España (|V|=950),Bélmez de la Moraleda,7
+España (|V|=950),Pegalajar,7
+España (|V|=950),Santa Elena,6
+España (|V|=950),Castellar,6
+España (|V|=950),Cazorla,7
+España (|V|=950),Santo Tomé,7
+España (|V|=950),Villares (Los),7
+España (|V|=950),Villardompardo,7
+España (|V|=950),Quesada,7
+España (|V|=950),Iznatoraf,6
+España (|V|=950),Jabalquinto,7
+España (|V|=950),Jamilena,7
+España (|V|=950),Lahiguera,7
+España (|V|=950),Orcera,6
+España (|V|=950),Pozo Alcón,7
+España (|V|=950),Torreperogil,7
+España (|V|=950),Santiago-Pontones,6
+España (|V|=950),Fuente de Piedra,8
+España (|V|=950),Villanueva del Trabuco,8
+España (|V|=950),Sayalonga,8
+España (|V|=950),Alhaurín de la Torre,8
+España (|V|=950),Mijas,8
+España (|V|=950),Almáchar,8
+España (|V|=950),Cañete la Real,8
+España (|V|=950),Almogía,8
+España (|V|=950),Álora,8
+España (|V|=950),Yunquera,8
+España (|V|=950),Antequera,8
+España (|V|=950),Benahavís,7
+España (|V|=950),Benaoján,8
+España (|V|=950),Martín de la Jara,8
+España (|V|=950),Colmenar,8
+España (|V|=950),Casares,6
+España (|V|=950),Guaro,8
+España (|V|=950),Frigiliana,8
+España (|V|=950),Ojén,8
+España (|V|=950),Gilena,8
+España (|V|=950),Guadalcanal,6
+España (|V|=950),Villanueva del Ariscal,8
+España (|V|=950),Mairena del Alcor,8
+España (|V|=950),Rinconada (La),8
+España (|V|=950),Tocina,8
+España (|V|=950),Algámitas,8
+España (|V|=950),Palomares del Río,8
+España (|V|=950),Paradas,8
+España (|V|=950),Gerena,8
+España (|V|=950),Castilleja de la Cuesta,8
+España (|V|=950),Villaverde del Río,8
+España (|V|=950),Lora del Río,8
+España (|V|=950),Luisiana (La),8
+España (|V|=950),Ronquillo (El),8
+España (|V|=950),Pedroso (El),7
+España (|V|=950),Molares (Los),8
+España (|V|=950),Écija,8
+España (|V|=950),Marinaleda,8
+España (|V|=950),Isla Mayor,8
+España (|V|=950),Lantejuela (La),8
+España (|V|=950),Morón de la Frontera,8
+España (|V|=950),Navas de la Concepción (Las),6
+España (|V|=950),Osuna,8
+España (|V|=950),Palacios y Villafranca (Los),8
+España (|V|=950),Puebla de Cazalla (La),8
+España (|V|=950),Aínsa-Sobrarbe,3
+España (|V|=950),Albalate de Cinca,8
+España (|V|=950),Almudévar,3
+España (|V|=950),Altorricón,8
+España (|V|=950),Sotonera (La),3
+España (|V|=950),Fonz,6
+España (|V|=950),Benabarre,5
+España (|V|=950),Benasque,3
+España (|V|=950),Sabiñánigo,3
+España (|V|=950),Binaced,8
+España (|V|=950),Torrente de Cinca,8
+España (|V|=950),Lalueza,4
+España (|V|=950),Graus,5
+España (|V|=950),Gurrea de Gállego,6
+España (|V|=950),Huesca,3
+España (|V|=950),Jaca,2
+España (|V|=950),Sallent de Gállego,2
+España (|V|=950),Gimenells i el Pla de la Font,8
+España (|V|=950),Híjar,6
+España (|V|=950),Cella,3
+España (|V|=950),Alcañiz,6
+España (|V|=950),Andorra,5
+España (|V|=950),Calaceite,6
+España (|V|=950),Calamocha,3
+España (|V|=950),Calanda,6
+España (|V|=950),Utrillas,3
+España (|V|=950),Monreal del Campo,3
+España (|V|=950),Sarrión,3
+España (|V|=950),Teruel,3
+España (|V|=950),Valderrobres,6
+España (|V|=950),Ainzón,6
+España (|V|=950),Pinseque,6
+España (|V|=950),Puebla de Alfindén (La),6
+España (|V|=950),Cariñena,5
+España (|V|=950),Alhama de Aragón,3
+España (|V|=950),Ricla,6
+España (|V|=950),Belchite,6
+España (|V|=950),Biota,6
+España (|V|=950),Boquiñeni,6
+España (|V|=950),Brea de Aragón,5
+España (|V|=950),Bujaraloz,6
+España (|V|=950),María de Huerva,6
+España (|V|=950),Calatayud,4
+España (|V|=950),Caspe,6
+España (|V|=950),Daroca,3
+España (|V|=950),Ejea de los Caballeros,6
+España (|V|=950),Lumpiaque,6
+España (|V|=950),Sástago,6
+España (|V|=950),Fabara,6
+España (|V|=950),Fuentes de Ebro,6
+España (|V|=950),Quinto,6
+España (|V|=950),San Mateo de Gállego,6
+España (|V|=950),Mallén,6
+España (|V|=950),Cascante,6
+España (|V|=950),Allande,7
+España (|V|=950),Aller,6
+España (|V|=950),Castrillón,7
+España (|V|=950),Belmonte de Miranda,7
+España (|V|=950),San Martín del Rey Aurelio,7
+España (|V|=950),Coaña,7
+España (|V|=950),Llanes,6
+España (|V|=950),Cabranes,6
+España (|V|=950),Regueras (Las),7
+España (|V|=950),Cangas de Onís,6
+España (|V|=950),Carreño,7
+España (|V|=950),Caso,6
+España (|V|=950),Castropol,7
+España (|V|=950),Muros de Nalón,7
+España (|V|=950),Palacios del Sil,5
+España (|V|=950),Grandas de Salime,7
+España (|V|=950),Ibias,7
+España (|V|=950),Riosa,7
+España (|V|=950),Ribera de Arriba,7
+España (|V|=950),Siero,7
+España (|V|=950),Peñamellera Baja,6
+España (|V|=950),Teverga,7
+España (|V|=950),Tineo,7
+España (|V|=950),Valdés,6
+España (|V|=950),Reocín,7
+España (|V|=950),Limpias,8
+España (|V|=950),Molledo,7
+España (|V|=950),Argoños,8
+España (|V|=950),Meruelo,8
+España (|V|=950),Astillero (El),8
+España (|V|=950),Cabezón de la Sal,7
+España (|V|=950),Rionansa,7
+España (|V|=950),Potes,6
+España (|V|=950),Campoo de Enmedio,7
+España (|V|=950),Villafufre,8
+España (|V|=950),Castro-Urdiales,10
+España (|V|=950),San Vicente de la Barquera,7
+España (|V|=950),Corrales de Buelna (Los),7
+España (|V|=950),Entrambasaguas,8
+España (|V|=950),Miengo,7
+España (|V|=950),Ramales de la Victoria,8
+España (|V|=950),Selaya,8
+España (|V|=950),Valderredible,6
+España (|V|=950),Albacete,6
+España (|V|=950),Casas-Ibáñez,6
+España (|V|=950),Alcaraz,6
+España (|V|=950),Almansa,8
+España (|V|=950),Bonete,6
+España (|V|=950),San Pedro,6
+España (|V|=950),Barrax,6
+España (|V|=950),Molinicos,6
+España (|V|=950),Bonillo (El),6
+España (|V|=950),Valdeganga,6
+España (|V|=950),Caudete,9
+España (|V|=950),Cenizate,6
+España (|V|=950),Pozo Cañada,6
+España (|V|=950),Letur,6
+España (|V|=950),Ontur,6
+España (|V|=950),Gineta (La),6
+España (|V|=950),Tobarra,6
+España (|V|=950),Lezuza,6
+España (|V|=950),Liétor,6
+España (|V|=950),Tarazona de la Mancha,6
+España (|V|=950),Casas de Fernando Alonso,6
+España (|V|=950),Nerpio,6
+España (|V|=950),Ossa de Montiel,6
+España (|V|=950),Pozohondo,6
+España (|V|=950),Riópar,6
+España (|V|=950),Casas de Benítez,6
+España (|V|=950),Provencio (El),6
+España (|V|=950),Abenójar,5
+España (|V|=950),Agudo,6
+España (|V|=950),Montiel,6
+España (|V|=950),Campo de Criptana,6
+España (|V|=950),Piedrabuena,6
+España (|V|=950),Calzada de Calatrava,6
+España (|V|=950),Carrizosa,6
+España (|V|=950),Chillón,6
+España (|V|=950),Bolaños de Calatrava,6
+España (|V|=950),Almodóvar del Campo,5
+España (|V|=950),Arenas de San Juan,6
+España (|V|=950),Argamasilla de Alba,6
+España (|V|=950),Torralba de Calatrava,6
+España (|V|=950),Torrenueva,6
+España (|V|=950),Miguelturra,6
+España (|V|=950),Corral de Calatrava,6
+España (|V|=950),Cózar,6
+España (|V|=950),Malagón,6
+España (|V|=950),Fuencaliente,4
+España (|V|=950),Villafranca de los Caballeros,6
+España (|V|=950),Membrilla,6
+España (|V|=950),Mota del Cuervo,6
+España (|V|=950),Puebla de Don Rodrigo,6
+España (|V|=950),San Pablo de los Montes,8
+España (|V|=950),Robledo (El),6
+España (|V|=950),San Carlos del Valle,6
+España (|V|=950),Socuéllamos,6
+España (|V|=950),Villamanrique,6
+España (|V|=950),Villanueva de la Fuente,6
+España (|V|=950),Viso del Marqués,6
+España (|V|=950),Alberca de Záncara (La),6
+España (|V|=950),Villar de Olalla,3
+España (|V|=950),Barajas de Melo,7
+España (|V|=950),Pedernoso (El),6
+España (|V|=950),Motilla del Palancar,5
+España (|V|=950),Horcajo de Santiago,7
+España (|V|=950),Valverde de Júcar,4
+España (|V|=950),Huete,6
+España (|V|=950),Villalpardo,6
+España (|V|=950),Talayuelas,4
+España (|V|=950),Priego,1
+España (|V|=950),San Lorenzo de la Parrilla,3
+España (|V|=950),Tarancón,7
+España (|V|=950),Albalate de Zorita,7
+España (|V|=950),Villanueva de la Torre,11
+España (|V|=950),Trijueque,8
+España (|V|=950),Guadalajara,11
+España (|V|=950),Valdeolmos-Alalpardo,11
+España (|V|=950),Cifuentes,3
+España (|V|=950),Yunquera de Henares,10
+España (|V|=950),Torrejón del Rey,11
+España (|V|=950),Jadraque,3
+España (|V|=950),Pioz,11
+España (|V|=950),Molina de Aragón,1
+España (|V|=950),Villar del Olmo,11
+España (|V|=950),Sacedón,6
+España (|V|=950),Sigüenza,3
+España (|V|=950),Uceda,10
+España (|V|=950),Ajofrín,9
+España (|V|=950),Pantoja,11
+España (|V|=950),Alcaudete de la Jara,7
+España (|V|=950),Escalona,9
+España (|V|=950),Cobisa,9
+España (|V|=950),Magán,11
+España (|V|=950),Esquivias,11
+España (|V|=950),Gerindote,9
+España (|V|=950),Portillo de Toledo,10
+España (|V|=950),Carpio de Tajo (El),9
+España (|V|=950),Carranque,11
+España (|V|=950),Casar de Escalona (El),9
+España (|V|=950),Valmojado,11
+España (|V|=950),Castillo de Bayuela,9
+España (|V|=950),Cebolla,9
+España (|V|=950),Lominchar,11
+España (|V|=950),Consuegra,6
+España (|V|=950),Lillo,7
+España (|V|=950),Cuerva,8
+España (|V|=950),Guardia (La),9
+España (|V|=950),Polán,9
+España (|V|=950),Yepes,10
+España (|V|=950),Lagartera,6
+España (|V|=950),Mejorada,7
+España (|V|=950),Quintanar de la Orden,6
+España (|V|=950),Orgaz,8
+España (|V|=950),Navahermosa,8
+España (|V|=950),Navalcán,6
+España (|V|=950),Navalucillos (Los),8
+España (|V|=950),Noblejas,11
+España (|V|=950),Aranjuez,11
+España (|V|=950),Villa de Don Fadrique (La),6
+España (|V|=950),Santa Cruz de la Zarza,9
+España (|V|=950),Adrada (La),9
+España (|V|=950),Mombeltrán,6
+España (|V|=950),Arévalo,5
+España (|V|=950),Ávila,6
+España (|V|=950),Barco de Ávila (El),5
+España (|V|=950),Navaluenga,8
+España (|V|=950),Madrigal de la Vera,6
+España (|V|=950),Cebreros,9
+España (|V|=950),Madrigal de las Altas Torres,5
+España (|V|=950),Navas del Marqués (Las),9
+España (|V|=950),Piedrahíta,5
+España (|V|=950),Burgos,4
+España (|V|=950),Aranda de Duero,4
+España (|V|=950),Belorado,6
+España (|V|=950),Briviesca,6
+España (|V|=950),Iruña Oka/Iruña de Oca,9
+España (|V|=950),Espinosa de los Monteros,8
+España (|V|=950),Huerta de Rey,4
+España (|V|=950),Lerma,4
+España (|V|=950),Villarcayo de Merindad de Castilla la Vieja,6
+España (|V|=950),Melgar de Fernamental,6
+España (|V|=950),Merindad de Río Ubierna,6
+España (|V|=950),Ribera Baja/Erribera Beitia,7
+España (|V|=950),Trespaderne,6
+España (|V|=950),Duruelo de la Sierra,4
+España (|V|=950),Roa,3
+España (|V|=950),Salas de los Infantes,4
+España (|V|=950),Villadiego,6
+España (|V|=950),Artziniega,11
+España (|V|=950),San Justo de la Vega,5
+España (|V|=950),Bañeza (La),5
+España (|V|=950),Folgoso de la Ribera,5
+España (|V|=950),Santa Marina del Rey,6
+España (|V|=950),Sabero,6
+España (|V|=950),Cubillos del Sil,5
+España (|V|=950),Villadecanes,5
+España (|V|=950),Santovenia de la Valdoncina,6
+España (|V|=950),Robla (La),6
+España (|V|=950),Vega de Espinareda,5
+España (|V|=950),Valdepolo,6
+España (|V|=950),Villamañán,6
+España (|V|=950),León,6
+España (|V|=950),Villasabariego,6
+España (|V|=950),Carballeda de Valdeorras,5
+España (|V|=950),Villada,5
+España (|V|=950),Valderas,5
+España (|V|=950),Velilla del Río Carrión,5
+España (|V|=950),Vegas del Condado,6
+España (|V|=950),Villamanín,6
+España (|V|=950),Aguilar de Campoo,6
+España (|V|=950),Alar del Rey,6
+España (|V|=950),Astudillo,6
+España (|V|=950),Torquemada,6
+España (|V|=950),Carrión de los Condes,6
+España (|V|=950),Cervera de Pisuerga,6
+España (|V|=950),Venta de Baños,6
+España (|V|=950),Palencia,6
+España (|V|=950),Paredes de Nava,6
+España (|V|=950),Saldaña,6
+España (|V|=950),Alba de Tormes,5
+España (|V|=950),Alberca (La),5
+España (|V|=950),Aldeadávila de la Ribera,3
+España (|V|=950),Carbajosa de la Sagrada,5
+España (|V|=950),Béjar,5
+España (|V|=950),Villares de la Reina,5
+España (|V|=950),Fresno el Viejo,5
+España (|V|=950),Cantalpino,5
+España (|V|=950),Ciudad Rodrigo,3
+España (|V|=950),Fuente de San Esteban (La),3
+España (|V|=950),Fuentes de Oñoro,3
+España (|V|=950),Guijuelo,5
+España (|V|=950),Ledesma,4
+España (|V|=950),Lumbrales,3
+España (|V|=950),Peñaranda de Bracamonte,5
+España (|V|=950),Vitigudino,3
+España (|V|=950),Mozoncillo,4
+España (|V|=950),Cantalejo,4
+España (|V|=950),Carbonero el Mayor,6
+España (|V|=950),Nava de la Asunción,6
+España (|V|=950),Cuéllar,6
+España (|V|=950),Espinar (El),9
+España (|V|=950),San Cristóbal de Segovia,9
+España (|V|=950),Sepúlveda,4
+España (|V|=950),Villacastín,8
+España (|V|=950),Ágreda,6
+España (|V|=950),Almazán,3
+España (|V|=950),Arcos de Jalón,3
+España (|V|=950),Berlanga de Duero,3
+España (|V|=950),Burgo de Osma-Ciudad de Osma,4
+España (|V|=950),Golmayo,3
+España (|V|=950),San Leonardo de Yagüe,4
+España (|V|=950),Vinuesa,3
+España (|V|=950),Alaejos,5
+España (|V|=950),Pedraja de Portillo (La),7
+España (|V|=950),Zaratán,7
+España (|V|=950),Laguna de Duero,7
+España (|V|=950),Santovenia de Pisuerga,7
+España (|V|=950),Peñafiel,4
+España (|V|=950),Pedrajas de San Esteban,7
+España (|V|=950),Serrada,7
+España (|V|=950),Mayorga,5
+España (|V|=950),Villabrágima,5
+España (|V|=950),Rueda,7
+España (|V|=950),Traspinedo,7
+España (|V|=950),Villalón de Campos,5
+España (|V|=950),Trabazos,1
+España (|V|=950),Benavente,5
+España (|V|=950),Bermillo de Sayago,3
+España (|V|=950),Villaralbo,4
+España (|V|=950),Corrales,4
+España (|V|=950),Fermoselle,3
+España (|V|=950),Fuentesaúco,5
+España (|V|=950),Puebla de Sanabria,3
+España (|V|=950),Toro,5
+España (|V|=950),Santibáñez de Vidriales,3
+España (|V|=950),Villalpando,5
+España (|V|=950),Olesa de Montserrat,13
+España (|V|=950),Aiguafreda,13
+España (|V|=950),Premià de Dalt,13
+España (|V|=950),Bigues i Riells,13
+España (|V|=950),Sant Iscle de Vallalta,13
+España (|V|=950),Sant Andreu de Llavaneres,13
+España (|V|=950),Sant Fruitós de Bages,13
+España (|V|=950),Berga,9
+España (|V|=950),Balsareny,13
+España (|V|=950),Subirats,13
+España (|V|=950),Badalona,13
+España (|V|=950),Badia del Vallès,13
+España (|V|=950),Guardiola de Berguedà,8
+España (|V|=950),Balenyà,13
+España (|V|=950),Cornellà de Llobregat,13
+España (|V|=950),Sant Climent de Llobregat,13
+España (|V|=950),Hostalets de Pierola (Els),13
+España (|V|=950),Sant Pere de Riudebitlles,13
+España (|V|=950),Sant Guim de Freixenet,13
+España (|V|=950),Castellar del Vallès,13
+España (|V|=950),Calldetenes,13
+España (|V|=950),Súria,13
+España (|V|=950),Granollers,13
+España (|V|=950),Sant Antoni de Vilamajor,13
+España (|V|=950),Sant Pere de Ribes,13
+España (|V|=950),Capellades,13
+España (|V|=950),Casserres,10
+España (|V|=950),Castellgalí,13
+España (|V|=950),Pallejà,13
+España (|V|=950),Bellvei,13
+España (|V|=950),Moià,13
+España (|V|=950),Sant Martí Sarroca,13
+España (|V|=950),Castellví de Rosanes,13
+España (|V|=950),Palafolls,10
+España (|V|=950),Vilafranca del Penedès,13
+España (|V|=950),Riells i Viabrea,13
+España (|V|=950),Igualada,13
+España (|V|=950),Mollet del Vallès,13
+España (|V|=950),Torelló,10
+España (|V|=950),Prats de Lluçanès,11
+España (|V|=950),Puigcerdà,6
+España (|V|=950),Cellera de Ter (La),10
+España (|V|=950),Sant Hilari Sacalm,11
+España (|V|=950),Vilafant,10
+España (|V|=950),Banyoles,10
+España (|V|=950),Palafrugell,10
+España (|V|=950),Salt,10
+España (|V|=950),Bisbal d'Empordà (La),10
+España (|V|=950),Celrà,10
+España (|V|=950),Port de la Selva (El),7
+España (|V|=950),Riudellots de la Selva,10
+España (|V|=950),Santa Cristina d'Aro,10
+España (|V|=950),Campdevànol,8
+España (|V|=950),Camprodon,8
+España (|V|=950),Olot,10
+España (|V|=950),Castelló d'Empúries,7
+España (|V|=950),Ullà,10
+España (|V|=950),Jonquera (La),7
+España (|V|=950),Sils,10
+España (|V|=950),Sant Feliu de Pallerols,10
+España (|V|=950),Castellserà,8
+España (|V|=950),Soses,8
+España (|V|=950),Lleida,8
+España (|V|=950),Rosselló,8
+España (|V|=950),Alfarràs,8
+España (|V|=950),Tàrrega,8
+España (|V|=950),Juneda,8
+España (|V|=950),Puigverd de Lleida,8
+España (|V|=950),Ponts,8
+España (|V|=950),Térmens,8
+España (|V|=950),Golmés,8
+España (|V|=950),Vielha e Mijaran,3
+España (|V|=950),Torà,9
+España (|V|=950),Isona i Conca Dellà,5
+España (|V|=950),Seu d'Urgell (La),6
+España (|V|=950),Oliana,8
+España (|V|=950),Pobla de Segur (La),5
+España (|V|=950),Vall de Boí (La),3
+España (|V|=950),Sant Llorenç de Morunys,8
+España (|V|=950),Solsona,9
+España (|V|=950),Sort,4
+España (|V|=950),Bisbal del Penedès (La),13
+España (|V|=950),Alcanar,7
+España (|V|=950),Vilallonga del Camp,8
+España (|V|=950),Amposta,7
+España (|V|=950),Alforja,8
+España (|V|=950),Reus,8
+España (|V|=950),Pobla de Montornès (La),9
+España (|V|=950),Perelló (El),7
+España (|V|=950),Flix,8
+España (|V|=950),Gandesa,7
+España (|V|=950),Benissanet,7
+España (|V|=950),Montbrió del Camp,8
+España (|V|=950),Cabra del Camp,11
+España (|V|=950),Deltebre,7
+España (|V|=950),Pallaresos (Els),8
+España (|V|=950),Espluga de Francolí (L'),8
+España (|V|=950),Falset,8
+España (|V|=950),Roquetes,7
+España (|V|=950),Rossell,7
+España (|V|=950),Aceuchal,8
+España (|V|=950),Berlanga,6
+España (|V|=950),Zarza (La),7
+España (|V|=950),Torre de Miguel Sesmero,8
+España (|V|=950),Alburquerque,4
+España (|V|=950),Alconchel,8
+España (|V|=950),Calamonte,7
+España (|V|=950),Granja de Torrehermosa,6
+España (|V|=950),Badajoz,7
+España (|V|=950),Salvaleón,8
+España (|V|=950),Bienvenida,8
+España (|V|=950),Segura de León,8
+España (|V|=950),Burguillos del Cerro,8
+España (|V|=950),Peñalsordo,6
+España (|V|=950),Monesterio,8
+España (|V|=950),Coronada (La),6
+España (|V|=950),Campillo de Llerena,6
+España (|V|=950),Navalvillar de Pela,6
+España (|V|=950),Valdecaballeros,6
+España (|V|=950),Zalamea de la Serena,6
+España (|V|=950),Cheles,6
+España (|V|=950),Codosera (La),3
+España (|V|=950),Corte de Peleas,8
+España (|V|=950),Villanueva de la Serena,6
+España (|V|=950),Puebla de Alcocer,6
+España (|V|=950),Parra (La),8
+España (|V|=950),Herrera del Duque,6
+España (|V|=950),Villafranca de los Barros,8
+España (|V|=950),Guareña,7
+España (|V|=950),Hornachos,7
+España (|V|=950),Valle de Santa Ana,8
+España (|V|=950),Llerena,7
+España (|V|=950),Puebla de la Calzada,7
+España (|V|=950),Santa Amalia,6
+España (|V|=950),Puebla de Sancho Pérez,8
+España (|V|=950),Trujillanos,7
+España (|V|=950),Monterrubio de la Serena,6
+España (|V|=950),Nava de Santiago (La),7
+España (|V|=950),Oliva de la Frontera,8
+España (|V|=950),Valverde de Leganés,8
+España (|V|=950),Roca de la Sierra (La),7
+España (|V|=950),Pueblonuevo del Guadiana,7
+España (|V|=950),San Vicente de Alcántara,3
+España (|V|=950),Siruela,6
+España (|V|=950),Valencia del Ventoso,8
+España (|V|=950),Villanueva del Fresno,7
+España (|V|=950),Zarza de Granadilla,6
+España (|V|=950),Alcántara,6
+España (|V|=950),Montánchez,6
+España (|V|=950),Aldeanueva de la Vera,6
+España (|V|=950),Guadalupe,6
+España (|V|=950),Aliseda,6
+España (|V|=950),Casatejada,6
+España (|V|=950),Malpartida de Cáceres,6
+España (|V|=950),Navas del Madroño,6
+España (|V|=950),Cabezuela del Valle,6
+España (|V|=950),Cáceres,6
+España (|V|=950),Caminomorisco,6
+España (|V|=950),Campo Lugar,6
+España (|V|=950),Cañaveral,6
+España (|V|=950),Galisteo,6
+España (|V|=950),Castañar de Ibor,6
+España (|V|=950),Ceclavín,6
+España (|V|=950),Eljas,4
+España (|V|=950),Coria,6
+España (|V|=950),Gata,4
+España (|V|=950),Guijo de Galisteo,6
+España (|V|=950),Logrosán,6
+España (|V|=950),Madroñera,6
+España (|V|=950),Plasencia,6
+España (|V|=950),Navalmoral de la Mata,6
+España (|V|=950),Rosalejo,6
+España (|V|=950),Serradilla,6
+España (|V|=950),Torreorgaz,6
+España (|V|=950),Torrecillas de la Tiesa,6
+España (|V|=950),Cesuras,7
+España (|V|=950),Ames,7
+España (|V|=950),Aranga,7
+España (|V|=950),Ferrol,7
+España (|V|=950),Laracha (A),7
+España (|V|=950),Boimorto,7
+España (|V|=950),Noia,7
+España (|V|=950),Miño,7
+España (|V|=950),Paderne,7
+España (|V|=950),Pobra do Caramiñal (A),8
+España (|V|=950),Vedra,8
+España (|V|=950),Cabana de Bergantiños,7
+España (|V|=950),Muxía,7
+España (|V|=950),Cambre,7
+España (|V|=950),Dodro,8
+España (|V|=950),Coristanco,7
+España (|V|=950),Cariño,7
+España (|V|=950),Muros,7
+España (|V|=950),Cedeira,7
+España (|V|=950),Cee,7
+España (|V|=950),Tordoia,7
+España (|V|=950),Pino (O),7
+España (|V|=950),Malpica de Bergantiños,7
+España (|V|=950),Vicedo (O),7
+España (|V|=950),Mazaricos,7
+España (|V|=950),Melide,7
+España (|V|=950),Moeche,7
+España (|V|=950),Xermade,7
+España (|V|=950),Zas,7
+España (|V|=950),Abadín,7
+España (|V|=950),Valadouro (O),7
+España (|V|=950),Monterroso,7
+España (|V|=950),Castroverde,7
+España (|V|=950),Láncara,7
+España (|V|=950),Foz,7
+España (|V|=950),Nogais (As),7
+España (|V|=950),Rábade,7
+España (|V|=950),Incio (O),7
+España (|V|=950),Cervo,7
+España (|V|=950),Peroxa (A),8
+España (|V|=950),Pol,7
+España (|V|=950),Saviñao (O),7
+España (|V|=950),Fonsagrada (A),7
+España (|V|=950),Friol,7
+España (|V|=950),Portomarín,7
+España (|V|=950),Lourenzá,7
+España (|V|=950),Pantón,7
+España (|V|=950),Riotorto,7
+España (|V|=950),Ribas de Sil,6
+España (|V|=950),Sandiás,8
+España (|V|=950),Bolo (O),8
+España (|V|=950),Arnoia (A),8
+España (|V|=950),Leiro,8
+España (|V|=950),Blancos (Os),8
+España (|V|=950),Muíños,8
+España (|V|=950),Baños de Molgas,8
+España (|V|=950),San Cibrao das Viñas,8
+España (|V|=950),Cerdedo,8
+España (|V|=950),Celanova,8
+España (|V|=950),Monterrei,6
+España (|V|=950),Trasmiras,7
+España (|V|=950),Entrimo,8
+España (|V|=950),Padrenda,8
+España (|V|=950),Gudiña (A),6
+España (|V|=950),Dozón,8
+España (|V|=950),Pobra de Trives (A),6
+España (|V|=950),Rúa (A),6
+España (|V|=950),Riós,6
+España (|V|=950),Viana do Bolo,6
+España (|V|=950),Vila de Cruces,7
+España (|V|=950),Arbo,8
+España (|V|=950),Nigrán,8
+España (|V|=950),Portas,8
+España (|V|=950),Moaña,8
+España (|V|=950),Cambados,8
+España (|V|=950),Moraña,8
+España (|V|=950),Covelo,8
+España (|V|=950),Soutomaior,8
+España (|V|=950),Rosal (O),4
+España (|V|=950),Poio,8
+España (|V|=950),Mos,8
+España (|V|=950),Salceda de Caselas,8
+España (|V|=950),Agoncillo,8
+España (|V|=950),Albelda de Iregua,8
+España (|V|=950),Lardero,8
+España (|V|=950),Rincón de Soto,8
+España (|V|=950),Castejón,7
+España (|V|=950),Quel,8
+España (|V|=950),Nájera,7
+España (|V|=950),San Adrián,8
+España (|V|=950),Haro,7
+España (|V|=950),Elciego,7
+España (|V|=950),Fitero,6
+España (|V|=950),Santo Domingo de la Calzada,7
+España (|V|=950),Sartaguda,8
+España (|V|=950),Ajalvir,11
+España (|V|=950),Anchuelo,11
+España (|V|=950),Alcobendas,11
+España (|V|=950),Móstoles,11
+España (|V|=950),Navas del Rey,11
+España (|V|=950),Collado Mediano,11
+España (|V|=950),Campo Real,11
+España (|V|=950),Chinchón,11
+España (|V|=950),Pozuelo de Alarcón,11
+España (|V|=950),Manzanares el Real,11
+España (|V|=950),Villanueva de la Cañada,11
+España (|V|=950),Lozoyuela-Navas-Sieteiglesias,9
+España (|V|=950),Navalafuente,10
+España (|V|=950),Cadalso de los Vidrios,9
+España (|V|=950),Tielmes,11
+España (|V|=950),Torrejón de la Calzada,11
+España (|V|=950),Ciempozuelos,11
+España (|V|=950),Galapagar,11
+España (|V|=950),Mejorada del Campo,11
+España (|V|=950),San Lorenzo de El Escorial,11
+España (|V|=950),Fuentidueña de Tajo,10
+España (|V|=950),Fresnedillas de la Oliva,11
+España (|V|=950),Getafe,11
+España (|V|=950),Molar (El),11
+España (|V|=950),Villanueva de Perales,11
+España (|V|=950),Rascafría,9
+España (|V|=950),Fortuna,9
+España (|V|=950),Blanca,7
+España (|V|=950),Águilas,7
+España (|V|=950),Campos del Río,7
+España (|V|=950),Alguazas,7
+España (|V|=950),Torre-Pacheco,7
+España (|V|=950),Totana,7
+España (|V|=950),Librilla,7
+España (|V|=950),Beniel,9
+España (|V|=950),Bullas,7
+España (|V|=950),Calasparra,6
+España (|V|=950),Caravaca de la Cruz,6
+España (|V|=950),Unión (La),4
+España (|V|=950),Fuente Álamo de Murcia,7
+España (|V|=950),Jumilla,6
+España (|V|=950),Lorca,7
+España (|V|=950),Mazarrón,7
+España (|V|=950),Pliego,7
+España (|V|=950),Puerto Lumbreras,7
+España (|V|=950),San Pedro del Pinatar,7
+España (|V|=950),Yecla,8
+España (|V|=950),Arróniz,8
+España (|V|=950),Olazti/Olazagutía,10
+España (|V|=950),Villava/Atarrabia,7
+España (|V|=950),Aoiz/Agoitz,7
+España (|V|=950),Arbizu,10
+España (|V|=950),Mendigorría,8
+España (|V|=950),Estella/Lizarra,8
+España (|V|=950),Barañain,8
+España (|V|=950),Baztan,6
+España (|V|=950),Lesaka,8
+España (|V|=950),Fustiñana,6
+España (|V|=950),Marcilla,8
+España (|V|=950),Carcastillo,7
+España (|V|=950),Cáseda,7
+España (|V|=950),Ultzama,8
+España (|V|=950),Lekunberri,10
+España (|V|=950),Lerín,8
+España (|V|=950),Lumbier,7
+España (|V|=950),Tafalla,8
+España (|V|=950),Salvatierra/Agurain,10
+España (|V|=950),Laudio/Llodio,11
+España (|V|=950),Aretxabaleta,11
+España (|V|=950),Campezo/Kanpezu,9
+España (|V|=950),Legutiano,11
+España (|V|=950),Urkabustaiz,11
+España (|V|=950),Valdegovía/Gaubea,8
+España (|V|=950),Zarautz,10
+España (|V|=950),Irura,10
+España (|V|=950),Lasarte-Oria,10
+España (|V|=950),Urretxu,10
+España (|V|=950),Errenteria,9
+España (|V|=950),Ordizia,10
+España (|V|=950),Azpeitia,10
+España (|V|=950),Deba,10
+España (|V|=950),Eibar,11
+España (|V|=950),Hondarribia,8
+España (|V|=950),Segura,10
+España (|V|=950),Abadiño,11
+España (|V|=950),Santurtzi,11
+España (|V|=950),Sondika,11
+España (|V|=950),Galdakao,11
+España (|V|=950),Areatza,11
+España (|V|=950),Mungia,11
+España (|V|=950),Zalla,11
+España (|V|=950),Plentzia,11
+España (|V|=950),Mundaka,11
+España (|V|=950),Berriatua,11
+España (|V|=950),Gernika-Lumo,11
+España (|V|=950),Tibi,9
+España (|V|=950),Campello (el),9
+España (|V|=950),Cox,9
+España (|V|=950),Alcalalí,8
+España (|V|=950),Cocentaina,10
+España (|V|=950),Nucia (la),9
+España (|V|=950),Benejúzar,9
+España (|V|=950),Fondó de les Neus (el)/Hondón de las Nieves,9
+España (|V|=950),Alicante/Alacant,9
+España (|V|=950),Novelda,9
+España (|V|=950),Bocairent,10
+España (|V|=950),Cañada,9
+España (|V|=950),Ondara,8
+España (|V|=950),Pobla del Duc (la),10
+España (|V|=950),Finestrat,9
+España (|V|=950),Rojales,9
+España (|V|=950),Teulada,6
+España (|V|=950),Onil,9
+España (|V|=950),Elche/Elx,9
+España (|V|=950),Elda,9
+España (|V|=950),Montesinos (Los),9
+España (|V|=950),Santa Pola,9
+España (|V|=950),Albocàsser,7
+España (|V|=950),Alcalà de Xivert,7
+España (|V|=950),Alcora (l'),7
+España (|V|=950),Almazora/Almassora,7
+España (|V|=950),Faura,9
+España (|V|=950),Nules,8
+España (|V|=950),Segorbe,9
+España (|V|=950),Betxí,7
+España (|V|=950),Useras/Useres (les),7
+España (|V|=950),Villafranca del Cid/Vilafranca,7
+España (|V|=950),Càlig,7
+España (|V|=950),Pobla Tornesa (la),7
+España (|V|=950),Jérica,8
+España (|V|=950),Morella,7
+España (|V|=950),Sant Mateu,7
+España (|V|=950),Ademuz,3
+España (|V|=950),Ador,10
+España (|V|=950),Albaida,10
+España (|V|=950),Quart de Poblet,10
+España (|V|=950),Catarroja,10
+España (|V|=950),Riola,10
+España (|V|=950),Bonrepòs i Mirambell,10
+España (|V|=950),Estivella,9
+España (|V|=950),Gavarda,10
+España (|V|=950),Alborache,10
+España (|V|=950),Pobla de Farnals (la),10
+España (|V|=950),Guadassuar,10
+España (|V|=950),Alcúdia de Crespins (l'),10
+España (|V|=950),Catadau,10
+España (|V|=950),Benifaió,10
+España (|V|=950),Bellreguard,10
+España (|V|=950),Chella,10
+España (|V|=950),Ayora,8
+España (|V|=950),Benifairó de la Valldigna,10
+España (|V|=950),Ènova (l'),10
+España (|V|=950),Benaguasil,10
+España (|V|=950),Eliana (l'),10
+España (|V|=950),Camporrobles,6
+España (|V|=950),Casinos,10
+España (|V|=950),Chelva,8
+España (|V|=950),Chiva,10
+España (|V|=950),Font de la Figuera (la),9
+España (|V|=950),Jalance,8
+España (|V|=950),Olocau,10
+España (|V|=950),Mogente/Moixent,10
+España (|V|=950),Montroy,10
+España (|V|=950),Utiel,6
+España (|V|=950),Siete Aguas,10
+España (|V|=950),Venta del Moro,6
+ADIF (|V|≈485),B7181,2
+ADIF (|V|≈485),B5102,2
+ADIF (|V|≈485),11300,2
+ADIF (|V|≈485),15106,2
+ADIF (|V|≈485),XX011,1
+ADIF (|V|≈485),51416,1
+ADIF (|V|≈485),71707,2
+ADIF (|V|≈485),A7510,1
+ADIF (|V|≈485),PK068,1
+ADIF (|V|≈485),14214,2
+ADIF (|V|≈485),16602,1
+ADIF (|V|≈485),B0110,2
+ADIF (|V|≈485),51412,1
+ADIF (|V|≈485),B9521,2
+ADIF (|V|≈485),71403,2
+ADIF (|V|≈485),A5040,2
+ADIF (|V|≈485),66006,1
+ADIF (|V|≈485),70706,2
+ADIF (|V|≈485),B1401,2
+ADIF (|V|≈485),13506,1
+ADIF (|V|≈485),A7226,2
+ADIF (|V|≈485),30100,2
+ADIF (|V|≈485),81209,2
+ADIF (|V|≈485),B1111,2
+ADIF (|V|≈485),PK540,1
+ADIF (|V|≈485),70400,2
+ADIF (|V|≈485),15018,1
+ADIF (|V|≈485),10611,2
+ADIF (|V|≈485),B2051,2
+ADIF (|V|≈485),C4003,2
+ADIF (|V|≈485),B2052,2
+ADIF (|V|≈485),A6141,1
+ADIF (|V|≈485),B4301,2
+ADIF (|V|≈485),50300,2
+ADIF (|V|≈485),31400,2
+ADIF (|V|≈485),11102,2
+ADIF (|V|≈485),71801,2
+ADIF (|V|≈485),B6406,2
+ADIF (|V|≈485),B2301,2
+ADIF (|V|≈485),A7141,2
+ADIF (|V|≈485),B5702,2
+ADIF (|V|≈485),B3500,2
+ADIF (|V|≈485),23004,2
+ADIF (|V|≈485),03100,1
+ADIF (|V|≈485),16011,1
+ADIF (|V|≈485),10620,2
+ADIF (|V|≈485),B3200,2
+ADIF (|V|≈485),70803,2
+ADIF (|V|≈485),A0320,2
+ADIF (|V|≈485),A1983,2
+ADIF (|V|≈485),B0802,2
+ADIF (|V|≈485),B6501,2
+ADIF (|V|≈485),40100,2
+ADIF (|V|≈485),23008,2
+ADIF (|V|≈485),64003,1
+ADIF (|V|≈485),B4303,2
+ADIF (|V|≈485),A6060,2
+ADIF (|V|≈485),B6100,2
+ADIF (|V|≈485),B9701,2
+ADIF (|V|≈485),A0823,2
+ADIF (|V|≈485),B3730,2
+ADIF (|V|≈485),98100,2
+ADIF (|V|≈485),21010,2
+ADIF (|V|≈485),65400,1
+ADIF (|V|≈485),B0860,2
+ADIF (|V|≈485),05803,1
+ADIF (|V|≈485),XX004,1
+ADIF (|V|≈485),B3021,2
+ADIF (|V|≈485),XX017,1
+ADIF (|V|≈485),B5109,2
+ADIF (|V|≈485),B0323,2
+ADIF (|V|≈485),B3501,2
+ADIF (|V|≈485),XX015,1
+ADIF (|V|≈485),10400,2
+ADIF (|V|≈485),15212,2
+ADIF (|V|≈485),B0900,2
+ADIF (|V|≈485),20300,2
+ADIF (|V|≈485),XX001,1
+ADIF (|V|≈485),08224,2
+ADIF (|V|≈485),B3603,2
+ADIF (|V|≈485),B7800,2
+ADIF (|V|≈485),51101,2
+ADIF (|V|≈485),05405,2
+ADIF (|V|≈485),16400,2
+ADIF (|V|≈485),79400,1
+ADIF (|V|≈485),15302,2
+ADIF (|V|≈485),81200,2
+ADIF (|V|≈485),10200,2
+ADIF (|V|≈485),85214,1
+ADIF (|V|≈485),B6500,2
+ADIF (|V|≈485),71600,2
+ADIF (|V|≈485),55018,1
+ADIF (|V|≈485),18000,2
+ADIF (|V|≈485),37603,1
+ADIF (|V|≈485),95101,2
+ADIF (|V|≈485),B6001,2
+ADIF (|V|≈485),79308,2
+ADIF (|V|≈485),08240,2
+ADIF (|V|≈485),B7901,2
+ADIF (|V|≈485),05455,1
+ADIF (|V|≈485),30000,2
+ADIF (|V|≈485),15400,2
+ADIF (|V|≈485),B8100,2
+ADIF (|V|≈485),79206,2
+ADIF (|V|≈485),B1521,2
+ADIF (|V|≈485),B5101,2
+ADIF (|V|≈485),70100,2
+ADIF (|V|≈485),78004,2
+ADIF (|V|≈485),92102,1
+ADIF (|V|≈485),B7082,2
+ADIF (|V|≈485),54413,2
+ADIF (|V|≈485),B1602,2
+ADIF (|V|≈485),70600,2
+ADIF (|V|≈485),B3760,1
+ADIF (|V|≈485),72100,2
+ADIF (|V|≈485),B1112,2
+ADIF (|V|≈485),77310,1
+ADIF (|V|≈485),B4005,2
+ADIF (|V|≈485),A7890,2
+ADIF (|V|≈485),56100,2
+ADIF (|V|≈485),60400,2
+ADIF (|V|≈485),64108,1
+ADIF (|V|≈485),05754,2
+ADIF (|V|≈485),10500,2
+ADIF (|V|≈485),A1311,2
+ADIF (|V|≈485),A0843,2
+ADIF (|V|≈485),A7227,2
+ADIF (|V|≈485),69011,1
+ADIF (|V|≈485),51415,1
+ADIF (|V|≈485),B0861,2
+ADIF (|V|≈485),03310,2
+ADIF (|V|≈485),60101,2
+ADIF (|V|≈485),05461,2
+ADIF (|V|≈485),B2302,2
+ADIF (|V|≈485),00018,1
+ADIF (|V|≈485),B5703,2
+ADIF (|V|≈485),B1509,2
+ADIF (|V|≈485),A7002,2
+ADIF (|V|≈485),05325,2
+ADIF (|V|≈485),B0810,2
+ADIF (|V|≈485),37001,2
+ADIF (|V|≈485),B4030,2
+ADIF (|V|≈485),B3531,2
+ADIF (|V|≈485),79002,2
+ADIF (|V|≈485),04307,2
+ADIF (|V|≈485),74217,1
+ADIF (|V|≈485),50100,2
+ADIF (|V|≈485),B0740,2
+ADIF (|V|≈485),A7110,2
+ADIF (|V|≈485),69110,1
+ADIF (|V|≈485),B1506,2
+ADIF (|V|≈485),B0340,2
+ADIF (|V|≈485),70101,2
+ADIF (|V|≈485),B3141,2
+ADIF (|V|≈485),79011,2
+ADIF (|V|≈485),71101,2
+ADIF (|V|≈485),B0817,2
+ADIF (|V|≈485),69200,1
+ADIF (|V|≈485),04040,2
+ADIF (|V|≈485),B0903,2
+ADIF (|V|≈485),60600,2
+ADIF (|V|≈485),72400,1
+ADIF (|V|≈485),A5101,2
+ADIF (|V|≈485),A0720,1
+ADIF (|V|≈485),60108,1
+ADIF (|V|≈485),37400,2
+ADIF (|V|≈485),A0180,1
+ADIF (|V|≈485),B1611,2
+ADIF (|V|≈485),08223,1
+ADIF (|V|≈485),14200,2
+ADIF (|V|≈485),A6133,2
+ADIF (|V|≈485),22100,2
+ADIF (|V|≈485),B3120,2
+ADIF (|V|≈485),B1005,2
+ADIF (|V|≈485),B0105,2
+ADIF (|V|≈485),51405,1
+ADIF (|V|≈485),51005,2
+ADIF (|V|≈485),69109,1
+ADIF (|V|≈485),61101,2
+ADIF (|V|≈485),37012,1
+ADIF (|V|≈485),78200,2
+ADIF (|V|≈485),B1508,2
+ADIF (|V|≈485),B4300,2
+ADIF (|V|≈485),B0333,2
+ADIF (|V|≈485),B4104,2
+ADIF (|V|≈485),51411,1
+ADIF (|V|≈485),XX018,1
+ADIF (|V|≈485),15301,2
+ADIF (|V|≈485),22403,1
+ADIF (|V|≈485),66200,1
+ADIF (|V|≈485),65402,2
+ADIF (|V|≈485),B3710,2
+ADIF (|V|≈485),B6405,2
+ADIF (|V|≈485),60200,2
+ADIF (|V|≈485),17000,2
+ADIF (|V|≈485),72212,1
+ADIF (|V|≈485),05389,1
+ADIF (|V|≈485),65017,1
+ADIF (|V|≈485),04313,1
+ADIF (|V|≈485),55023,1
+ADIF (|V|≈485),22112,1
+ADIF (|V|≈485),B7173,2
+ADIF (|V|≈485),69108,1
+ADIF (|V|≈485),35407,1
+ADIF (|V|≈485),14100,2
+ADIF (|V|≈485),17009,2
+ADIF (|V|≈485),15208,2
+ADIF (|V|≈485),50501,2
+ADIF (|V|≈485),05473,2
+ADIF (|V|≈485),B6731,2
+ADIF (|V|≈485),XX006,1
+ADIF (|V|≈485),A0426,2
+ADIF (|V|≈485),A7400,2
+ADIF (|V|≈485),60004,2
+ADIF (|V|≈485),A6000,2
+ADIF (|V|≈485),B7801,2
+ADIF (|V|≈485),B0200,2
+ADIF (|V|≈485),70001,2
+ADIF (|V|≈485),62109,2
+ADIF (|V|≈485),98305,1
+ADIF (|V|≈485),65200,2
+ADIF (|V|≈485),B1507,2
+ADIF (|V|≈485),54301,2
+ADIF (|V|≈485),A5031,2
+ADIF (|V|≈485),B1702,2
+ADIF (|V|≈485),67224,1
+ADIF (|V|≈485),37315,1
+ADIF (|V|≈485),79316,1
+ADIF (|V|≈485),56312,1
+ADIF (|V|≈485),B0109,2
+ADIF (|V|≈485),B3002,2
+ADIF (|V|≈485),XX005,1
+ADIF (|V|≈485),05509,2
+ADIF (|V|≈485),A9060,1
+ADIF (|V|≈485),B8801,2
+ADIF (|V|≈485),71100,2
+ADIF (|V|≈485),37500,2
+ADIF (|V|≈485),A7220,2
+ADIF (|V|≈485),42022,1
+ADIF (|V|≈485),97018,2
+ADIF (|V|≈485),05552,1
+ADIF (|V|≈485),70805,1
+ADIF (|V|≈485),B0902,2
+ADIF (|V|≈485),B7511,1
+ADIF (|V|≈485),50500,2
+ADIF (|V|≈485),94005,2
+ADIF (|V|≈485),B1804,2
+ADIF (|V|≈485),B0826,2
+ADIF (|V|≈485),60901,2
+ADIF (|V|≈485),20400,2
+ADIF (|V|≈485),55020,1
+ADIF (|V|≈485),61404,1
+ADIF (|V|≈485),04031,2
+ADIF (|V|≈485),37610,1
+ADIF (|V|≈485),B1320,2
+ADIF (|V|≈485),37600,2
+ADIF (|V|≈485),B5119,2
+ADIF (|V|≈485),11000,2
+ADIF (|V|≈485),43019,1
+ADIF (|V|≈485),B0103,2
+ADIF (|V|≈485),37803,2
+ADIF (|V|≈485),55021,1
+ADIF (|V|≈485),B4043,2
+ADIF (|V|≈485),65002,2
+ADIF (|V|≈485),16002,2
+ADIF (|V|≈485),B6722,2
+ADIF (|V|≈485),70800,2
+ADIF (|V|≈485),15211,2
+ADIF (|V|≈485),65411,1
+ADIF (|V|≈485),16403,2
+ADIF (|V|≈485),51107,1
+ADIF (|V|≈485),60900,2
+ADIF (|V|≈485),05308,2
+ADIF (|V|≈485),A7225,2
+ADIF (|V|≈485),79006,2
+ADIF (|V|≈485),08244,1
+ADIF (|V|≈485),05226,1
+ADIF (|V|≈485),B7510,2
+ADIF (|V|≈485),B5601,2
+ADIF (|V|≈485),78400,2
+ADIF (|V|≈485),23015,2
+ADIF (|V|≈485),79200,2
+ADIF (|V|≈485),13305,2
+ADIF (|V|≈485),74200,1
+ADIF (|V|≈485),05770,2
+ADIF (|V|≈485),62107,1
+ADIF (|V|≈485),B6000,1
+ADIF (|V|≈485),A7070,2
+ADIF (|V|≈485),B2300,2
+ADIF (|V|≈485),10608,1
+ADIF (|V|≈485),65501,1
+ADIF (|V|≈485),60202,2
+ADIF (|V|≈485),10503,2
+ADIF (|V|≈485),A5030,2
+ADIF (|V|≈485),65016,1
+ADIF (|V|≈485),B0824,2
+ADIF (|V|≈485),A7086,2
+ADIF (|V|≈485),10100,2
+ADIF (|V|≈485),A0300,2
+ADIF (|V|≈485),A2240,2
+ADIF (|V|≈485),22308,1
+ADIF (|V|≈485),11014,2
+ADIF (|V|≈485),64200,2
+ADIF (|V|≈485),95104,1
+ADIF (|V|≈485),B1601,2
+ADIF (|V|≈485),A0660,1
+ADIF (|V|≈485),15100,2
+ADIF (|V|≈485),04200,1
+ADIF (|V|≈485),54412,2
+ADIF (|V|≈485),05713,1
+ADIF (|V|≈485),72507,2
+ADIF (|V|≈485),16604,1
+ADIF (|V|≈485),50700,2
+ADIF (|V|≈485),82100,1
+ADIF (|V|≈485),21011,1
+ADIF (|V|≈485),20200,2
+ADIF (|V|≈485),05655,2
+ADIF (|V|≈485),73100,2
+ADIF (|V|≈485),51050,1
+ADIF (|V|≈485),22300,2
+ADIF (|V|≈485),05451,1
+ADIF (|V|≈485),14224,1
+ADIF (|V|≈485),16501,1
+ADIF (|V|≈485),05329,1
+ADIF (|V|≈485),78706,2
+ADIF (|V|≈485),15410,2
+ADIF (|V|≈485),15300,2
+ADIF (|V|≈485),B0862,2
+ADIF (|V|≈485),31416,2
+ADIF (|V|≈485),A3140,1
+ADIF (|V|≈485),B5103,2
+ADIF (|V|≈485),11101,1
+ADIF (|V|≈485),05443,1
+ADIF (|V|≈485),43023,2
+ADIF (|V|≈485),16101,2
+ADIF (|V|≈485),05663,2
+ADIF (|V|≈485),60100,2
+ADIF (|V|≈485),78007,2
+ADIF (|V|≈485),37113,2
+ADIF (|V|≈485),14226,1
+ADIF (|V|≈485),B4015,2
+ADIF (|V|≈485),02003,2
+ADIF (|V|≈485),B5052,2
+ADIF (|V|≈485),07004,1
+ADIF (|V|≈485),A8248,2
+ADIF (|V|≈485),XX003,1
+ADIF (|V|≈485),15122,2
+ADIF (|V|≈485),B9811,2
+ADIF (|V|≈485),A7081,2
+ADIF (|V|≈485),54400,2
+ADIF (|V|≈485),B0815,2
+ADIF (|V|≈485),15000,2
+ADIF (|V|≈485),B0107,2
+ADIF (|V|≈485),50512,2
+ADIF (|V|≈485),14221,2
+ADIF (|V|≈485),72503,2
+ADIF (|V|≈485),16405,1
+ADIF (|V|≈485),A1702,2
+ADIF (|V|≈485),65000,1
+ADIF (|V|≈485),04104,2
+ADIF (|V|≈485),65013,2
+ADIF (|V|≈485),79009,2
+ADIF (|V|≈485),50A03,1
+ADIF (|V|≈485),19003,1
+ADIF (|V|≈485),A1510,2
+ADIF (|V|≈485),12023,1
+ADIF (|V|≈485),78006,1
+ADIF (|V|≈485),02030,2
+ADIF (|V|≈485),62002,2
+ADIF (|V|≈485),B5410,2
+ADIF (|V|≈485),B6411,2
+ADIF (|V|≈485),64100,2
+ADIF (|V|≈485),B6505,2
+ADIF (|V|≈485),79300,2
+ADIF (|V|≈485),A6031,2
+ADIF (|V|≈485),C1160,1
+ADIF (|V|≈485),15019,2
+ADIF (|V|≈485),B6504,2
+ADIF (|V|≈485),B4100,2
+ADIF (|V|≈485),A8401,2
+ADIF (|V|≈485),A8249,2
+ADIF (|V|≈485),31422,1
+ADIF (|V|≈485),03500,2
+ADIF (|V|≈485),05447,1
+ADIF (|V|≈485),30200,2
+ADIF (|V|≈485),23006,1
+ADIF (|V|≈485),54516,1
+ADIF (|V|≈485),A6541,2
+ADIF (|V|≈485),13201,2
+ADIF (|V|≈485),20114,1
+ADIF (|V|≈485),B3750,2
+ADIF (|V|≈485),A6131,1
+ADIF (|V|≈485),13400,1
+ADIF (|V|≈485),A7111,2
+ADIF (|V|≈485),60911,2
+ADIF (|V|≈485),A0427,2
+ADIF (|V|≈485),37805,2
+ADIF (|V|≈485),A7080,2
+ADIF (|V|≈485),50709,2
+ADIF (|V|≈485),71500,2
+ADIF (|V|≈485),72305,2
+ADIF (|V|≈485),B0814,2
+ADIF (|V|≈485),A6422,2
+ADIF (|V|≈485),97100,2
+ADIF (|V|≈485),20407,1
+ADIF (|V|≈485),B0820,2
+ADIF (|V|≈485),A7190,2
+ADIF (|V|≈485),11004,2
+ADIF (|V|≈485),20603,1
+ADIF (|V|≈485),B5701,2
+ADIF (|V|≈485),B8000,2
+ADIF (|V|≈485),51003,2
+ADIF (|V|≈485),05602,2
+ADIF (|V|≈485),03216,2
+ADIF (|V|≈485),30002,1
+ADIF (|V|≈485),13408,1
+ADIF (|V|≈485),B6091,2
+ADIF (|V|≈485),A3760,1
+ADIF (|V|≈485),B2230,2
+ADIF (|V|≈485),B3503,2
+ADIF (|V|≈485),A5100,2
+ADIF (|V|≈485),B5073,2
+ADIF (|V|≈485),B7183,2
+ADIF (|V|≈485),A9820,2
+ADIF (|V|≈485),54517,1
+ADIF (|V|≈485),71400,2
+ADIF (|V|≈485),37200,2
+ADIF (|V|≈485),78002,1
+ADIF (|V|≈485),12006,1
+ADIF (|V|≈485),A0801,2
+ADIF (|V|≈485),A6420,2
+ADIF (|V|≈485),20204,2
+ADIF (|V|≈485),12100,1
+ADIF (|V|≈485),05223,2
+ADIF (|V|≈485),66212,1
+ADIF (|V|≈485),15205,2
+ADIF (|V|≈485),A1112,2
+ADIF (|V|≈485),B0320,2
+ADIF (|V|≈485),B1110,2
+ADIF (|V|≈485),10101,2
+ADIF (|V|≈485),A0825,2
+ADIF (|V|≈485),64203,2
+ADIF (|V|≈485),62001,2
+ADIF (|V|≈485),B1120,2
+ADIF (|V|≈485),B4041,2
+ADIF (|V|≈485),05019,1
+ADIF (|V|≈485),B7081,2
+ADIF (|V|≈485),A7083,2
+ADIF (|V|≈485),A7087,2
+ADIF (|V|≈485),C3308,1
+ADIF (|V|≈485),98001,2
+ADIF (|V|≈485),37700,2
+ADIF (|V|≈485),22200,2
+ADIF (|V|≈485),B3122,2
+ADIF (|V|≈485),B2041,2
+ADIF (|V|≈485),B0201,2
+ADIF (|V|≈485),B1803,2
+ADIF (|V|≈485),35607,1
+ADIF (|V|≈485),A8250,2
+ADIF (|V|≈485),10600,2
+ADIF (|V|≈485),05600,1
+ADIF (|V|≈485),35100,2
+ADIF (|V|≈485),78800,2
+ADIF (|V|≈485),B2001,2
+ADIF (|V|≈485),65301,2
+ADIF (|V|≈485),61210,2
+ADIF (|V|≈485),55024,1
+ADIF (|V|≈485),31409,1
+ADIF (|V|≈485),A7229,2
+ADIF (|V|≈485),35400,2
+ADIF (|V|≈485),78100,2
+ADIF (|V|≈485),05551,2
+ADIF (|V|≈485),71905,1
+ADIF (|V|≈485),A2220,2
+ADIF (|V|≈485),A2045,2
+ADIF (|V|≈485),A1984,2
+ADIF (|V|≈485),71901,1
+ADIF (|V|≈485),B4054,2
+ADIF (|V|≈485),05671,1
+ADIF (|V|≈485),72006,1
+ADIF (|V|≈485),B3770,2
+ADIF (|V|≈485),11200,2
+ADIF (|V|≈485),05779,1
+ADIF (|V|≈485),B1511,2
+ADIF (|V|≈485),41004,1
