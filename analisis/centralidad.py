@@ -1,51 +1,72 @@
-import networkx as nx
+"""
+Visualización de las top-10 nodos por centralidad de grado, intermediación y cercanía.
+Opera sobre la red CyL (AdjacencyMatrixNamed45.csv).
+"""
+
+import os
 import pandas as pd
+import networkx as nx
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-# Define graph G here
-#G = nx.karate_club_graph()  # Example graph, replace with correct
+BASE = os.path.dirname(os.path.abspath(__file__))
+DATA_CYL = os.path.join(BASE, '..', 'datos', 'cyl')
+FIGS_CYL = os.path.join(BASE, '..', 'figuras', 'cyl')
 
-# Calculate centrality measures
-degree_centrality = nx.degree_centrality(G)
-betweenness_centrality = nx.betweenness_centrality(G)
-closeness_centrality = nx.closeness_centrality(G)
-
-# Convert centrality measures to DataFrame for easier handling
-centrality_measures_df = pd.DataFrame({
-	'Degree Centrality': degree_centrality,
-	'Betweenness Centrality': betweenness_centrality,
-	'Closeness Centrality': closeness_centrality
-})
-
-# Visualize the top nodes based on each centrality measure
-top_n = 10  # Number of top nodes to display
-
-# Sort and select top nodes for each centrality measure
-top_degree = centrality_measures_df['Degree Centrality'].sort_values(ascending=False).head(top_n)
-top_betweenness = centrality_measures_df['Betweenness Centrality'].sort_values(ascending=False).head(top_n)
-top_closeness = centrality_measures_df['Closeness Centrality'].sort_values(ascending=False).head(top_n)
-
-# Plotting
-fig, axes = plt.subplots(1, 3, figsize=(18, 5))
-
-# Degree Centrality
-top_degree.plot(kind='bar', ax=axes[0], color='skyblue')
-axes[0].set_title('Top Nodes by Degree Centrality')
-axes[0].set_ylabel('Centrality Score')
-axes[0].set_xlabel('Node')
-
-# Betweenness Centrality
-top_betweenness.plot(kind='bar', ax=axes[1], color='lightgreen')
-axes[1].set_title('Top Nodes by Betweenness Centrality')
-axes[1].set_xlabel('Node')
-
-# Closeness Centrality
-top_closeness.plot(kind='bar', ax=axes[2], color='salmon')
-axes[2].set_title('Top Nodes by Closeness Centrality')
-axes[2].set_xlabel('Node')
-
-plt.tight_layout()
-plt.savefig('centrality_measures_visualization.png')
-plt.show()
+os.makedirs(FIGS_CYL, exist_ok=True)
 
 
+def load_graph(adj_csv: str) -> nx.Graph:
+    adj = pd.read_csv(adj_csv, index_col=0)
+    return nx.from_pandas_adjacency(adj)
+
+
+def plot_top_centrality(G: nx.Graph, out_dir: str, top_n: int = 10) -> None:
+    degree_c = nx.degree_centrality(G)
+    betweenness_c = nx.betweenness_centrality(G)
+    closeness_c = nx.closeness_centrality(G)
+
+    df = pd.DataFrame({
+        'Centralidad de grado': degree_c,
+        'Centralidad de intermediación': betweenness_c,
+        'Centralidad de cercanía': closeness_c,
+    })
+
+    colors = ['steelblue', 'firebrick', 'seagreen']
+    fig, axes = plt.subplots(1, 3, figsize=(16, 5))
+
+    plt.rcParams.update({
+        'font.family': 'serif',
+        'font.size': 11,
+        'axes.labelsize': 10,
+        'axes.titlesize': 10,
+        'xtick.labelsize': 8,
+        'ytick.labelsize': 9,
+    })
+
+    for ax, col, color in zip(axes, df.columns, colors):
+        top = df[col].sort_values(ascending=False).head(top_n)
+        top.plot(kind='bar', ax=ax, color=color, edgecolor='white', linewidth=0.5)
+        ax.set_title(col)
+        ax.set_xlabel('Nodo')
+        ax.set_ylabel('Valor de centralidad')
+        ax.tick_params(axis='x', rotation=45)
+        ax.grid(axis='y', alpha=0.3)
+
+    fig.tight_layout()
+
+    for ext in ('pdf', 'png'):
+        path = os.path.join(out_dir, f'centralidad_top10.{ext}')
+        fig.savefig(path, dpi=150, bbox_inches='tight')
+        print(f"Guardado: {path}")
+
+    plt.close(fig)
+
+
+if __name__ == '__main__':
+    adj_csv = os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv')
+    G = load_graph(adj_csv)
+    print(f"Grafo cargado: |V|={G.number_of_nodes()}, |E|={G.number_of_edges()}")
+    plot_top_centrality(G, FIGS_CYL)
+    print("Listo.")

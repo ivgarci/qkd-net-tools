@@ -1,0 +1,4 @@
+Caso,|V|,|E|,Eficiencia_global_E,Asortatividad_r,Small_world_sigma,Conectividad_algebraica_lambda2,Exponente_escala_libre_alpha,Ajuste_R2
+CyL (|V|=100),100,254,0.245797,0.555405,4.7224,0.071685,0.021,0.0002
+España (|V|=950),950,5681,0.120766,0.773051,,0.013936,0.128,0.0064
+ADIF (|V|=485),485,633,0.066458,,,,,
