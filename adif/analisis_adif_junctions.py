@@ -13,12 +13,16 @@ AVE 982 superan el umbral de referencia Δ = 45 km en menos del 7%, dentro del
 margen de variabilidad del modelo físico simplificado).
 """
 
+import os
 import pandas as pd
 import networkx as nx
 import numpy as np
 import random
 import warnings
 warnings.filterwarnings('ignore')
+
+BASE      = os.path.dirname(os.path.abspath(__file__))
+DATA_ADIF = os.path.join(BASE, '..', 'datos', 'adif')
 
 DELTA_REF   = 45.0   # km — umbral de referencia (modelo simplificado)
 DELTA_EFF   = 50.0   # km — umbral operativo adoptado para esta red
@@ -34,11 +38,11 @@ np.random.seed(SEED)
 
 print("Cargando datos...")
 nodes_df = pd.read_csv(
-    '/Users/igarcia/doctorado/2025_2026/mapas/nodos_red_adif.csv',
+    os.path.join(DATA_ADIF, 'nodos_red_adif.csv'),
     quotechar='"', on_bad_lines='skip'
 )
 adj_df = pd.read_csv(
-    '/Users/igarcia/doctorado/2025_2026/mapas/adyacencia_red_adif.csv',
+    os.path.join(DATA_ADIF, 'adyacencia_red_adif.csv'),
     quotechar='"', on_bad_lines='skip'
 )
 
@@ -390,6 +394,6 @@ results = {
                  for n, _ in top5_cb]
 }
 
-with open('/Users/igarcia/doctorado/2025_2026/mapas/resultados_adif_junctions.json', 'w') as f:
+with open(os.path.join(DATA_ADIF, 'resultados_adif_junctions.json'), 'w') as f:
     json.dump(results, f, ensure_ascii=False, indent=2)
 print("\nResultados guardados en resultados_adif_junctions.json")

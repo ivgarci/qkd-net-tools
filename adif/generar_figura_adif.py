@@ -1,5 +1,6 @@
 """Genera adif_resiliencia.pdf con el estilo de las figuras de resiliencia existentes."""
 
+import os
 import json
 import numpy as np
 import matplotlib
@@ -7,8 +8,13 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 
+BASE      = os.path.dirname(os.path.abspath(__file__))
+DATA_ADIF = os.path.join(BASE, '..', 'datos', 'adif')
+FIGS_ADIF = os.path.join(BASE, '..', 'figuras', 'adif')
+os.makedirs(FIGS_ADIF, exist_ok=True)
+
 # ── Datos ──────────────────────────────────────────────────────────────────────
-with open('/Users/igarcia/doctorado/2025_2026/mapas/resultados_adif_junctions.json') as f:
+with open(os.path.join(DATA_ADIF, 'resultados_adif_junctions.json')) as f:
     data = json.load(f)
 
 p      = [v * 100 for v in data['attack_degree']['p_values']]
@@ -97,8 +103,8 @@ ax.legend(fontsize=FONT_LEG, loc='upper right', framealpha=0.9,
 
 fig.tight_layout()
 
-out_pdf = '/Users/igarcia/doctorado/2025_2026/697937f94a86c11bc36ad509/Figures/adif_resiliencia.pdf'
-out_png = '/Users/igarcia/doctorado/2025_2026/697937f94a86c11bc36ad509/Figures/adif_resiliencia.png'
+out_pdf = os.path.join(FIGS_ADIF, 'adif_resiliencia.pdf')
+out_png = os.path.join(FIGS_ADIF, 'adif_resiliencia.png')
 fig.savefig(out_pdf, format='pdf', dpi=150, bbox_inches='tight')
 fig.savefig(out_png, format='png', dpi=150, bbox_inches='tight')
 print(f'Guardado: {out_pdf}')

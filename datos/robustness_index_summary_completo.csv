@@ -1,0 +1,4 @@
+Caso,R_grado,R_betweenness,p*_grado (%),p*_betweenness (%)
+"CyL ($|V|=100$, $\Delta=45$ km)",0.3067,0.2353,35,21
+"España ($|V|=950$, $\Delta=45$ km)",0.3752,0.3455,48,38
+ADIF (|V|=485),0.0825,0.1336,5,10

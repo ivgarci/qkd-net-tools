@@ -1,12 +1,20 @@
+import os
 import pandas as pd
 import networkx as nx
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from scipy.stats import f_oneway
 
+BASE     = os.path.dirname(os.path.abspath(__file__))
+DATA_CYL = os.path.join(BASE, '..', 'datos', 'cyl')
+FIGS_CYL = os.path.join(BASE, '..', 'figuras', 'cyl')
+os.makedirs(FIGS_CYL, exist_ok=True)
+
 # Cargar la matriz de adyacencia
-file_path = 'AdjacencyMatrixNamed45.csv'  
+file_path = os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv')
 adjacency_matrix = pd.read_csv(file_path, index_col=0)
 
 # Crear el grafo
@@ -66,13 +74,12 @@ plt.ylabel('PCA2')
 plt.title('HJ-Biplot Clusters')
 
 # Guardar el gráfico en diferentes formatos
-plt.savefig("hj_biplot_clusters.pdf", format='pdf')  # Guardar como PDF
-
-# Mostrar por pantalla el gráfico
-plt.show()
+plt.savefig(os.path.join(FIGS_CYL, "hj_biplot_clusters.pdf"), format='pdf')
+plt.savefig(os.path.join(FIGS_CYL, "hj_biplot_clusters.png"), dpi=150)
+plt.close()
 
 # Guardar los resultados en un archivo CSV
-centralities_df.to_csv('Node_Specific_Network_Measures.csv', index=True)
+centralities_df.to_csv(os.path.join(DATA_CYL, 'Node_Specific_Network_Measures.csv'), index=True)
 
 # Imprimir resultados globales
 print(f"Número de aristas de la red: {number_of_edges}")
