@@ -14,6 +14,7 @@ import os
 import json
 import numpy as np
 import pandas as pd
+import networkx as nx
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -93,9 +94,48 @@ def load_random_failures(data_dir: str, N: int) -> pd.DataFrame:
     path = os.path.join(data_dir, 'random_failure_results.csv')
     df = pd.read_csv(path)
     df['S_rel'] = df['Largest Connected Component Size'] / N
-    # Diámetro: puede ser NaN si la red queda desconectada
     df['diameter'] = df['Diameter of Largest Component']
     return df
+
+
+def compute_random_failure_ci(G: 'nx.Graph', p_steps: list,
+                               n_trials: int = 100,
+                               ci: float = 0.95) -> pd.DataFrame:
+    """
+    Curva S(p) de fallos aleatorios con intervalo de confianza bootstrap.
+
+    Para cada p en p_steps ejecuta n_trials simulaciones independientes,
+    devuelve DataFrame con columnas [p_pct, S_mean, S_lo, S_hi].
+    """
+    import random as _random
+    N = G.number_of_nodes()
+    alpha = (1 - ci) / 2
+
+    rows = []
+    for p in p_steps:
+        num_remove = int((p / 100) * N)
+        s_vals = []
+        for _ in range(n_trials):
+            G_copy = G.copy()
+            nodes_rm = _random.sample(list(G_copy.nodes()), min(num_remove, N))
+            G_copy.remove_nodes_from(nodes_rm)
+            if G_copy.number_of_nodes() == 0:
+                s_vals.append(0.0)
+            elif nx.is_connected(G_copy):
+                s_vals.append(1.0)
+            else:
+                gcc = max(nx.connected_components(G_copy), key=len)
+                s_vals.append(len(gcc) / N)
+
+        s_arr = np.array(s_vals)
+        rows.append({
+            'p_pct': p,
+            'S_mean': float(np.mean(s_arr)),
+            'S_lo':   float(np.quantile(s_arr, alpha)),
+            'S_hi':   float(np.quantile(s_arr, 1 - alpha)),
+        })
+
+    return pd.DataFrame(rows)
 
 
 # ---------------------------------------------------------------------------
@@ -108,6 +148,15 @@ def make_comparison_figure(casos: list, out_dir: str) -> None:
     for ax, caso in zip(axes, casos):
         df_cd = caso['df_cd']
         df_cb = caso['df_cb']
+
+        # Banda de confianza 95 % para fallos aleatorios (si disponible)
+        df_rf = caso.get('df_rf_ci')
+        if df_rf is not None:
+            ax.fill_between(df_rf['p_pct'], df_rf['S_lo'], df_rf['S_hi'],
+                            color='forestgreen', alpha=0.18, label='Fallo aleatorio IC 95 %')
+            ax.plot(df_rf['p_pct'], df_rf['S_mean'], '-',
+                    color='forestgreen', lw=1.4, alpha=0.85,
+                    label='Fallo aleatorio (media)')
 
         ax.plot(df_cd['p_pct'], df_cd['S_rel'], '-',
                 color='steelblue', lw=1.8, label=r'$C_D$ (grado)')
@@ -258,8 +307,7 @@ if __name__ == '__main__':
     print("Comparación de resiliencia — tres casos QKD")
     print("=" * 65)
 
-    # Cargar grafos (solo para N)
-    import networkx as nx
+    # Cargar grafos
     adj_cyl = pd.read_csv(os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv'), index_col=0)
     adj_esp = pd.read_csv(os.path.join(DATA_ESP, 'AdjacencyMatrixNamed45.csv'), index_col=0)
     N_cyl = len(adj_cyl)
@@ -278,13 +326,26 @@ if __name__ == '__main__':
     df_cyl_cd_raw = pd.read_csv(os.path.join(DATA_CYL, 'incremental_targeted_attack_results.csv'))
     df_esp_cd_raw = pd.read_csv(os.path.join(DATA_ESP, 'incremental_targeted_attack_results.csv'))
 
+    # Curvas de fallos aleatorios con IC 95 % (n_trials=100 para rapidez)
+    print("\nCalculando curvas de fallos aleatorios con IC 95 %...")
+    G_cyl = nx.from_pandas_adjacency(adj_cyl)
+    G_esp = nx.from_pandas_adjacency(adj_esp)
+    p_steps_rf = list(range(0, 50, 2))  # pasos de 2% para equilibrar coste
+
+    df_cyl_rf_ci = compute_random_failure_ci(G_cyl, p_steps_rf, n_trials=100)
+    print("  CyL OK")
+    df_esp_rf_ci = compute_random_failure_ci(G_esp, p_steps_rf, n_trials=50)
+    print("  España OK")
+
     casos = [
         {'label': r'CyL ($|V|=100$, $\Delta=45$ km)',
          'df_cd': df_cyl_cd, 'df_cb': df_cyl_cb,
-         'df_cd_raw': df_cyl_cd_raw},
+         'df_cd_raw': df_cyl_cd_raw,
+         'df_rf_ci': df_cyl_rf_ci},
         {'label': r'España ($|V|=950$, $\Delta=45$ km)',
          'df_cd': df_esp_cd, 'df_cb': df_esp_cb,
-         'df_cd_raw': df_esp_cd_raw},
+         'df_cd_raw': df_esp_cd_raw,
+         'df_rf_ci': df_esp_rf_ci},
         {'label': r'ADIF ($|V|=485$, $\Delta_{\rm eff}=50$ km)',
          'df_cd': df_adif_cd, 'df_cb': df_adif_cb,
          'x_max': max(df_adif_cd['p_pct'].max(), df_adif_cb['p_pct'].max())},

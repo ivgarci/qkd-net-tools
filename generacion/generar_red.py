@@ -8,7 +8,9 @@ Generado: 2026-05-17
 import json, csv, os, xml.etree.ElementTree as ET
 from xml.dom import minidom
 
-OUT = "/Users/igarcia/doctorado/2025_2026/mapas"
+BASE = os.path.dirname(os.path.abspath(__file__))
+OUT  = os.path.join(BASE, '..', 'datos', 'generado')
+os.makedirs(OUT, exist_ok=True)
 
 # ─────────────────────────────────────────────
 # NODOS

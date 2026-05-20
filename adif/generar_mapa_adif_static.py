@@ -15,20 +15,25 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.lines import Line2D
 
+BASE      = os.path.dirname(os.path.abspath(__file__))
+DATA_ADIF = os.path.join(BASE, '..', 'datos', 'adif')
+FIGS_ADIF = os.path.join(BASE, '..', 'figuras', 'adif')
+os.makedirs(FIGS_ADIF, exist_ok=True)
+
 DELTA_EFF = 50.0   # km — umbral operativo
 SEED = 42
 
-OUT_PDF = '/Users/igarcia/doctorado/2025_2026/697937f94a86c11bc36ad509/Figures/adif_junctions_mapa.pdf'
-OUT_PNG = '/Users/igarcia/doctorado/2025_2026/697937f94a86c11bc36ad509/Figures/adif_junctions_mapa.png'
+OUT_PDF = os.path.join(FIGS_ADIF, 'adif_junctions_mapa.pdf')
+OUT_PNG = os.path.join(FIGS_ADIF, 'adif_junctions_mapa.png')
 
 # ── 1. Cargar datos ────────────────────────────────────────────────────────────
 print("Cargando datos...")
 nodes_df = pd.read_csv(
-    '/Users/igarcia/doctorado/2025_2026/mapas/nodos_red_adif.csv',
+    os.path.join(DATA_ADIF, 'nodos_red_adif.csv'),
     quotechar='"', on_bad_lines='skip'
 )
 adj_df = pd.read_csv(
-    '/Users/igarcia/doctorado/2025_2026/mapas/adyacencia_red_adif.csv',
+    os.path.join(DATA_ADIF, 'adyacencia_red_adif.csv'),
     quotechar='"', on_bad_lines='skip'
 )
 

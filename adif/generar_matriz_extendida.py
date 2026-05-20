@@ -12,9 +12,11 @@ Output:
 
 import json, csv, heapq, math, os
 
-BASE  = "/Users/igarcia/doctorado/2025_2026/mapas"
-ADIF  = os.path.join(BASE, "adif")
-RENFE = os.path.join(BASE, "renfe")
+BASE       = os.path.dirname(os.path.abspath(__file__))
+DATA_ADIF  = os.path.join(BASE, '..', 'datos', 'adif')
+DATA_RENFE = os.path.join(BASE, '..', 'datos', 'renfe')
+FIGS_ADIF  = os.path.join(BASE, '..', 'figuras', 'adif')
+os.makedirs(FIGS_ADIF, exist_ok=True)
 
 # ── Utilidades ────────────────────────────────────────────────────────────────
 
@@ -50,7 +52,7 @@ def project_point_on_linestring(pt_lat, pt_lon, coords):
 # ── Cargar dependencias ───────────────────────────────────────────────────────
 
 print("Cargando dependencias...")
-with open(os.path.join(ADIF, "adif_dependencias.geojson")) as f:
+with open(os.path.join(DATA_ADIF, "adif_dependencias.geojson")) as f:
     deps_features = json.load(f)["features"]
 
 dep_info   = {}   # cod -> properties
@@ -67,7 +69,7 @@ for feat in deps_features:
 # ── Cargar tramos ─────────────────────────────────────────────────────────────
 
 print("Cargando tramos...")
-with open(os.path.join(ADIF, "adif_tramos.geojson")) as f:
+with open(os.path.join(DATA_ADIF, "adif_tramos.geojson")) as f:
     tramos_features = json.load(f)["features"]
 
 tramo_by_cod = {f["properties"]["CODTRAMO"]: f for f in tramos_features
@@ -154,19 +156,19 @@ BORDER = {"77310","79316"}
 station_codes = set()
 
 # Catálogo completo
-with open(os.path.join(RENFE, "estaciones.csv"), encoding="latin-1") as f:
+with open(os.path.join(DATA_RENFE, "estaciones.csv"), encoding="latin-1") as f:
     for row in csv.DictReader(f, delimiter=";"):
         if row.get("PAIS","").strip().upper() in ("ESPAÑA","ESPA\xd1A"):
             station_codes.add(row["CODIGO"].strip().strip('"'))
 
 # FEVE
-with open(os.path.join(RENFE, "listado-de-estaciones-feve-2.csv"), encoding="utf-8-sig") as f:
+with open(os.path.join(DATA_RENFE, "listado-de-estaciones-feve-2.csv"), encoding="utf-8-sig") as f:
     for row in csv.DictReader(f, delimiter=";"):
         ck = [k for k in row.keys() if "DIGO" in k][0]
         station_codes.add(row[ck].strip())
 
 # AV/LD/MD
-with open(os.path.join(RENFE, "listado_completo_av_ld_md.csv"), encoding="utf-8-sig") as f:
+with open(os.path.join(DATA_RENFE, "listado_completo_av_ld_md.csv"), encoding="utf-8-sig") as f:
     for row in csv.DictReader(f, delimiter=";"):
         pais = row.get("PAIS","").strip()
         ck   = [k for k in row.keys() if "DIGO" in k][0]
@@ -277,7 +279,7 @@ print(f"  SS (secundario-secundario):{cat_counts['SS']}")
 
 # ── CSV ───────────────────────────────────────────────────────────────────────
 
-csv_path = os.path.join(BASE, "matriz_extendida.csv")
+csv_path = os.path.join(DATA_ADIF, "matriz_extendida.csv")
 with open(csv_path, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=[
         "from_cod","from_nombre","from_cat","from_tipo_dep",
@@ -498,7 +500,7 @@ render();
 </html>
 """
 
-html_path = os.path.join(BASE, "matriz_extendida.html")
+html_path = os.path.join(FIGS_ADIF, "matriz_extendida.html")
 with open(html_path, "w", encoding="utf-8") as f:
     f.write(html)
 

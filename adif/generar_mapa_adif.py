@@ -14,9 +14,11 @@ Fuentes de estaciones:
 import json, csv, math, os
 from datetime import date
 
-BASE   = "/Users/igarcia/doctorado/2025_2026/mapas"
-ADIF   = os.path.join(BASE, "adif")
-RENFE  = os.path.join(BASE, "renfe")
+BASE       = os.path.dirname(os.path.abspath(__file__))
+DATA_ADIF  = os.path.join(BASE, '..', 'datos', 'adif')
+DATA_RENFE = os.path.join(BASE, '..', 'datos', 'renfe')
+FIGS_ADIF  = os.path.join(BASE, '..', 'figuras', 'adif')
+os.makedirs(FIGS_ADIF, exist_ok=True)
 
 # ─── Douglas-Peucker simplification (pure Python) ────────────────────────────
 
@@ -48,11 +50,11 @@ def rdp(coords, eps):
 # ─── Cargar datos ─────────────────────────────────────────────────────────────
 
 print("Cargando dependencias...")
-with open(os.path.join(ADIF, "adif_dependencias.geojson"), encoding="utf-8") as f:
+with open(os.path.join(DATA_ADIF, "adif_dependencias.geojson"), encoding="utf-8") as f:
     dep_gj = json.load(f)
 
 print("Cargando tramos...")
-with open(os.path.join(ADIF, "adif_tramos.geojson"), encoding="utf-8") as f:
+with open(os.path.join(DATA_ADIF, "adif_tramos.geojson"), encoding="utf-8") as f:
     tra_gj = json.load(f)
 
 # ─── Conectividad contra tramos ──────────────────────────────────────────────
@@ -108,7 +110,7 @@ def add_station(codigo, nombre, lat, lon, poblacion, provincia, pais, tipo):
 # 1. estaciones.csv — catálogo completo (lowest priority, loaded first)
 print("Cargando estaciones.csv (catálogo completo)...")
 n_est_spain = 0
-with open(os.path.join(RENFE, "estaciones.csv"), encoding="latin-1") as f:
+with open(os.path.join(DATA_RENFE, "estaciones.csv"), encoding="latin-1") as f:
     for row in csv.DictReader(f, delimiter=";"):
         pais = row.get("PAIS","").strip().upper()
         if pais not in ("ESPAÑA", "ESPA\xd1A") and row.get("CODIGO","").strip().strip('"') not in BORDER_CODES:
@@ -135,7 +137,7 @@ print(f"  {n_est_spain} estaciones España en catálogo")
 # 2. FEVE CSV — vía estrecha norte
 print("Cargando FEVE...")
 n_feve = 0
-with open(os.path.join(RENFE, "listado-de-estaciones-feve-2.csv"), encoding="utf-8-sig") as f:
+with open(os.path.join(DATA_RENFE, "listado-de-estaciones-feve-2.csv"), encoding="utf-8-sig") as f:
     for row in csv.DictReader(f, delimiter=";"):
         code_key = [k for k in row.keys() if "DIGO" in k][0]
         codigo = row[code_key].strip()
@@ -155,7 +157,7 @@ print(f"  {n_feve} estaciones FEVE")
 print("Cargando Renfe AV/LD/MD...")
 n_avldmd = 0
 dropped_foreign = 0
-with open(os.path.join(RENFE, "listado_completo_av_ld_md.csv"), encoding="utf-8-sig") as f:
+with open(os.path.join(DATA_RENFE, "listado_completo_av_ld_md.csv"), encoding="utf-8-sig") as f:
     for row in csv.DictReader(f, delimiter=";"):
         code_key = [k for k in row.keys() if "CÓDIGO" in k or "DIGO" in k][0]
         codigo = row[code_key].strip()
@@ -501,7 +503,7 @@ map.on('click', () => {{ panel.style.display='none'; }});
 </body>
 </html>"""
 
-out = os.path.join(BASE, "red_adif_mapa.html")
+out = os.path.join(FIGS_ADIF, "red_adif_mapa.html")
 with open(out, "w", encoding="utf-8") as f:
     f.write(html)
 

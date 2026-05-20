@@ -94,8 +94,14 @@ pip install -r requirements.txt
 | `coeficiente.py` | `analisis/` | Clustering coefficient distribution |
 | `comunidad.py` | `analisis/` | Louvain community detection |
 | `conectividad.py` | `analisis/` | Connectivity visualisation |
-| `ataques_aleatorios_nodos_fault.py` | `ataques/` | Monte Carlo random-failure simulation (default: 13% of nodes, R=300) |
+| `ataques_aleatorios_nodos_fault.py` | `ataques/` | Monte Carlo random-failure simulation (default: 13% of nodes, R=300, seed=42) |
 | `ataques_dirigidos_nodos_fault.py` | `ataques/` | Incremental targeted attack by centrality (degree/betweenness/closeness), 0–49% in 1% steps |
+| `metricas_avanzadas.py` | `analisis/` | Advanced global metrics: efficiency, assortativity, small-world σ, algebraic connectivity λ₂, scale-free exponent α |
+| `comunidad.py` | `analisis/` | Louvain community detection (built-in NetworkX ≥3.0); saves `comunidades_louvain.pdf/.png` |
+| `comparacion_resiliencia.py` | `ataques/` | Three-case S(p) comparison figure + unified robustness table (R, p*) + bootstrap 95% CI for random failures |
+| `ataques_dinamicos.py` | `ataques/` | **Dynamic** targeted attack: betweenness recomputed after each removal; compares static vs dynamic p* |
+| `ataques_aristas.py` | `ataques/` | Edge betweenness attack simulation; top-10 critical links; bridge identification |
+| `k_core_decomposition.py` | `analisis/` | k-core hierarchy for all three cases; k-shell visualisation; `datos/k_core_decomposition.csv` |
 
 **Input files** (place in `datos/` or update paths in scripts):
 
@@ -104,6 +110,14 @@ pip install -r requirements.txt
 | `datos/cyl_1000.csv` | `girvan_newmancyl.py`, `generar_red.py` |
 | `datos/peninsula_1000.csv` | `generar_red.py` (Peninsular Spain case) |
 | `AdjacencyMatrixNamed45.csv` | `analis_redes_complejas.py`, `ataques/`, `analisis/` |
+
+### QKD physics and benchmarks
+
+| Script | Directory | Description |
+|--------|-----------|-------------|
+| `skr_bb84.py` | `protocols/` | BB84 decoy-state SKR(d) model (Lo-Ma-Chen 2005); QBER(d); SKR per link for CyL/España; `figuras/skr_vs_distancia.pdf` |
+| `enrutamiento_qkd.py` | `analisis/` | Key-aware routing: Dijkstra (hops) vs max-SKR path; top-10 SKR bottleneck pairs; `figuras/comparacion_rutas_qkd.pdf` |
+| `benchmarks_qkd.py` | `analisis/` | Compare same metrics with real published QKD networks (Tokyo 2011, SECOQC 2009, China 2021); `datos/benchmarks_qkd_comparacion.csv` |
 
 ---
 
@@ -173,12 +187,23 @@ Rscript components.R       # verifies connectivity
 # Step 2: structural analysis (Python)
 cd ../analisis/
 python analis_redes_complejas.py
-python girvan_newmancyl.py
+python metricas_avanzadas.py
+python girvan_newmancyl.py          # default k=8; use `python girvan_newmancyl.py 10` for k=10
+python k_core_decomposition.py
+python enrutamiento_qkd.py
+python benchmarks_qkd.py
 
 # Step 3: resilience
 cd ../ataques/
 python ataques_aleatorios_nodos_fault.py
 python ataques_dirigidos_nodos_fault.py
+python ataques_dinamicos.py         # ~20-60 min for España (betweenness recomputed each step)
+python ataques_aristas.py
+python comparacion_resiliencia.py   # generates 3-case comparison figure with 95% CI bands
+
+# Step 4: QKD physics
+cd ../protocols/
+python skr_bb84.py
 ```
 
 ---
@@ -186,9 +211,12 @@ python ataques_dirigidos_nodos_fault.py
 ## Reproducibility notes | Reproducibilidad
 
 - **ADIF junction graph**: fully deterministic given the input CSVs (no random seed needed for the graph structure itself).
-- **Random failures**: seed fixed via `numpy.random.seed(42)` in `analisis_adif_junctions.py`.
+- **Random failures**: seed fixed via `random.seed(42)` + `numpy.random.seed(42)` in all simulation scripts.
 - **PAM clustering**: seed fixed in `medoids.R` — see inline comment.
 - **Girvan–Newman**: deterministic given the graph.
+- **Louvain communities**: `seed=42` passed to `nx_comm.louvain_communities()`.
+- **Shared utilities**: `qkd_utils.py` at repo root exposes `load_graph()`, `relative_gcc()`,
+  `robustness_index()`, `p_star()`, `validate_adjacency_matrix()` and `get_thesis_style()`.
 
 ---
 

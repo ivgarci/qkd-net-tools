@@ -17,6 +17,13 @@ import json
 import csv
 import heapq
 import math
+import os
+
+BASE       = os.path.dirname(os.path.abspath(__file__))
+DATA_ADIF  = os.path.join(BASE, '..', 'datos', 'adif')
+DATA_RENFE = os.path.join(BASE, '..', 'datos', 'renfe')
+FIGS_ADIF  = os.path.join(BASE, '..', 'figuras', 'adif')
+os.makedirs(FIGS_ADIF, exist_ok=True)
 
 # -------------------------------------------------------------------
 # Utility
@@ -73,7 +80,7 @@ def project_point_on_linestring(pt_lat, pt_lon, coords):
 # -------------------------------------------------------------------
 
 print("Loading dependencias...")
-with open("adif/adif_dependencias.geojson") as f:
+with open(os.path.join(DATA_ADIF, "adif_dependencias.geojson")) as f:
     deps_features = json.load(f)["features"]
 
 dep_info = {}
@@ -91,7 +98,7 @@ for feat in deps_features:
 print(f"  {len(dep_info)} dependencias loaded")
 
 print("Loading tramos...")
-with open("adif/adif_tramos.geojson") as f:
+with open(os.path.join(DATA_ADIF, "adif_tramos.geojson")) as f:
     tramos_features = json.load(f)["features"]
 
 tramo_by_cod = {}
@@ -218,7 +225,7 @@ for cod, p in dep_info.items():
         }
 
 # Tier 2: Renfe AV/LD/MD CSV (Spain + border crossings)
-with open("renfe/listado_completo_av_ld_md.csv", encoding="utf-8-sig") as f:
+with open(os.path.join(DATA_RENFE, "listado_completo_av_ld_md.csv"), encoding="utf-8-sig") as f:
     for row in csv.DictReader(f, delimiter=";"):
         pais = row.get("PAIS", "").strip()
         code_key = [k for k in row.keys() if "DIGO" in k][0]
@@ -334,7 +341,7 @@ print(f"Primary nodes with no connections: {len(isolated)}")
 # -------------------------------------------------------------------
 # Write CSV
 # -------------------------------------------------------------------
-csv_path = "matriz_distancias_primarios.csv"
+csv_path = os.path.join(DATA_ADIF, "matriz_distancias_primarios.csv")
 with open(csv_path, "w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=[
         "from_code", "from_nombre", "from_provincia",
@@ -548,7 +555,7 @@ sortRender();
 </html>
 """
 
-html_path = "matriz_distancias_primarios.html"
+html_path = os.path.join(FIGS_ADIF, "matriz_distancias_primarios.html")
 with open(html_path, "w", encoding="utf-8") as f:
     f.write(html)
 

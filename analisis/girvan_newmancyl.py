@@ -1,52 +1,90 @@
+"""
+Detección de comunidades Girvan-Newman para CyL (y opcionalmente España).
+k (número de comunidades) se puede pasar como argumento de línea de comandos.
+
+Uso:
+    python girvan_newmancyl.py         # k=8 por defecto, caso CyL
+    python girvan_newmancyl.py 10      # k=10, caso CyL
+"""
+
+import os
+import sys
 import pandas as pd
 import networkx as nx
 from networkx.algorithms.community import girvan_newman
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-# Load the adjacency matrix from the uploaded CSV file
-file_path = 'AdjacencyMatrixNamed45.csv'
-adjacency_matrix = pd.read_csv(file_path, index_col=0)
+BASE     = os.path.dirname(os.path.abspath(__file__))
+DATA_CYL = os.path.join(BASE, '..', 'datos', 'cyl')
+FIGS_CYL = os.path.join(BASE, '..', 'figuras', 'cyl')
 
-# Convert the adjacency matrix to a NetworkX graph
-G = nx.from_pandas_adjacency(adjacency_matrix)
+os.makedirs(FIGS_CYL, exist_ok=True)
 
-# Load the node coordinates from the uploaded CSV file
-coordinates_file_path = 'cyl_1000.csv'
-coordinates_df = pd.read_csv(coordinates_file_path, delimiter=';')
+COLORS = [
+    'skyblue', 'lightgreen', 'coral', 'gold', 'lightpink',
+    'lightgrey', 'lightblue', 'orange', 'purple', 'brown', 'cyan', 'lime',
+]
 
-# Create a dictionary of node positions using the coordinates
-node_positions = {row['Población']: (row['Longitud'], row['Latitud']) for idx, row in coordinates_df.iterrows()}
 
-# Run the Girvan-Newman algorithm for more levels
-communities_generator = girvan_newman(G)
-k = 8  # Specify the number of communities you want to create
-limited = [next(communities_generator) for _ in range(k - 1)]
-top_communities = sorted(map(sorted, next(communities_generator)))
+def run_girvan_newman(adj_csv, coords_csv, k, out_dir, caso_name, sep=','):
+    adj = pd.read_csv(adj_csv, index_col=0)
+    G = nx.from_pandas_adjacency(adj)
 
-# Create a color map for the communities
-color_map = []
-colors = ['skyblue', 'lightgreen', 'coral', 'gold', 'lightpink', 'lightgrey', 'lightblue', 'orange', 'purple', 'brown']
-for node in G:
-    for idx, community in enumerate(top_communities):
-        if node in community:
-            color_map.append(colors[idx % len(colors)])
+    coords_df = pd.read_csv(coords_csv, delimiter=sep)
+    col_pob = 'Población' if 'Población' in coords_df.columns else coords_df.columns[0]
+    node_positions = {
+        row[col_pob]: (row['Longitud'], row['Latitud'])
+        for _, row in coords_df.iterrows()
+        if row[col_pob] in G.nodes()
+    }
 
-# Plot the network using the provided coordinates and color-coded by community
-plt.figure(figsize=(12, 12))
-nx.draw(G, pos=node_positions, with_labels=True, node_size=500, node_color=color_map, font_size=8, font_weight='bold', edge_color='gray')
-plt.title("Network Visualization with Multiple Communities")
-plt.xlabel("Longitude")
-plt.ylabel("Latitude")
+    communities_generator = girvan_newman(G)
+    for _ in range(k - 1):
+        next(communities_generator)
+    top_communities = sorted(map(sorted, next(communities_generator)))
 
-# Guardar el gráfico en diferentes formatos
-plt.savefig("girvan_newman_cyl_9.png", format='png', dpi=300)  # Guardar como PNG
-plt.savefig("girvan_newman_cyl_9.pdf", format='pdf')  # Guardar como PDF
-plt.savefig("girvan_newman_cyl_9.svg", format='svg')  # Guardar como SVG
+    color_map = []
+    for node in G:
+        for idx, community in enumerate(top_communities):
+            if node in community:
+                color_map.append(COLORS[idx % len(COLORS)])
+                break
 
-plt.show()
+    fig = plt.figure(figsize=(12, 12))
+    nx.draw(G, pos=node_positions, with_labels=True, node_size=500,
+            node_color=color_map, font_size=8, font_weight='bold', edge_color='gray')
+    plt.title(f"Comunidades Girvan-Newman — {caso_name} ({k} comunidades)")
+    plt.xlabel("Longitud")
+    plt.ylabel("Latitud")
 
-# Convert the communities to a DataFrame for better display
-communities_df = pd.DataFrame({"Community": range(len(top_communities)), "Nodes": top_communities})
+    base_name = f"girvan_newman_{caso_name}_{k}"
+    for ext in ('png', 'pdf', 'svg'):
+        path = os.path.join(out_dir, f"{base_name}.{ext}")
+        plt.savefig(path, format=ext, dpi=300 if ext == 'png' else None,
+                    bbox_inches='tight')
+        print(f"Guardado: {path}")
+    plt.close(fig)
 
-# Display the DataFrame in a readable format (for example, print to console)
-print(communities_df)
+    communities_df = pd.DataFrame({
+        'Community': range(len(top_communities)),
+        'Nodes': top_communities,
+        'Size': [len(c) for c in top_communities],
+    })
+    print(f"\nComunidades Girvan-Newman ({caso_name}, k={k}):")
+    print(communities_df.to_string(index=False))
+    return top_communities
+
+
+if __name__ == '__main__':
+    k = int(sys.argv[1]) if len(sys.argv) > 1 else 8
+    print(f"Ejecutando Girvan-Newman con k={k} comunidades — caso CyL")
+    run_girvan_newman(
+        adj_csv=os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv'),
+        coords_csv=os.path.join(DATA_CYL, 'cyl_1000.csv'),
+        k=k,
+        out_dir=FIGS_CYL,
+        caso_name='cyl',
+        sep=';',
+    )
