@@ -3,8 +3,8 @@
 **Doctoral dissertation (ES):** *Generación y validación de redes QKD a gran escala bajo restricciones físicas y tecnológicas*  
 **English title:** *Generating and validating large-scale QKD networks under realistic physical and technological constraints*
 
-**Author:** Iván García Cobo · Universidad de Salamanca · 2025–2026  
-**Related publication:** García-Cobo, I. & Menéndez, H.D. (2021). *Designing large quantum key distribution networks via medoid-based algorithms.* Future Generation Computer Systems, 115, 814–824.
+**Author:** Iván García Cobo · Universidad de Salamanca · 2019–2026  
+**Doctoral publication:** García-Cobo, I. & Menéndez, H.D. (2021). *Designing large quantum key distribution networks via medoid-based algorithms.* Future Generation Computer Systems, 115, 814–824.
 
 ---
 
@@ -231,5 +231,5 @@ Copyright (C) 2020-2026 Iván García Cobo
 **Citation (thesis):**
 > García-Cobo, I. (2026). *Generación y validación de redes QKD a gran escala bajo restricciones físicas y tecnológicas*. Tesis doctoral, Universidad de Salamanca.
 
-**Citation (related paper):**
+**Citation (doctoral journal article):**
 > García-Cobo, I. & Menéndez, H.D. (2021). Designing large quantum key distribution networks via medoid-based algorithms. *Future Generation Computer Systems*, 115, 814–824.
