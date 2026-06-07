@@ -225,7 +225,7 @@ python skr_bb84.py
 **License:** [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html) — `SPDX-License-Identifier: GPL-3.0-only`
 
 ```
-Copyright (C) 2020-2026 Iván García Cobo
+Copyright (C) 2019-2026 Iván García Cobo
 ```
 
 <!-- After the first GitHub Release, replace the line below with the real Zenodo badge -->
@@ -240,4 +240,4 @@ A machine-readable citation is available in [`CITATION.cff`](CITATION.cff).
 > García-Cobo, I. (2026). *Generación y validación de redes QKD a gran escala bajo restricciones físicas y tecnológicas*. Tesis doctoral, Universidad de Salamanca.
 
 **Citation (doctoral journal article):**
-> García-Cobo, I. & Menéndez, H.D. (2021). Designing large quantum key distribution networks via medoid-based algorithms. *Future Generation Computer Systems*, 115, 814–824. https://doi.org/10.1016/j.future.2020.10.024
+> García-Cobo, I. & Menéndez, H.D. (2021). Designing large quantum key distribution networks via medoid-based algorithms. *Future Generation Computer Systems*, 115, 814–824. https://doi.org/10.1016/j.future.2020.09.037 
