@@ -229,7 +229,7 @@ Copyright (C) 2020-2026 Iván García Cobo
 ```
 
 <!-- After the first GitHub Release, replace the line below with the real Zenodo badge -->
-<!-- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX) -->
+<!-- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20582869.svg)](https://doi.org/10.5281/zenodo.20582869) -->
 
 **Citation (software):**
 
