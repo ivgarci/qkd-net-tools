@@ -273,4 +273,91 @@ if __name__ == '__main__':
     else:
         print('  Not enough coordinates for geographic plot — skipping.')
 
+    # ── 3. CyL topology — same style as Spain ─────────────────────────────────
+    print('Generating CyL topology figure...')
+    adj_cyl = pd.read_csv(os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv'), index_col=0)
+    G_cyl   = nx.from_pandas_adjacency(adj_cyl)
+    if not nx.is_connected(G_cyl):
+        G_cyl = G_cyl.subgraph(max(nx.connected_components(G_cyl), key=len)).copy()
+
+    coords_cyl_raw = pd.read_csv(os.path.join(DATA_CYL, 'cyl_1000.csv'), sep=';', decimal=',')
+    coords_cyl = {}
+    for _, row in coords_cyl_raw.iterrows():
+        name = str(row['Población']).strip()
+        try:
+            coords_cyl[name] = (float(str(row['Latitud']).replace(',', '.')),
+                                float(str(row['Longitud']).replace(',', '.')))
+        except (ValueError, KeyError):
+            pass
+
+    pos_cyl   = {n: (coords_cyl[n][1], coords_cyl[n][0])
+                 for n in G_cyl.nodes() if n in coords_cyl}
+    nodes_cyl = list(pos_cyl.keys())
+    print(f'  |V|={G_cyl.number_of_nodes()}, |E|={G_cyl.number_of_edges()}, '
+          f'nodes with coords={len(nodes_cyl)}')
+
+    if len(nodes_cyl) >= 20:
+        from matplotlib.cm import ScalarMappable
+        from matplotlib.colors import BoundaryNorm, ListedColormap
+
+        deg_cyl = dict(G_cyl.degree())
+        cb_cyl  = nx.betweenness_centrality(G_cyl, normalized=True)
+
+        all_degs_cyl = np.array([deg_cyl[n] for n in nodes_cyl])
+        deg_pct_cyl  = np.percentile(all_degs_cyl, [20, 40, 60, 80])
+
+        def deg_color_cyl(n):
+            d = deg_cyl[n]
+            if d <= deg_pct_cyl[0]: return '#d1e5f0'
+            if d <= deg_pct_cyl[1]: return '#92c5de'
+            if d <= deg_pct_cyl[2]: return '#4393c3'
+            if d <= deg_pct_cyl[3]: return '#2166ac'
+            return '#053061'
+
+        node_colors_cyl = [deg_color_cyl(n) for n in nodes_cyl]
+        cb_vals_cyl     = np.array([cb_cyl.get(n, 0) for n in nodes_cyl])
+        node_sizes_cyl  = 12 + 200 * cb_vals_cyl / (cb_vals_cyl.max() + 1e-12)
+
+        fig, ax = plt.subplots(figsize=(9, 7))
+        nx.draw_networkx_edges(G_cyl, pos_cyl, ax=ax, alpha=0.30,
+                               edge_color='#999999', width=0.5)
+        nx.draw_networkx_nodes(G_cyl, pos_cyl, nodelist=nodes_cyl, ax=ax,
+                               node_color=node_colors_cyl, node_size=node_sizes_cyl,
+                               alpha=0.92, edgecolors='white', linewidths=0.4)
+
+        # Labels for highest-betweenness nodes
+        top_cb = sorted(nodes_cyl, key=lambda n: cb_cyl.get(n, 0), reverse=True)[:8]
+        labels_cyl = {n: n for n in top_cb}
+        nx.draw_networkx_labels(G_cyl, pos_cyl, labels=labels_cyl, ax=ax,
+                                font_size=6, font_color='#222222',
+                                bbox=dict(boxstyle='round,pad=0.15', fc='white',
+                                          alpha=0.65, ec='none'))
+
+        cmap_cyl = ListedColormap(['#d1e5f0', '#92c5de', '#4393c3', '#2166ac', '#053061'])
+        norm_cyl = BoundaryNorm(
+            [0, deg_pct_cyl[0], deg_pct_cyl[1], deg_pct_cyl[2],
+             deg_pct_cyl[3], all_degs_cyl.max() + 1], 5)
+        sm_cyl = ScalarMappable(cmap=cmap_cyl, norm=norm_cyl)
+        sm_cyl.set_array([])
+        cbar_cyl = fig.colorbar(sm_cyl, ax=ax, fraction=0.025, pad=0.02)
+        cbar_cyl.set_label('Node degree', fontsize=9)
+
+        ax.set_xlabel('Longitude (°)', fontsize=10)
+        ax.set_ylabel('Latitude (°)', fontsize=10)
+        ax.set_title(f'CyL QKD relay backbone: $|V|={G_cyl.number_of_nodes()}$ nodes, '
+                     f'$|E|={G_cyl.number_of_edges()}$ edges\n'
+                     r'Node colour $\propto$ degree, size $\propto$ betweenness centrality',
+                     fontsize=10)
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        fig.tight_layout()
+
+        for ext in ('png', 'pdf'):
+            out = os.path.join(PAPER_DIR, f'cyl_topologia.{ext}')
+            fig.savefig(out, dpi=150, bbox_inches='tight')
+            print(f'  Saved: {out}')
+        plt.close(fig)
+    else:
+        print('  Not enough coordinates for CyL plot — skipping.')
+
     print('Done.')
