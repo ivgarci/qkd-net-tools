@@ -1,0 +1,10 @@
+E_R,bridges,connected,dataset,delta,density,k,kstar,max_violations,mean_violations,min_violations,n_runs,pct_max,pct_mean,std_violations,tabla,uncovered
+164,0,False,,,0.0519,80,,,,,,,,,IV,0
+203,0,False,,,0.0507,90,,,,,,,,,IV,0
+253,4,True,,,0.0511,100,,,,,,,,,IV,0
+323,0,False,,,0.0539,110,,,,,,,,,IV,0
+401,0,False,,,0.0562,120,,,,,,,,,IV,0
+,,,,,,950,,0,0.0,0,20,0.0,0.0,0.0,II,
+,,,CyL,30.0,,,,,,,,,,,III,
+,,,CyL,45.0,,,156,,,,,,,,III,
+,,,CyL,60.0,,,65,,,,,,,,III,

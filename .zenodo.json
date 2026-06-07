@@ -1,0 +1,40 @@
+{
+  "upload_type": "software",
+  "title": "qkd-net-tools: QKD Network Analysis Toolkit",
+  "description": "Python and R scripts for generating and validating large-scale Quantum Key Distribution (QKD) network topologies under realistic physical and technological constraints. Covers three case studies: Castile and León (generated topology, 100 nodes), Peninsular Spain (generated topology, 950 nodes), and the ADIF dark-fibre railway network (real infrastructure, 485 junction nodes). Includes topology generation via PAM k-medoids clustering, structural analysis (centrality, community detection, k-core decomposition), BB84 decoy-state secret-key-rate modelling, QKD-aware routing, and resilience simulations (random failures and targeted attacks). Developed as part of a doctoral dissertation at the Universidad de Salamanca (2019–2026).",
+  "creators": [
+    {
+      "name": "García-Cobo, Iván",
+      "affiliation": "Universidad de Salamanca",
+      "orcid": ""
+    }
+  ],
+  "license": "GPL-3.0-only",
+  "keywords": [
+    "quantum key distribution",
+    "QKD",
+    "network analysis",
+    "complex networks",
+    "network topology",
+    "PAM clustering",
+    "k-medoids",
+    "BB84",
+    "secret key rate",
+    "resilience",
+    "dark fibre",
+    "ADIF",
+    "community detection",
+    "k-core decomposition"
+  ],
+  "language": "eng",
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "10.1016/j.future.2020.10.024",
+      "scheme": "doi",
+      "resource_type": "publication-article"
+    }
+  ],
+  "grants": []
+}

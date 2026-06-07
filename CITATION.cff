@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "qkd-net-tools: QKD Network Analysis Toolkit"
+version: "1.0.0"
+date-released: "2026-06-01"
+abstract: >
+  Python and R scripts for generating and validating large-scale QKD network
+  topologies under realistic physical and technological constraints. Three case
+  studies: Castile and León, Peninsular Spain, and the ADIF dark-fibre railway
+  network. Includes topology generation (PAM k-medoids), structural analysis,
+  BB84 secret-key-rate modelling, QKD-aware routing, and resilience simulations.
+authors:
+  - family-names: "García-Cobo"
+    given-names: "Iván"
+    affiliation: "Universidad de Salamanca"
+    email: "ivangarciacobo@usal.es"
+license: GPL-3.0-only
+repository-code: "https://github.com/ivgarci/qkd-net-tools"
+keywords:
+  - quantum key distribution
+  - QKD
+  - network analysis
+  - complex networks
+  - PAM clustering
+  - BB84
+  - resilience
+  - dark fibre
+  - ADIF
+

@@ -228,8 +228,16 @@ python skr_bb84.py
 Copyright (C) 2020-2026 Iván García Cobo
 ```
 
+<!-- After the first GitHub Release, replace the line below with the real Zenodo badge -->
+<!-- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX) -->
+
+**Citation (software):**
+
+If you use this toolkit, please cite it via Zenodo (DOI assigned on first release).
+A machine-readable citation is available in [`CITATION.cff`](CITATION.cff).
+
 **Citation (thesis):**
 > García-Cobo, I. (2026). *Generación y validación de redes QKD a gran escala bajo restricciones físicas y tecnológicas*. Tesis doctoral, Universidad de Salamanca.
 
 **Citation (doctoral journal article):**
-> García-Cobo, I. & Menéndez, H.D. (2021). Designing large quantum key distribution networks via medoid-based algorithms. *Future Generation Computer Systems*, 115, 814–824.
+> García-Cobo, I. & Menéndez, H.D. (2021). Designing large quantum key distribution networks via medoid-based algorithms. *Future Generation Computer Systems*, 115, 814–824. https://doi.org/10.1016/j.future.2020.10.024
