@@ -2,13 +2,15 @@
 Δ (link-distance threshold) sensitivity analysis — Spain QKD network.
 
 For each Δ ∈ {35, 40, 45, 50} km, the Spain graph is rebuilt from scratch
-using raw municipality coordinates (peninsula_1000.csv).  An edge (u,v) exists
-iff haversine(u,v) ≤ Δ km.  Each edge is annotated with the BB84 decoy SKR
-using fibre distance d_fibre = haversine_km × ρ_f.
+using ONLY the 950 PAM relay nodes from AdjacencyMatrixNamed45.csv.  An edge
+(u,v) exists iff haversine(u,v) ≤ Δ km.  Each edge is annotated with the BB84
+decoy SKR using fibre distance d_fibre = haversine_km × ρ_f.
 
-This fixes the previous Table 5 computation in enrutamiento_espana_completo.py
-which incorrectly re-used the same Δ=45 km adjacency matrix for all four
-threshold values, producing identical results.
+This ensures consistency with Tables 1–4, which are computed on the same 950-node
+PAM-generated Spain relay backbone.
+
+At Δ=45, the rebuilt graph is verified against AdjacencyMatrixNamed45.csv
+(expected ~5681 edges).
 
 Outputs:
   - Prints Table 5 to stdout
@@ -34,8 +36,9 @@ os.makedirs(OUT_DIR, exist_ok=True)
 sys.path.insert(0, os.path.join(BASE, '..'))
 from protocols.skr_bb84 import skr_bb84_decoy, _haversine
 
-COORDS_CSV = os.path.join(DATA_ESP, 'peninsula_1000.csv')
-JSON_OUT   = os.path.join(OUT_DIR, 'tablas_skr_routing.json')
+COORDS_CSV   = os.path.join(DATA_ESP, 'peninsula_1000.csv')
+ADJ_MAT_CSV  = os.path.join(DATA_ESP, 'AdjacencyMatrixNamed45.csv')
+JSON_OUT     = os.path.join(OUT_DIR, 'tablas_skr_routing.json')
 
 # Physical / routing constants (must match enrutamiento_espana_completo.py)
 RHO_F       = 1.25   # routing factor: fibre_km = haversine_km * RHO_F
@@ -51,16 +54,31 @@ def haversine(lat1, lon1, lat2, lon2):
 
 
 # ---------------------------------------------------------------------------
-# Load coordinates
+# Load PAM relay node names from the 950×950 adjacency matrix
 # ---------------------------------------------------------------------------
-def load_coords(csv_path=COORDS_CSV):
-    """Returns dict: poblacion -> (lat, lon)."""
+def load_pam_node_names(adj_csv=ADJ_MAT_CSV):
+    """Returns the list of 950 PAM relay node names (row index of the adj matrix)."""
+    adj = pd.read_csv(adj_csv, index_col=0)
+    return list(adj.index)
+
+
+# ---------------------------------------------------------------------------
+# Load coordinates, filtered to the 950 PAM nodes
+# ---------------------------------------------------------------------------
+def load_coords(csv_path=COORDS_CSV, pam_nodes=None):
+    """Returns dict: poblacion -> (lat, lon), restricted to pam_nodes if given."""
     df = pd.read_csv(csv_path, delimiter=';')
     df.columns = [c.strip().lstrip('﻿').lstrip('﻿') for c in df.columns]
     df['Latitud']  = df['Latitud'].astype(str).str.replace(',', '.').astype(float)
     df['Longitud'] = df['Longitud'].astype(str).str.replace(',', '.').astype(float)
     coords = {row['Población']: (row['Latitud'], row['Longitud'])
               for _, row in df.iterrows()}
+    if pam_nodes is not None:
+        # Keep only the 950 PAM relay nodes (in the order they appear in adj matrix)
+        missing = [n for n in pam_nodes if n not in coords]
+        if missing:
+            print(f"  WARNING: {len(missing)} PAM nodes not found in coords CSV: {missing[:5]}")
+        coords = {n: coords[n] for n in pam_nodes if n in coords}
     return coords
 
 
@@ -287,13 +305,19 @@ if __name__ == '__main__':
 
     print("=" * 65)
     print("Δ-Sensitivity Analysis — Spain QKD Network")
-    print("Rebuilding graph from coordinates for each threshold")
+    print("Using 950 PAM relay nodes (consistent with Tables 1–4)")
+    print("Rebuilding edges from coordinates for each threshold")
     print("=" * 65)
 
-    # Load coordinates once
-    print(f"\nLoading coordinates from: {COORDS_CSV}")
-    coords = load_coords()
-    print(f"  Loaded {len(coords)} municipalities")
+    # Load the 950 PAM relay node names from the adjacency matrix
+    print(f"\nLoading PAM node names from: {ADJ_MAT_CSV}")
+    pam_nodes = load_pam_node_names()
+    print(f"  Found {len(pam_nodes)} PAM relay nodes")
+
+    # Load coordinates for those 950 nodes only
+    print(f"Loading coordinates from: {COORDS_CSV}")
+    coords = load_coords(pam_nodes=pam_nodes)
+    print(f"  Loaded coordinates for {len(coords)} PAM nodes")
 
     delta_values = [35, 40, 45, 50]
     sensitivity_results = []   # for JSON (matches table5_sensitivity_delta format)
@@ -312,6 +336,14 @@ if __name__ == '__main__':
         n_edges_full = G.number_of_edges()
         print(f"  Graph built in {t_build:.1f}s — |V|={n_nodes_full}, |E|={n_edges_full}",
               flush=True)
+
+        # Verify at Δ=45: rebuilt graph should match AdjacencyMatrixNamed45.csv
+        if delta == 45:
+            adj_mat = pd.read_csv(ADJ_MAT_CSV, index_col=0)
+            expected_edges = int(adj_mat.values.sum() / 2)
+            match = "MATCH" if n_edges_full == expected_edges else f"MISMATCH (expected {expected_edges})"
+            print(f"  VERIFICATION Δ=45: rebuilt edges={n_edges_full}, "
+                  f"AdjacencyMatrix edges={expected_edges} — {match}", flush=True)
 
         # Remove isolated nodes (nodes with no edges — they don't participate)
         isolated = [v for v in G.nodes() if G.degree(v) == 0]
@@ -382,7 +414,8 @@ if __name__ == '__main__':
     json_data['table5_sensitivity_delta_meta'] = {
         'generated':   time.strftime('%Y-%m-%dT%H:%M:%S'),
         'description': (
-            'Graph rebuilt from peninsula_1000.csv coordinates for each Δ. '
+            'Graph rebuilt using the 950 PAM relay nodes from AdjacencyMatrixNamed45.csv '
+            '(consistent with Tables 1-4). Coordinates from peninsula_1000.csv. '
             'Edge exists iff haversine(u,v) <= Δ km. '
             'SKR uses fibre_km = haversine_km * 1.25 with BB84 decoy model. '
             'If disconnected, computation uses the largest connected component.'
