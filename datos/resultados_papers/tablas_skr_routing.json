@@ -306,5 +306,105 @@
   "table5_sensitivity_delta_meta": {
     "generated": "2026-06-08T19:14:09",
     "description": "Graph rebuilt using the 950 PAM relay nodes from AdjacencyMatrixNamed45.csv (consistent with Tables 1-4). Coordinates from peninsula_1000.csv. Edge exists iff haversine(u,v) <= \u0394 km. SKR uses fibre_km = haversine_km * 1.25 with BB84 decoy model. If disconnected, computation uses the largest connected component."
+  },
+  "adif_routing": {
+    "metadata": {
+      "generated": "2026-06-08T19:28:15",
+      "network": "ADIF junction graph",
+      "delta_km": 45.0,
+      "L_att_km": 22.0,
+      "R0": 1.0,
+      "eta_det": 0.1,
+      "p_dark": 1e-06,
+      "rho_f": 1.0,
+      "note": "ADIF distances are real fibre lengths; no routing factor applied",
+      "n_pairs": 3738745,
+      "runtime_s": 107.6
+    },
+    "network_stats": {
+      "n_nodes_full": 2760,
+      "n_edges_csv": 2931,
+      "n_edges_added": 2928,
+      "n_edges_filtered": 3,
+      "n_isolated": 0,
+      "n_components": 5,
+      "lcc_size": 2735,
+      "lcc_edges": 2907,
+      "pct_edges_excluded": 0.1
+    },
+    "aggregate": {
+      "label": "adif",
+      "n_pairs": 3738745,
+      "I_mean": 2.4559,
+      "I_median": 2.2767,
+      "I_std": 0.9966,
+      "I_P90": 3.7536,
+      "I_P99": 4.0922,
+      "I_max": 5.9406,
+      "dh_mean": 131.5377,
+      "dh_median": 112.0,
+      "dh_std": 104.419,
+      "dh_P90": 281.0,
+      "dh_P99": 440.0,
+      "dh_max": 573
+    },
+    "geographic": [
+      {
+        "bin": "[0,100)",
+        "n_pairs": 256895,
+        "I_mean": 1.2312,
+        "I_median": 1.0,
+        "I_max": 5.9406,
+        "dh_mean": 24.4268
+      },
+      {
+        "bin": "[100,300)",
+        "n_pairs": 962622,
+        "I_mean": 2.1841,
+        "I_median": 1.7812,
+        "I_max": 5.1599,
+        "dh_mean": 73.831
+      },
+      {
+        "bin": "[300,500)",
+        "n_pairs": 1167455,
+        "I_mean": 2.6375,
+        "I_median": 2.6815,
+        "I_max": 4.5226,
+        "dh_mean": 136.5114
+      },
+      {
+        "bin": "[500,700)",
+        "n_pairs": 954078,
+        "I_mean": 2.7223,
+        "I_median": 2.9635,
+        "I_max": 4.3611,
+        "dh_mean": 178.7618
+      },
+      {
+        "bin": ">700",
+        "n_pairs": 397695,
+        "I_mean": 2.7324,
+        "I_median": 2.8969,
+        "I_max": 4.2825,
+        "dh_mean": 212.5147
+      },
+      {
+        "bin": "All",
+        "n_pairs": 3738745,
+        "I_mean": 2.4559,
+        "I_median": 2.2767,
+        "I_max": 5.9406,
+        "dh_mean": 131.5377
+      }
+    ],
+    "spain_comparison": {
+      "spain_I_mean": 2.8811,
+      "adif_I_mean": 2.4559,
+      "diff_I_mean": -0.4252,
+      "spain_dh_mean": 45.2047,
+      "adif_dh_mean": 131.5377,
+      "diff_dh_mean": 86.333
+    }
   }
 }

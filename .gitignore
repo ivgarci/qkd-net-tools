@@ -5,3 +5,7 @@ __pycache__/
 *.egg-info/
 .venv/
 venv/
+
+# Large all-pairs CSVs (>100 MB — use Git LFS or keep local only)
+datos/resultados_papers/enrutamiento_espana_allpairs.csv
+datos/resultados_papers/enrutamiento_adif_allpairs.csv
