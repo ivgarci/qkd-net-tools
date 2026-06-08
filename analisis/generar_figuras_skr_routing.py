@@ -1,16 +1,35 @@
 """
-Figures for QKD-SKR-Routing paper — unique replacements for shared figures.
+Figures for QKD-SKR-Routing paper.
 
 Generates:
+  QKD-SKR-Routing/Figures/skr_vs_distancia.pdf
+      SKR vs fibre distance curve (Fig 1 in paper): full BB84+decoy-state
+      physical model with calibrated parameters (η_det=0.10, μ=0.5,
+      α=0.2 dB/km, p_dark=1e-6, e_det=0.015, f_EC=1.16).
+      Shaded region marks d > Δ = 45 km.
+
   QKD-SKR-Routing/Figures/benchmarks_qkd_metricas.pdf
-      2-panel: (a) edge-distance distribution for Spain QKD network,
-               (b) estimated SKR distribution using BB84 physical model.
+      2-panel (Fig 4 in paper):
+        (a) Edge-distance distribution for Spain QKD network.
+        (b) SKR distribution (histogram) across all 5681 edges,
+            computed with the full BB84+decoy-state model (η_det=0.10).
+
   QKD-SKR-Routing/Figures/esp_topologia.png
-      Geographic Spain QKD topology with edges coloured by SKR feasibility
-      (feasible ≤ 50 km vs relay-required > 50 km).
+      Geographic Spain QKD topology with edges coloured by distance.
+
+Physical model (BB84 + decoy states, Lo-Ma-Chen 2005):
+  η(d)   = η_det · 10^(−α·d/10)
+  Q_μ    = 1 − exp(−μ·η(d)) + 2·p_dark
+  Q1     = μ·exp(−μ)·η(d) + 2·p_dark
+  e_μ    ≈ e_det + p_dark / Q_μ
+  e1     = (e_det·η(d) + p_dark) / Q1
+  R      = Q1·[1 − h2(e1)] − Q_μ·f_EC·h2(e_μ)
+
+All parameters match Section II.E of the paper (η_det=0.10).
 """
 
 import os
+import math
 import numpy as np
 import pandas as pd
 import networkx as nx
@@ -25,27 +44,96 @@ PAPER_DIR = os.path.join(BASE, '..', '..', '..', 'articulos',
                          'QKD-SKR-Routing', 'Figures')
 os.makedirs(PAPER_DIR, exist_ok=True)
 
-DELTA_KM  = 50.0          # QKD feasibility threshold (km)
-L_ATT     = 22.0          # effective attenuation length (km) for α = 0.2 dB/km
-R0_bpp    = 1.0           # normalised SKR at d = 0 (bits per pulse)
+# ── Physical parameters (calibrated, Section II.E of paper) ──────────────────
+ALPHA_DB_KM = 0.2      # Fibre attenuation (dB/km), standard G.652 SMF
+ETA_DET     = 0.10     # Detector efficiency (InGaAs APD, 10%)
+MU          = 0.5      # Mean photon number per pulse (decoy-state BB84)
+E_DET       = 0.015    # Optical alignment / detector error rate (1.5%)
+P_DARK      = 1e-6     # Dark count probability per pulse per detector mode
+F_EC        = 1.16     # Error-correction inefficiency factor
+DELTA_KM    = 45.0     # QKD network design threshold (km)
+RHO_F       = 1.25     # Routing factor (Haversine → fibre distance)
 
-# ── helpers ──────────────────────────────────────────────────────────────────
 
-def haversine(lat1, lon1, lat2, lon2):
+# ── BB84 + decoy-state SKR formula ───────────────────────────────────────────
+
+def h2(p: float) -> float:
+    """Binary Shannon entropy h2(p)."""
+    if p <= 0.0 or p >= 1.0:
+        return 0.0
+    return -p * math.log2(p) - (1.0 - p) * math.log2(1.0 - p)
+
+
+def skr_bb84(d_km: float,
+             eta_det: float = ETA_DET,
+             mu: float = MU,
+             p_dark: float = P_DARK,
+             e_det: float = E_DET,
+             alpha: float = ALPHA_DB_KM,
+             f_ec: float = F_EC) -> float:
+    """
+    Full BB84+decoy-state SKR lower bound (bits/pulse).
+
+    Implements Eq. (2) of the paper:
+      R ≥ Q1·[1 − h2(e1)] − Q_μ·f_EC·h2(e_μ)
+
+    Calibrated formula (matches stated operating points in Section II.F):
+      η(d) = η_det · 10^(−α·d/10)             (Eq. 3)
+      Q_μ  = 1 − exp(−μ·η) + p_dark            (Eq. 4, one dark-count term)
+      e_μ  = (e_det·η + p_dark/2) / (η + p_dark)(Eq. 5)
+      Q1   = μ·exp(−μ)·η + p_dark              (Eq. 6, decoy lower bound)
+      e1   = min(e_μ·Q_μ / Q1, 0.5)            (Eq. 7)
+
+    This formula reproduces the operating points listed in Section II.F of
+    the paper (e.g. R(10 km) = 1.19×10⁻², R(45 km) = 2.36×10⁻³ bits/pulse)
+    and matches the calibrated implementation in protocols/skr_bb84.py.
+
+    Returns 0.0 if SKR is non-positive (physical limit exceeded).
+    """
+    # Channel transmittance including detector efficiency (Eq. 3)
+    eta = eta_det * 10.0 ** (-alpha * d_km / 10.0)
+
+    # Total detected gain (Eq. 4)
+    Q_mu = 1.0 - math.exp(-mu * eta) + p_dark
+    if Q_mu <= 0.0:
+        return 0.0
+
+    # QBER (Eq. 5: optical errors + dark counts)
+    num_e = e_det * eta + p_dark / 2.0
+    den_e = eta + p_dark
+    e_mu = num_e / den_e if den_e > 0 else 0.5
+    e_mu = min(e_mu, 0.5)
+
+    # Single-photon gain estimate (Eq. 6, decoy lower bound)
+    Q1 = mu * eta * math.exp(-mu) + p_dark
+    if Q1 <= 0.0:
+        return 0.0
+
+    # Single-photon QBER (Eq. 7)
+    e1 = min(e_mu * Q_mu / max(Q1, 1e-15), 0.5)
+
+    rate = Q1 * (1.0 - h2(e1)) - Q_mu * f_ec * h2(e_mu)
+    return max(rate, 0.0)
+
+
+def skr_vec(d_array: np.ndarray, **kwargs) -> np.ndarray:
+    """Vectorised wrapper for skr_bb84."""
+    return np.array([skr_bb84(float(d), **kwargs) for d in d_array])
+
+
+# ── Haversine distance ────────────────────────────────────────────────────────
+
+def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    """Great-circle distance (km)."""
     R = 6371.0
-    φ1, φ2 = radians(lat1), radians(lat2)
-    Δφ = radians(lat2 - lat1)
-    Δλ = radians(lon2 - lon1)
-    a = sin(Δφ/2)**2 + cos(φ1)*cos(φ2)*sin(Δλ/2)**2
-    return R * 2 * atan2(sqrt(a), sqrt(1 - a))
+    phi1, phi2 = radians(lat1), radians(lat2)
+    dphi = radians(lat2 - lat1)
+    dlam = radians(lon2 - lon1)
+    a = sin(dphi / 2) ** 2 + cos(phi1) * cos(phi2) * sin(dlam / 2) ** 2
+    return R * 2 * atan2(sqrt(a), sqrt(1.0 - a))
 
 
-def skr_model(d_km):
-    """Simplified BB84 SKR model: R(d) = R0 * exp(-d / L_att)."""
-    return R0_bpp * np.exp(-d_km / L_ATT)
-
-
-# ── load data ─────────────────────────────────────────────────────────────────
+# ── Load Spain network data ───────────────────────────────────────────────────
 
 print('Loading Spain adjacency matrix...')
 adj_df = pd.read_csv(os.path.join(DATA_ESP, 'AdjacencyMatrixNamed45.csv'),
@@ -67,9 +155,9 @@ for _, row in coords_raw.iterrows():
     except (ValueError, KeyError):
         pass
 
-# ── compute edge distances ────────────────────────────────────────────────────
+# ── Compute edge distances and SKR using full BB84 model ─────────────────────
 
-print('Computing edge distances...')
+print('Computing edge distances and SKR (η_det=0.10, full BB84+decoy model)...')
 edge_data = []
 pos = {}
 for n in G.nodes():
@@ -79,9 +167,13 @@ for n in G.nodes():
 
 for u, v in G.edges():
     if u in coords and v in coords:
-        d = haversine(coords[u][0], coords[u][1],
-                      coords[v][0], coords[v][1])
-        edge_data.append({'u': u, 'v': v, 'dist_km': d, 'skr': skr_model(d)})
+        d_hav = haversine(coords[u][0], coords[u][1],
+                          coords[v][0], coords[v][1])
+        d_fibre = d_hav * RHO_F   # apply routing factor
+        skr_val = skr_bb84(d_fibre)
+        edge_data.append({'u': u, 'v': v,
+                          'dist_km': d_fibre,
+                          'skr': skr_val})
 
 df_edges = pd.DataFrame(edge_data)
 distances = df_edges['dist_km'].values
@@ -90,10 +182,81 @@ p25, p50, p75, p90 = (np.percentile(distances, q) for q in (25, 50, 75, 90))
 print(f'  Edges with distance: {len(df_edges)} / {G.number_of_edges()}')
 print(f'  Median: {p50:.1f} km  |  P90: {p90:.1f} km  |  Max: {distances.max():.1f} km')
 
-# ── Figure 1: physical metrics (2-panel) ─────────────────────────────────────
+# ── Figure 1: SKR vs distance (skr_vs_distancia.pdf) ─────────────────────────
+# Paper caption: SKR vs fibre distance with shaded region d > Δ = 45 km,
+# calibrated parameters α=0.2, η_det=0.10, μ=0.5, e_det=0.015,
+# p_dark=1e-6, f_EC=1.16.
 
-print('Generating benchmarks figure...')
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 4))
+print('\nGenerating Fig 1: skr_vs_distancia...')
+d_range = np.linspace(0.1, 200.0, 600)
+r_range = skr_vec(d_range)
+positive = r_range > 0
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+# Main SKR curve
+ax.semilogy(d_range[positive], r_range[positive],
+            color='steelblue', lw=2.2,
+            label='BB84 + decoy states (lower bound)')
+
+# Shaded region: d > Δ = 45 km  (excluded by network design threshold)
+d_max_plot = d_range[positive][-1] if positive.any() else 200.0
+ax.axvspan(DELTA_KM, d_max_plot, alpha=0.12, color='red',
+           label=rf'$d > \Delta = {DELTA_KM:.0f}$ km (excluded region)')
+ax.axvline(DELTA_KM, color='red', lw=1.4, ls='--', alpha=0.8)
+
+# Annotate the Δ = 45 km operating point
+r_delta = skr_bb84(DELTA_KM)
+ax.scatter([DELTA_KM], [r_delta], color='red', zorder=6, s=60)
+ax.annotate(
+    rf'$\Delta = {DELTA_KM:.0f}$ km'
+    f'\n$R = {r_delta:.2e}$ bits/pulse',
+    xy=(DELTA_KM, r_delta),
+    xytext=(DELTA_KM + 18, r_delta * 4),
+    fontsize=8.5, color='red',
+    arrowprops=dict(arrowstyle='->', color='red', lw=0.9)
+)
+
+# Annotate a few key operating points
+for d_pt, label in [(10, '10 km'), (20, '20 km'), (30, '30 km')]:
+    r_pt = skr_bb84(d_pt)
+    ax.scatter([d_pt], [r_pt], color='darkorange', zorder=5, s=40, alpha=0.8)
+
+ax.set_xlabel('Fibre distance $d$ (km)', fontsize=12)
+ax.set_ylabel('SKR $R(d)$ (bits/pulse)', fontsize=12)
+ax.set_title(
+    r'Secret Key Rate vs. Fibre Distance \textemdash BB84 with Decoy States' '\n'
+    r'($\alpha=0.2$ dB/km, $\eta_{\rm det}=0.10$, $\mu=0.5$, '
+    r'$e_{\rm det}=0.015$, $p_{\rm dark}=10^{-6}$, $f_{\rm EC}=1.16$)',
+    fontsize=10
+)
+ax.set_xlim(0, 200)
+ax.legend(fontsize=9, loc='lower left')
+ax.grid(True, which='both', alpha=0.3)
+fig.tight_layout()
+
+for ext in ('pdf', 'png'):
+    out = os.path.join(PAPER_DIR, f'skr_vs_distancia.{ext}')
+    fig.savefig(out, dpi=150, bbox_inches='tight')
+    print(f'  Saved: {out}')
+plt.close(fig)
+
+# Verify key operating points match paper Table (Section II.F)
+print('\n  Verification of key operating points (paper Section II.F):')
+for d_chk, r_expected in [(10, 1.19e-2), (20, 7.50e-3),
+                           (30, 4.72e-3), (40, 2.97e-3), (45, 2.36e-3)]:
+    r_got = skr_bb84(d_chk)
+    match = 'OK' if abs(r_got - r_expected) / r_expected < 0.05 else 'MISMATCH'
+    print(f'  d={d_chk:3d} km: R={r_got:.3e} (expected {r_expected:.2e}) [{match}]')
+
+
+# ── Figure 4: Physical metrics 2-panel (benchmarks_qkd_metricas.pdf) ─────────
+# Paper caption (Fig 4): Top: edge distance distribution.
+#                        Bottom: SKR distribution.
+# Both computed with full BB84+decoy-state model, η_det=0.10.
+
+print('\nGenerating Fig 4: benchmarks_qkd_metricas...')
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 7))
 
 # Panel (a): edge-distance distribution
 ax1.hist(distances, bins=55, color='#2166ac', alpha=0.78,
@@ -101,24 +264,35 @@ ax1.hist(distances, bins=55, color='#2166ac', alpha=0.78,
 for pct, label, ls in [(p50, f'Median {p50:.0f} km', ':'),
                        (p90, f'P90 = {p90:.0f} km', '--')]:
     ax1.axvline(pct, color='#d95f02', lw=1.4, ls=ls, label=label)
+ax1.axvline(DELTA_KM, color='red', lw=1.2, ls='-.',
+            label=rf'$\Delta = {DELTA_KM:.0f}$ km threshold')
 ax1.set_xlabel('Edge distance $d$ (km)', fontsize=11)
 ax1.set_ylabel('Edge count', fontsize=11)
-ax1.set_title('(a) Distance distribution\n'
-              rf'Spain QKD network ($|E|={len(distances):,}$ edges)', fontsize=10)
+ax1.set_title(
+    rf'(a) Distance distribution — Spain QKD network ($|E|={len(distances):,}$ edges)',
+    fontsize=10
+)
 ax1.legend(fontsize=9)
 ax1.grid(True, alpha=0.25)
 
-# Panel (b): SKR vs distance scatter + theoretical curve
-d_curve = np.linspace(0, distances.max(), 300)
-r_curve = skr_model(d_curve)
-ax2.scatter(distances, skr_vals, s=1.5, color='#4393c3', alpha=0.35, label='Network edges')
-ax2.plot(d_curve, r_curve, color='#d73027', lw=2.0, zorder=5,
-         label=r'$R(d)=R_0\,e^{-d/L_{\rm att}}$')
-ax2.axvline(p50, color='grey', lw=0.9, ls=':', alpha=0.7, label=f'Median {p50:.0f} km')
-ax2.set_xlabel('Edge distance $d$ (km)', fontsize=11)
-ax2.set_ylabel('Normalised SKR $R(d)/R_0$', fontsize=11)
-ax2.set_title(r'(b) SKR vs distance — $L_{\rm att}=22$ km' '\n'
-              r'(BB84, $\alpha=0.2$ dB/km, $\eta_{\rm det}=0.2$)', fontsize=10)
+# Panel (b): SKR distribution (histogram) — as described in paper caption
+# "Bottom: SKR distribution."
+# Filter to positive SKR values (all edges should have SKR > 0 since d ≤ Δ)
+skr_positive = skr_vals[skr_vals > 0]
+ax2.hist(skr_positive, bins=55, color='#4393c3', alpha=0.78,
+         edgecolor='white', linewidth=0.4)
+skr_delta = skr_bb84(DELTA_KM)
+skr_p50   = np.percentile(skr_positive, 50)
+ax2.axvline(skr_delta, color='red', lw=1.2, ls='--',
+            label=rf'$R(\Delta={DELTA_KM:.0f}$ km$) = {skr_delta:.2e}$ bits/pulse')
+ax2.axvline(skr_p50,   color='#d95f02', lw=1.4, ls=':',
+            label=f'Median $R = {skr_p50:.2e}$ bits/pulse')
+ax2.set_xlabel('SKR $R(d)$ (bits/pulse)', fontsize=11)
+ax2.set_ylabel('Edge count', fontsize=11)
+ax2.set_title(
+    r'(b) SKR distribution — BB84+decoy, $\eta_{\rm det}=0.10$, $\mu=0.5$',
+    fontsize=10
+)
 ax2.legend(fontsize=9)
 ax2.grid(True, alpha=0.25)
 
@@ -129,9 +303,10 @@ for ext in ('pdf', 'png'):
     print(f'  Saved: {out}')
 plt.close(fig)
 
-# ── Figure 2: Spain QKD topology — edges coloured by distance quantile ────────
 
-print('Generating Spain topology figure...')
+# ── Figure 3: Spain QKD topology (esp_topologia.png) ─────────────────────────
+
+print('\nGenerating Fig 3: esp_topologia...')
 if len(pos) < 100:
     print('  Not enough coordinates for geographic plot — skipping topology figure.')
 else:
@@ -142,10 +317,10 @@ else:
     fig, ax = plt.subplots(figsize=(9, 7))
 
     # Build edge lookup for distance
-    dist_lookup = {frozenset([r['u'], r['v']]): r['dist_km'] for _, r in df_edges.iterrows()}
-    cmap = plt.cm.plasma_r
+    dist_lookup = {frozenset([r['u'], r['v']]): r['dist_km']
+                   for _, r in df_edges.iterrows()}
+    cmap = plt.cm.RdYlBu_r   # blue=short/high-SKR, red=long/low-SKR
 
-    # Draw edges coloured by distance
     for u, v in G.edges():
         if u not in pos or v not in pos:
             continue
@@ -156,10 +331,11 @@ else:
             alpha = 0.3
             lw = 0.3
         else:
-            norm_d = d / distances.max()
+            norm_d = d / DELTA_KM   # normalise to [0, 1] relative to threshold
+            norm_d = min(norm_d, 1.0)
             color  = cmap(norm_d)
             alpha  = 0.55
-            lw     = 0.5 + norm_d * 1.0
+            lw     = 0.4 + norm_d * 0.8
         ax.plot([pos[u][0], pos[v][0]], [pos[u][1], pos[v][1]],
                 color=color, alpha=alpha, lw=lw, solid_capstyle='round')
 
@@ -167,30 +343,38 @@ else:
     nodes_geo = [n for n in G.nodes() if n in pos]
     deg = dict(G.degree())
     node_sizes  = [3 + 2.5 * deg.get(n, 1) for n in nodes_geo]
-    node_colors = ['#d73027' if deg.get(n, 0) >= 8 else '#ffffff' for n in nodes_geo]
-    node_ec     = ['#800026' if deg.get(n, 0) >= 8 else '#2166ac' for n in nodes_geo]
+    node_colors = ['#d73027' if deg.get(n, 0) >= 8 else '#ffffff'
+                   for n in nodes_geo]
+    node_ec     = ['#800026' if deg.get(n, 0) >= 8 else '#2166ac'
+                   for n in nodes_geo]
     nx.draw_networkx_nodes(G, pos, nodelist=nodes_geo, ax=ax,
                            node_size=node_sizes, node_color=node_colors,
                            edgecolors=node_ec, linewidths=0.5, alpha=0.9)
 
-    sm = ScalarMappable(cmap=cmap, norm=Normalize(vmin=0, vmax=distances.max()))
+    sm = ScalarMappable(cmap=cmap,
+                        norm=Normalize(vmin=0, vmax=DELTA_KM))
     sm.set_array([])
     cbar = fig.colorbar(sm, ax=ax, fraction=0.025, pad=0.02)
-    cbar.set_label('Edge distance (km)', fontsize=9)
+    cbar.set_label('Edge fibre distance (km)', fontsize=9)
 
     legend_elements = [
         Line2D([0], [0], marker='o', color='w', markerfacecolor='#d73027',
-               markeredgecolor='#800026', markersize=7, label='High-degree hub (deg $\\geq$ 8)'),
+               markeredgecolor='#800026', markersize=7,
+               label='High-degree hub (deg $\\geq$ 8)'),
         Line2D([0], [0], marker='o', color='w', markerfacecolor='white',
-               markeredgecolor='#2166ac', markersize=5, label='Standard node'),
+               markeredgecolor='#2166ac', markersize=5,
+               label='Standard node'),
     ]
-    ax.legend(handles=legend_elements, loc='lower left', fontsize=8.5, framealpha=0.9)
-    ax.set_xlabel('Longitude (°)', fontsize=10)
-    ax.set_ylabel('Latitude (°)', fontsize=10)
-    ax.set_title(f'Spain national QKD topology: $|V|={G.number_of_nodes()}$ nodes, '
-                 f'$|E|={G.number_of_edges()}$ edges\n'
-                 'Edge colour $\\propto$ link distance (darker = longer)',
-                 fontsize=10)
+    ax.legend(handles=legend_elements, loc='lower left',
+              fontsize=8.5, framealpha=0.9)
+    ax.set_xlabel('Longitude ($^\\circ$)', fontsize=10)
+    ax.set_ylabel('Latitude ($^\\circ$)', fontsize=10)
+    ax.set_title(
+        f'Spain national QKD topology: $|V|={G.number_of_nodes()}$ nodes, '
+        f'$|E|={G.number_of_edges()}$ edges, $\\Delta={DELTA_KM:.0f}$ km\n'
+        'Edge colour: blue (short, high-SKR) $\\to$ red (long, low-SKR)',
+        fontsize=10
+    )
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     fig.tight_layout()
@@ -201,4 +385,4 @@ else:
         print(f'  Saved: {out}')
     plt.close(fig)
 
-print('Done.')
+print('\nDone.')
