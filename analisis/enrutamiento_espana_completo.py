@@ -10,6 +10,9 @@ Genera:
   - datos/resultados_papers/enrutamiento_espana_allpairs.csv
   - datos/resultados_papers/tablas_skr_routing.json
   - ../../../articulos/QKD-SKR-Routing/Figures/comparacion_rutas_qkd.pdf
+
+Run with:
+    python analisis/enrutamiento_espana_completo.py
 """
 
 import os

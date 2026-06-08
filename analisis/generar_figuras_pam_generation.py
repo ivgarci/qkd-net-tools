@@ -8,6 +8,9 @@ Generates:
   QKD-PAM-Generation/Figures/esp_topologia.png
       Geographic Spain QKD topology with nodes coloured by degree decile,
       sized by betweenness centrality — different visual from SKR-Routing version.
+
+Run with:
+    python analisis/generar_figuras_pam_generation.py
 """
 
 import os

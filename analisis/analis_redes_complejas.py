@@ -1,3 +1,14 @@
+"""
+analis_redes_complejas.py — Full structural analysis of CyL QKD network.
+
+Computes centrality (degree, betweenness, closeness), PCA/KMeans clustering of
+node metrics, Louvain community detection, and global network statistics.
+Reads datos/cyl/AdjacencyMatrixNamed45.csv.
+
+Run with:
+    python analisis/analis_redes_complejas.py
+"""
+
 import os
 import pandas as pd
 import networkx as nx

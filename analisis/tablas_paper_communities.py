@@ -5,7 +5,7 @@ Genera los valores exactos para todas las tablas del paper que estaban marcados
 como estimados o pendientes de verificación.
 
 Ejecutar con:
-    /Users/igarcia/my_env/bin/python tablas_paper_communities.py
+    python tablas_paper_communities.py
 
 Salida por pantalla → copiar los valores directamente al LaTeX.
 Genera también resultados/tablas_communities.csv

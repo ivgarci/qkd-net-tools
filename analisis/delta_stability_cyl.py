@@ -12,7 +12,7 @@ La asignación nodo→provincia se establece una sola vez con GN+Hungarian en
 Δ=45km (resultado verificado empíricamente) y se usa como referencia fija.
 
 Uso:
-    /Users/igarcia/my_env/bin/python analisis/delta_stability_cyl.py
+    python analisis/delta_stability_cyl.py
 
 Salida: tabla por pantalla + datos/resultados_papers/delta_stability_cyl.csv
 """

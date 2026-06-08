@@ -26,6 +26,9 @@ Physical model (BB84 + decoy states, Lo-Ma-Chen 2005):
   R      = Q1·[1 − h2(e1)] − Q_μ·f_EC·h2(e_μ)
 
 All parameters match Section II.E of the paper (η_det=0.10).
+
+Run with:
+    python analisis/generar_figuras_skr_routing.py
 """
 
 import os

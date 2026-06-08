@@ -121,6 +121,31 @@ pip install -r requirements.txt
 
 ---
 
+### QKD-PAM-Generation (IEEE TNSE submission)
+
+| Script | Description | Run |
+|--------|-------------|-----|
+| `analisis/tablas_paper_pam_generation.py` | Generates exact values for Tables II–IV of the PAM paper: k-means vs PAM coverage violations (Table II), Δ-sensitivity k* for CyL and España (Table III), network properties for k=80..120 in CyL (Table IV); requires `pip install scikit-learn-extra haversine` | `python analisis/tablas_paper_pam_generation.py` |
+| `analisis/greedy_cds_cyl.py` | Greedy MCDS baseline on CyL (n=267, Δ=45 km): greedy MDS via set-cover then Steiner-path repair; yields k_greedy=42 | `python analisis/greedy_cds_cyl.py` |
+| `analisis/ilp_mcds_cyl.py` | ILP lower bounds for MCDS on CyL: LP relaxation (k_LP=22.1), ILP minimum dominating set (k_DS=20), ILP MCDS (k_MCDS=46); requires `pip install pulp` | `python analisis/ilp_mcds_cyl.py` |
+| `analisis/generar_figuras_pam_generation.py` | Generates all PAM paper figures: radar benchmark chart (Fig comparing real QKD deployments vs thesis networks) and Spain topology with degree/betweenness visual encoding | `python analisis/generar_figuras_pam_generation.py` |
+
+**Results**: `datos/resultados_papers/tablas_pam_generation.csv` (Tables II–IV aggregate values)
+
+---
+
+### QKD-SKR-Routing (JOCN submission)
+
+| Script | Description | Run |
+|--------|-------------|-----|
+| `analisis/enrutamiento_espana_completo.py` | All-pairs widest-path routing on the Spain 950-node PAM backbone (450,775 pairs); compares hop-minimal Dijkstra vs max-SKR bottleneck path; produces Tables 1–4 and Fig 2 | `python analisis/enrutamiento_espana_completo.py` |
+| `analisis/delta_sensitivity_espana.py` | Δ-threshold sensitivity analysis (Table 5); rebuilds Spain graph from 950 PAM relay coordinates for each Δ ∈ {35, 40, 45, 50} km; consistent with PAM-generated backbone | `python analisis/delta_sensitivity_espana.py` |
+| `analisis/generar_figuras_skr_routing.py` | Generates Fig 1 (SKR vs distance with calibrated BB84+decoy model, η_det=0.10), Fig 3 (Spain topology coloured by edge distance), Fig 4 (edge-distance and SKR distributions) | `python analisis/generar_figuras_skr_routing.py` |
+
+**Results**: `datos/resultados_papers/tablas_skr_routing.json` (Tables 1–5 aggregate stats), `datos/resultados_papers/enrutamiento_espana_allpairs.csv` (450,775 pair-level routing results)
+
+---
+
 ### Case III — ADIF dark-fibre network (real infrastructure)
 
 | Script | Directory | Description |

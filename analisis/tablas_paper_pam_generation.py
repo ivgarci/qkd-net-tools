@@ -5,7 +5,7 @@ Genera los valores exactos para todas las tablas del paper que estaban marcados
 como estimados o pendientes de verificación.
 
 Ejecutar con:
-    /Users/igarcia/my_env/bin/python tablas_paper_pam_generation.py
+    python tablas_paper_pam_generation.py
 
 Cubre:
     - Table II : k-means vs PAM — violaciones de cobertura (España, k=950, Δ=45km)
@@ -15,7 +15,6 @@ Cubre:
 
 Prerrequisitos:
     pip install scikit-learn-extra haversine
-    (ya disponibles en /Users/igarcia/my_env)
 
 Datos requeridos:
     datos/cyl/cyl_1000.csv       — municipios CyL (Población;Latitud;Longitud)
