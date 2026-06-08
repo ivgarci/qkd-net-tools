@@ -6,7 +6,7 @@
     {
       "name": "García-Cobo, Iván",
       "affiliation": "Universidad de Salamanca",
-      "orcid": ""
+      "orcid": "0000-0002-9472-5613"
     }
   ],
   "license": "GPL-3.0-only",
@@ -31,7 +31,7 @@
   "related_identifiers": [
     {
       "relation": "isSupplementTo",
-      "identifier": "10.1016/j.future.2020.10.024",
+      "identifier": "10.1016/j.future.2020.09.037",
       "scheme": "doi",
       "resource_type": "publication-article"
     }

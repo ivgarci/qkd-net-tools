@@ -6,6 +6,8 @@ Nodos: junctions (grado ≠ 2) del grafo completo ADIF
 Aristas: tramos contraídos, coloreados por longitud respecto a Δ_eff = 50 km
 """
 
+import os
+import sys
 import pandas as pd
 import networkx as nx
 import numpy as np
@@ -165,21 +167,21 @@ nx.draw_networkx_labels(J, pos, labels=labels, ax=ax,
 # ── Leyenda ────────────────────────────────────────────────────────────────────
 legend_elements = [
     Line2D([0], [0], color='#2166ac', linewidth=1.2, alpha=0.8,
-           label=f'Tramo $\\leq {DELTA_EFF:.0f}$ km ({len(short_edges)} aristas)'),
+           label=f'Corridor $\\leq {DELTA_EFF:.0f}$ km ({len(short_edges)} links)'),
     Line2D([0], [0], color='#d95f02', linewidth=2.0, alpha=0.9,
-           label=f'Tramo $> {DELTA_EFF:.0f}$ km — requiere repetidor ({len(long_edges)} aristas)'),
+           label=f'Corridor $> {DELTA_EFF:.0f}$ km — relay required ({len(long_edges)} links)'),
     Line2D([0], [0], marker='o', color='w', markerfacecolor='#6baed6',
-           markersize=5, label=f'Junction (grado $<$ 5, {len(low_degree)} nodos)'),
+           markersize=5, label=f'Junction (degree $<$ 5, {len(low_degree)} nodes)'),
     Line2D([0], [0], marker='o', color='w', markerfacecolor='#d73027',
-           markersize=8, label=f'Junction crítico (grado $\\geq$ 5, {len(high_degree)} nodos)'),
+           markersize=8, label=f'Critical junction (degree $\\geq$ 5, {len(high_degree)} nodes)'),
 ]
 ax.legend(handles=legend_elements, loc='lower right', fontsize=8,
           framealpha=0.9, edgecolor='#cccccc')
 
-ax.set_xlabel('Longitud (°)', fontsize=9)
-ax.set_ylabel('Latitud (°)', fontsize=9)
+ax.set_xlabel('Longitude (°)', fontsize=9)
+ax.set_ylabel('Latitude (°)', fontsize=9)
 ax.tick_params(labelsize=8)
-ax.set_title(f'Grafo de junctions de la red ADIF ($|V_J|={J.number_of_nodes()}$, $|E_J|={J.number_of_edges()}$)',
+ax.set_title(f'ADIF junction graph ($|V_J|={J.number_of_nodes()}$, $|E_J|={J.number_of_edges()}$)',
              fontsize=11, pad=8)
 
 # Eliminar spines superiores y derechos

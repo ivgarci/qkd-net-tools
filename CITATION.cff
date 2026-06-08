@@ -15,6 +15,7 @@ authors:
     given-names: "Iván"
     affiliation: "Universidad de Salamanca"
     email: "ivangarciacobo@usal.es"
+    orcid: "https://orcid.org/0000-0002-9472-5613"
 license: GPL-3.0-only
 repository-code: "https://github.com/ivgarci/qkd-net-tools"
 keywords:

@@ -112,7 +112,7 @@ def plot_edge_attacks(casos, out_dir):
     for ax, caso in zip(axes, casos):
         df = caso['df']
         ax.plot(df['p_pct'], df['S_rel'], '-',
-                color='darkorange', lw=2.0, label='Ataque aristas ($C_B^e$)')
+                color='darkorange', lw=2.0, label='Edge attack ($C_B^e$)')
         ax.axhline(0.5, color='black', lw=0.8, ls=':', alpha=0.5)
 
         ps = next(
@@ -126,16 +126,16 @@ def plot_edge_attacks(casos, out_dir):
 
         n_bridges = caso.get('n_bridges', 0)
         ax.set_title(f"{caso['label']}\n"
-                     f"Puentes: {n_bridges}  |  Top arista: {caso.get('top_edge', '—')}")
-        ax.set_xlabel(r'Fracción de aristas eliminadas $p$ (%)')
+                     f"Bridges: {n_bridges}  |  Top edge: {caso.get('top_edge', '—')}")
+        ax.set_xlabel(r'Fraction of edges removed $p$ (%)')
         ax.set_xlim(0, df['p_pct'].max())
         ax.set_ylim(0, 1.05)
         ax.xaxis.set_major_locator(mticker.MultipleLocator(10))
         ax.legend(loc='upper right')
         ax.grid(True, alpha=0.3)
 
-    axes[0].set_ylabel(r'$S(p) = |GCC| / |V|$')
-    fig.suptitle('Resiliencia bajo ataques a enlaces — redes QKD',
+    axes[0].set_ylabel(r'$S(p) = |\mathrm{LCC}| / |V|$')
+    fig.suptitle('Resilience under edge attacks — QKD networks',
                  fontsize=12, y=1.01)
     fig.tight_layout()
 

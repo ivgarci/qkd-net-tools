@@ -150,7 +150,7 @@ def plot_kcore_panel(ax, G, core_numbers, label):
         labels = {n: str(n)[:10] for n in inner}
         nx.draw_networkx_labels(G, pos, labels=labels, ax=ax, font_size=4.5)
 
-    ax.set_title(f'{label}\n$k_{{max}}={max_k}$, núcleo interno: {len(inner)} nodos',
+    ax.set_title(f'{label}\n$k_{{max}}={max_k}$, inner core: {len(inner)} nodes',
                  fontsize=9)
     ax.axis('off')
 
@@ -171,7 +171,7 @@ if __name__ == '__main__':
 
     grafos = [
         ('CyL (|V|=100)',    load_cyl,               'cyl'),
-        ('España (|V|=950)', load_espana,             'espana'),
+        ('Spain (|V|=950)',  load_espana,             'espana'),
         ('ADIF (|V|≈485)',   load_adif_junction_graph, 'adif'),
     ]
 
@@ -206,7 +206,7 @@ if __name__ == '__main__':
         for ax, (label, G, core_numbers) in zip(axes, results):
             plot_kcore_panel(ax, G, core_numbers, label)
 
-        fig.suptitle('Jerarquía k-core — casos de estudio QKD',
+        fig.suptitle('k-core hierarchy — QKD case studies',
                      fontsize=12, y=1.01)
         fig.tight_layout()
 
