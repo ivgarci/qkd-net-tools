@@ -1,0 +1,1001 @@
+red,idx,nodo_u,nodo_v
+cyl,0,Adrada (La),Carpio
+cyl,1,Adrada (La),Carrión de los Condes
+cyl,2,Adrada (La),Cebreros
+cyl,3,Adrada (La),Cubillos del Sil
+cyl,4,Adrada (La),Espinar (El)
+cyl,5,Adrada (La),Fermoselle
+cyl,6,Adrada (La),Fuentes de Oñoro
+cyl,7,Adrada (La),Herrera de Pisuerga
+cyl,8,Adrada (La),Merindad de Río Ubierna
+cyl,9,Adrada (La),Puente de Domingo Flórez
+cyl,10,Adrada (La),Roa
+cyl,11,Adrada (La),Salamanca
+cyl,12,Adrada (La),Santovenia de la Valdoncina
+cyl,13,Adrada (La),Traspinedo
+cyl,14,Adrada (La),Valderas
+cyl,15,Adrada (La),Velilla del Río Carrión
+cyl,16,Adrada (La),Villaralbo
+cyl,17,Adrada (La),Villasabariego
+cyl,18,Adrada (La),Villoria
+cyl,19,Adrada (La),Vitigudino
+cyl,20,Adrada (La),Zaratán
+cyl,21,Alberca (La),Berlanga de Duero
+cyl,22,Alberca (La),Béjar
+cyl,23,Alberca (La),Duruelo de la Sierra
+cyl,24,Alberca (La),Lumbrales
+cyl,25,Alberca (La),Mombeltrán
+cyl,26,Alberca (La),Peñaranda de Bracamonte
+cyl,27,Alberca (La),Pola de Gordón (La)
+cyl,28,Alberca (La),Saldaña
+cyl,29,Alberca (La),San Justo de la Vega
+cyl,30,Alberca (La),Trabazos
+cyl,31,Alberca (La),Traspinedo
+cyl,32,Alberca (La),Trespaderne
+cyl,33,Alberca (La),Valle de Mena
+cyl,34,Alberca (La),Vitigudino
+cyl,35,Alberca (La),Zaratán
+cyl,36,Alberca (La),Ólvega
+cyl,37,Aldeadávila de la Ribera,Benavente
+cyl,38,Aldeadávila de la Ribera,Berlanga de Duero
+cyl,39,Aldeadávila de la Ribera,Burgos
+cyl,40,Aldeadávila de la Ribera,Duruelo de la Sierra
+cyl,41,Aldeadávila de la Ribera,Ledesma
+cyl,42,Aldeadávila de la Ribera,Lumbrales
+cyl,43,Aldeadávila de la Ribera,Mombeltrán
+cyl,44,Aldeadávila de la Ribera,Mozoncillo
+cyl,45,Aldeadávila de la Ribera,Pedrajas de San Esteban
+cyl,46,Aldeadávila de la Ribera,Peñaranda de Bracamonte
+cyl,47,Aldeadávila de la Ribera,Sabero
+cyl,48,Aldeadávila de la Ribera,Salas de los Infantes
+cyl,49,Aldeadávila de la Ribera,Santovenia de la Valdoncina
+cyl,50,Aldeadávila de la Ribera,Traspinedo
+cyl,51,Aldeadávila de la Ribera,Valle de Mena
+cyl,52,Aldeadávila de la Ribera,Vega de Espinareda
+cyl,53,Aldeadávila de la Ribera,Villabrágima
+cyl,54,Aldeadávila de la Ribera,Ólvega
+cyl,55,Almazán,Barco de Ávila (El)
+cyl,56,Almazán,Burgos
+cyl,57,Almazán,Fuente de San Esteban (La)
+cyl,58,Almazán,Lerma
+cyl,59,Almazán,Miranda de Ebro
+cyl,60,Almazán,Palencia
+cyl,61,Almazán,Roa
+cyl,62,Almazán,Salas de los Infantes
+cyl,63,Almazán,San Cristóbal de Segovia
+cyl,64,Almazán,Terradillos
+cyl,65,Almazán,Trabazos
+cyl,66,Almazán,Valderas
+cyl,67,Almazán,Vega de Espinareda
+cyl,68,Almazán,Velilla del Río Carrión
+cyl,69,Aranda de Duero,Arévalo
+cyl,70,Aranda de Duero,Barco de Ávila (El)
+cyl,71,Aranda de Duero,Berlanga de Duero
+cyl,72,Aranda de Duero,Burgos
+cyl,73,Aranda de Duero,Cantalejo
+cyl,74,Aranda de Duero,Carrión de los Condes
+cyl,75,Aranda de Duero,Cervera de Pisuerga
+cyl,76,Aranda de Duero,Fermoselle
+cyl,77,Aranda de Duero,Fuentes de Oñoro
+cyl,78,Aranda de Duero,Herrera de Pisuerga
+cyl,79,Aranda de Duero,Mozoncillo
+cyl,80,Aranda de Duero,Palencia
+cyl,81,Aranda de Duero,Pedraja de Portillo (La)
+cyl,82,Aranda de Duero,Peñaranda de Bracamonte
+cyl,83,Aranda de Duero,Pola de Gordón (La)
+cyl,84,Aranda de Duero,Sabero
+cyl,85,Aranda de Duero,San Cristóbal de Segovia
+cyl,86,Aranda de Duero,Santibáñez de Vidriales
+cyl,87,Aranda de Duero,Soria
+cyl,88,Aranda de Duero,Torquemada
+cyl,89,Aranda de Duero,Traspinedo
+cyl,90,Aranda de Duero,Vega de Espinareda
+cyl,91,Aranda de Duero,Velilla del Río Carrión
+cyl,92,Aranda de Duero,Viana de Cega
+cyl,93,Aranda de Duero,Villabrágima
+cyl,94,Aranda de Duero,Ávila
+cyl,95,Aranda de Duero,Ólvega
+cyl,96,Arcos de Jalón,Belorado
+cyl,97,Arcos de Jalón,Carbonero el Mayor
+cyl,98,Arcos de Jalón,Cubillos del Sil
+cyl,99,Arcos de Jalón,Duruelo de la Sierra
+cyl,100,Arcos de Jalón,Espinar (El)
+cyl,101,Arcos de Jalón,Ledesma
+cyl,102,Arcos de Jalón,Merindad de Río Ubierna
+cyl,103,Arcos de Jalón,Nava de la Asunción
+cyl,104,Arcos de Jalón,Palacios del Sil
+cyl,105,Arcos de Jalón,Pedrajas de San Esteban
+cyl,106,Arcos de Jalón,Saldaña
+cyl,107,Arcos de Jalón,Santibáñez de Vidriales
+cyl,108,Arcos de Jalón,Santovenia de Pisuerga
+cyl,109,Arcos de Jalón,Valle de Mena
+cyl,110,Arcos de Jalón,Vega de Espinareda
+cyl,111,Arcos de Jalón,Villada
+cyl,112,Arcos de Jalón,Villalpando
+cyl,113,Arcos de Jalón,Villoria
+cyl,114,Arcos de Jalón,Vitigudino
+cyl,115,Arcos de Jalón,Ávila
+cyl,116,Arcos de Jalón,Ólvega
+cyl,117,Arévalo,Barruelo de Santullán
+cyl,118,Arévalo,Benavente
+cyl,119,Arévalo,Burgo de Osma-Ciudad de Osma
+cyl,120,Arévalo,Cebreros
+cyl,121,Arévalo,Fermoselle
+cyl,122,Arévalo,Fuente de San Esteban (La)
+cyl,123,Arévalo,Gradefes
+cyl,124,Arévalo,Huerta de Rey
+cyl,125,Arévalo,Lerma
+cyl,126,Arévalo,Mozoncillo
+cyl,127,Arévalo,Nava de la Asunción
+cyl,128,Arévalo,Piedrahíta
+cyl,129,Arévalo,Puebla de Sanabria
+cyl,130,Arévalo,Salamanca
+cyl,131,Arévalo,San Cristóbal de Segovia
+cyl,132,Arévalo,San Leonardo de Yagüe
+cyl,133,Arévalo,Santa Marina del Rey
+cyl,134,Arévalo,Soria
+cyl,135,Arévalo,Trabazos
+cyl,136,Arévalo,Traspinedo
+cyl,137,Arévalo,Valderas
+cyl,138,Arévalo,Valle de Mena
+cyl,139,Arévalo,Vega de Espinareda
+cyl,140,Arévalo,Viana de Cega
+cyl,141,Arévalo,Villadecanes
+cyl,142,Arévalo,Villadiego
+cyl,143,Arévalo,Villarcayo de Merindad de Castilla la Vieja
+cyl,144,Barco de Ávila (El),Campaspero
+cyl,145,Barco de Ávila (El),Cantalejo
+cyl,146,Barco de Ávila (El),Carrión de los Condes
+cyl,147,Barco de Ávila (El),Cervera de Pisuerga
+cyl,148,Barco de Ávila (El),Fermoselle
+cyl,149,Barco de Ávila (El),Fuentesaúco
+cyl,150,Barco de Ávila (El),Merindad de Río Ubierna
+cyl,151,Barco de Ávila (El),Peñaranda de Bracamonte
+cyl,152,Barco de Ávila (El),Salamanca
+cyl,153,Barco de Ávila (El),San Cristóbal de Segovia
+cyl,154,Barco de Ávila (El),Santovenia de Pisuerga
+cyl,155,Barco de Ávila (El),Terradillos
+cyl,156,Barco de Ávila (El),Toro
+cyl,157,Barco de Ávila (El),Trabazos
+cyl,158,Barco de Ávila (El),Traspinedo
+cyl,159,Barco de Ávila (El),Villabrágima
+cyl,160,Barco de Ávila (El),Villada
+cyl,161,Barco de Ávila (El),Villalpando
+cyl,162,Barco de Ávila (El),Villaquilambre
+cyl,163,Barco de Ávila (El),Vitigudino
+cyl,164,Barco de Ávila (El),Ávila
+cyl,165,Barruelo de Santullán,Burgos
+cyl,166,Barruelo de Santullán,Carbonero el Mayor
+cyl,167,Barruelo de Santullán,Carrión de los Condes
+cyl,168,Barruelo de Santullán,Cervera de Pisuerga
+cyl,169,Barruelo de Santullán,Espinar (El)
+cyl,170,Barruelo de Santullán,Fermoselle
+cyl,171,Barruelo de Santullán,Guijuelo
+cyl,172,Barruelo de Santullán,Melgar de Fernamental
+cyl,173,Barruelo de Santullán,Mozoncillo
+cyl,174,Barruelo de Santullán,Piedrahíta
+cyl,175,Barruelo de Santullán,Roa
+cyl,176,Barruelo de Santullán,San Cristóbal de Segovia
+cyl,177,Barruelo de Santullán,Toro
+cyl,178,Barruelo de Santullán,Venta de Baños
+cyl,179,Barruelo de Santullán,Villada
+cyl,180,Barruelo de Santullán,Villalpando
+cyl,181,Barruelo de Santullán,Ólvega
+cyl,182,Bañeza (La),Burgo de Osma-Ciudad de Osma
+cyl,183,Bañeza (La),Cebreros
+cyl,184,Bañeza (La),Espinar (El)
+cyl,185,Bañeza (La),Fermoselle
+cyl,186,Bañeza (La),Fuentes de Oñoro
+cyl,187,Bañeza (La),Nava de la Asunción
+cyl,188,Bañeza (La),Roa
+cyl,189,Bañeza (La),Santibáñez de Vidriales
+cyl,190,Bañeza (La),Villada
+cyl,191,Bañeza (La),Villadiego
+cyl,192,Belorado,Burgo de Osma-Ciudad de Osma
+cyl,193,Belorado,Cebreros
+cyl,194,Belorado,Espinar (El)
+cyl,195,Belorado,Gradefes
+cyl,196,Belorado,Huerta de Rey
+cyl,197,Belorado,Ledesma
+cyl,198,Belorado,Lumbrales
+cyl,199,Belorado,Palencia
+cyl,200,Belorado,Peñaranda de Bracamonte
+cyl,201,Belorado,San Cristóbal de Segovia
+cyl,202,Belorado,Santa Marina del Rey
+cyl,203,Belorado,Traspinedo
+cyl,204,Belorado,Vitigudino
+cyl,205,Belorado,Zaratán
+cyl,206,Benavente,Campaspero
+cyl,207,Benavente,Carpio
+cyl,208,Benavente,Fuentes de Oñoro
+cyl,209,Benavente,Lumbrales
+cyl,210,Benavente,Melgar de Fernamental
+cyl,211,Benavente,Nava de la Asunción
+cyl,212,Benavente,Puebla de Sanabria
+cyl,213,Benavente,San Cristóbal de Segovia
+cyl,214,Benavente,Santa Marina del Rey
+cyl,215,Benavente,Terradillos
+cyl,216,Benavente,Traspinedo
+cyl,217,Benavente,Trespaderne
+cyl,218,Benavente,Vega de Espinareda
+cyl,219,Benavente,Velilla del Río Carrión
+cyl,220,Benavente,Villadiego
+cyl,221,Benavente,Villalpando
+cyl,222,Berlanga de Duero,Burgos
+cyl,223,Berlanga de Duero,Béjar
+cyl,224,Berlanga de Duero,Carpio
+cyl,225,Berlanga de Duero,Carrión de los Condes
+cyl,226,Berlanga de Duero,Cervera de Pisuerga
+cyl,227,Berlanga de Duero,Cubillos del Sil
+cyl,228,Berlanga de Duero,Folgoso de la Ribera
+cyl,229,Berlanga de Duero,Herrera de Pisuerga
+cyl,230,Berlanga de Duero,Melgar de Fernamental
+cyl,231,Berlanga de Duero,Mombeltrán
+cyl,232,Berlanga de Duero,Puebla de Sanabria
+cyl,233,Berlanga de Duero,Puente de Domingo Flórez
+cyl,234,Berlanga de Duero,San Leonardo de Yagüe
+cyl,235,Berlanga de Duero,Santibáñez de Vidriales
+cyl,236,Berlanga de Duero,Villalpando
+cyl,237,Berlanga de Duero,Villamañán
+cyl,238,Berlanga de Duero,Villoria
+cyl,239,Bermillo de Sayago,Briviesca
+cyl,240,Bermillo de Sayago,Burgo de Osma-Ciudad de Osma
+cyl,241,Bermillo de Sayago,Carbonero el Mayor
+cyl,242,Bermillo de Sayago,Carpio
+cyl,243,Bermillo de Sayago,Carrión de los Condes
+cyl,244,Bermillo de Sayago,Cebreros
+cyl,245,Bermillo de Sayago,Ciudad Rodrigo
+cyl,246,Bermillo de Sayago,Miranda de Ebro
+cyl,247,Bermillo de Sayago,Mozoncillo
+cyl,248,Bermillo de Sayago,Palacios del Sil
+cyl,249,Bermillo de Sayago,Pedrajas de San Esteban
+cyl,250,Bermillo de Sayago,Salas de los Infantes
+cyl,251,Bermillo de Sayago,San Justo de la Vega
+cyl,252,Bermillo de Sayago,San Leonardo de Yagüe
+cyl,253,Bermillo de Sayago,Santibáñez de Vidriales
+cyl,254,Bermillo de Sayago,Toro
+cyl,255,Bermillo de Sayago,Valle de Mena
+cyl,256,Bermillo de Sayago,Vega de Espinareda
+cyl,257,Bermillo de Sayago,Velilla del Río Carrión
+cyl,258,Bermillo de Sayago,Villada
+cyl,259,Bermillo de Sayago,Villamañán
+cyl,260,Bermillo de Sayago,Villaquilambre
+cyl,261,Bermillo de Sayago,Villarcayo de Merindad de Castilla la Vieja
+cyl,262,Bermillo de Sayago,Ávila
+cyl,263,Briviesca,Burgo de Osma-Ciudad de Osma
+cyl,264,Briviesca,Duruelo de la Sierra
+cyl,265,Briviesca,Fermoselle
+cyl,266,Briviesca,Lumbrales
+cyl,267,Briviesca,Melgar de Fernamental
+cyl,268,Briviesca,Nava de la Asunción
+cyl,269,Briviesca,Navaluenga
+cyl,270,Briviesca,Palacios del Sil
+cyl,271,Briviesca,San Cristóbal de Segovia
+cyl,272,Briviesca,Santovenia de Pisuerga
+cyl,273,Briviesca,Soria
+cyl,274,Briviesca,Valderas
+cyl,275,Briviesca,Velilla del Río Carrión
+cyl,276,Briviesca,Viana de Cega
+cyl,277,Briviesca,Villalpando
+cyl,278,Briviesca,Vitigudino
+cyl,279,Briviesca,Ólvega
+cyl,280,Burgo de Osma-Ciudad de Osma,Campaspero
+cyl,281,Burgo de Osma-Ciudad de Osma,Cantalejo
+cyl,282,Burgo de Osma-Ciudad de Osma,Carpio
+cyl,283,Burgo de Osma-Ciudad de Osma,Cervera de Pisuerga
+cyl,284,Burgo de Osma-Ciudad de Osma,Fermoselle
+cyl,285,Burgo de Osma-Ciudad de Osma,Herrera de Pisuerga
+cyl,286,Burgo de Osma-Ciudad de Osma,Melgar de Fernamental
+cyl,287,Burgo de Osma-Ciudad de Osma,Merindad de Río Ubierna
+cyl,288,Burgo de Osma-Ciudad de Osma,Paredes de Nava
+cyl,289,Burgo de Osma-Ciudad de Osma,Pola de Gordón (La)
+cyl,290,Burgo de Osma-Ciudad de Osma,Salas de los Infantes
+cyl,291,Burgo de Osma-Ciudad de Osma,Santibáñez de Vidriales
+cyl,292,Burgo de Osma-Ciudad de Osma,Santovenia de la Valdoncina
+cyl,293,Burgo de Osma-Ciudad de Osma,Villada
+cyl,294,Burgo de Osma-Ciudad de Osma,Villaralbo
+cyl,295,Burgo de Osma-Ciudad de Osma,Villarcayo de Merindad de Castilla la Vieja
+cyl,296,Burgo de Osma-Ciudad de Osma,Ólvega
+cyl,297,Burgos,Carpio
+cyl,298,Burgos,Carrión de los Condes
+cyl,299,Burgos,Cebreros
+cyl,300,Burgos,Cervera de Pisuerga
+cyl,301,Burgos,Fermoselle
+cyl,302,Burgos,Guijuelo
+cyl,303,Burgos,Lumbrales
+cyl,304,Burgos,Mozoncillo
+cyl,305,Burgos,Palencia
+cyl,306,Burgos,Pedraja de Portillo (La)
+cyl,307,Burgos,Pedrajas de San Esteban
+cyl,308,Burgos,Salas de los Infantes
+cyl,309,Burgos,Terradillos
+cyl,310,Burgos,Ávila
+cyl,311,Béjar,Candeleda
+cyl,312,Béjar,Fermoselle
+cyl,313,Béjar,Fuente de San Esteban (La)
+cyl,314,Béjar,Gradefes
+cyl,315,Béjar,Herrera de Pisuerga
+cyl,316,Béjar,Nava de la Asunción
+cyl,317,Béjar,Roa
+cyl,318,Béjar,San Justo de la Vega
+cyl,319,Béjar,Santovenia de la Valdoncina
+cyl,320,Béjar,Seca (La)
+cyl,321,Béjar,Villada
+cyl,322,Campaspero,Fuentesaúco
+cyl,323,Campaspero,Ledesma
+cyl,324,Campaspero,Peñaranda de Bracamonte
+cyl,325,Campaspero,Salamanca
+cyl,326,Campaspero,Salas de los Infantes
+cyl,327,Campaspero,Santibáñez de Vidriales
+cyl,328,Campaspero,Soria
+cyl,329,Campaspero,Valle de Mena
+cyl,330,Campaspero,Venta de Baños
+cyl,331,Campaspero,Villaquilambre
+cyl,332,Candeleda,Cantalejo
+cyl,333,Candeleda,Carpio
+cyl,334,Candeleda,Espinar (El)
+cyl,335,Candeleda,Ledesma
+cyl,336,Candeleda,Mombeltrán
+cyl,337,Candeleda,Palacios del Sil
+cyl,338,Candeleda,Piedrahíta
+cyl,339,Candeleda,Santa Marina del Rey
+cyl,340,Candeleda,Santibáñez de Vidriales
+cyl,341,Candeleda,Soria
+cyl,342,Candeleda,Toro
+cyl,343,Candeleda,Trabazos
+cyl,344,Candeleda,Velilla del Río Carrión
+cyl,345,Candeleda,Venta de Baños
+cyl,346,Candeleda,Villada
+cyl,347,Candeleda,Villaquilambre
+cyl,348,Candeleda,Villaralbo
+cyl,349,Candeleda,Villasabariego
+cyl,350,Candeleda,Vitigudino
+cyl,351,Candeleda,Ávila
+cyl,352,Candeleda,Ólvega
+cyl,353,Cantalejo,Cebreros
+cyl,354,Cantalejo,Fuentesaúco
+cyl,355,Cantalejo,Gradefes
+cyl,356,Cantalejo,Lerma
+cyl,357,Cantalejo,Piedrahíta
+cyl,358,Cantalejo,Salamanca
+cyl,359,Cantalejo,Saldaña
+cyl,360,Cantalejo,San Justo de la Vega
+cyl,361,Cantalejo,Trabazos
+cyl,362,Cantalejo,Valle de Mena
+cyl,363,Cantalejo,Villaquilambre
+cyl,364,Cantalejo,Villarcayo de Merindad de Castilla la Vieja
+cyl,365,Cantalejo,Villasabariego
+cyl,366,Cantalejo,Villoria
+cyl,367,Cantalejo,Vitigudino
+cyl,368,Cantalejo,Ólvega
+cyl,369,Carbonero el Mayor,Cebreros
+cyl,370,Carbonero el Mayor,Cervera de Pisuerga
+cyl,371,Carbonero el Mayor,Gradefes
+cyl,372,Carbonero el Mayor,Huerta de Rey
+cyl,373,Carbonero el Mayor,Lerma
+cyl,374,Carbonero el Mayor,Melgar de Fernamental
+cyl,375,Carbonero el Mayor,Navaluenga
+cyl,376,Carbonero el Mayor,Pedrajas de San Esteban
+cyl,377,Carbonero el Mayor,Peñaranda de Bracamonte
+cyl,378,Carbonero el Mayor,Piedrahíta
+cyl,379,Carbonero el Mayor,Puente de Domingo Flórez
+cyl,380,Carbonero el Mayor,Roa
+cyl,381,Carbonero el Mayor,San Cristóbal de Segovia
+cyl,382,Carbonero el Mayor,Santa Marina del Rey
+cyl,383,Carbonero el Mayor,Santibáñez de Vidriales
+cyl,384,Carbonero el Mayor,Soria
+cyl,385,Carbonero el Mayor,Venta de Baños
+cyl,386,Carbonero el Mayor,Villalpando
+cyl,387,Carpio,Gradefes
+cyl,388,Carpio,Melgar de Fernamental
+cyl,389,Carpio,Nava de la Asunción
+cyl,390,Carpio,Palencia
+cyl,391,Carpio,Pedraja de Portillo (La)
+cyl,392,Carpio,Puente de Domingo Flórez
+cyl,393,Carpio,Salas de los Infantes
+cyl,394,Carpio,San Cristóbal de Segovia
+cyl,395,Carpio,Santovenia de Pisuerga
+cyl,396,Carpio,Toro
+cyl,397,Carpio,Valderas
+cyl,398,Carpio,Venta de Baños
+cyl,399,Carpio,Zaratán
+cyl,400,Carpio,Ávila
+cyl,401,Carrión de los Condes,Cubillos del Sil
+cyl,402,Carrión de los Condes,Gradefes
+cyl,403,Carrión de los Condes,Huerta de Rey
+cyl,404,Carrión de los Condes,Lumbrales
+cyl,405,Carrión de los Condes,Miranda de Ebro
+cyl,406,Carrión de los Condes,Mozoncillo
+cyl,407,Carrión de los Condes,Palacios del Sil
+cyl,408,Carrión de los Condes,Pedrajas de San Esteban
+cyl,409,Carrión de los Condes,Piedrahíta
+cyl,410,Carrión de los Condes,Pola de Gordón (La)
+cyl,411,Carrión de los Condes,Roa
+cyl,412,Carrión de los Condes,Sabero
+cyl,413,Carrión de los Condes,Salas de los Infantes
+cyl,414,Carrión de los Condes,San Justo de la Vega
+cyl,415,Carrión de los Condes,Santa Marina del Rey
+cyl,416,Carrión de los Condes,Santovenia de Pisuerga
+cyl,417,Carrión de los Condes,Torquemada
+cyl,418,Carrión de los Condes,Traspinedo
+cyl,419,Carrión de los Condes,Villabrágima
+cyl,420,Carrión de los Condes,Ávila
+cyl,421,Cebreros,Cervera de Pisuerga
+cyl,422,Cebreros,Guijuelo
+cyl,423,Cebreros,Lumbrales
+cyl,424,Cebreros,Palacios del Sil
+cyl,425,Cebreros,Puebla de Sanabria
+cyl,426,Cebreros,Seca (La)
+cyl,427,Cebreros,Trabazos
+cyl,428,Cebreros,Valderas
+cyl,429,Cebreros,Villadecanes
+cyl,430,Cebreros,Villarcayo de Merindad de Castilla la Vieja
+cyl,431,Cebreros,Villoria
+cyl,432,Cebreros,Vitigudino
+cyl,433,Cebreros,Ólvega
+cyl,434,Cervera de Pisuerga,Ciudad Rodrigo
+cyl,435,Cervera de Pisuerga,Duruelo de la Sierra
+cyl,436,Cervera de Pisuerga,Fuente de San Esteban (La)
+cyl,437,Cervera de Pisuerga,Gradefes
+cyl,438,Cervera de Pisuerga,Lumbrales
+cyl,439,Cervera de Pisuerga,Navaluenga
+cyl,440,Cervera de Pisuerga,Palencia
+cyl,441,Cervera de Pisuerga,Sabero
+cyl,442,Cervera de Pisuerga,Salamanca
+cyl,443,Cervera de Pisuerga,Salas de los Infantes
+cyl,444,Cervera de Pisuerga,Saldaña
+cyl,445,Cervera de Pisuerga,Santibáñez de Vidriales
+cyl,446,Cervera de Pisuerga,Trabazos
+cyl,447,Cervera de Pisuerga,Valderas
+cyl,448,Cervera de Pisuerga,Velilla del Río Carrión
+cyl,449,Cervera de Pisuerga,Villabrágima
+cyl,450,Cervera de Pisuerga,Villamañán
+cyl,451,Ciudad Rodrigo,Espinar (El)
+cyl,452,Ciudad Rodrigo,Gradefes
+cyl,453,Ciudad Rodrigo,Herrera de Pisuerga
+cyl,454,Ciudad Rodrigo,Ledesma
+cyl,455,Ciudad Rodrigo,Melgar de Fernamental
+cyl,456,Ciudad Rodrigo,Paredes de Nava
+cyl,457,Ciudad Rodrigo,Pedraja de Portillo (La)
+cyl,458,Ciudad Rodrigo,Salamanca
+cyl,459,Ciudad Rodrigo,Salas de los Infantes
+cyl,460,Ciudad Rodrigo,Saldaña
+cyl,461,Ciudad Rodrigo,San Leonardo de Yagüe
+cyl,462,Ciudad Rodrigo,Santovenia de Pisuerga
+cyl,463,Ciudad Rodrigo,Seca (La)
+cyl,464,Ciudad Rodrigo,Torquemada
+cyl,465,Ciudad Rodrigo,Trabazos
+cyl,466,Ciudad Rodrigo,Vega de Espinareda
+cyl,467,Ciudad Rodrigo,Villabrágima
+cyl,468,Ciudad Rodrigo,Villadecanes
+cyl,469,Ciudad Rodrigo,Villamañán
+cyl,470,Ciudad Rodrigo,Villaquilambre
+cyl,471,Ciudad Rodrigo,Ávila
+cyl,472,Ciudad Rodrigo,Ólvega
+cyl,473,Cubillos del Sil,Espinar (El)
+cyl,474,Cubillos del Sil,Lerma
+cyl,475,Cubillos del Sil,Mozoncillo
+cyl,476,Cubillos del Sil,Palacios del Sil
+cyl,477,Cubillos del Sil,Piedrahíta
+cyl,478,Cubillos del Sil,Salamanca
+cyl,479,Cubillos del Sil,San Justo de la Vega
+cyl,480,Cubillos del Sil,Soria
+cyl,481,Cubillos del Sil,Traspinedo
+cyl,482,Cubillos del Sil,Valle de Mena
+cyl,483,Duruelo de la Sierra,Paredes de Nava
+cyl,484,Duruelo de la Sierra,Peñaranda de Bracamonte
+cyl,485,Duruelo de la Sierra,Piedrahíta
+cyl,486,Duruelo de la Sierra,Pola de Gordón (La)
+cyl,487,Duruelo de la Sierra,Puebla de Sanabria
+cyl,488,Duruelo de la Sierra,Sabero
+cyl,489,Duruelo de la Sierra,Santovenia de Pisuerga
+cyl,490,Duruelo de la Sierra,Seca (La)
+cyl,491,Duruelo de la Sierra,Traspinedo
+cyl,492,Duruelo de la Sierra,Vega de Espinareda
+cyl,493,Duruelo de la Sierra,Venta de Baños
+cyl,494,Duruelo de la Sierra,Viana de Cega
+cyl,495,Duruelo de la Sierra,Villabrágima
+cyl,496,Duruelo de la Sierra,Villadiego
+cyl,497,Duruelo de la Sierra,Vitigudino
+cyl,498,Duruelo de la Sierra,Ávila
+cyl,499,Espinar (El),Fuentes de Oñoro
+cyl,500,Espinar (El),Huerta de Rey
+cyl,501,Espinar (El),Palencia
+cyl,502,Espinar (El),Pedrajas de San Esteban
+cyl,503,Espinar (El),Puente de Domingo Flórez
+cyl,504,Espinar (El),San Cristóbal de Segovia
+cyl,505,Espinar (El),Valle de Mena
+cyl,506,Espinar (El),Villabrágima
+cyl,507,Espinar (El),Villoria
+cyl,508,Fermoselle,Fuentesaúco
+cyl,509,Fermoselle,Herrera de Pisuerga
+cyl,510,Fermoselle,Melgar de Fernamental
+cyl,511,Fermoselle,Pola de Gordón (La)
+cyl,512,Fermoselle,Toro
+cyl,513,Fermoselle,Trabazos
+cyl,514,Fermoselle,Traspinedo
+cyl,515,Fermoselle,Valderas
+cyl,516,Fermoselle,Venta de Baños
+cyl,517,Fermoselle,Villabrágima
+cyl,518,Fermoselle,Villadiego
+cyl,519,Fermoselle,Ólvega
+cyl,520,Folgoso de la Ribera,Fuentes de Oñoro
+cyl,521,Folgoso de la Ribera,Huerta de Rey
+cyl,522,Folgoso de la Ribera,Ledesma
+cyl,523,Folgoso de la Ribera,Nava de la Asunción
+cyl,524,Folgoso de la Ribera,Paredes de Nava
+cyl,525,Folgoso de la Ribera,Peñaranda de Bracamonte
+cyl,526,Folgoso de la Ribera,Pola de Gordón (La)
+cyl,527,Folgoso de la Ribera,Puebla de Sanabria
+cyl,528,Folgoso de la Ribera,Puente de Domingo Flórez
+cyl,529,Folgoso de la Ribera,Salamanca
+cyl,530,Folgoso de la Ribera,Salas de los Infantes
+cyl,531,Folgoso de la Ribera,San Justo de la Vega
+cyl,532,Folgoso de la Ribera,Santa Marina del Rey
+cyl,533,Folgoso de la Ribera,Santovenia de la Valdoncina
+cyl,534,Folgoso de la Ribera,Torquemada
+cyl,535,Folgoso de la Ribera,Villabrágima
+cyl,536,Folgoso de la Ribera,Villada
+cyl,537,Folgoso de la Ribera,Villarcayo de Merindad de Castilla la Vieja
+cyl,538,Folgoso de la Ribera,Villasabariego
+cyl,539,Folgoso de la Ribera,Zaratán
+cyl,540,Fuente de San Esteban (La),Lumbrales
+cyl,541,Fuente de San Esteban (La),Merindad de Río Ubierna
+cyl,542,Fuente de San Esteban (La),Navaluenga
+cyl,543,Fuente de San Esteban (La),Paredes de Nava
+cyl,544,Fuente de San Esteban (La),Puente de Domingo Flórez
+cyl,545,Fuente de San Esteban (La),Roa
+cyl,546,Fuente de San Esteban (La),Sabero
+cyl,547,Fuente de San Esteban (La),Seca (La)
+cyl,548,Fuente de San Esteban (La),Toro
+cyl,549,Fuente de San Esteban (La),Trespaderne
+cyl,550,Fuente de San Esteban (La),Velilla del Río Carrión
+cyl,551,Fuente de San Esteban (La),Villabrágima
+cyl,552,Fuente de San Esteban (La),Villada
+cyl,553,Fuente de San Esteban (La),Villaralbo
+cyl,554,Fuentes de Oñoro,Fuentesaúco
+cyl,555,Fuentes de Oñoro,Herrera de Pisuerga
+cyl,556,Fuentes de Oñoro,Navaluenga
+cyl,557,Fuentes de Oñoro,Pedraja de Portillo (La)
+cyl,558,Fuentes de Oñoro,Piedrahíta
+cyl,559,Fuentes de Oñoro,Puebla de Sanabria
+cyl,560,Fuentes de Oñoro,Puente de Domingo Flórez
+cyl,561,Fuentes de Oñoro,Roa
+cyl,562,Fuentes de Oñoro,Soria
+cyl,563,Fuentes de Oñoro,Valle de Mena
+cyl,564,Fuentes de Oñoro,Venta de Baños
+cyl,565,Fuentes de Oñoro,Viana de Cega
+cyl,566,Fuentes de Oñoro,Villalpando
+cyl,567,Fuentes de Oñoro,Villaralbo
+cyl,568,Fuentes de Oñoro,Villoria
+cyl,569,Fuentes de Oñoro,Ólvega
+cyl,570,Fuentesaúco,Guijuelo
+cyl,571,Fuentesaúco,Merindad de Río Ubierna
+cyl,572,Fuentesaúco,Palencia
+cyl,573,Fuentesaúco,Paredes de Nava
+cyl,574,Fuentesaúco,Pola de Gordón (La)
+cyl,575,Fuentesaúco,Salamanca
+cyl,576,Fuentesaúco,Santa Marina del Rey
+cyl,577,Fuentesaúco,Santovenia de Pisuerga
+cyl,578,Fuentesaúco,Santovenia de la Valdoncina
+cyl,579,Fuentesaúco,Toro
+cyl,580,Fuentesaúco,Vega de Espinareda
+cyl,581,Fuentesaúco,Villabrágima
+cyl,582,Fuentesaúco,Villalpando
+cyl,583,Fuentesaúco,Villaralbo
+cyl,584,Fuentesaúco,Villoria
+cyl,585,Fuentesaúco,Vitigudino
+cyl,586,Gradefes,Lerma
+cyl,587,Gradefes,Melgar de Fernamental
+cyl,588,Gradefes,Miranda de Ebro
+cyl,589,Gradefes,Mombeltrán
+cyl,590,Gradefes,Piedrahíta
+cyl,591,Gradefes,Puente de Domingo Flórez
+cyl,592,Gradefes,Saldaña
+cyl,593,Gradefes,Santibáñez de Vidriales
+cyl,594,Gradefes,Santovenia de Pisuerga
+cyl,595,Gradefes,Soria
+cyl,596,Gradefes,Terradillos
+cyl,597,Gradefes,Toro
+cyl,598,Gradefes,Valderas
+cyl,599,Gradefes,Vega de Espinareda
+cyl,600,Gradefes,Velilla del Río Carrión
+cyl,601,Gradefes,Villada
+cyl,602,Gradefes,Villalpando
+cyl,603,Guijuelo,Lerma
+cyl,604,Guijuelo,Lumbrales
+cyl,605,Guijuelo,Miranda de Ebro
+cyl,606,Guijuelo,Sabero
+cyl,607,Guijuelo,Salamanca
+cyl,608,Guijuelo,Salas de los Infantes
+cyl,609,Guijuelo,San Leonardo de Yagüe
+cyl,610,Guijuelo,Valderas
+cyl,611,Guijuelo,Valle de Mena
+cyl,612,Guijuelo,Velilla del Río Carrión
+cyl,613,Guijuelo,Venta de Baños
+cyl,614,Guijuelo,Villada
+cyl,615,Guijuelo,Villamañán
+cyl,616,Guijuelo,Villaralbo
+cyl,617,Herrera de Pisuerga,Huerta de Rey
+cyl,618,Herrera de Pisuerga,Miranda de Ebro
+cyl,619,Herrera de Pisuerga,Pedraja de Portillo (La)
+cyl,620,Herrera de Pisuerga,Pedrajas de San Esteban
+cyl,621,Herrera de Pisuerga,Peñaranda de Bracamonte
+cyl,622,Herrera de Pisuerga,Piedrahíta
+cyl,623,Herrera de Pisuerga,Puente de Domingo Flórez
+cyl,624,Herrera de Pisuerga,Santa Marina del Rey
+cyl,625,Herrera de Pisuerga,Trabazos
+cyl,626,Herrera de Pisuerga,Vega de Espinareda
+cyl,627,Herrera de Pisuerga,Venta de Baños
+cyl,628,Herrera de Pisuerga,Villabrágima
+cyl,629,Herrera de Pisuerga,Ólvega
+cyl,630,Huerta de Rey,Merindad de Río Ubierna
+cyl,631,Huerta de Rey,Palacios del Sil
+cyl,632,Huerta de Rey,Puebla de Sanabria
+cyl,633,Huerta de Rey,Puente de Domingo Flórez
+cyl,634,Huerta de Rey,Roa
+cyl,635,Huerta de Rey,Trabazos
+cyl,636,Huerta de Rey,Valderas
+cyl,637,Huerta de Rey,Vega de Espinareda
+cyl,638,Huerta de Rey,Velilla del Río Carrión
+cyl,639,Huerta de Rey,Venta de Baños
+cyl,640,Huerta de Rey,Villada
+cyl,641,Huerta de Rey,Villarcayo de Merindad de Castilla la Vieja
+cyl,642,Huerta de Rey,Villasabariego
+cyl,643,Huerta de Rey,Vitigudino
+cyl,644,Huerta de Rey,Zaratán
+cyl,645,Huerta de Rey,Ólvega
+cyl,646,Ledesma,Nava de la Asunción
+cyl,647,Ledesma,Navaluenga
+cyl,648,Ledesma,Pedraja de Portillo (La)
+cyl,649,Ledesma,Pedrajas de San Esteban
+cyl,650,Ledesma,San Cristóbal de Segovia
+cyl,651,Ledesma,San Justo de la Vega
+cyl,652,Ledesma,Villabrágima
+cyl,653,Ledesma,Villada
+cyl,654,Ledesma,Villamañán
+cyl,655,Ledesma,Villaquilambre
+cyl,656,Ledesma,Villarcayo de Merindad de Castilla la Vieja
+cyl,657,Ledesma,Villasabariego
+cyl,658,Ledesma,Vitigudino
+cyl,659,Ledesma,Ólvega
+cyl,660,Lerma,Melgar de Fernamental
+cyl,661,Lerma,Mombeltrán
+cyl,662,Lerma,Navaluenga
+cyl,663,Lerma,Paredes de Nava
+cyl,664,Lerma,Pedraja de Portillo (La)
+cyl,665,Lerma,Puebla de Sanabria
+cyl,666,Lerma,Sabero
+cyl,667,Lerma,Santibáñez de Vidriales
+cyl,668,Lerma,Trespaderne
+cyl,669,Lerma,Vega de Espinareda
+cyl,670,Lerma,Velilla del Río Carrión
+cyl,671,Lerma,Villadecanes
+cyl,672,Lerma,Villaralbo
+cyl,673,Lerma,Villarcayo de Merindad de Castilla la Vieja
+cyl,674,Lerma,Ólvega
+cyl,675,Lumbrales,Melgar de Fernamental
+cyl,676,Lumbrales,Miranda de Ebro
+cyl,677,Lumbrales,Palencia
+cyl,678,Lumbrales,Pedrajas de San Esteban
+cyl,679,Lumbrales,Peñaranda de Bracamonte
+cyl,680,Lumbrales,Piedrahíta
+cyl,681,Lumbrales,Saldaña
+cyl,682,Lumbrales,San Justo de la Vega
+cyl,683,Lumbrales,Santa Marina del Rey
+cyl,684,Lumbrales,Torquemada
+cyl,685,Lumbrales,Villabrágima
+cyl,686,Lumbrales,Villadecanes
+cyl,687,Melgar de Fernamental,Mozoncillo
+cyl,688,Melgar de Fernamental,Palencia
+cyl,689,Melgar de Fernamental,Piedrahíta
+cyl,690,Melgar de Fernamental,Saldaña
+cyl,691,Melgar de Fernamental,Toro
+cyl,692,Melgar de Fernamental,Trespaderne
+cyl,693,Melgar de Fernamental,Vega de Espinareda
+cyl,694,Melgar de Fernamental,Villadecanes
+cyl,695,Melgar de Fernamental,Villarcayo de Merindad de Castilla la Vieja
+cyl,696,Melgar de Fernamental,Vitigudino
+cyl,697,Merindad de Río Ubierna,Miranda de Ebro
+cyl,698,Merindad de Río Ubierna,Nava de la Asunción
+cyl,699,Merindad de Río Ubierna,Palacios del Sil
+cyl,700,Merindad de Río Ubierna,Pedraja de Portillo (La)
+cyl,701,Merindad de Río Ubierna,Peñaranda de Bracamonte
+cyl,702,Merindad de Río Ubierna,Puente de Domingo Flórez
+cyl,703,Merindad de Río Ubierna,Saldaña
+cyl,704,Merindad de Río Ubierna,San Justo de la Vega
+cyl,705,Merindad de Río Ubierna,Santa Marina del Rey
+cyl,706,Merindad de Río Ubierna,Santovenia de Pisuerga
+cyl,707,Merindad de Río Ubierna,Terradillos
+cyl,708,Merindad de Río Ubierna,Valderas
+cyl,709,Merindad de Río Ubierna,Valle de Mena
+cyl,710,Merindad de Río Ubierna,Venta de Baños
+cyl,711,Merindad de Río Ubierna,Villada
+cyl,712,Merindad de Río Ubierna,Villaralbo
+cyl,713,Miranda de Ebro,Mozoncillo
+cyl,714,Miranda de Ebro,Paredes de Nava
+cyl,715,Miranda de Ebro,Puebla de Sanabria
+cyl,716,Miranda de Ebro,Roa
+cyl,717,Miranda de Ebro,Sabero
+cyl,718,Miranda de Ebro,Salas de los Infantes
+cyl,719,Miranda de Ebro,Seca (La)
+cyl,720,Miranda de Ebro,Soria
+cyl,721,Miranda de Ebro,Valle de Mena
+cyl,722,Miranda de Ebro,Vitigudino
+cyl,723,Miranda de Ebro,Zaratán
+cyl,724,Miranda de Ebro,Ólvega
+cyl,725,Mombeltrán,Pedraja de Portillo (La)
+cyl,726,Mombeltrán,Peñaranda de Bracamonte
+cyl,727,Mombeltrán,San Justo de la Vega
+cyl,728,Mombeltrán,Trabazos
+cyl,729,Mombeltrán,Villamañán
+cyl,730,Mombeltrán,Villaquilambre
+cyl,731,Mombeltrán,Villasabariego
+cyl,732,Mozoncillo,Navaluenga
+cyl,733,Mozoncillo,Puente de Domingo Flórez
+cyl,734,Mozoncillo,Salamanca
+cyl,735,Mozoncillo,San Leonardo de Yagüe
+cyl,736,Mozoncillo,Santa Marina del Rey
+cyl,737,Mozoncillo,Terradillos
+cyl,738,Mozoncillo,Valle de Mena
+cyl,739,Mozoncillo,Velilla del Río Carrión
+cyl,740,Mozoncillo,Viana de Cega
+cyl,741,Mozoncillo,Villamañán
+cyl,742,Mozoncillo,Ávila
+cyl,743,Nava de la Asunción,Palencia
+cyl,744,Nava de la Asunción,Pedrajas de San Esteban
+cyl,745,Nava de la Asunción,Peñaranda de Bracamonte
+cyl,746,Nava de la Asunción,Puente de Domingo Flórez
+cyl,747,Nava de la Asunción,Terradillos
+cyl,748,Nava de la Asunción,Vega de Espinareda
+cyl,749,Nava de la Asunción,Villabrágima
+cyl,750,Nava de la Asunción,Villamañán
+cyl,751,Nava de la Asunción,Vitigudino
+cyl,752,Navaluenga,Paredes de Nava
+cyl,753,Navaluenga,Piedrahíta
+cyl,754,Navaluenga,Pola de Gordón (La)
+cyl,755,Navaluenga,Puebla de Sanabria
+cyl,756,Navaluenga,Sabero
+cyl,757,Navaluenga,Salas de los Infantes
+cyl,758,Navaluenga,Santovenia de la Valdoncina
+cyl,759,Navaluenga,Seca (La)
+cyl,760,Navaluenga,Ólvega
+cyl,761,Palacios del Sil,Paredes de Nava
+cyl,762,Palacios del Sil,Peñaranda de Bracamonte
+cyl,763,Palacios del Sil,Puebla de Sanabria
+cyl,764,Palacios del Sil,San Cristóbal de Segovia
+cyl,765,Palacios del Sil,San Justo de la Vega
+cyl,766,Palacios del Sil,Torquemada
+cyl,767,Palacios del Sil,Trespaderne
+cyl,768,Palacios del Sil,Velilla del Río Carrión
+cyl,769,Palacios del Sil,Villadecanes
+cyl,770,Palacios del Sil,Villamañán
+cyl,771,Palacios del Sil,Villaquilambre
+cyl,772,Palacios del Sil,Villaralbo
+cyl,773,Palacios del Sil,Villarcayo de Merindad de Castilla la Vieja
+cyl,774,Palencia,Piedrahíta
+cyl,775,Palencia,Roa
+cyl,776,Palencia,Salamanca
+cyl,777,Palencia,Santovenia de la Valdoncina
+cyl,778,Palencia,Torquemada
+cyl,779,Palencia,Trespaderne
+cyl,780,Palencia,Villadiego
+cyl,781,Palencia,Villalpando
+cyl,782,Palencia,Villaquilambre
+cyl,783,Palencia,Ávila
+cyl,784,Paredes de Nava,Piedrahíta
+cyl,785,Paredes de Nava,Salamanca
+cyl,786,Paredes de Nava,Santibáñez de Vidriales
+cyl,787,Paredes de Nava,Traspinedo
+cyl,788,Paredes de Nava,Trespaderne
+cyl,789,Paredes de Nava,Valle de Mena
+cyl,790,Paredes de Nava,Villamañán
+cyl,791,Paredes de Nava,Villasabariego
+cyl,792,Pedraja de Portillo (La),Sabero
+cyl,793,Pedraja de Portillo (La),San Cristóbal de Segovia
+cyl,794,Pedraja de Portillo (La),Santovenia de Pisuerga
+cyl,795,Pedraja de Portillo (La),Soria
+cyl,796,Pedraja de Portillo (La),Valderas
+cyl,797,Pedraja de Portillo (La),Venta de Baños
+cyl,798,Pedraja de Portillo (La),Viana de Cega
+cyl,799,Pedraja de Portillo (La),Villabrágima
+cyl,800,Pedraja de Portillo (La),Villasabariego
+cyl,801,Pedraja de Portillo (La),Vitigudino
+cyl,802,Pedrajas de San Esteban,Peñaranda de Bracamonte
+cyl,803,Pedrajas de San Esteban,Piedrahíta
+cyl,804,Pedrajas de San Esteban,Sabero
+cyl,805,Pedrajas de San Esteban,Saldaña
+cyl,806,Pedrajas de San Esteban,Santibáñez de Vidriales
+cyl,807,Pedrajas de San Esteban,Toro
+cyl,808,Pedrajas de San Esteban,Venta de Baños
+cyl,809,Pedrajas de San Esteban,Villadiego
+cyl,810,Pedrajas de San Esteban,Villoria
+cyl,811,Peñaranda de Bracamonte,Piedrahíta
+cyl,812,Peñaranda de Bracamonte,Saldaña
+cyl,813,Peñaranda de Bracamonte,Soria
+cyl,814,Peñaranda de Bracamonte,Torquemada
+cyl,815,Peñaranda de Bracamonte,Trespaderne
+cyl,816,Peñaranda de Bracamonte,Viana de Cega
+cyl,817,Peñaranda de Bracamonte,Villadiego
+cyl,818,Piedrahíta,Santibáñez de Vidriales
+cyl,819,Piedrahíta,Santovenia de la Valdoncina
+cyl,820,Piedrahíta,Terradillos
+cyl,821,Piedrahíta,Viana de Cega
+cyl,822,Piedrahíta,Villadecanes
+cyl,823,Piedrahíta,Villasabariego
+cyl,824,Pola de Gordón (La),Sabero
+cyl,825,Pola de Gordón (La),Santa Marina del Rey
+cyl,826,Pola de Gordón (La),Terradillos
+cyl,827,Pola de Gordón (La),Trabazos
+cyl,828,Pola de Gordón (La),Velilla del Río Carrión
+cyl,829,Pola de Gordón (La),Villamañán
+cyl,830,Pola de Gordón (La),Ólvega
+cyl,831,Puebla de Sanabria,Roa
+cyl,832,Puebla de Sanabria,San Justo de la Vega
+cyl,833,Puebla de Sanabria,Santovenia de Pisuerga
+cyl,834,Puebla de Sanabria,Torquemada
+cyl,835,Puebla de Sanabria,Vega de Espinareda
+cyl,836,Puebla de Sanabria,Velilla del Río Carrión
+cyl,837,Puebla de Sanabria,Venta de Baños
+cyl,838,Puebla de Sanabria,Villabrágima
+cyl,839,Puebla de Sanabria,Villarcayo de Merindad de Castilla la Vieja
+cyl,840,Puebla de Sanabria,Ávila
+cyl,841,Puebla de Sanabria,Ólvega
+cyl,842,Puente de Domingo Flórez,San Cristóbal de Segovia
+cyl,843,Puente de Domingo Flórez,Santovenia de Pisuerga
+cyl,844,Puente de Domingo Flórez,Trabazos
+cyl,845,Puente de Domingo Flórez,Velilla del Río Carrión
+cyl,846,Puente de Domingo Flórez,Villaquilambre
+cyl,847,Puente de Domingo Flórez,Villarcayo de Merindad de Castilla la Vieja
+cyl,848,Puente de Domingo Flórez,Villoria
+cyl,849,Puente de Domingo Flórez,Vitigudino
+cyl,850,Puente de Domingo Flórez,Zaratán
+cyl,851,Puente de Domingo Flórez,Ólvega
+cyl,852,Roa,Salas de los Infantes
+cyl,853,Roa,Saldaña
+cyl,854,Roa,San Leonardo de Yagüe
+cyl,855,Roa,Toro
+cyl,856,Roa,Trabazos
+cyl,857,Roa,Venta de Baños
+cyl,858,Roa,Ávila
+cyl,859,Sabero,Salas de los Infantes
+cyl,860,Sabero,San Cristóbal de Segovia
+cyl,861,Sabero,Traspinedo
+cyl,862,Sabero,Velilla del Río Carrión
+cyl,863,Sabero,Villada
+cyl,864,Sabero,Villaralbo
+cyl,865,Sabero,Villarcayo de Merindad de Castilla la Vieja
+cyl,866,Sabero,Villoria
+cyl,867,Sabero,Ávila
+cyl,868,Salamanca,San Leonardo de Yagüe
+cyl,869,Salamanca,Valderas
+cyl,870,Salamanca,Viana de Cega
+cyl,871,Salamanca,Villabrágima
+cyl,872,Salamanca,Villadecanes
+cyl,873,Salamanca,Zaratán
+cyl,874,Salas de los Infantes,San Leonardo de Yagüe
+cyl,875,Salas de los Infantes,Torquemada
+cyl,876,Salas de los Infantes,Velilla del Río Carrión
+cyl,877,Salas de los Infantes,Villadiego
+cyl,878,Salas de los Infantes,Villalpando
+cyl,879,Salas de los Infantes,Ávila
+cyl,880,Saldaña,San Leonardo de Yagüe
+cyl,881,Saldaña,Santovenia de Pisuerga
+cyl,882,Saldaña,Seca (La)
+cyl,883,Saldaña,Soria
+cyl,884,Saldaña,Villaquilambre
+cyl,885,Saldaña,Villoria
+cyl,886,San Cristóbal de Segovia,Santovenia de Pisuerga
+cyl,887,San Cristóbal de Segovia,Trespaderne
+cyl,888,San Cristóbal de Segovia,Valle de Mena
+cyl,889,San Cristóbal de Segovia,Viana de Cega
+cyl,890,San Cristóbal de Segovia,Villada
+cyl,891,San Cristóbal de Segovia,Villadecanes
+cyl,892,San Cristóbal de Segovia,Villoria
+cyl,893,San Justo de la Vega,San Leonardo de Yagüe
+cyl,894,San Justo de la Vega,Santovenia de Pisuerga
+cyl,895,San Justo de la Vega,Soria
+cyl,896,San Justo de la Vega,Traspinedo
+cyl,897,San Justo de la Vega,Trespaderne
+cyl,898,San Justo de la Vega,Venta de Baños
+cyl,899,San Justo de la Vega,Viana de Cega
+cyl,900,San Justo de la Vega,Villaquilambre
+cyl,901,San Justo de la Vega,Ólvega
+cyl,902,San Leonardo de Yagüe,Santa Marina del Rey
+cyl,903,San Leonardo de Yagüe,Seca (La)
+cyl,904,San Leonardo de Yagüe,Valderas
+cyl,905,San Leonardo de Yagüe,Vega de Espinareda
+cyl,906,San Leonardo de Yagüe,Villada
+cyl,907,San Leonardo de Yagüe,Villamañán
+cyl,908,San Leonardo de Yagüe,Villoria
+cyl,909,Santa Marina del Rey,Terradillos
+cyl,910,Santa Marina del Rey,Valle de Mena
+cyl,911,Santa Marina del Rey,Velilla del Río Carrión
+cyl,912,Santa Marina del Rey,Viana de Cega
+cyl,913,Santa Marina del Rey,Villadecanes
+cyl,914,Santa Marina del Rey,Villalpando
+cyl,915,Santa Marina del Rey,Villarcayo de Merindad de Castilla la Vieja
+cyl,916,Santa Marina del Rey,Vitigudino
+cyl,917,Santa Marina del Rey,Zaratán
+cyl,918,Santibáñez de Vidriales,Soria
+cyl,919,Santibáñez de Vidriales,Trespaderne
+cyl,920,Santibáñez de Vidriales,Valderas
+cyl,921,Santibáñez de Vidriales,Villabrágima
+cyl,922,Santibáñez de Vidriales,Villada
+cyl,923,Santibáñez de Vidriales,Villadecanes
+cyl,924,Santibáñez de Vidriales,Ólvega
+cyl,925,Santovenia de Pisuerga,Soria
+cyl,926,Santovenia de Pisuerga,Valle de Mena
+cyl,927,Santovenia de la Valdoncina,Torquemada
+cyl,928,Santovenia de la Valdoncina,Trespaderne
+cyl,929,Santovenia de la Valdoncina,Venta de Baños
+cyl,930,Santovenia de la Valdoncina,Viana de Cega
+cyl,931,Santovenia de la Valdoncina,Villabrágima
+cyl,932,Santovenia de la Valdoncina,Villadiego
+cyl,933,Santovenia de la Valdoncina,Zaratán
+cyl,934,Seca (La),Valderas
+cyl,935,Seca (La),Viana de Cega
+cyl,936,Seca (La),Villabrágima
+cyl,937,Soria,Trespaderne
+cyl,938,Soria,Valderas
+cyl,939,Soria,Villalpando
+cyl,940,Soria,Villasabariego
+cyl,941,Soria,Vitigudino
+cyl,942,Soria,Zaratán
+cyl,943,Terradillos,Villadecanes
+cyl,944,Toro,Torquemada
+cyl,945,Toro,Trabazos
+cyl,946,Toro,Traspinedo
+cyl,947,Toro,Trespaderne
+cyl,948,Toro,Valle de Mena
+cyl,949,Toro,Villada
+cyl,950,Toro,Villarcayo de Merindad de Castilla la Vieja
+cyl,951,Torquemada,Valderas
+cyl,952,Torquemada,Venta de Baños
+cyl,953,Torquemada,Viana de Cega
+cyl,954,Torquemada,Villaquilambre
+cyl,955,Trabazos,Valderas
+cyl,956,Trabazos,Villarcayo de Merindad de Castilla la Vieja
+cyl,957,Traspinedo,Viana de Cega
+cyl,958,Traspinedo,Villada
+cyl,959,Traspinedo,Villalpando
+cyl,960,Traspinedo,Villasabariego
+cyl,961,Trespaderne,Villalpando
+cyl,962,Trespaderne,Villaralbo
+cyl,963,Valderas,Venta de Baños
+cyl,964,Valderas,Villabrágima
+cyl,965,Valderas,Villadiego
+cyl,966,Valderas,Ólvega
+cyl,967,Valle de Mena,Villabrágima
+cyl,968,Valle de Mena,Villada
+cyl,969,Valle de Mena,Villadecanes
+cyl,970,Valle de Mena,Villalpando
+cyl,971,Valle de Mena,Villaralbo
+cyl,972,Valle de Mena,Ávila
+cyl,973,Vega de Espinareda,Velilla del Río Carrión
+cyl,974,Vega de Espinareda,Villasabariego
+cyl,975,Vega de Espinareda,Ávila
+cyl,976,Velilla del Río Carrión,Villaralbo
+cyl,977,Venta de Baños,Villabrágima
+cyl,978,Venta de Baños,Villada
+cyl,979,Venta de Baños,Villalpando
+cyl,980,Venta de Baños,Villarcayo de Merindad de Castilla la Vieja
+cyl,981,Venta de Baños,Villasabariego
+cyl,982,Venta de Baños,Vitigudino
+cyl,983,Viana de Cega,Villadecanes
+cyl,984,Viana de Cega,Villaralbo
+cyl,985,Villabrágima,Villalpando
+cyl,986,Villabrágima,Villasabariego
+cyl,987,Villadecanes,Villalpando
+cyl,988,Villadiego,Villaralbo
+cyl,989,Villadiego,Villarcayo de Merindad de Castilla la Vieja
+cyl,990,Villalpando,Villaquilambre
+cyl,991,Villalpando,Villasabariego
+cyl,992,Villamañán,Vitigudino
+cyl,993,Villamañán,Zaratán
+cyl,994,Villamañán,Ólvega
+cyl,995,Villaquilambre,Villaralbo
+cyl,996,Villaquilambre,Ávila
+cyl,997,Villaquilambre,Ólvega
+cyl,998,Villasabariego,Ólvega
+cyl,999,Vitigudino,Ólvega

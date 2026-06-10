@@ -1,0 +1,6 @@
+red,protocolo,p_star_topo,p_star_svc,C0_median
+cyl,random,0.35,0.25,0.0041616952986602
+cyl,degree_static,0.34,0.23,0.0041616952986602
+cyl,degree_adaptive,0.27,0.24,0.0041616952986602
+cyl,betweenness_static,0.21,0.19,0.0041616952986602
+cyl,betweenness_adaptive,0.09,0.06,0.0041616952986602
