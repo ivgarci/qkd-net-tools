@@ -479,12 +479,17 @@ def calcular_umbrales(df_proto):
 # ---------------------------------------------------------------------------
 
 def main():
-    global LOG_FH
+    global LOG_FH, N_PARES, R_RANDOM
     parser = argparse.ArgumentParser(
         description='Capacidad de servicio QKD bajo ataques de nodos')
     parser.add_argument('--red', required=True, choices=['cyl', 'adif', 'espana'])
     args = parser.parse_args()
     red = args.red
+
+    # Espec del paper para España: N=2000 pares, random con R=100 (por coste)
+    if red == 'espana':
+        N_PARES = 2000
+        R_RANDOM = 100
 
     LOG_FH = open(os.path.join(LOG_DIR, f'exp8_capacidad_{red}.log'), 'w')
     t_inicio = time.time()
