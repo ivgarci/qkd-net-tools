@@ -1,0 +1,2001 @@
+red,idx,nodo_u,nodo_v
+espana,0,Abadiño,Nevada
+espana,1,Abadiño,Rincón de Soto
+espana,2,Abadiño,Sant Climent de Llobregat
+espana,3,Abadiño,Sant Feliu de Pallerols
+espana,4,Abadín,Ayamonte
+espana,5,Abadín,Lardero
+espana,6,Abadín,Monesterio
+espana,7,Abadín,Valderas
+espana,8,Abenójar,Arcos de Jalón
+espana,9,Abenójar,Benissanet
+espana,10,Abenójar,Caso
+espana,11,Abenójar,Castrillón
+espana,12,Abenójar,Cáseda
+espana,13,Abenójar,Mazaricos
+espana,14,Abenójar,Navalmoral de la Mata
+espana,15,Abenójar,Níjar
+espana,16,Abrucena,Arquillos
+espana,17,Abrucena,Ferrol
+espana,18,Abrucena,Lesaka
+espana,19,Abrucena,Lora del Río
+espana,20,Abrucena,Riells i Viabrea
+espana,21,Abrucena,Torelló
+espana,22,Aceuchal,Almudévar
+espana,23,Aceuchal,Argoños
+espana,24,Aceuchal,Guadalajara
+espana,25,Aceuchal,Puerto de Santa María (El)
+espana,26,Aceuchal,Tarifa
+espana,27,Ademuz,Aínsa-Sobrarbe
+espana,28,Ademuz,Roquetes
+espana,29,Ademuz,Tabernas
+espana,30,Ademuz,Villa del Río
+espana,31,Ador,Ossa de Montiel
+espana,32,Ador,Padrenda
+espana,33,Ador,Vicedo (O)
+espana,34,Ador,Yepes
+espana,35,Adrada (La),Lozoyuela-Navas-Sieteiglesias
+espana,36,Adrada (La),Valdecaballeros
+espana,37,Agoncillo,Haro
+espana,38,Agoncillo,Liétor
+espana,39,Agoncillo,Mollet del Vallès
+espana,40,Agoncillo,Pinseque
+espana,41,Agudo,Arenas de San Juan
+espana,42,Agudo,Chillón
+espana,43,Agudo,Santa Marina del Rey
+espana,44,Aguilar de Campoo,Aoiz/Agoitz
+espana,45,Aguilar de Campoo,Chillón
+espana,46,Aguilar de Campoo,Lahiguera
+espana,47,Aguilar de Campoo,Meruelo
+espana,48,Aguilar de Campoo,Santa Cruz de la Zarza
+espana,49,Aguilar de Campoo,Tarifa
+espana,50,Aiguafreda,Allande
+espana,51,Aiguafreda,Cuéllar
+espana,52,Aiguafreda,Horcajo de Santiago
+espana,53,Aiguafreda,Soses
+espana,54,Aiguafreda,Soutomaior
+espana,55,Aiguafreda,Villa de Don Fadrique (La)
+espana,56,Aiguafreda,Villamañán
+espana,57,Ajalvir,Sondika
+espana,58,Ajalvir,Villaverde del Río
+espana,59,Ajofrín,Blanca
+espana,60,Ajofrín,Cedeira
+espana,61,Ajofrín,Galera
+espana,62,Ajofrín,Ibias
+espana,63,Ajofrín,Priego de Córdoba
+espana,64,Ajofrín,Villanueva de la Fuente
+espana,65,Alaejos,Casariche
+espana,66,Alaejos,Laudio/Llodio
+espana,67,Alar del Rey,Moraña
+espana,68,Alar del Rey,Sant Feliu de Pallerols
+espana,69,Alar del Rey,Soses
+espana,70,Alba de Tormes,Bosque (El)
+espana,71,Alba de Tormes,Castillo de Bayuela
+espana,72,Alba de Tormes,Cocentaina
+espana,73,Alba de Tormes,Mejorada
+espana,74,Alba de Tormes,Puebla de Don Fadrique
+espana,75,Alba de Tormes,Sant Antoni de Vilamajor
+espana,76,Alba de Tormes,Torrejón de la Calzada
+espana,77,Albaida,Carranque
+espana,78,Albaida,Paderne
+espana,79,Albaida,Priego de Córdoba
+espana,80,Albaida,Roquetes
+espana,81,Albaida,Ultzama
+espana,82,Albaida,Villalón de Campos
+espana,83,Albalate de Cinca,Cifuentes
+espana,84,Albalate de Cinca,Puebla de Guzmán
+espana,85,Albalate de Cinca,Real de la Jara (El)
+espana,86,Albalate de Cinca,Santa Pola
+espana,87,Albalate de Cinca,Villada
+espana,88,Albalate de Zorita,Bujaraloz
+espana,89,Albalate de Zorita,Guardia (La)
+espana,90,Albalate de Zorita,Isona i Conca Dellà
+espana,91,Albalate de Zorita,Madrigal de la Vera
+espana,92,Albalate de Zorita,Puebla de Alfindén (La)
+espana,93,Albanchez de Mágina,Legutiano
+espana,94,Albanchez de Mágina,Rosal (O)
+espana,95,Albanchez de Mágina,Santo Domingo de la Calzada
+espana,96,Albelda de Iregua,Elda
+espana,97,Albelda de Iregua,Galera
+espana,98,Albelda de Iregua,Martín de la Jara
+espana,99,Albelda de Iregua,Orgaz
+espana,100,Alberca (La),Amposta
+espana,101,Alberca (La),Baños de Molgas
+espana,102,Alberca (La),Cobisa
+espana,103,Alberca (La),Lumbier
+espana,104,Alberca (La),Paradas
+espana,105,Alberca (La),Sant Guim de Freixenet
+espana,106,Alberca (La),Vejer de la Frontera
+espana,107,Alberca (La),Villanueva de la Fuente
+espana,108,Alberca de Záncara (La),Ledesma
+espana,109,Alberca de Záncara (La),Paderne
+espana,110,Albocàsser,Altorricón
+espana,111,Albocàsser,Campdevànol
+espana,112,Albocàsser,León
+espana,113,Albocàsser,Ogíjares
+espana,114,Albocàsser,Pulpí
+espana,115,Albocàsser,Uceda
+espana,116,Alborache,Llanes
+espana,117,Alborache,Mazaricos
+espana,118,Alborache,Melgar de Fernamental
+espana,119,Alborache,Villalpardo
+espana,120,Alborache,Vélez-Blanco
+espana,121,Alcalalí,Alcúdia de Crespins (l')
+espana,122,Alcalalí,Allande
+espana,123,Alcalalí,Bélmez de la Moraleda
+espana,124,Alcalalí,Cardeña
+espana,125,Alcalalí,Guadalupe
+espana,126,Alcalalí,Pilas
+espana,127,Alcalà de Xivert,Pol
+espana,128,Alcalá de los Gazules,Caudete
+espana,129,Alcalá de los Gazules,Ordizia
+espana,130,Alcanar,Anchuelo
+espana,131,Alcanar,Astillero (El)
+espana,132,Alcanar,Guijuelo
+espana,133,Alcanar,Nava de la Asunción
+espana,134,Alcanar,Portomarín
+espana,135,Alcanar,Priego de Córdoba
+espana,136,Alcaraz,Tineo
+espana,137,Alcaucín,Pulpí
+espana,138,Alcaucín,Riola
+espana,139,Alcaucín,San Roque
+espana,140,Alcaucín,Villalpardo
+espana,141,Alcaudete de la Jara,San Fernando
+espana,142,Alcaudete de la Jara,Soses
+espana,143,Alcaudete de la Jara,Villanueva de la Serena
+espana,144,Alcañiz,Santo Tomé
+espana,145,Alcobendas,Aliseda
+espana,146,Alcobendas,Monesterio
+espana,147,Alcobendas,Santo Domingo de la Calzada
+espana,148,Alconchel,Castellar
+espana,149,Alconchel,Cerro de Andévalo (El)
+espana,150,Alconchel,Liétor
+espana,151,Alconchel,Rinconada (La)
+espana,152,Alcora (l'),Añora
+espana,153,Alcora (l'),Pol
+espana,154,Alcora (l'),Vedra
+espana,155,Alcora (l'),Villares (Los)
+espana,156,Alcántara,Rojales
+espana,157,Alcántara,Santo Domingo de la Calzada
+espana,158,Alcántara,Segura
+espana,159,Alcántara,Trijueque
+espana,160,Alcúdia de Crespins (l'),Benaoján
+espana,161,Alcúdia de Crespins (l'),Benavente
+espana,162,Alcúdia de Crespins (l'),Montiel
+espana,163,Alcúdia de Crespins (l'),Pobra de Trives (A)
+espana,164,Alcúdia de Crespins (l'),San Carlos del Valle
+espana,165,Aldeadávila de la Ribera,Haro
+espana,166,Aldeadávila de la Ribera,Lumpiaque
+espana,167,Aldeanueva de la Vera,Benissanet
+espana,168,Aldeanueva de la Vera,Bonrepòs i Mirambell
+espana,169,Aldeanueva de la Vera,Camporrobles
+espana,170,Aldeanueva de la Vera,Laracha (A)
+espana,171,Aldeanueva de la Vera,Níjar
+espana,172,Aldeanueva de la Vera,Paderne
+espana,173,Aldeanueva de la Vera,Pilas
+espana,174,Aldeanueva de la Vera,Polán
+espana,175,Aldeanueva de la Vera,Soses
+espana,176,Aldeanueva de la Vera,Tafalla
+espana,177,Alfarràs,Arboleas
+espana,178,Alfarràs,Cheles
+espana,179,Alfarràs,Malpartida de Cáceres
+espana,180,Alfarràs,Paderne
+espana,181,Alforja,Cervera de Pisuerga
+espana,182,Alforja,Ferrol
+espana,183,Alforja,Pantoja
+espana,184,Alforja,Roquetes
+espana,185,Alforja,Santa Bárbara de Casa
+espana,186,Alforja,Utiel
+espana,187,Algar,Bollullos Par del Condado
+espana,188,Algar,Cabana de Bergantiños
+espana,189,Algar,Cerdedo
+espana,190,Algar,Lasarte-Oria
+espana,191,Algar,Roquetas de Mar
+espana,192,Alguazas,Bélmez de la Moraleda
+espana,193,Alguazas,Casinos
+espana,194,Algámitas,Bullas
+espana,195,Algámitas,Cangas de Onís
+espana,196,Algámitas,Orgaz
+espana,197,Algámitas,Peñalsordo
+espana,198,Algámitas,Valverde de Leganés
+espana,199,Alhama de Aragón,Híjar
+espana,200,Alhama de Aragón,Paderne
+espana,201,Alhama de Aragón,Paradas
+espana,202,Alhaurín de la Torre,Caniles
+espana,203,Alhaurín de la Torre,Cantalpino
+espana,204,Alhaurín de la Torre,Cee
+espana,205,Alicante/Alacant,Almazán
+espana,206,Alicante/Alacant,Bullas
+espana,207,Alicante/Alacant,Casserres
+espana,208,Alicante/Alacant,Flix
+espana,209,Alicante/Alacant,Miguelturra
+espana,210,Alicante/Alacant,Orcera
+espana,211,Alicante/Alacant,Sarrión
+espana,212,Alicante/Alacant,Villadiego
+espana,213,Aliseda,Badajoz
+espana,214,Aliseda,Covelo
+espana,215,Aliseda,Iruña Oka/Iruña de Oca
+espana,216,Aliseda,Siruela
+espana,217,Allande,Cabana de Bergantiños
+espana,218,Allande,Ejido (El)
+espana,219,Allande,Valdecaballeros
+espana,220,Aller,Almazán
+espana,221,Aller,Belmonte de Miranda
+espana,222,Aller,Celanova
+espana,223,Aller,Celrà
+espana,224,Aller,María de Huerva
+espana,225,Aller,Roa
+espana,226,Almansa,Casas de Fernando Alonso
+espana,227,Almansa,Lasarte-Oria
+espana,228,Almansa,Marcilla
+espana,229,Almansa,Rinconada (La)
+espana,230,Almansa,Sant Pere de Ribes
+espana,231,Almansa,Villanueva de Perales
+espana,232,Almazora/Almassora,Fondó de les Neus (el)/Hondón de las Nieves
+espana,233,Almazora/Almassora,Navahermosa
+espana,234,Almazora/Almassora,Nules
+espana,235,Almazán,Cantalejo
+espana,236,Almazán,Nava de Santiago (La)
+espana,237,Almazán,Torrejón de la Calzada
+espana,238,Almazán,Ávila
+espana,239,Almodóvar del Campo,Arquillos
+espana,240,Almodóvar del Campo,Colomera
+espana,241,Almodóvar del Campo,Guadassuar
+espana,242,Almodóvar del Campo,Mazarrón
+espana,243,Almodóvar del Campo,Mijas
+espana,244,Almodóvar del Campo,San Cristóbal de Segovia
+espana,245,Almodóvar del Campo,San Martín del Rey Aurelio
+espana,246,Almogía,Bonete
+espana,247,Almogía,Lahiguera
+espana,248,Almogía,Mogente/Moixent
+espana,249,Almogía,Palafolls
+espana,250,Almogía,Villarcayo de Merindad de Castilla la Vieja
+espana,251,Almudévar,Aranda de Duero
+espana,252,Almudévar,Manzanares el Real
+espana,253,Almudévar,Pobra de Trives (A)
+espana,254,Almudévar,Toro
+espana,255,Almáchar,Calaceite
+espana,256,Almáchar,Ponts
+espana,257,Almáchar,Rionansa
+espana,258,Almáchar,Santa Elena
+espana,259,Altorricón,Cijuela
+espana,260,Altorricón,Gérgal
+espana,261,Altorricón,Peñafiel
+espana,262,Altorricón,Pinar (El)
+espana,263,Altorricón,Saviñao (O)
+espana,264,Altorricón,Teulada
+espana,265,Ames,Galdakao
+espana,266,Ames,Guijuelo
+espana,267,Ames,Navalafuente
+espana,268,Amposta,Casar de Escalona (El)
+espana,269,Amposta,Irura
+espana,270,Amposta,Noalejo
+espana,271,Amposta,Sabiñánigo
+espana,272,Amposta,San Bartolomé de la Torre
+espana,273,Amposta,San Pedro
+espana,274,Amposta,Tobarra
+espana,275,Anchuelo,Santiago-Pontones
+espana,276,Anchuelo,Villada
+espana,277,Anchuelo,Villaviciosa de Córdoba
+espana,278,Anchuelo,Ágreda
+espana,279,Andorra,Pallejà
+espana,280,Antequera,Arenas de San Juan
+espana,281,Antequera,Codosera (La)
+espana,282,Antequera,León
+espana,283,Antequera,Siete Aguas
+espana,284,Antequera,Xermade
+espana,285,Aoiz/Agoitz,Fuencaliente
+espana,286,Aoiz/Agoitz,Navalcán
+espana,287,Aoiz/Agoitz,Ogíjares
+espana,288,Aoiz/Agoitz,Plasencia
+espana,289,Aoiz/Agoitz,Riotorto
+espana,290,Aoiz/Agoitz,Sacedón
+espana,291,Aoiz/Agoitz,Segorbe
+espana,292,Aoiz/Agoitz,Subirats
+espana,293,Aoiz/Agoitz,Valderrobres
+espana,294,Aranda de Duero,Gimenells i el Pla de la Font
+espana,295,Aranda de Duero,Pobra de Trives (A)
+espana,296,Aranga,Berja
+espana,297,Aranga,Dodro
+espana,298,Aranga,Fuentes de Ebro
+espana,299,Aranga,Rincón de Soto
+espana,300,Aranga,Riópar
+espana,301,Aranga,Seu d'Urgell (La)
+espana,302,Aranga,Valderas
+espana,303,Aranjuez,Arbo
+espana,304,Aranjuez,Laudio/Llodio
+espana,305,Aranjuez,Valdecaballeros
+espana,306,Arbizu,Jalance
+espana,307,Arbizu,San Leonardo de Yagüe
+espana,308,Arbizu,Totana
+espana,309,Arbizu,Vicedo (O)
+espana,310,Arbizu,Xermade
+espana,311,Arbo,Calatayud
+espana,312,Arbo,Covelo
+espana,313,Arbo,Rábade
+espana,314,Arbo,Villafranca de los Caballeros
+espana,315,Arboleas,Cuevas de San Marcos
+espana,316,Arboleas,Estivella
+espana,317,Arboleas,Orcera
+espana,318,Arboleas,Peroxa (A)
+espana,319,Arboleas,Sant Mateu
+espana,320,Arboleas,Yecla
+espana,321,Arcos de Jalón,Monturque
+espana,322,Arcos de Jalón,Ossa de Montiel
+espana,323,Arcos de Jalón,Reus
+espana,324,Arcos de Jalón,Riotorto
+espana,325,Arcos de Jalón,Sartaguda
+espana,326,Arcos de Jalón,Torrejón del Rey
+espana,327,Arcos de Jalón,Vinuesa
+espana,328,Areatza,Bañeza (La)
+espana,329,Areatza,Palomares del Río
+espana,330,Areatza,Segura de León
+espana,331,Areatza,Trasmiras
+espana,332,Arenas de San Juan,Casares
+espana,333,Arenas de San Juan,Eibar
+espana,334,Arenas de San Juan,San Bartolomé de la Torre
+espana,335,Arenas de San Juan,Sepúlveda
+espana,336,Arenas del Rey,Aretxabaleta
+espana,337,Aretxabaleta,Chillón
+espana,338,Aretxabaleta,Ejea de los Caballeros
+espana,339,Aretxabaleta,Jumilla
+espana,340,Aretxabaleta,Merindad de Río Ubierna
+espana,341,Aretxabaleta,Pallaresos (Els)
+espana,342,Aretxabaleta,Valle de Santa Ana
+espana,343,Argamasilla de Alba,Monterrei
+espana,344,Argamasilla de Alba,Pegalajar
+espana,345,Argamasilla de Alba,Roca de la Sierra (La)
+espana,346,Argoños,Belmonte de Miranda
+espana,347,Argoños,Calasparra
+espana,348,Argoños,Granollers
+espana,349,Argoños,Navalucillos (Los)
+espana,350,Argoños,Perelló (El)
+espana,351,Argoños,Puebla de Alfindén (La)
+espana,352,Argoños,Torreorgaz
+espana,353,Argoños,Ávila
+espana,354,Arjonilla,Arroyo del Ojanco
+espana,355,Arjonilla,Belmonte de Miranda
+espana,356,Arjonilla,Blancos (Os)
+espana,357,Arjonilla,Cariñena
+espana,358,Arjonilla,Casariche
+espana,359,Arjonilla,Navalmoral de la Mata
+espana,360,Arnoia (A),Barco de Ávila (El)
+espana,361,Arnoia (A),Valdeolmos-Alalpardo
+espana,362,Aroche,Limpias
+espana,363,Aroche,Magán
+espana,364,Aroche,Unión (La)
+espana,365,Aroche,Vélez-Blanco
+espana,366,Arquillos,Tarazona de la Mancha
+espana,367,Arquillos,Uleila del Campo
+espana,368,Arquillos,Vila de Cruces
+espana,369,Arroyo del Ojanco,Híjar
+espana,370,Arroyo del Ojanco,Pantón
+espana,371,Arroyo del Ojanco,Solsona
+espana,372,Arroyomolinos de León,Guadalajara
+espana,373,Arroyomolinos de León,Pol
+espana,374,Arroyomolinos de León,Ricla
+espana,375,Arróniz,Celrà
+espana,376,Arróniz,Chiva
+espana,377,Arróniz,Navalcán
+espana,378,Arróniz,Sigüenza
+espana,379,Arróniz,Vinuesa
+espana,380,Artziniega,Benasque
+espana,381,Artziniega,Laguna de Duero
+espana,382,Artziniega,Robledo (El)
+espana,383,Artziniega,Zarza (La)
+espana,384,Arévalo,Cariñena
+espana,385,Arévalo,Castril
+espana,386,Arévalo,Peñaflor
+espana,387,Arévalo,Torre de Miguel Sesmero
+espana,388,Arévalo,Villacastín
+espana,389,Arévalo,Zarza (La)
+espana,390,Astillero (El),Fuentes de Oñoro
+espana,391,Astudillo,Finestrat
+espana,392,Astudillo,Ibros
+espana,393,Astudillo,Lepe
+espana,394,Astudillo,Pulpí
+espana,395,Ayamonte,Boimorto
+espana,396,Ayamonte,Molina de Aragón
+espana,397,Ayamonte,Navas de la Concepción (Las)
+espana,398,Ayamonte,Pobla del Duc (la)
+espana,399,Ayamonte,Villarcayo de Merindad de Castilla la Vieja
+espana,400,Ayora,Cádiar
+espana,401,Ayora,San Lorenzo de la Parrilla
+espana,402,Azpeitia,Oliva de la Frontera
+espana,403,Azpeitia,Piedrabuena
+espana,404,Azpeitia,Tarifa
+espana,405,Aínsa-Sobrarbe,Cambre
+espana,406,Aínsa-Sobrarbe,Fuente de Piedra
+espana,407,Aínsa-Sobrarbe,Villanueva del Rey
+espana,408,Añora,Bonete
+espana,409,Añora,Castilleja de la Cuesta
+espana,410,Añora,Yunquera de Henares
+espana,411,Badajoz,Laudio/Llodio
+espana,412,Badajoz,Mejorada
+espana,413,Badalona,Bellvei
+espana,414,Badalona,Cuéllar
+espana,415,Badalona,San Lorenzo de El Escorial
+espana,416,Badalona,San Pedro
+espana,417,Badalona,Villabrágima
+espana,418,Badia del Vallès,Ferrol
+espana,419,Badia del Vallès,Obejo
+espana,420,Badia del Vallès,Victoria (La)
+espana,421,Balenyà,Burgo de Osma-Ciudad de Osma
+espana,422,Balenyà,Casas de Fernando Alonso
+espana,423,Balenyà,Caudete
+espana,424,Balenyà,Chillón
+espana,425,Balenyà,Fuencaliente
+espana,426,Balenyà,Fuente Álamo de Murcia
+espana,427,Balsareny,Muíños
+espana,428,Banyoles,Teverga
+espana,429,Banyoles,Torre de Miguel Sesmero
+espana,430,Barajas de Melo,Granollers
+espana,431,Barajas de Melo,Guadalcázar
+espana,432,Barajas de Melo,Teulada
+espana,433,Barañain,Reus
+espana,434,Barañain,Valverde del Camino
+espana,435,Barco de Ávila (El),Piedrahíta
+espana,436,Barco de Ávila (El),Pozo Alcón
+espana,437,Barrax,Níjar
+espana,438,Baztan,Lominchar
+espana,439,Baztan,Trasmiras
+espana,440,Bañeza (La),Jumilla
+espana,441,Baños de Molgas,Cedeira
+espana,442,Baños de Molgas,Monesterio
+espana,443,Baños de la Encina,Sant Hilari Sacalm
+espana,444,Belalcázar,Castril
+espana,445,Belalcázar,Guadalcázar
+espana,446,Belchite,Pueblonuevo del Guadiana
+espana,447,Bellreguard,Casares
+espana,448,Bellreguard,Fuente de Piedra
+espana,449,Bellreguard,Utrillas
+espana,450,Bellvei,Eibar
+espana,451,Bellvei,Puebla de Alfindén (La)
+espana,452,Bellvei,Rionansa
+espana,453,Bellvei,Villaviciosa de Córdoba
+espana,454,Belmonte de Miranda,Molares (Los)
+espana,455,Belmonte de Miranda,Paradas
+espana,456,Belmonte de Miranda,Vera
+espana,457,Belorado,Guadalupe
+espana,458,Belorado,Guadassuar
+espana,459,Belorado,Pliego
+espana,460,Belorado,Trabazos
+espana,461,Belorado,Villada
+espana,462,Benabarre,Cantalejo
+espana,463,Benabarre,Mejorada del Campo
+espana,464,Benabarre,Palomares del Río
+espana,465,Benabarre,Valadouro (O)
+espana,466,Benabarre,Vega de Espinareda
+espana,467,Benaguasil,Brea de Aragón
+espana,468,Benaguasil,Hondarribia
+espana,469,Benaguasil,Muros de Nalón
+espana,470,Benaguasil,Palacios y Villafranca (Los)
+espana,471,Benaguasil,Plasencia
+espana,472,Benahadux,Font de la Figuera (la)
+espana,473,Benahadux,Onil
+espana,474,Benahadux,Port de la Selva (El)
+espana,475,Benahadux,Puebla de Sanabria
+espana,476,Benahadux,Villanueva del Fresno
+espana,477,Benahavís,Cañada
+espana,478,Benahavís,Font de la Figuera (la)
+espana,479,Benahavís,Siete Aguas
+espana,480,Benahavís,Totana
+espana,481,Benalup-Casas Viejas,Guadalcázar
+espana,482,Benalup-Casas Viejas,Muíños
+espana,483,Benalup-Casas Viejas,Palencia
+espana,484,Benalup-Casas Viejas,Villanueva del Fresno
+espana,485,Benamejí,Iznatoraf
+espana,486,Benamejí,Monturque
+espana,487,Benamejí,Provencio (El)
+espana,488,Benamejí,Rosal de la Frontera
+espana,489,Benamejí,Rossell
+espana,490,Benaoján,Cambados
+espana,491,Benaoján,Chelva
+espana,492,Benaoján,Friol
+espana,493,Benaoján,Higuera de la Sierra
+espana,494,Benaoján,Pedrajas de San Esteban
+espana,495,Benaoján,Ponts
+espana,496,Benaoján,Ribera Baja/Erribera Beitia
+espana,497,Benaoján,Ullà
+espana,498,Benaoján,Valdés
+espana,499,Benasque,Ibros
+espana,500,Benasque,Paterna de Rivera
+espana,501,Benasque,Villanueva de la Cañada
+espana,502,Benavente,Entrimo
+espana,503,Benavente,Golmés
+espana,504,Benavente,Mayorga
+espana,505,Benavente,Reus
+espana,506,Benejúzar,Bolo (O)
+espana,507,Benejúzar,Jabugo
+espana,508,Beniel,Mota del Cuervo
+espana,509,Beniel,Purullena
+espana,510,Beniel,Villalpardo
+espana,511,Beniel,Villanueva de la Serena
+espana,512,Benifairó de la Valldigna,Cascante
+espana,513,Benifairó de la Valldigna,Horcajo de Santiago
+espana,514,Benifairó de la Valldigna,Lumbier
+espana,515,Benifairó de la Valldigna,Onil
+espana,516,Benifairó de la Valldigna,Villaverde del Río
+espana,517,Benifaió,Catadau
+espana,518,Benifaió,Zas
+espana,519,Benissanet,Zarza de Granadilla
+espana,520,Berga,Huete
+espana,521,Berga,San Pedro
+espana,522,Berga,Santa Amalia
+espana,523,Berja,Orcera
+espana,524,Berlanga,Canjáyar
+espana,525,Berlanga,Castillo de Bayuela
+espana,526,Berlanga,Pulpí
+espana,527,Berlanga de Duero,Collado Mediano
+espana,528,Berlanga de Duero,Incio (O)
+espana,529,Berlanga de Duero,Lahiguera
+espana,530,Berlanga de Duero,Peñamellera Baja
+espana,531,Berlanga de Duero,Tineo
+espana,532,Berlanga de Duero,Torralba de Calatrava
+espana,533,Bermillo de Sayago,Biota
+espana,534,Bermillo de Sayago,Llerena
+espana,535,Bermillo de Sayago,Torrenueva
+espana,536,Berriatua,Briviesca
+espana,537,Berriatua,Escalona
+espana,538,Berriatua,Huelva
+espana,539,Betxí,Castril
+espana,540,Betxí,Grandas de Salime
+espana,541,Betxí,Ledesma
+espana,542,Betxí,Valle de Santa Ana
+espana,543,Bienvenida,Valverde de Júcar
+espana,544,Bigues i Riells,Boimorto
+espana,545,Bigues i Riells,Rosal (O)
+espana,546,Bigues i Riells,Santa Cristina d'Aro
+espana,547,Bigues i Riells,Victoria (La)
+espana,548,Binaced,Freila
+espana,549,Binaced,Irura
+espana,550,Binaced,Paredes de Nava
+espana,551,Biota,Lezuza
+espana,552,Biota,Mendigorría
+espana,553,Biota,Ronquillo (El)
+espana,554,Biota,Valdecaballeros
+espana,555,Bisbal d'Empordà (La),Padrenda
+espana,556,Bisbal d'Empordà (La),Teverga
+espana,557,Bisbal d'Empordà (La),Villa del Río
+espana,558,Bisbal d'Empordà (La),Villanueva del Ariscal
+espana,559,Bisbal del Penedès (La),Calamonte
+espana,560,Bisbal del Penedès (La),Corral de Calatrava
+espana,561,Bisbal del Penedès (La),Huelva
+espana,562,Bisbal del Penedès (La),Plasencia
+espana,563,Blanca,Calamocha
+espana,564,Blanca,Melide
+espana,565,Blanca,Pinos Genil
+espana,566,Blanca,Santo Tomé
+espana,567,Blanca,Villanueva de la Serena
+espana,568,Blancos (Os),Cervo
+espana,569,Blancos (Os),Cáceres
+espana,570,Blancos (Os),Valdeolmos-Alalpardo
+espana,571,Bocairent,San Fernando
+espana,572,Bocairent,Segura de León
+espana,573,Bocairent,Subirats
+espana,574,Bocairent,Trujillanos
+espana,575,Bocairent,Vila de Cruces
+espana,576,Boimorto,Cobisa
+espana,577,Boimorto,Láncara
+espana,578,Boimorto,Subirats
+espana,579,Bolaños de Calatrava,Font de la Figuera (la)
+espana,580,Bolaños de Calatrava,Jumilla
+espana,581,Bolaños de Calatrava,Vielha e Mijaran
+espana,582,Bollullos Par del Condado,Gavarda
+espana,583,Bollullos Par del Condado,Segura
+espana,584,Bolo (O),Guadalupe
+espana,585,Bolo (O),Mundaka
+espana,586,Bolo (O),Zarza de Granadilla
+espana,587,Bonares,Burguillos del Cerro
+espana,588,Bonares,Carballeda de Valdeorras
+espana,589,Bonares,Orgaz
+espana,590,Bonares,Segorbe
+espana,591,Bonares,Setenil de las Bodegas
+espana,592,Bonares,Tabernas
+espana,593,Bonares,Urkabustaiz
+espana,594,Bonares,Vilafranca del Penedès
+espana,595,Bonete,Palacios del Sil
+espana,596,Bonete,Serradilla
+espana,597,Bonete,Villanueva del Fresno
+espana,598,Bonillo (El),Fitero
+espana,599,Bonillo (El),Meruelo
+espana,600,Bonillo (El),Nules
+espana,601,Bonillo (El),Roquetas de Mar
+espana,602,Bonrepòs i Mirambell,Campezo/Kanpezu
+espana,603,Bonrepòs i Mirambell,Galapagar
+espana,604,Bonrepòs i Mirambell,Molina de Aragón
+espana,605,Bonrepòs i Mirambell,Riós
+espana,606,Bonrepòs i Mirambell,San Lorenzo de la Parrilla
+espana,607,Bonrepòs i Mirambell,Setenil de las Bodegas
+espana,608,Bonrepòs i Mirambell,Valdeganga
+espana,609,Bonrepòs i Mirambell,Villanueva de la Serena
+espana,610,Boquiñeni,Carpio (El)
+espana,611,Boquiñeni,Pozohondo
+espana,612,Bornos,Ledesma
+espana,613,Bornos,Pedroche
+espana,614,Bornos,Pobla de Farnals (la)
+espana,615,Bornos,Seu d'Urgell (La)
+espana,616,Bosque (El),Gilena
+espana,617,Bosque (El),Lantejuela (La)
+espana,618,Brea de Aragón,Cardeña
+espana,619,Brea de Aragón,Jadraque
+espana,620,Brea de Aragón,Molar (El)
+espana,621,Briviesca,Castroverde
+espana,622,Briviesca,Jonquera (La)
+espana,623,Briviesca,Madrigal de las Altas Torres
+espana,624,Briviesca,Villasabariego
+espana,625,Bujaraloz,Logrosán
+espana,626,Bullas,Calaceite
+espana,627,Bullas,Cangas de Onís
+espana,628,Bullas,Fuentesaúco
+espana,629,Bullas,Horcajo de Santiago
+espana,630,Bullas,Puebla de Cazalla (La)
+espana,631,Bullas,Tocina
+espana,632,Bullas,Villamanín
+espana,633,Burgo de Osma-Ciudad de Osma,Letur
+espana,634,Burgo de Osma-Ciudad de Osma,Lumpiaque
+espana,635,Burgo de Osma-Ciudad de Osma,Ondara
+espana,636,Burgo de Osma-Ciudad de Osma,Villamanrique
+espana,637,Burgos,Corral de Calatrava
+espana,638,Burgos,Errenteria
+espana,639,Burgos,Malpica de Bergantiños
+espana,640,Burgos,San Lorenzo de El Escorial
+espana,641,Burgos,Segorbe
+espana,642,Burgos,Álora
+espana,643,Burguillos del Cerro,Duruelo de la Sierra
+espana,644,Burguillos del Cerro,Minas de Riotinto
+espana,645,Burguillos del Cerro,Roquetas de Mar
+espana,646,Burguillos del Cerro,Santa Marina del Rey
+espana,647,Burguillos del Cerro,Villacastín
+espana,648,Burguillos del Cerro,Xermade
+espana,649,Béjar,Cañete la Real
+espana,650,Béjar,Folgoso de la Ribera
+espana,651,Béjar,Laracha (A)
+espana,652,Béjar,Mundaka
+espana,653,Bélmez de la Moraleda,Luisiana (La)
+espana,654,Bélmez de la Moraleda,Salvatierra/Agurain
+espana,655,Bélmez de la Moraleda,San Leonardo de Yagüe
+espana,656,Bélmez de la Moraleda,Sant Mateu
+espana,657,Cabezuela del Valle,Casserres
+espana,658,Cabezuela del Valle,Fuentes de Ebro
+espana,659,Cabezuela del Valle,Laudio/Llodio
+espana,660,Cabezón de la Sal,Guadalajara
+espana,661,Cabezón de la Sal,Segura
+espana,662,Cabra del Camp,Cañete la Real
+espana,663,Cabra del Camp,Lahiguera
+espana,664,Cabra del Camp,Navalafuente
+espana,665,Cabra del Camp,Pol
+espana,666,Cabranes,Navalucillos (Los)
+espana,667,Cabranes,Ondara
+espana,668,Cabranes,Pino (O)
+espana,669,Cadalso de los Vidrios,Olot
+espana,670,Cadalso de los Vidrios,Useras/Useres (les)
+espana,671,Cadalso de los Vidrios,Valdeolmos-Alalpardo
+espana,672,Calaceite,Calasparra
+espana,673,Calaceite,Calldetenes
+espana,674,Calaceite,Carbajosa de la Sagrada
+espana,675,Calaceite,Carrión de los Condes
+espana,676,Calaceite,Cerdedo
+espana,677,Calaceite,Gudiña (A)
+espana,678,Calaceite,Torrenueva
+espana,679,Calamonte,Nigrán
+espana,680,Calamonte,San Cibrao das Viñas
+espana,681,Calamonte,Totana
+espana,682,Calamonte,Valdeganga
+espana,683,Calanda,Cañada
+espana,684,Calanda,Ronquillo (El)
+espana,685,Calanda,San Lorenzo de la Parrilla
+espana,686,Calasparra,Cebolla
+espana,687,Calasparra,Torrejón de la Calzada
+espana,688,Calasparra,Villabrágima
+espana,689,Calasparra,Villanueva del Trabuco
+espana,690,Calatayud,Gilena
+espana,691,Calatayud,Ontur
+espana,692,Calatayud,Pallejà
+espana,693,Calatayud,Santurtzi
+espana,694,Calldetenes,Campo de Criptana
+espana,695,Calldetenes,Font de la Figuera (la)
+espana,696,Calldetenes,Guadalajara
+espana,697,Calzada de Calatrava,Logrosán
+espana,698,Calzada de Calatrava,Pliego
+espana,699,Calzada de Calatrava,Roa
+espana,700,Calzada de Calatrava,Sanlúcar de Barrameda
+espana,701,Calzada de Calatrava,Sayalonga
+espana,702,Calzada de Calatrava,Villava/Atarrabia
+espana,703,Cambados,Orcera
+espana,704,Cambados,Santa Cristina d'Aro
+espana,705,Caminomorisco,Cariñena
+espana,706,Caminomorisco,Fondó de les Neus (el)/Hondón de las Nieves
+espana,707,Campdevànol,Sant Pere de Riudebitlles
+espana,708,Campello (el),Santurtzi
+espana,709,Campezo/Kanpezu,Villamanrique
+espana,710,Campillo de Llerena,Tobarra
+espana,711,Campo Lugar,Pedroso (El)
+espana,712,Campo Lugar,Salceda de Caselas
+espana,713,Campo Lugar,Sepúlveda
+espana,714,Campo Lugar,Teulada
+espana,715,Campo Real,Coaña
+espana,716,Campo Real,Premià de Dalt
+espana,717,Campo Real,Roquetes
+espana,718,Campo de Criptana,Gérgal
+espana,719,Campo de Criptana,Huete
+espana,720,Campo de Criptana,Marinaleda
+espana,721,Campo de Criptana,Sils
+espana,722,Campoo de Enmedio,Lumpiaque
+espana,723,Campoo de Enmedio,Santa Marina del Rey
+espana,724,Campoo de Enmedio,Siruela
+espana,725,Campoo de Enmedio,Vilafant
+espana,726,Camporrobles,Casatejada
+espana,727,Camporrobles,Miño
+espana,728,Camporrobles,Mogente/Moixent
+espana,729,Camporrobles,Salvatierra/Agurain
+espana,730,Campos del Río,Valverde de Júcar
+espana,731,Camprodon,Estivella
+espana,732,Camprodon,Lumbier
+espana,733,Camprodon,Polán
+espana,734,Cangas de Onís,Carbonero el Mayor
+espana,735,Cangas de Onís,Láncara
+espana,736,Cangas de Onís,Pedernoso (El)
+espana,737,Cangas de Onís,Sant Iscle de Vallalta
+espana,738,Caniles,Colmenar
+espana,739,Caniles,Golmayo
+espana,740,Caniles,Lagartera
+espana,741,Caniles,Marcilla
+espana,742,Caniles,Puebla de Guzmán
+espana,743,Canjáyar,Seu d'Urgell (La)
+espana,744,Cantalejo,Castril
+espana,745,Cantalejo,Cáceres
+espana,746,Cantalpino,Carranque
+espana,747,Cantalpino,Cañaveral
+espana,748,Cantalpino,Trigueros
+espana,749,Capellades,Caspe
+espana,750,Capellades,Duruelo de la Sierra
+espana,751,Capellades,Peñarroya-Pueblonuevo
+espana,752,Capellades,Vilallonga del Camp
+espana,753,Caravaca de la Cruz,Pozo Alcón
+espana,754,Carbajosa de la Sagrada,Getafe
+espana,755,Carbajosa de la Sagrada,Robla (La)
+espana,756,Carbajosa de la Sagrada,Sant Andreu de Llavaneres
+espana,757,Carbajosa de la Sagrada,Yepes
+espana,758,Carballeda de Valdeorras,Gata
+espana,759,Carballeda de Valdeorras,Laguna de Duero
+espana,760,Carballeda de Valdeorras,Pioz
+espana,761,Carballeda de Valdeorras,Santovenia de la Valdoncina
+espana,762,Carboneras,Mairena del Alcor
+espana,763,Carboneras,Meruelo
+espana,764,Carbonero el Mayor,Covelo
+espana,765,Carbonero el Mayor,Puebla de Sancho Pérez
+espana,766,Carcastillo,Térmens
+espana,767,Cardeña,Mijas
+espana,768,Cariñena,Carpio (El)
+espana,769,Cariñena,Casas de Benítez
+espana,770,Cariñena,Madrigal de la Vera
+espana,771,Cariñena,Quart de Poblet
+espana,772,Cariñena,Valdegovía/Gaubea
+espana,773,Cariño,Eljas
+espana,774,Cariño,Jonquera (La)
+espana,775,Cariño,Puebla de Cazalla (La)
+espana,776,Cariño,Tarancón
+espana,777,Carpio (El),Ondara
+espana,778,Carpio (El),San Adrián
+espana,779,Carpio (El),Sigüenza
+espana,780,Carpio de Tajo (El),Sabero
+espana,781,Carranque,Villalón de Campos
+espana,782,Carreño,Incio (O)
+espana,783,Carreño,Montroy
+espana,784,Carreño,Nogais (As)
+espana,785,Carrizosa,Padrenda
+espana,786,Carrizosa,Santo Tomé
+espana,787,Carrizosa,Villa de Don Fadrique (La)
+espana,788,Carrión de los Condes,Villafranca de los Caballeros
+espana,789,Carrión de los Condes,Villafufre
+espana,790,Casar de Escalona (El),Montroy
+espana,791,Casar de Escalona (El),Sanlúcar de Barrameda
+espana,792,Casares,Guadalcázar
+espana,793,Casares,Perelló (El)
+espana,794,Casares,Ricla
+espana,795,Casares,Santa Cristina d'Aro
+espana,796,Casares,Trespaderne
+espana,797,Casariche,Finestrat
+espana,798,Casariche,Molares (Los)
+espana,799,Casariche,Palencia
+espana,800,Casariche,Puerto Lumbreras
+espana,801,Casariche,Yecla
+espana,802,Casas de Benítez,Faura
+espana,803,Casas de Benítez,Pedernoso (El)
+espana,804,Casas de Benítez,San Martín del Rey Aurelio
+espana,805,Casas de Benítez,Sant Guim de Freixenet
+espana,806,Casas de Benítez,Villa de Don Fadrique (La)
+espana,807,Casas de Fernando Alonso,Valdepolo
+espana,808,Casas-Ibáñez,Librilla
+espana,809,Casas-Ibáñez,Mungia
+espana,810,Casas-Ibáñez,Serradilla
+espana,811,Casas-Ibáñez,Trespaderne
+espana,812,Casas-Ibáñez,Ullà
+espana,813,Casas-Ibáñez,Valdés
+espana,814,Casatejada,Corrales
+espana,815,Casatejada,Elda
+espana,816,Casatejada,Gurrea de Gállego
+espana,817,Casatejada,Real de la Jara (El)
+espana,818,Casatejada,Riós
+espana,819,Casatejada,Vélez-Blanco
+espana,820,Casatejada,Xermade
+espana,821,Cascante,Cerdedo
+espana,822,Cascante,Gérgal
+espana,823,Cascante,Navas del Marqués (Las)
+espana,824,Cascante,Santiago-Pontones
+espana,825,Cascante,Solsona
+espana,826,Cascante,Sástago
+espana,827,Cascante,Villanueva de la Fuente
+espana,828,Casinos,Santa Elena
+espana,829,Caso,Codosera (La)
+espana,830,Caso,Ibias
+espana,831,Casserres,Cedeira
+espana,832,Casserres,Quesada
+espana,833,Castañar de Ibor,Cellera de Ter (La)
+espana,834,Castañar de Ibor,Frigiliana
+espana,835,Castañar de Ibor,Paredes de Nava
+espana,836,Castejón,Paymogo
+espana,837,Castejón,San Martín del Rey Aurelio
+espana,838,Castellar,Grandas de Salime
+espana,839,Castellar,Lezuza
+espana,840,Castellar del Vallès,Salas de los Infantes
+espana,841,Castellar del Vallès,Santa Cristina d'Aro
+espana,842,Castellar del Vallès,Venta de Baños
+espana,843,Castellar del Vallès,Villalpardo
+espana,844,Castellgalí,Cedeira
+espana,845,Castellgalí,Espejo
+espana,846,Castellgalí,Fuentes de Ebro
+espana,847,Castellgalí,Madrigal de la Vera
+espana,848,Castellserà,Castillo de Locubín
+espana,849,Castellserà,Cox
+espana,850,Castellserà,Duruelo de la Sierra
+espana,851,Castellserà,Fuentidueña de Tajo
+espana,852,Castellserà,Huerta de Rey
+espana,853,Castellserà,Jalance
+espana,854,Castellserà,Olula del Río
+espana,855,Castellserà,Serradilla
+espana,856,Castellserà,Ullà
+espana,857,Castellví de Rosanes,Oliva de la Frontera
+espana,858,Castellví de Rosanes,Santa Marina del Rey
+espana,859,Castellví de Rosanes,Yunquera de Henares
+espana,860,Castelló d'Empúries,Jaca
+espana,861,Castelló d'Empúries,Valdeganga
+espana,862,Castilleja de la Cuesta,Cañaveral
+espana,863,Castilleja de la Cuesta,Guijo de Galisteo
+espana,864,Castilleja de la Cuesta,Pobla de Montornès (La)
+espana,865,Castilleja de la Cuesta,Pozohondo
+espana,866,Castilleja de la Cuesta,Sallent de Gállego
+espana,867,Castillo de Bayuela,Peñarroya-Pueblonuevo
+espana,868,Castillo de Bayuela,Riells i Viabrea
+espana,869,Castillo de Locubín,Salt
+espana,870,Castillo de Locubín,Venta de Baños
+espana,871,Castillo de Locubín,Ávila
+espana,872,Castril,Vera
+espana,873,Castrillón,Manzanilla
+espana,874,Castrillón,María de Huerva
+espana,875,Castrillón,Navalucillos (Los)
+espana,876,Castrillón,Pozohondo
+espana,877,Castrillón,Santa Amalia
+espana,878,Castro-Urdiales,Lillo
+espana,879,Castro-Urdiales,Marcilla
+espana,880,Castro-Urdiales,Mozoncillo
+espana,881,Castro-Urdiales,Navas del Rey
+espana,882,Castropol,Liétor
+espana,883,Castropol,Riells i Viabrea
+espana,884,Castropol,Rábade
+espana,885,Castropol,Subirats
+espana,886,Castropol,Trujillanos
+espana,887,Castroverde,Igualada
+espana,888,Castroverde,Lorca
+espana,889,Castroverde,Miño
+espana,890,Castroverde,Ojén
+espana,891,Castroverde,Pinar (El)
+espana,892,Castroverde,Santovenia de la Valdoncina
+espana,893,Castroverde,Tocina
+espana,894,Catadau,Galera
+espana,895,Catarroja,Ledesma
+espana,896,Catarroja,San Fernando
+espana,897,Catarroja,Valdegovía/Gaubea
+espana,898,Caudete,Cervo
+espana,899,Caudete,Láncara
+espana,900,Caudete,Valverde de Leganés
+espana,901,Caudete,Vilallonga del Camp
+espana,902,Cazorla,Cee
+espana,903,Cazorla,Cellera de Ter (La)
+espana,904,Cazorla,Horcajo de Santiago
+espana,905,Cazorla,Lagartera
+espana,906,Cazorla,Pozuelo de Alarcón
+espana,907,Cazorla,Vejer de la Frontera
+espana,908,Cazorla,Villafranca del Cid/Vilafranca
+espana,909,Cañada,Torreorgaz
+espana,910,Cañaveral,Cijuela
+espana,911,Cañaveral,Cubillos del Sil
+espana,912,Cañaveral,Falset
+espana,913,Cañaveral,Merindad de Río Ubierna
+espana,914,Cañaveral,San Fernando
+espana,915,Cañete de las Torres,Guadalcanal
+espana,916,Cañete de las Torres,Sant Llorenç de Morunys
+espana,917,Cañete de las Torres,Sigüenza
+espana,918,Cañete de las Torres,Villanueva del Ariscal
+espana,919,Cañete la Real,Fonsagrada (A)
+espana,920,Cañete la Real,Monterroso
+espana,921,Cañete la Real,Roquetes
+espana,922,Cañete la Real,Rueda
+espana,923,Cañete la Real,San Roque
+espana,924,Cebreros,Palacios del Sil
+espana,925,Cebreros,Sondika
+espana,926,Cebreros,Toro
+espana,927,Cebreros,Zahara
+espana,928,Ceclavín,Higuera la Real
+espana,929,Ceclavín,Paymogo
+espana,930,Ceclavín,Peñaranda de Bracamonte
+espana,931,Cedeira,Estivella
+espana,932,Cedeira,Posadas
+espana,933,Cedeira,Rosalejo
+espana,934,Cedeira,Ultzama
+espana,935,Cee,Elche/Elx
+espana,936,Cee,Higuera de la Sierra
+espana,937,Cee,Lasarte-Oria
+espana,938,Cee,Navalvillar de Pela
+espana,939,Cee,San Lorenzo de la Parrilla
+espana,940,Cee,Villalón de Campos
+espana,941,Cee,Zarautz
+espana,942,Celanova,Corrales
+espana,943,Cella,Moià
+espana,944,Cella,Zas
+espana,945,Cellera de Ter (La),Jumilla
+espana,946,Cellera de Ter (La),Jérica
+espana,947,Cellera de Ter (La),Rossell
+espana,948,Cellera de Ter (La),Sort
+espana,949,Celrà,Jadraque
+espana,950,Celrà,Pobla Tornesa (la)
+espana,951,Celrà,Villanueva del Fresno
+espana,952,Cenizate,Lumbier
+espana,953,Cenizate,Oliana
+espana,954,Cenizate,Real de la Jara (El)
+espana,955,Cenizate,Serradilla
+espana,956,Cerdedo,Monturque
+espana,957,Cerdedo,Plentzia
+espana,958,Cerdedo,Villafranca de los Barros
+espana,959,Cerdedo,Ágreda
+espana,960,Cerro de Andévalo (El),Monterrei
+espana,961,Cerro de Andévalo (El),Olot
+espana,962,Cervera de Pisuerga,Ferrol
+espana,963,Cervera de Pisuerga,Rosselló
+espana,964,Cervera de Pisuerga,Vicedo (O)
+espana,965,Cervo,Esquivias
+espana,966,Cervo,Hondarribia
+espana,967,Cesuras,Yunquera
+espana,968,Chella,Flix
+espana,969,Chella,Mallén
+espana,970,Chella,Monreal del Campo
+espana,971,Chella,Villarcayo de Merindad de Castilla la Vieja
+espana,972,Chelva,Rosselló
+espana,973,Chelva,San Cristóbal de Segovia
+espana,974,Chelva,Santa Cruz de la Zarza
+espana,975,Chelva,Villada
+espana,976,Chillón,Motilla del Palancar
+espana,977,Chillón,Socuéllamos
+espana,978,Chillón,Villafufre
+espana,979,Chillón,Yunquera
+espana,980,Chinchón,Novelda
+espana,981,Chinchón,Torelló
+espana,982,Chinchón,Vélez-Blanco
+espana,983,Chiva,Paderne
+espana,984,Chiva,Paradas
+espana,985,Chiva,Segura
+espana,986,Chiva,Tíjola
+espana,987,Ciempozuelos,Lardero
+espana,988,Ciempozuelos,Torrejón del Rey
+espana,989,Ciempozuelos,Villardompardo
+espana,990,Ciempozuelos,Xermade
+espana,991,Cifuentes,Herrera del Duque
+espana,992,Cifuentes,Priego
+espana,993,Cijuela,Móstoles
+espana,994,Cijuela,Ordizia
+espana,995,Cijuela,San Pedro
+espana,996,Cijuela,Valderas
+espana,997,Ciudad Rodrigo,Navas del Rey
+espana,998,Ciudad Rodrigo,Ondara
+espana,999,Coaña,Puebla de Cazalla (La)
+espana,1000,Cobisa,Mendigorría
+espana,1001,Cobisa,Morella
+espana,1002,Cobisa,Santibáñez de Vidriales
+espana,1003,Cobisa,Tordoia
+espana,1004,Cobisa,Uleila del Campo
+espana,1005,Cocentaina,Elda
+espana,1006,Cocentaina,Ferrol
+espana,1007,Cocentaina,Manzanilla
+espana,1008,Cocentaina,Orgaz
+espana,1009,Cocentaina,Pallejà
+espana,1010,Cocentaina,San Pedro del Pinatar
+espana,1011,Cocentaina,Torre de Miguel Sesmero
+espana,1012,Codosera (La),Gudiña (A)
+espana,1013,Collado Mediano,Marcilla
+espana,1014,Collado Mediano,Puebla de Alfindén (La)
+espana,1015,Collado Mediano,Santibáñez de Vidriales
+espana,1016,Collado Mediano,Villalpardo
+espana,1017,Collado Mediano,Zalla
+espana,1018,Colmenar,Deba
+espana,1019,Colmenar,Jimena de la Frontera
+espana,1020,Colmenar,Portillo de Toledo
+espana,1021,Consuegra,Pino (O)
+espana,1022,Consuegra,Villanueva de la Serena
+espana,1023,Coria,Luisiana (La)
+espana,1024,Coria,Rossell
+espana,1025,Coria,Órgiva
+espana,1026,Coristanco,Osuna
+espana,1027,Coristanco,San Vicente de Alcántara
+espana,1028,Coristanco,Sant Antoni de Vilamajor
+espana,1029,Coristanco,Santa Cruz de la Zarza
+espana,1030,Coristanco,Tordoia
+espana,1031,Cornellà de Llobregat,Isona i Conca Dellà
+espana,1032,Cornellà de Llobregat,Pueblonuevo del Guadiana
+espana,1033,Cornellà de Llobregat,Villares de la Reina
+espana,1034,Coronada (La),Foz
+espana,1035,Coronada (La),Noblejas
+espana,1036,Coronada (La),Reus
+espana,1037,Corral de Calatrava,Corrales
+espana,1038,Corral de Calatrava,Noalejo
+espana,1039,Corral de Calatrava,Tarancón
+espana,1040,Corrales,Càlig
+espana,1041,Corrales,Ferrol
+espana,1042,Corrales,Graus
+espana,1043,Corrales,Pulianas
+espana,1044,Corrales de Buelna (Los),Ledesma
+espana,1045,Corrales de Buelna (Los),Padrenda
+espana,1046,Corrales de Buelna (Los),Potes
+espana,1047,Corrales de Buelna (Los),Trujillanos
+espana,1048,Corrales de Buelna (Los),Venta de Baños
+espana,1049,Corte de Peleas,Galapagar
+espana,1050,Corte de Peleas,Ávila
+espana,1051,Cortes de Baza,Moaña
+espana,1052,Cortes de Baza,Olazti/Olazagutía
+espana,1053,Cortes de Baza,Poio
+espana,1054,Covelo,Cáceres
+espana,1055,Covelo,Dozón
+espana,1056,Covelo,Librilla
+espana,1057,Cubillos del Sil,Plentzia
+espana,1058,Cubillos del Sil,Pulpí
+espana,1059,Cubillos del Sil,Serradilla
+espana,1060,Cubillos del Sil,Valdeolmos-Alalpardo
+espana,1061,Cubillos del Sil,Vitigudino
+espana,1062,Cuerva,Errenteria
+espana,1063,Cuerva,Miño
+espana,1064,Cuerva,Nucia (la)
+espana,1065,Cuerva,Tordoia
+espana,1066,Cuerva,Valadouro (O)
+espana,1067,Cuevas de San Marcos,Estivella
+espana,1068,Cuevas de San Marcos,Flix
+espana,1069,Cuevas de San Marcos,Luisiana (La)
+espana,1070,Cuevas de San Marcos,Monterrubio de la Serena
+espana,1071,Cuevas de San Marcos,Navas del Rey
+espana,1072,Cuevas de San Marcos,Turre
+espana,1073,Cuéllar,Granollers
+espana,1074,Cuéllar,Palacios del Sil
+espana,1075,Cuéllar,Pinar (El)
+espana,1076,Cuéllar,Villa del Río
+espana,1077,Càlig,Fondó de les Neus (el)/Hondón de las Nieves
+espana,1078,Càlig,Laracha (A)
+espana,1079,Càlig,Robla (La)
+espana,1080,Càlig,Valdegovía/Gaubea
+espana,1081,Càlig,Venta del Moro
+espana,1082,Cáceres,Puerto Lumbreras
+espana,1083,Cáceres,Villafranca de los Barros
+espana,1084,Cádiar,Ferrol
+espana,1085,Cáseda,Pedraja de Portillo (La)
+espana,1086,Cáseda,Pedro Martínez
+espana,1087,Cáseda,Pino (O)
+espana,1088,Cózar,Jaca
+espana,1089,Cózar,Plasencia
+espana,1090,Cózar,Riells i Viabrea
+espana,1091,Cózar,Salt
+espana,1092,Cúllar,Freila
+espana,1093,Cúllar,Santiago-Pontones
+espana,1094,Daroca,Faura
+espana,1095,Daroca,Rascafría
+espana,1096,Daroca,San Adrián
+espana,1097,Daroca,San Carlos del Valle
+espana,1098,Daroca,Villanueva del Trabuco
+espana,1099,Deba,Peñafiel
+espana,1100,Deba,Valderas
+espana,1101,Deba,Valverde de Júcar
+espana,1102,Deltebre,Ribera de Arriba
+espana,1103,Dodro,Navalcán
+espana,1104,Dodro,Vilallonga del Camp
+espana,1105,Dozón,Galdakao
+espana,1106,Dozón,Sepúlveda
+espana,1107,Doña Mencía,Villanueva del Rey
+espana,1108,Duruelo de la Sierra,Perelló (El)
+espana,1109,Duruelo de la Sierra,Puebla de Alcocer
+espana,1110,Duruelo de la Sierra,Riosa
+espana,1111,Duruelo de la Sierra,Villanueva del Trabuco
+espana,1112,Dúrcal,Galdakao
+espana,1113,Dúrcal,Gerindote
+espana,1114,Dúrcal,Oria
+espana,1115,Dúrcal,Peñalsordo
+espana,1116,Dúrcal,Puebla de Alfindén (La)
+espana,1117,Dúrcal,Robledo (El)
+espana,1118,Dúrcal,Tarifa
+espana,1119,Dúrcal,Vielha e Mijaran
+espana,1120,Dúrcal,Villadiego
+espana,1121,Eibar,Espluga de Francolí (L')
+espana,1122,Eibar,Ondara
+espana,1123,Eibar,Sacedón
+espana,1124,Eibar,Tineo
+espana,1125,Eibar,Villanueva de la Cañada
+espana,1126,Eibar,Ágreda
+espana,1127,Ejea de los Caballeros,Jamilena
+espana,1128,Ejido (El),Granja de Torrehermosa
+espana,1129,Ejido (El),Pedraja de Portillo (La)
+espana,1130,Ejido (El),Ricla
+espana,1131,Elciego,Fonz
+espana,1132,Elciego,Peñafiel
+espana,1133,Elda,Lillo
+espana,1134,Elda,Saviñao (O)
+espana,1135,Eliana (l'),Jumilla
+espana,1136,Eliana (l'),Sigüenza
+espana,1137,Eliana (l'),Valadouro (O)
+espana,1138,Eljas,Fuentes de Oñoro
+espana,1139,Eljas,Riudellots de la Selva
+espana,1140,Eljas,Vilafant
+espana,1141,Encinasola,Pobla Tornesa (la)
+espana,1142,Encinasola,Rúa (A)
+espana,1143,Entrambasaguas,Mairena del Alcor
+espana,1144,Entrambasaguas,Navalvillar de Pela
+espana,1145,Entrimo,Vera
+espana,1146,Errenteria,Pedroso (El)
+espana,1147,Errenteria,Puigcerdà
+espana,1148,Errenteria,Reocín
+espana,1149,Escalona,Pedernoso (El)
+espana,1150,Escalona,Sacedón
+espana,1151,Escalona,San Pedro del Pinatar
+espana,1152,Escalona,Santovenia de Pisuerga
+espana,1153,Escalona,Villamanrique
+espana,1154,Espejo,Pioz
+espana,1155,Espejo,Pliego
+espana,1156,Espinar (El),Torrente de Cinca
+espana,1157,Espinar (El),Villabrágima
+espana,1158,Espinosa de los Monteros,Valderrobres
+espana,1159,Espinosa de los Monteros,Vilafant
+espana,1160,Espluga de Francolí (L'),Santa Pola
+espana,1161,Espluga de Francolí (L'),Villalpardo
+espana,1162,Esquivias,Limpias
+espana,1163,Esquivias,Noia
+espana,1164,Estella/Lizarra,Monesterio
+espana,1165,Estella/Lizarra,Pobla de Montornès (La)
+espana,1166,Estella/Lizarra,Pobla de Segur (La)
+espana,1167,Estivella,San Martín del Rey Aurelio
+espana,1168,Fabara,Pobra do Caramiñal (A)
+espana,1169,Fabara,Port de la Selva (El)
+espana,1170,Faura,Galera
+espana,1171,Faura,Ibros
+espana,1172,Faura,Lora del Río
+espana,1173,Faura,Molares (Los)
+espana,1174,Fermoselle,Galisteo
+espana,1175,Fermoselle,Hondarribia
+espana,1176,Fermoselle,Pedro Martínez
+espana,1177,Fermoselle,Riosa
+espana,1178,Ferrol,Gineta (La)
+espana,1179,Ferrol,Moeche
+espana,1180,Finestrat,María de Huerva
+espana,1181,Finestrat,Mozoncillo
+espana,1182,Finestrat,Muros de Nalón
+espana,1183,Finestrat,Móstoles
+espana,1184,Finestrat,Puebla de Cazalla (La)
+espana,1185,Finestrat,Villaviciosa de Córdoba
+espana,1186,Fitero,Hondarribia
+espana,1187,Fitero,Malpartida de Cáceres
+espana,1188,Fitero,Polán
+espana,1189,Fitero,Villamanín
+espana,1190,Flix,Yunquera de Henares
+espana,1191,Folgoso de la Ribera,Níjar
+espana,1192,Folgoso de la Ribera,Zarza de Granadilla
+espana,1193,Fondó de les Neus (el)/Hondón de las Nieves,Premià de Dalt
+espana,1194,Fondó de les Neus (el)/Hondón de las Nieves,Ricla
+espana,1195,Fondó de les Neus (el)/Hondón de las Nieves,Tarazona de la Mancha
+espana,1196,Fonsagrada (A),Laudio/Llodio
+espana,1197,Fonsagrada (A),Pedroche
+espana,1198,Fonsagrada (A),Sotonera (La)
+espana,1199,Font de la Figuera (la),Peñalsordo
+espana,1200,Font de la Figuera (la),Rojales
+espana,1201,Font de la Figuera (la),Villamanín
+espana,1202,Fonz,Gandesa
+espana,1203,Fonz,Palafolls
+espana,1204,Fortuna,Sant Andreu de Llavaneres
+espana,1205,Foz,Isla Mayor
+espana,1206,Foz,Jamilena
+espana,1207,Foz,Mendigorría
+espana,1208,Foz,Trasmiras
+espana,1209,Freila,Haro
+espana,1210,Freila,Sondika
+espana,1211,Fresnedillas de la Oliva,Jadraque
+espana,1212,Fresnedillas de la Oliva,Magán
+espana,1213,Fresnedillas de la Oliva,Oria
+espana,1214,Fresnedillas de la Oliva,Zarautz
+espana,1215,Fresno el Viejo,Monterroso
+espana,1216,Fresno el Viejo,Rincón de Soto
+espana,1217,Friol,Legutiano
+espana,1218,Fuencaliente,Gurrea de Gállego
+espana,1219,Fuencaliente,Navas del Marqués (Las)
+espana,1220,Fuente de Piedra,Manzanilla
+espana,1221,Fuente de Piedra,Moraña
+espana,1222,Fuente de Piedra,Riotorto
+espana,1223,Fuente de Piedra,Salceda de Caselas
+espana,1224,Fuente de Piedra,Torelló
+espana,1225,Fuente de San Esteban (La),Mozoncillo
+espana,1226,Fuente Álamo de Murcia,Navas del Rey
+espana,1227,Fuente Álamo de Murcia,Prats de Lluçanès
+espana,1228,Fuente Álamo de Murcia,Ribera de Arriba
+espana,1229,Fuentes de Ebro,Gimenells i el Pla de la Font
+espana,1230,Fuentes de Ebro,Ossa de Montiel
+espana,1231,Fuentes de Ebro,Vegas del Genil
+espana,1232,Fuentes de Ebro,Vielha e Mijaran
+espana,1233,Fuentes de Oñoro,Mallén
+espana,1234,Fuentes de Oñoro,Reocín
+espana,1235,Fuentesaúco,Quesada
+espana,1236,Fuentidueña de Tajo,Nava de la Asunción
+espana,1237,Fustiñana,Guadalupe
+espana,1238,Fustiñana,Pol
+espana,1239,Fustiñana,Rosal (O)
+espana,1240,Fustiñana,Salvatierra/Agurain
+espana,1241,Fustiñana,Uceda
+espana,1242,Fustiñana,Valverde de Leganés
+espana,1243,Galapagar,Membrilla
+espana,1244,Galapagar,Villabrágima
+espana,1245,Galdakao,Madrigal de las Altas Torres
+espana,1246,Galdakao,Priego
+espana,1247,Galdakao,Villaralto
+espana,1248,Galera,Montejícar
+espana,1249,Galisteo,Teulada
+espana,1250,Galisteo,Villaralto
+espana,1251,Gandesa,Siruela
+espana,1252,Gata,Hornachos
+espana,1253,Gata,Ibros
+espana,1254,Gata,Santa Cristina d'Aro
+espana,1255,Gavarda,Manzanares el Real
+espana,1256,Gavarda,Molledo
+espana,1257,Gavarda,Santovenia de la Valdoncina
+espana,1258,Gavarda,Sondika
+espana,1259,Gerena,Jerez del Marquesado
+espana,1260,Gerena,Santo Tomé
+espana,1261,Gerindote,Salceda de Caselas
+espana,1262,Gerindote,Tarazona de la Mancha
+espana,1263,Gernika-Lumo,Ondara
+espana,1264,Gernika-Lumo,Roca de la Sierra (La)
+espana,1265,Gernika-Lumo,San Lorenzo de El Escorial
+espana,1266,Gernika-Lumo,Villa de Don Fadrique (La)
+espana,1267,Getafe,Golmayo
+espana,1268,Getafe,Isla Mayor
+espana,1269,Getafe,Peñaflor
+espana,1270,Getafe,Trigueros
+espana,1271,Gilena,Lesaka
+espana,1272,Gilena,Lillo
+espana,1273,Gilena,Oliva de la Frontera
+espana,1274,Gilena,Serradilla
+espana,1275,Gilena,Tordoia
+espana,1276,Gilena,Villaverde del Río
+espana,1277,Gimenells i el Pla de la Font,León
+espana,1278,Gimenells i el Pla de la Font,Rueda
+espana,1279,Gimenells i el Pla de la Font,Villanueva de la Cañada
+espana,1280,Gineta (La),Sant Pere de Riudebitlles
+espana,1281,Gineta (La),Santa Bárbara de Casa
+espana,1282,Gineta (La),Villafranca de los Barros
+espana,1283,Golmés,Guadalupe
+espana,1284,Golmés,Polán
+espana,1285,Grandas de Salime,Martín de la Jara
+espana,1286,Grandas de Salime,Moaña
+espana,1287,Grandas de Salime,San Pablo de los Montes
+espana,1288,Granollers,Ènova (l')
+espana,1289,Guadalajara,Láncara
+espana,1290,Guadalajara,Villaviciosa de Córdoba
+espana,1291,Guadalcanal,San Lorenzo de El Escorial
+espana,1292,Guadalcanal,Villanueva de la Cañada
+espana,1293,Guadalcázar,Jérica
+espana,1294,Guadalcázar,Purullena
+espana,1295,Guadalcázar,San Carlos del Valle
+espana,1296,Guadalcázar,Torrejón del Rey
+espana,1297,Guadalupe,Priego de Córdoba
+espana,1298,Guadalupe,Roa
+espana,1299,Guadalupe,Rueda
+espana,1300,Guadalupe,Vila de Cruces
+espana,1301,Guadassuar,Meruelo
+espana,1302,Guadassuar,Navalafuente
+espana,1303,Guadassuar,Riola
+espana,1304,Guardia (La),Letur
+espana,1305,Guardia (La),Lourenzá
+espana,1306,Guardia (La),Pozohondo
+espana,1307,Guardia (La),Rossell
+espana,1308,Guardia (La),Santo Tomé
+espana,1309,Guardia (La),Valdegovía/Gaubea
+espana,1310,Guardiola de Berguedà,Malpica de Bergantiños
+espana,1311,Guareña,Pozo Alcón
+espana,1312,Guaro,Sabiñánigo
+espana,1313,Guaro,San Leonardo de Yagüe
+espana,1314,Gudiña (A),Pedrajas de San Esteban
+espana,1315,Gudiña (A),Pedroche
+espana,1316,Gudiña (A),Vall de Boí (La)
+espana,1317,Guijo de Galisteo,Muros de Nalón
+espana,1318,Guijo de Galisteo,Saviñao (O)
+espana,1319,Guijuelo,Molina de Aragón
+espana,1320,Guijuelo,Muxía
+espana,1321,Gurrea de Gállego,Mayorga
+espana,1322,Gurrea de Gállego,Olot
+espana,1323,Gurrea de Gállego,Pobla de Montornès (La)
+espana,1324,Gurrea de Gállego,Villanueva del Ariscal
+espana,1325,Gérgal,Marinaleda
+espana,1326,Gérgal,Rinconada (La)
+espana,1327,Haro,Perelló (El)
+espana,1328,Haro,Siero
+espana,1329,Herrera del Duque,Laracha (A)
+espana,1330,Herrera del Duque,Lozoyuela-Navas-Sieteiglesias
+espana,1331,Higuera de la Sierra,Posadas
+espana,1332,Higuera la Real,Robledo (El)
+espana,1333,Higuera la Real,San Pedro
+espana,1334,Higuera la Real,Villaralbo
+espana,1335,Hondarribia,Viana do Bolo
+espana,1336,Horcajo de Santiago,Lekunberri
+espana,1337,Horcajo de Santiago,Mazaricos
+espana,1338,Horcajo de Santiago,Reus
+espana,1339,Horcajo de Santiago,Torre-Pacheco
+espana,1340,Horcajo de Santiago,Valdeganga
+espana,1341,Hornachos,Riosa
+espana,1342,Hornachos,Santibáñez de Vidriales
+espana,1343,Huelva,Sondika
+espana,1344,Huerta de Rey,Igualada
+espana,1345,Huerta de Rey,Mazaricos
+espana,1346,Huerta de Rey,Peñafiel
+espana,1347,Huerta de Rey,Roquetas de Mar
+espana,1348,Huesca,Molinicos
+espana,1349,Huesca,Nerpio
+espana,1350,Huesca,Portillo de Toledo
+espana,1351,Huete,Motril
+espana,1352,Huete,Yunquera de Henares
+espana,1353,Huétor Tájar,Mejorada
+espana,1354,Huétor Tájar,Xermade
+espana,1355,Híjar,Mazarrón
+espana,1356,Híjar,Reocín
+espana,1357,Ibias,Ledesma
+espana,1358,Ibias,Puerto Serrano
+espana,1359,Ibros,Mollet del Vallès
+espana,1360,Ibros,Santo Tomé
+espana,1361,Ibros,Villanueva de Perales
+espana,1362,Igualada,Miño
+espana,1363,Igualada,Rambla (La)
+espana,1364,Igualada,Santa Cristina d'Aro
+espana,1365,Incio (O),Peroxa (A)
+espana,1366,Incio (O),Puerto Lumbreras
+espana,1367,Incio (O),Tíjola
+espana,1368,Incio (O),Villarcayo de Merindad de Castilla la Vieja
+espana,1369,Incio (O),Vélez-Blanco
+espana,1370,Iruña Oka/Iruña de Oca,Sant Pere de Riudebitlles
+espana,1371,Isla Mayor,Lumpiaque
+espana,1372,Isla Mayor,Pulpí
+espana,1373,Isona i Conca Dellà,Jerez del Marquesado
+espana,1374,Itrabo,Morella
+espana,1375,Itrabo,Puebla de Guzmán
+espana,1376,Jabalquinto,Poio
+espana,1377,Jabalquinto,Zaratán
+espana,1378,Jabugo,Monterroso
+espana,1379,Jabugo,Valverde del Camino
+espana,1380,Jaca,Muíños
+espana,1381,Jaca,Rinconada (La)
+espana,1382,Jadraque,Saviñao (O)
+espana,1383,Jalance,Ordizia
+espana,1384,Jalance,Trabazos
+espana,1385,Jamilena,Mairena del Alcor
+espana,1386,Jamilena,Mollet del Vallès
+espana,1387,Jamilena,Nucia (la)
+espana,1388,Jamilena,Utiel
+espana,1389,Jerez del Marquesado,Pedroche
+espana,1390,Jerez del Marquesado,Santa Bárbara de Casa
+espana,1391,Jimena de la Frontera,Pantón
+espana,1392,Jimena de la Frontera,Ultzama
+espana,1393,Jonquera (La),Rojales
+espana,1394,Jonquera (La),Súria
+espana,1395,Jonquera (La),Zarautz
+espana,1396,Jumilla,Peñaranda de Bracamonte
+espana,1397,Juneda,Vicedo (O)
+espana,1398,Jérica,Ricla
+espana,1399,Lagartera,Olazti/Olazagutía
+espana,1400,Laguna de Duero,Pantón
+espana,1401,Laguna de Duero,Villasabariego
+espana,1402,Lahiguera,Moaña
+espana,1403,Lahiguera,Paderne
+espana,1404,Lahiguera,Salt
+espana,1405,Lahiguera,Villanueva de la Cañada
+espana,1406,Lantejuela (La),Navas del Madroño
+espana,1407,Lantejuela (La),Nájera
+espana,1408,Lantejuela (La),Villadecanes
+espana,1409,Lardero,Lominchar
+espana,1410,Lardero,Moià
+espana,1411,Lardero,Torrente de Cinca
+espana,1412,Lasarte-Oria,Torreorgaz
+espana,1413,Lasarte-Oria,Venta del Moro
+espana,1414,Lasarte-Oria,Órgiva
+espana,1415,Lebrija,Pedroso (El)
+espana,1416,Ledesma,Lerma
+espana,1417,Ledesma,Malpica de Bergantiños
+espana,1418,Ledesma,Reocín
+espana,1419,Ledesma,Tarancón
+espana,1420,Legutiano,Zalamea de la Serena
+espana,1421,Leiro,Mendigorría
+espana,1422,Leiro,Pilas
+espana,1423,Leiro,San Carlos del Valle
+espana,1424,Leiro,San Cristóbal de Segovia
+espana,1425,Leiro,Vielha e Mijaran
+espana,1426,Leiro,Villabrágima
+espana,1427,Lekunberri,Segorbe
+espana,1428,Lekunberri,Valverde de Leganés
+espana,1429,Lepe,Lerín
+espana,1430,Lepe,Ogíjares
+espana,1431,Lepe,Teruel
+espana,1432,Lerín,Palacios y Villafranca (Los)
+espana,1433,Lerín,Paredes de Nava
+espana,1434,Lerín,Villar de Olalla
+espana,1435,Lesaka,Mos
+espana,1436,Lesaka,Urkabustaiz
+espana,1437,Letur,Navalafuente
+espana,1438,Letur,Zalla
+espana,1439,Lezuza,Muxía
+espana,1440,Lezuza,Pedroso (El)
+espana,1441,Lezuza,Villanueva de Córdoba
+espana,1442,León,Llanes
+espana,1443,León,Torrejón del Rey
+espana,1444,Librilla,Provencio (El)
+espana,1445,Lillo,Torà
+espana,1446,Limpias,Móstoles
+espana,1447,Limpias,Torreperogil
+espana,1448,Liétor,Puebla de la Calzada
+espana,1449,Liétor,Puerto Lumbreras
+espana,1450,Liétor,Sant Pere de Riudebitlles
+espana,1451,Liétor,Súria
+espana,1452,Liétor,Villamanrique
+espana,1453,Llanes,Paradas
+espana,1454,Llanes,Reus
+espana,1455,Llanes,Rionansa
+espana,1456,Llanes,Traspinedo
+espana,1457,Llanes,Useras/Useres (les)
+espana,1458,Lleida,Quinto
+espana,1459,Lleida,Santiago-Pontones
+espana,1460,Lleida,Ullà
+espana,1461,Lleida,Villanueva del Trabuco
+espana,1462,Llerena,Morella
+espana,1463,Llerena,Rincón de Soto
+espana,1464,Llerena,Urretxu
+espana,1465,Llerena,Villafranca de los Barros
+espana,1466,Logrosán,Láncara
+espana,1467,Logrosán,Pioz
+espana,1468,Lominchar,Puigcerdà
+espana,1469,Lominchar,Torelló
+espana,1470,Lominchar,Valderas
+espana,1471,Lora del Río,Monturque
+espana,1472,Lora del Río,Xermade
+espana,1473,Lorca,Rueda
+espana,1474,Lourenzá,Pozohondo
+espana,1475,Lourenzá,Salas de los Infantes
+espana,1476,Lourenzá,Sant Andreu de Llavaneres
+espana,1477,Lourenzá,Valdeganga
+espana,1478,Lozoyuela-Navas-Sieteiglesias,Real de la Jara (El)
+espana,1479,Lozoyuela-Navas-Sieteiglesias,Villabrágima
+espana,1480,Luisiana (La),Pedraja de Portillo (La)
+espana,1481,Luisiana (La),Piedrahíta
+espana,1482,Luisiana (La),Rinconada (La)
+espana,1483,Luisiana (La),Sils
+espana,1484,Lumbier,Navahermosa
+espana,1485,Lumbier,Nigrán
+espana,1486,Lumbrales,Vielha e Mijaran
+espana,1487,Lumpiaque,Ontur
+espana,1488,Lumpiaque,Valle del Zalabí
+espana,1489,Láncara,Rionansa
+espana,1490,Madrigal de la Vera,Salvaleón
+espana,1491,Madroñera,Salt
+espana,1492,Madroñera,San Leonardo de Yagüe
+espana,1493,Madroñera,Sartaguda
+espana,1494,Madroñera,Valdeolmos-Alalpardo
+espana,1495,Magán,Obejo
+espana,1496,Mairena del Alcor,Traspinedo
+espana,1497,Malagón,Puebla de Sanabria
+espana,1498,Malagón,Saldaña
+espana,1499,Mallén,Montejícar
+espana,1500,Mallén,Pobla de Segur (La)
+espana,1501,Mallén,Rossell
+espana,1502,Malpartida de Cáceres,Miño
+espana,1503,Malpica de Bergantiños,Monesterio
+espana,1504,Manzanares el Real,Ondara
+espana,1505,Manzanares el Real,Peñaranda de Bracamonte
+espana,1506,Manzanares el Real,Vilafranca del Penedès
+espana,1507,Marcilla,Navalvillar de Pela
+espana,1508,Marcilla,Regueras (Las)
+espana,1509,Marcilla,Torrenueva
+espana,1510,Marinaleda,Sabero
+espana,1511,Marinaleda,Torreorgaz
+espana,1512,Marinaleda,Térmens
+espana,1513,Martín de la Jara,Miño
+espana,1514,Martín de la Jara,Muros de Nalón
+espana,1515,Martín de la Jara,Valverde de Júcar
+espana,1516,Martín de la Jara,Victoria (La)
+espana,1517,María de Huerva,Trijueque
+espana,1518,Mayorga,Pantón
+espana,1519,Mayorga,Torrejón de la Calzada
+espana,1520,Mayorga,Valencia del Ventoso
+espana,1521,Mazaricos,Zarza (La)
+espana,1522,Mejorada,Prats de Lluçanès
+espana,1523,Mejorada del Campo,Navas del Rey
+espana,1524,Mejorada del Campo,San Vicente de la Barquera
+espana,1525,Mejorada del Campo,Sant Pere de Ribes
+espana,1526,Mejorada del Campo,Tarifa
+espana,1527,Melgar de Fernamental,Noalejo
+espana,1528,Melgar de Fernamental,Puebla de Don Rodrigo
+espana,1529,Melide,Pobla de Farnals (la)
+espana,1530,Melide,Segura
+espana,1531,Melide,Sondika
+espana,1532,Membrilla,Vall de Boí (La)
+espana,1533,Mendigorría,Perelló (El)
+espana,1534,Mendigorría,Peñarroya-Pueblonuevo
+espana,1535,Mendigorría,Pobla de Segur (La)
+espana,1536,Mendigorría,Salas de los Infantes
+espana,1537,Mendigorría,Santo Domingo de la Calzada
+espana,1538,Meruelo,Peñarroya-Pueblonuevo
+espana,1539,Meruelo,Uceda
+espana,1540,Meruelo,Villadiego
+espana,1541,Miengo,Nigrán
+espana,1542,Miengo,Urkabustaiz
+espana,1543,Miengo,Vilallonga del Camp
+espana,1544,Miguelturra,Montánchez
+espana,1545,Miguelturra,Ogíjares
+espana,1546,Miguelturra,Tocina
+espana,1547,Miguelturra,Torrejón de la Calzada
+espana,1548,Mijas,Ontur
+espana,1549,Mijas,Pallejà
+espana,1550,Mijas,Pozuelo de Alarcón
+espana,1551,Mijas,Santa Cruz de la Zarza
+espana,1552,Minas de Riotinto,Pinos Genil
+espana,1553,Minas de Riotinto,Pobla del Duc (la)
+espana,1554,Minas de Riotinto,Priego de Córdoba
+espana,1555,Minas de Riotinto,Sant Feliu de Pallerols
+espana,1556,Minas de Riotinto,Torre de Miguel Sesmero
+espana,1557,Miño,Puebla de la Calzada
+espana,1558,Miño,Vilafant
+espana,1559,Miño,Villalpardo
+espana,1560,Moaña,San Bartolomé de la Torre
+espana,1561,Moaña,Valdepolo
+espana,1562,Moaña,Vilafant
+espana,1563,Moeche,Villamañán
+espana,1564,Mogente/Moixent,Pobla del Duc (la)
+espana,1565,Mogente/Moixent,Purullena
+espana,1566,Mogente/Moixent,Tafalla
+espana,1567,Mogente/Moixent,Valdeolmos-Alalpardo
+espana,1568,Mogente/Moixent,Écija
+espana,1569,Moià,Vega de Espinareda
+espana,1570,Moià,Villava/Atarrabia
+espana,1571,Moià,Zahara
+espana,1572,Molar (El),Monturque
+espana,1573,Molares (Los),Villar de Olalla
+espana,1574,Molina de Aragón,Olazti/Olazagutía
+espana,1575,Molina de Aragón,Villadecanes
+espana,1576,Mollet del Vallès,Santa Cristina d'Aro
+espana,1577,Mombeltrán,San Lorenzo de la Parrilla
+espana,1578,Mombeltrán,Uleila del Campo
+espana,1579,Mombeltrán,Vegas del Condado
+espana,1580,Monesterio,Quart de Poblet
+espana,1581,Monreal del Campo,Navalmoral de la Mata
+espana,1582,Monreal del Campo,Térmens
+espana,1583,Monreal del Campo,Vielha e Mijaran
+espana,1584,Montbrió del Camp,Pozo Cañada
+espana,1585,Montbrió del Camp,Riudellots de la Selva
+espana,1586,Montbrió del Camp,San Pedro
+espana,1587,Montejícar,Montánchez
+espana,1588,Montejícar,Ontur
+espana,1589,Montejícar,Peñalsordo
+espana,1590,Montejícar,Toro
+espana,1591,Montejícar,Álora
+espana,1592,Monterroso,Noblejas
+espana,1593,Monterrubio de la Serena,Tarifa
+espana,1594,Montesinos (Los),Quintanar de la Orden
+espana,1595,Montesinos (Los),Villafufre
+espana,1596,Montesinos (Los),Yecla
+espana,1597,Montiel,Pliego
+espana,1598,Montiel,Puerto Lumbreras
+espana,1599,Montiel,Tíjola
+espana,1600,Montroy,Portas
+espana,1601,Montroy,Real de la Jara (El)
+espana,1602,Montroy,Rábade
+espana,1603,Montroy,Villalpando
+espana,1604,Monturque,Ronquillo (El)
+espana,1605,Monturque,Tarazona de la Mancha
+espana,1606,Montánchez,Portillo de Toledo
+espana,1607,Montánchez,Pozuelo de Alarcón
+espana,1608,Montánchez,Puebla de Don Rodrigo
+espana,1609,Montánchez,San Cibrao das Viñas
+espana,1610,Montánchez,Setenil de las Bodegas
+espana,1611,Montánchez,Álora
+espana,1612,Morón de la Frontera,Torà
+espana,1613,Morón de la Frontera,Totana
+espana,1614,Mos,San Pedro del Pinatar
+espana,1615,Mos,Trijueque
+espana,1616,Mota del Cuervo,Santa Bárbara de Casa
+espana,1617,Mota del Cuervo,Santovenia de la Valdoncina
+espana,1618,Mota del Cuervo,Vielha e Mijaran
+espana,1619,Motril,Polopos
+espana,1620,Mungia,Roa
+espana,1621,Muros,Novelda
+espana,1622,Muros de Nalón,Pobra do Caramiñal (A)
+espana,1623,Muxía,Santovenia de la Valdoncina
+espana,1624,Muxía,Villafranca de los Caballeros
+espana,1625,Muíños,Villaralbo
+espana,1626,Móstoles,Villanueva de la Fuente
+espana,1627,Nava de Santiago (La),Sallent de Gállego
+espana,1628,Nava de la Asunción,Pedernoso (El)
+espana,1629,Navahermosa,Paterna de Rivera
+espana,1630,Navahermosa,Puerto de Santa María (El)
+espana,1631,Navahermosa,Torreperogil
+espana,1632,Navahermosa,Valdeganga
+espana,1633,Navalafuente,Turre
+espana,1634,Navalcán,Ullà
+espana,1635,Navalcán,Valencia del Ventoso
+espana,1636,Navalucillos (Los),Ojén
+espana,1637,Navalucillos (Los),Villafranca de los Caballeros
+espana,1638,Navaluenga,Sant Antoni de Vilamajor
+espana,1639,Navalvillar de Pela,Paterna de Rivera
+espana,1640,Navalvillar de Pela,Portomarín
+espana,1641,Navalvillar de Pela,Pozuelo de Alarcón
+espana,1642,Navalvillar de Pela,Sigüenza
+espana,1643,Navas de la Concepción (Las),Pobla Tornesa (la)
+espana,1644,Navas del Madroño,Santovenia de Pisuerga
+espana,1645,Navas del Madroño,Tobarra
+espana,1646,Navas del Madroño,Valdeolmos-Alalpardo
+espana,1647,Navas del Madroño,Villasabariego
+espana,1648,Navas del Rey,Peñaranda de Bracamonte
+espana,1649,Navas del Rey,Puebla de Alcocer
+espana,1650,Navas del Rey,Villarcayo de Merindad de Castilla la Vieja
+espana,1651,Nerpio,Villamanrique
+espana,1652,Nevada,Osuna
+espana,1653,Nevada,Sant Mateu
+espana,1654,Nevada,Saviñao (O)
+espana,1655,Nigrán,Níjar
+espana,1656,Nigrán,Pedro Martínez
+espana,1657,Noalejo,Zarza (La)
+espana,1658,Noblejas,Real de la Jara (El)
+espana,1659,Novelda,Rábade
+espana,1660,Novelda,Villada
+espana,1661,Nucia (la),Puebla de Alcocer
+espana,1662,Nucia (la),Riosa
+espana,1663,Nucia (la),San Roque
+espana,1664,Nucia (la),Valdepolo
+espana,1665,Nules,San Vicente de Alcántara
+espana,1666,Nules,Santa Bárbara de Casa
+espana,1667,Nules,Vilallonga del Camp
+espana,1668,Nájera,Ossa de Montiel
+espana,1669,Níjar,Solsona
+espana,1670,Obejo,Puebla de Don Fadrique
+espana,1671,Obejo,San Justo de la Vega
+espana,1672,Obejo,Sant Llorenç de Morunys
+espana,1673,Obejo,Segorbe
+espana,1674,Obejo,Vegas del Genil
+espana,1675,Ogíjares,San Roque
+espana,1676,Ogíjares,Trespaderne
+espana,1677,Ojén,Puebla de Guzmán
+espana,1678,Ojén,Villanueva del Rey
+espana,1679,Olazti/Olazagutía,Onil
+espana,1680,Olazti/Olazagutía,Viana do Bolo
+espana,1681,Olesa de Montserrat,Portas
+espana,1682,Oliana,Orgaz
+espana,1683,Oliana,Valderredible
+espana,1684,Oliana,Villafranca del Cid/Vilafranca
+espana,1685,Oliva de la Frontera,Pino (O)
+espana,1686,Olocau,Sant Hilari Sacalm
+espana,1687,Olocau,Santovenia de Pisuerga
+espana,1688,Olocau,Teruel
+espana,1689,Olot,Paredes de Nava
+espana,1690,Olula del Río,Reus
+espana,1691,Olula del Río,Villaralto
+espana,1692,Ondara,Priego de Córdoba
+espana,1693,Ondara,Sabiñánigo
+espana,1694,Ondara,Solsona
+espana,1695,Ondara,Vegas del Genil
+espana,1696,Onil,San Cristóbal de Segovia
+espana,1697,Onil,Villanueva de la Torre
+espana,1698,Ontur,Tabernas
+espana,1699,Ontur,Valdeolmos-Alalpardo
+espana,1700,Ontur,Vila de Cruces
+espana,1701,Orcera,Palafrugell
+espana,1702,Orcera,Pol
+espana,1703,Orcera,Sigüenza
+espana,1704,Ordizia,Tobarra
+espana,1705,Orgaz,Ramales de la Victoria
+espana,1706,Orgaz,Yunquera de Henares
+espana,1707,Oria,Port de la Selva (El)
+espana,1708,Oria,Sondika
+espana,1709,Oria,Tordoia
+espana,1710,Oria,Valderas
+espana,1711,Oria,Venta del Moro
+espana,1712,Ossa de Montiel,Ribas de Sil
+espana,1713,Ossa de Montiel,San Bartolomé de la Torre
+espana,1714,Ossa de Montiel,San Mateo de Gállego
+espana,1715,Ossa de Montiel,Velilla del Río Carrión
+espana,1716,Ossa de Montiel,Villalón de Campos
+espana,1717,Osuna,Valmojado
+espana,1718,Paderne,Pedraja de Portillo (La)
+espana,1719,Padrenda,Purullena
+espana,1720,Padrenda,San Bartolomé de la Torre
+espana,1721,Padrenda,Sarrión
+espana,1722,Padrenda,Tarazona de la Mancha
+espana,1723,Padrenda,Turre
+espana,1724,Padrenda,Villafranca del Cid/Vilafranca
+espana,1725,Palafolls,Pozohondo
+espana,1726,Palafrugell,Villasabariego
+espana,1727,Palencia,Puebla de Sanabria
+espana,1728,Palencia,Quesada
+espana,1729,Pallejà,Peñafiel
+espana,1730,Palomares del Río,Pobra de Trives (A)
+espana,1731,Palomares del Río,Tordoia
+espana,1732,Palomares del Río,Vall de Boí (La)
+espana,1733,Palomares del Río,Villanueva de la Fuente
+espana,1734,Pantoja,Santurtzi
+espana,1735,Pantón,Puerto de Santa María (El)
+espana,1736,Paradas,Port de la Selva (El)
+espana,1737,Paredes de Nava,Sant Iscle de Vallalta
+espana,1738,Parra (La),Potes
+espana,1739,Parra (La),Sant Antoni de Vilamajor
+espana,1740,Parra (La),Tíjola
+espana,1741,Parra (La),Useras/Useres (les)
+espana,1742,Paterna de Rivera,Pedraja de Portillo (La)
+espana,1743,Paymogo,Valle de Santa Ana
+espana,1744,Pedroche,Yecla
+espana,1745,Pegalajar,Pobla de Segur (La)
+espana,1746,Perelló (El),Pobra de Trives (A)
+espana,1747,Peroxa (A),San Cibrao das Viñas
+espana,1748,Peroxa (A),Sant Mateu
+espana,1749,Peroxa (A),Villafufre
+espana,1750,Peñafiel,Valencia del Ventoso
+espana,1751,Peñafiel,Zaratán
+espana,1752,Peñalsordo,Súria
+espana,1753,Peñamellera Baja,Trabazos
+espana,1754,Peñaranda de Bracamonte,San Cibrao das Viñas
+espana,1755,Peñarroya-Pueblonuevo,Puebla de Don Fadrique
+espana,1756,Peñarroya-Pueblonuevo,Torelló
+espana,1757,Piedrabuena,Villalón de Campos
+espana,1758,Piedrabuena,Vinuesa
+espana,1759,Piedrahíta,Villa de Don Fadrique (La)
+espana,1760,Piedrahíta,Villanueva del Rey
+espana,1761,Piedrahíta,Villardompardo
+espana,1762,Pilas,Puebla de Sanabria
+espana,1763,Pinar (El),Santo Domingo de la Calzada
+espana,1764,Pinos Genil,San Fernando
+espana,1765,Pinseque,Villanueva de Córdoba
+espana,1766,Pioz,Pozo Cañada
+espana,1767,Plasencia,Pulianas
+espana,1768,Plasencia,Vall de Boí (La)
+espana,1769,Plentzia,Villafranca de los Barros
+espana,1770,Pobla Tornesa (la),Quel
+espana,1771,Pobla Tornesa (la),San Cristóbal de Segovia
+espana,1772,Pobla de Farnals (la),Santovenia de Pisuerga
+espana,1773,Pobla de Montornès (La),Pueblonuevo del Guadiana
+espana,1774,Pobla de Montornès (La),Serradilla
+espana,1775,Pobla de Segur (La),San Vicente de Alcántara
+espana,1776,Pobla de Segur (La),Velilla del Río Carrión
+espana,1777,Pobla del Duc (la),Ronquillo (El)
+espana,1778,Pobla del Duc (la),Solsona
+espana,1779,Pobla del Duc (la),Subirats
+espana,1780,Pobra de Trives (A),Puigcerdà
+espana,1781,Pobra de Trives (A),Villanueva del Fresno
+espana,1782,Pobra do Caramiñal (A),Trigueros
+espana,1783,Polopos,Torrenueva
+espana,1784,Ponts,Valverde de Júcar
+espana,1785,Ponts,Vilafranca del Penedès
+espana,1786,Port de la Selva (El),Santa Cristina d'Aro
+espana,1787,Portas,Zalla
+espana,1788,Portillo de Toledo,Priego de Córdoba
+espana,1789,Portillo de Toledo,Puigcerdà
+espana,1790,Portillo de Toledo,Rambla (La)
+espana,1791,Portomarín,Ribas de Sil
+espana,1792,Portomarín,Santa Cruz de la Zarza
+espana,1793,Portomarín,Vegas del Condado
+espana,1794,Pozo Alcón,Villabrágima
+espana,1795,Pozo Cañada,Ènova (l')
+espana,1796,Pozuelo de Alarcón,Tielmes
+espana,1797,Pozuelo de Alarcón,Ènova (l')
+espana,1798,Prats de Lluçanès,Rosal (O)
+espana,1799,Prats de Lluçanès,Santa Bárbara de Casa
+espana,1800,Prats de Lluçanès,Vedra
+espana,1801,Prats de Lluçanès,Villanueva de la Serena
+espana,1802,Premià de Dalt,Torrejón de la Calzada
+espana,1803,Priego de Córdoba,Siero
+espana,1804,Puebla de Alcocer,Vilafant
+espana,1805,Puebla de Alfindén (La),Sant Guim de Freixenet
+espana,1806,Puebla de Cazalla (La),Águilas
+espana,1807,Puebla de Don Rodrigo,Riells i Viabrea
+espana,1808,Puebla de Guzmán,San Justo de la Vega
+espana,1809,Puebla de Guzmán,San Martín del Rey Aurelio
+espana,1810,Puebla de Guzmán,Zarautz
+espana,1811,Puebla de Sanabria,Sarrión
+espana,1812,Puerto Serrano,Rosalejo
+espana,1813,Puerto Serrano,Villalpardo
+espana,1814,Puerto de Santa María (El),Sant Climent de Llobregat
+espana,1815,Puerto de Santa María (El),Villafranca de los Caballeros
+espana,1816,Puigcerdà,Vedra
+espana,1817,Puigverd de Lleida,Segura
+espana,1818,Puigverd de Lleida,Villar del Olmo
+espana,1819,Pulianas,Rambla (La)
+espana,1820,Purullena,San Cristóbal de Segovia
+espana,1821,Purullena,Venta de Baños
+espana,1822,Quart de Poblet,Santa Cruz de la Zarza
+espana,1823,Quart de Poblet,Valencia del Ventoso
+espana,1824,Quel,Torre de Miguel Sesmero
+espana,1825,Quesada,Rosal de la Frontera
+espana,1826,Quesada,Vilallonga del Camp
+espana,1827,Quintanar de la Orden,Sepúlveda
+espana,1828,Quintanar de la Orden,Sástago
+espana,1829,Quintanar de la Orden,Torreorgaz
+espana,1830,Quinto,San Cristóbal de Segovia
+espana,1831,Quinto,Solsona
+espana,1832,Quinto,Torrejón de la Calzada
+espana,1833,Ramales de la Victoria,Santa Marina del Rey
+espana,1834,Ramales de la Victoria,Santibáñez de Vidriales
+espana,1835,Ramales de la Victoria,Villacastín
+espana,1836,Rascafría,Torre-Pacheco
+espana,1837,Rascafría,Zarza (La)
+espana,1838,Regueras (Las),Trigueros
+espana,1839,Regueras (Las),Valverde de Leganés
+espana,1840,Reocín,San Vicente de Alcántara
+espana,1841,Reus,Torrecillas de la Tiesa
+espana,1842,Reus,Villanueva de la Serena
+espana,1843,Ribas de Sil,Segorbe
+espana,1844,Ribas de Sil,Valverde de Júcar
+espana,1845,Ribas de Sil,Vedra
+espana,1846,Ribas de Sil,Órgiva
+espana,1847,Ribera Baja/Erribera Beitia,Santa Cruz de la Zarza
+espana,1848,Ribera Baja/Erribera Beitia,Saviñao (O)
+espana,1849,Ribera de Arriba,San Lorenzo de la Parrilla
+espana,1850,Ribera de Arriba,Segura
+espana,1851,Riells i Viabrea,Sant Pere de Ribes
+espana,1852,Riells i Viabrea,Villamañán
+espana,1853,Riosa,Villadiego
+espana,1854,Riosa,Viso del Marqués
+espana,1855,Riudellots de la Selva,Sandiás
+espana,1856,Riudellots de la Selva,Valadouro (O)
+espana,1857,Riópar,Roquetas de Mar
+espana,1858,Riópar,Subirats
+espana,1859,Riópar,Tordoia
+espana,1860,Riós,Valderrobres
+espana,1861,Roa,Sant Mateu
+espana,1862,Robla (La),Tordoia
+espana,1863,Robla (La),Villada
+espana,1864,Roca de la Sierra (La),Rosal (O)
+espana,1865,Rojales,San Bartolomé de la Torre
+espana,1866,Rojales,Tíjola
+espana,1867,Rojales,Valencia del Ventoso
+espana,1868,Rojales,Victoria (La)
+espana,1869,Rojales,Villafranca del Cid/Vilafranca
+espana,1870,Roquetas de Mar,Salas de los Infantes
+espana,1871,Roquetas de Mar,Saldaña
+espana,1872,Roquetes,Santa Elena
+espana,1873,Roquetes,Vitigudino
+espana,1874,Rosal de la Frontera,Villaralto
+espana,1875,Rosalejo,Yunquera de Henares
+espana,1876,Rueda,Villalón de Campos
+espana,1877,Rábade,Valverde del Camino
+espana,1878,Rábade,Vilafranca del Penedès
+espana,1879,Sabero,Valdegovía/Gaubea
+espana,1880,Sacedón,Villada
+espana,1881,Salas de los Infantes,Tobarra
+espana,1882,Salceda de Caselas,Villada
+espana,1883,Salt,Teverga
+espana,1884,Salvaleón,Talayuelas
+espana,1885,Salvatierra/Agurain,Trasmiras
+espana,1886,San Carlos del Valle,Sant Mateu
+espana,1887,San Carlos del Valle,Uceda
+espana,1888,San Carlos del Valle,Villar del Olmo
+espana,1889,San Cibrao das Viñas,Villanueva de la Cañada
+espana,1890,San Cristóbal de Segovia,Villanueva del Trabuco
+espana,1891,San Lorenzo de El Escorial,Siruela
+espana,1892,San Lorenzo de El Escorial,Trijueque
+espana,1893,San Lorenzo de la Parrilla,Totana
+espana,1894,San Lorenzo de la Parrilla,Viso del Marqués
+espana,1895,San Martín del Rey Aurelio,Valdegovía/Gaubea
+espana,1896,San Mateo de Gállego,Useras/Useres (les)
+espana,1897,San Mateo de Gállego,Vicedo (O)
+espana,1898,San Pedro del Pinatar,Vega de Espinareda
+espana,1899,San Roque,Vilallonga del Camp
+espana,1900,San Vicente de Alcántara,Serradilla
+espana,1901,San Vicente de Alcántara,Villaverde del Río
+espana,1902,San Vicente de la Barquera,Villanueva de la Serena
+espana,1903,Sant Andreu de Llavaneres,Siruela
+espana,1904,Sant Andreu de Llavaneres,Villaralbo
+espana,1905,Sant Antoni de Vilamajor,Villaralbo
+espana,1906,Sant Feliu de Pallerols,Écija
+espana,1907,Sant Fruitós de Bages,Teverga
+espana,1908,Sant Fruitós de Bages,Ultzama
+espana,1909,Sant Fruitós de Bages,Valdecaballeros
+espana,1910,Sant Guim de Freixenet,Teruel
+espana,1911,Sant Hilari Sacalm,Valle del Zalabí
+espana,1912,Sant Hilari Sacalm,Yunquera
+espana,1913,Sant Llorenç de Morunys,Sant Pere de Riudebitlles
+espana,1914,Sant Llorenç de Morunys,Viana do Bolo
+espana,1915,Sant Martí Sarroca,Santa Marina del Rey
+espana,1916,Sant Mateu,Tordoia
+espana,1917,Sant Mateu,Trabazos
+espana,1918,Sant Pere de Ribes,Santovenia de la Valdoncina
+espana,1919,Sant Pere de Riudebitlles,Tabernas
+espana,1920,Sant Pere de Riudebitlles,Villalpardo
+espana,1921,Sant Pere de Riudebitlles,Villanueva del Ariscal
+espana,1922,Sant Pere de Riudebitlles,Villarcayo de Merindad de Castilla la Vieja
+espana,1923,Santa Amalia,Tobarra
+espana,1924,Santa Cristina d'Aro,Torà
+espana,1925,Santa Cristina d'Aro,Villanueva de la Fuente
+espana,1926,Santa Cristina d'Aro,Órgiva
+espana,1927,Santa Elena,Tibi
+espana,1928,Santa Elena,Valdés
+espana,1929,Santa Elena,Yunquera
+espana,1930,Santiago-Pontones,Villalpando
+espana,1931,Santibáñez de Vidriales,Villamanín
+espana,1932,Santo Tomé,Trabazos
+espana,1933,Santurtzi,Villafranca de los Barros
+espana,1934,Sarrión,Villalón de Campos
+espana,1935,Sarrión,Villanueva del Ariscal
+espana,1936,Sarrión,Órgiva
+espana,1937,Sartaguda,Tarifa
+espana,1938,Saviñao (O),Villafranca de los Caballeros
+espana,1939,Segorbe,Vélez-Blanco
+espana,1940,Selaya,Sigüenza
+espana,1941,Selaya,Villafranca de los Caballeros
+espana,1942,Sepúlveda,Vedra
+espana,1943,Serrada,Zahara
+espana,1944,Setenil de las Bodegas,Unión (La)
+espana,1945,Siete Aguas,Utiel
+espana,1946,Sigüenza,Toro
+espana,1947,Sigüenza,Villamanrique
+espana,1948,Sils,Trujillanos
+espana,1949,Sástago,Écija
+espana,1950,Tafalla,Tàrrega
+espana,1951,Tafalla,Valle de Santa Ana
+espana,1952,Talayuelas,Urkabustaiz
+espana,1953,Talayuelas,Écija
+espana,1954,Teruel,Térmens
+espana,1955,Teruel,Villadiego
+espana,1956,Teulada,Tineo
+espana,1957,Tibi,Viso del Marqués
+espana,1958,Tibi,Yepes
+espana,1959,Tineo,Vegas del Genil
+espana,1960,Tordoia,Vegas del Condado
+espana,1961,Torralba de Calatrava,Villacastín
+espana,1962,Torrecillas de la Tiesa,Trigueros
+espana,1963,Torrejón del Rey,Vilallonga del Camp
+espana,1964,Torrejón del Rey,Villanueva de la Cañada
+espana,1965,Torrente de Cinca,Vall de Boí (La)
+espana,1966,Torrente de Cinca,Valle de Santa Ana
+espana,1967,Torrente de Cinca,Villaverde del Río
+espana,1968,Torreorgaz,Valdeganga
+espana,1969,Torreperogil,Valmojado
+espana,1970,Torreperogil,Écija
+espana,1971,Torà,Valadouro (O)
+espana,1972,Totana,Ultzama
+espana,1973,Trijueque,Villanueva del Ariscal
+espana,1974,Tíjola,Villares de la Reina
+espana,1975,Uleila del Campo,Valle del Zalabí
+espana,1976,Ullà,Vilallonga del Camp
+espana,1977,Unión (La),Zalla
+espana,1978,Urkabustaiz,Vinuesa
+espana,1979,Urretxu,Valadouro (O)
+espana,1980,Urretxu,Yecla
+espana,1981,Valderredible,Vedra
+espana,1982,Valderrobres,Zas
+espana,1983,Valle de Santa Ana,Yunquera
+espana,1984,Valle del Zalabí,Ènova (l')
+espana,1985,Vegas del Condado,Vilafant
+espana,1986,Vegas del Condado,Villada
+espana,1987,Vegas del Condado,Villanueva del Rey
+espana,1988,Vegas del Genil,Zas
+espana,1989,Vejer de la Frontera,Villar de Olalla
+espana,1990,Venta del Moro,Villafranca de los Caballeros
+espana,1991,Vera,Villanueva del Fresno
+espana,1992,Viana do Bolo,Vicedo (O)
+espana,1993,Villacastín,Villaralto
+espana,1994,Villadecanes,Villanueva de la Fuente
+espana,1995,Villadiego,Villanueva de la Fuente
+espana,1996,Villalpardo,Álora
+espana,1997,Villanueva de la Serena,Villares (Los)
+espana,1998,Zarautz,Zarza (La)
+espana,1999,Zarza de Granadilla,Ágreda
