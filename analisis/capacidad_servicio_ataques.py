@@ -26,28 +26,29 @@ Umbrales resumen por protocolo:
 
 Física del canal:
   - CyL / España: SKR por arista precalculado en datos/skr_per_link.csv
-    (BB84 + decoy states, η_det = 0.10; ver protocols/skr_bb84.py).
+    (modelo BB84 asintótico ideal, η_det = 0.10; ver
+    protocols/skr_bb84.py).
   - ADIF: grafo de junctions (contracción de cadenas de grado 2, misma
     metodología que adif/analisis_adif_junctions.py); SKR por arista
-    evaluado con skr_bb84_decoy() sobre la distancia de fibra contraída.
-    Los corredores largos (>50 km) tienen SKR ≈ 0: se usa el valor real
-    aunque sea ~0, sin filtrar aristas (la topología no cambia).
+    evaluado con skr_bb84_asymptotic() sobre la distancia acumulada del
+    corredor ferroviario contraído. Se conserva el valor que devuelve el
+    modelo, incluido 0 cuando la expresión deja de producir clave; no se
+    filtran aristas y la topología no cambia.
 
 Enrutamiento:
   La ruta widest-path (max-min bottleneck) es la misma lógica que
   analisis/enrutamiento_qkd.py::max_skr_path. Para abaratar las ~3·10⁶
   consultas por red se usa la equivalencia exacta «bottleneck max-min =
   mínima arista del camino en el bosque de máxima expansión», validada
-  numéricamente contra max_skr_path al inicio de cada ejecución.
+  numéricamente contra el núcleo single-source al inicio de cada ejecución.
 
 Genera:
   datos/resultados_papers/pares_muestreo_<red>.csv
   datos/resultados_papers/capacidad_<red>.csv
   datos/resultados_papers/capacidad_umbrales_<red>.csv
-  /Users/igarcia/doctorado/2025_2026/experimentos/exp8_capacidad_<red>.log
+  logs/exp8_capacidad_<red>.log (o $QKD_LOG_DIR)
 
 Uso:
-    cd /Users/igarcia/doctorado/2025_2026/codigo/qkd-net-tools
     python analisis/capacidad_servicio_ataques.py --red cyl
     python analisis/capacidad_servicio_ataques.py --red adif
 """
@@ -71,17 +72,16 @@ DATA_CYL  = os.path.join(DATA, 'cyl')
 DATA_ESP  = os.path.join(DATA, 'espana')
 DATA_ADIF = os.path.join(DATA, 'adif')
 OUT_DIR   = os.path.join(DATA, 'resultados_papers')
-LOG_DIR   = '/Users/igarcia/doctorado/2025_2026/experimentos'
+LOG_DIR   = os.environ.get('QKD_LOG_DIR', os.path.join(ROOT, 'logs'))
 
 os.makedirs(OUT_DIR, exist_ok=True)
-os.makedirs(LOG_DIR, exist_ok=True)
 
 # Reutilizamos la implementación widest-path existente como referencia
-# (analisis/enrutamiento_qkd.py) y el modelo físico BB84+decoy.
+# (analisis/enrutamiento_qkd.py) y el modelo BB84 asintótico ideal.
 sys.path.insert(0, ROOT)
 sys.path.insert(0, BASE)
-from enrutamiento_qkd import max_skr_path          # noqa: E402
-from protocols.skr_bb84 import skr_bb84_decoy      # noqa: E402
+from analisis.routing_core import max_min_metrics_from_source  # noqa: E402
+from protocols.skr_bb84 import skr_bb84_asymptotic  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Parámetros del experimento
@@ -119,18 +119,20 @@ def _asignar_skr_desde_csv(G, caso):
     df = df[df['caso'] == caso]
     tabla = {frozenset((r.nodo_u, r.nodo_v)): float(r.SKR_bits_pulso)
              for r in df.itertuples()}
-    faltantes = 0
+    faltantes = [
+        (u, v) for u, v in G.edges()
+        if frozenset((u, v)) not in tabla
+    ]
+    if faltantes:
+        muestra = ', '.join(f'{u!r}--{v!r}' for u, v in faltantes[:5])
+        raise ValueError(
+            f"{caso}: {len(faltantes)} aristas sin SKR en "
+            f"datos/skr_per_link.csv; primeras: {muestra}"
+        )
     for u, v in G.edges():
-        skr = tabla.get(frozenset((u, v)))
-        if skr is None:
-            # Mismo valor por defecto que enrutamiento_qkd.py (Δ = 45 km)
-            skr = skr_bb84_decoy(45.0)
-            faltantes += 1
+        skr = tabla[frozenset((u, v))]
         G[u][v]['skr'] = skr
         G[u][v]['SKR'] = skr   # compatibilidad con max_skr_path()
-    if faltantes:
-        log(f"  [AVISO] {faltantes} aristas sin SKR en skr_per_link.csv "
-            f"(caso={caso}) — asignado SKR(45 km) por defecto")
     return G
 
 
@@ -185,7 +187,7 @@ def _construir_junctions(G):
 
 
 def cargar_grafo_adif():
-    """Grafo de junctions ADIF con SKR BB84+decoy sobre distancias de fibra."""
+    """Proxy ADIF contraído con SKR ideal sobre longitudes acumuladas."""
     nodos_df = pd.read_csv(os.path.join(DATA_ADIF, 'nodos_red_adif.csv'),
                            quotechar='"', on_bad_lines='skip')
     adj_df = pd.read_csv(os.path.join(DATA_ADIF, 'adyacencia_red_adif.csv'),
@@ -217,11 +219,11 @@ def cargar_grafo_adif():
     if len(comps) > 1:
         J = J.subgraph(max(comps, key=len)).copy()
 
-    # SKR físico real por arista contraída (sin filtrar por distancia:
-    # corredores >50 km quedan con SKR ≈ 0, valor real del modelo)
+    # Evaluación del modelo ideal sobre cada longitud acumulada del proxy.
+    # No se filtran corredores: una tasa nula se conserva como tal.
     n_cero = 0
     for u, v in J.edges():
-        skr = skr_bb84_decoy(J[u][v]['dist_km'])
+        skr = skr_bb84_asymptotic(J[u][v]['dist_km'])
         J[u][v]['skr'] = skr
         J[u][v]['SKR'] = skr
         if skr <= 0.0:
@@ -309,18 +311,27 @@ def bottlenecks_pares(G, pares):
 
 
 def validar_motor(G, pares, n_check=100):
-    """Compara el motor rápido con enrutamiento_qkd.max_skr_path."""
+    """Compara el motor rápido con el núcleo exacto, agrupado por origen."""
     rng = np.random.default_rng(7)
     idx = rng.choice(len(pares), size=min(n_check, len(pares)), replace=False)
     sub = [pares[i] for i in idx]
     rapidos = bottlenecks_pares(G, sub)
-    refs = np.array([max_skr_path(G, u, v)[0] for u, v in sub])
+    rutas_por_origen = {}
+    for origen, _ in sub:
+        if origen not in rutas_por_origen:
+            rutas_por_origen[origen] = max_min_metrics_from_source(
+                G, origen, capacity_attr='skr'
+            )
+    refs = np.array([
+        rutas_por_origen[origen][destino].bottleneck
+        for origen, destino in sub
+    ])
     if not np.allclose(rapidos, refs, rtol=1e-9, atol=1e-15):
         peor = np.max(np.abs(rapidos - refs))
         raise RuntimeError(f"Motor de bottleneck inconsistente con "
-                           f"max_skr_path (desv. máx = {peor:.3e})")
+                           f"routing_core (desv. máx = {peor:.3e})")
     log(f"  Validación motor widest-path: OK ({len(sub)} pares, "
-        f"coincidencia exacta con enrutamiento_qkd.max_skr_path)")
+        f"coincidencia exacta con routing_core)")
 
 
 # ---------------------------------------------------------------------------
@@ -491,6 +502,7 @@ def main():
         N_PARES = 2000
         R_RANDOM = 100
 
+    os.makedirs(LOG_DIR, exist_ok=True)
     LOG_FH = open(os.path.join(LOG_DIR, f'exp8_capacidad_{red}.log'), 'w')
     t_inicio = time.time()
 

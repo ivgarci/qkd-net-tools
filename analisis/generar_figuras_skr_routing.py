@@ -2,37 +2,32 @@
 Figures for QKD-SKR-Routing paper.
 
 Generates:
-  QKD-SKR-Routing/Figures/skr_vs_distancia.pdf
-      SKR vs fibre distance curve (Fig 1 in paper): full BB84+decoy-state
-      physical model with calibrated parameters (η_det=0.10, μ=0.5,
+  figuras/qkd_skr_routing/skr_vs_distancia.pdf
+      SKR vs fibre distance curve (Fig 1 in paper): ideal asymptotic BB84
+      model with declared parameters (η_det=0.10, μ=0.5,
       α=0.2 dB/km, p_dark=1e-6, e_det=0.015, f_EC=1.16).
       Shaded region marks d > Δ = 45 km.
 
-  QKD-SKR-Routing/Figures/benchmarks_qkd_metricas.pdf
+  figuras/qkd_skr_routing/benchmarks_qkd_metricas.pdf
       2-panel (Fig 4 in paper):
         (a) Edge-distance distribution for Spain QKD network.
         (b) SKR distribution (histogram) across all 5681 edges,
-            computed with the full BB84+decoy-state model (η_det=0.10).
+            computed with the canonical ideal asymptotic model (η_det=0.10).
 
-  QKD-SKR-Routing/Figures/esp_topologia.png
+  figuras/qkd_skr_routing/esp_topologia.png
       Geographic Spain QKD topology with edges coloured by distance.
 
-Physical model (BB84 + decoy states, Lo-Ma-Chen 2005):
-  η(d)   = η_det · 10^(−α·d/10)
-  Q_μ    = 1 − exp(−μ·η(d)) + 2·p_dark
-  Q1     = μ·exp(−μ)·η(d) + 2·p_dark
-  e_μ    ≈ e_det + p_dark / Q_μ
-  e1     = (e_det·η(d) + p_dark) / Q1
-  R      = Q1·[1 − h2(e1)] − Q_μ·f_EC·h2(e_μ)
-
-All parameters match Section II.E of the paper (η_det=0.10).
+The SKR formula is not duplicated here. It is imported from
+``protocols/skr_bb84.py`` so figures and tabular results use the same canonical
+Lo--Ma--Chen ideal asymptotic model, including the BB84 sifting factor q=1/2.
+It is not a finite-decoy implementation or an experimental calibration.
 
 Run with:
     python analisis/generar_figuras_skr_routing.py
 """
 
 import os
-import math
+import sys
 import numpy as np
 import pandas as pd
 import networkx as nx
@@ -43,85 +38,34 @@ from math import radians, sin, cos, sqrt, atan2
 
 BASE      = os.path.dirname(os.path.abspath(__file__))
 DATA_ESP  = os.path.join(BASE, '..', 'datos', 'espana')
-PAPER_DIR = os.path.join(BASE, '..', '..', '..', 'articulos',
-                         'QKD-SKR-Routing', 'Figures')
+REPO_ROOT = os.path.abspath(os.path.join(BASE, '..'))
+PAPER_DIR = os.environ.get(
+    'QKD_SKR_FIGURE_DIR',
+    os.path.join(REPO_ROOT, 'figuras', 'qkd_skr_routing'),
+)
 os.makedirs(PAPER_DIR, exist_ok=True)
 
-# ── Physical parameters (calibrated, Section II.E of paper) ──────────────────
-ALPHA_DB_KM = 0.2      # Fibre attenuation (dB/km), standard G.652 SMF
-ETA_DET     = 0.10     # Detector efficiency (InGaAs APD, 10%)
-MU          = 0.5      # Mean photon number per pulse (decoy-state BB84)
-E_DET       = 0.015    # Optical alignment / detector error rate (1.5%)
-P_DARK      = 1e-6     # Dark count probability per pulse per detector mode
-F_EC        = 1.16     # Error-correction inefficiency factor
+# ── Canonical physical model ─────────────────────────────────────────────────
+sys.path.insert(0, REPO_ROOT)
+from protocols.skr_bb84 import (  # noqa: E402
+    ALPHA_DB_KM,
+    E_DETECTOR as E_DET,
+    ETA_DET,
+    F_EC,
+    MU,
+    P_DARK,
+    Q_SIFT,
+    skr_bb84_asymptotic,
+)
+
 DELTA_KM    = 45.0     # QKD network design threshold (km)
 RHO_F       = 1.25     # Routing factor (Haversine → fibre distance)
 
 
-# ── BB84 + decoy-state SKR formula ───────────────────────────────────────────
-
-def h2(p: float) -> float:
-    """Binary Shannon entropy h2(p)."""
-    if p <= 0.0 or p >= 1.0:
-        return 0.0
-    return -p * math.log2(p) - (1.0 - p) * math.log2(1.0 - p)
-
-
-def skr_bb84(d_km: float,
-             eta_det: float = ETA_DET,
-             mu: float = MU,
-             p_dark: float = P_DARK,
-             e_det: float = E_DET,
-             alpha: float = ALPHA_DB_KM,
-             f_ec: float = F_EC) -> float:
-    """
-    Full BB84+decoy-state SKR lower bound (bits/pulse).
-
-    Implements Eq. (2) of the paper:
-      R ≥ Q1·[1 − h2(e1)] − Q_μ·f_EC·h2(e_μ)
-
-    Calibrated formula (matches stated operating points in Section II.F):
-      η(d) = η_det · 10^(−α·d/10)             (Eq. 3)
-      Q_μ  = 1 − exp(−μ·η) + p_dark            (Eq. 4, one dark-count term)
-      e_μ  = (e_det·η + p_dark/2) / (η + p_dark)(Eq. 5)
-      Q1   = μ·exp(−μ)·η + p_dark              (Eq. 6, decoy lower bound)
-      e1   = min(e_μ·Q_μ / Q1, 0.5)            (Eq. 7)
-
-    This formula reproduces the operating points listed in Section II.F of
-    the paper (e.g. R(10 km) = 1.19×10⁻², R(45 km) = 2.36×10⁻³ bits/pulse)
-    and matches the calibrated implementation in protocols/skr_bb84.py.
-
-    Returns 0.0 if SKR is non-positive (physical limit exceeded).
-    """
-    # Channel transmittance including detector efficiency (Eq. 3)
-    eta = eta_det * 10.0 ** (-alpha * d_km / 10.0)
-
-    # Total detected gain (Eq. 4)
-    Q_mu = 1.0 - math.exp(-mu * eta) + p_dark
-    if Q_mu <= 0.0:
-        return 0.0
-
-    # QBER (Eq. 5: optical errors + dark counts)
-    num_e = e_det * eta + p_dark / 2.0
-    den_e = eta + p_dark
-    e_mu = num_e / den_e if den_e > 0 else 0.5
-    e_mu = min(e_mu, 0.5)
-
-    # Single-photon gain estimate (Eq. 6, decoy lower bound)
-    Q1 = mu * eta * math.exp(-mu) + p_dark
-    if Q1 <= 0.0:
-        return 0.0
-
-    # Single-photon QBER (Eq. 7)
-    e1 = min(e_mu * Q_mu / max(Q1, 1e-15), 0.5)
-
-    rate = Q1 * (1.0 - h2(e1)) - Q_mu * f_ec * h2(e_mu)
-    return max(rate, 0.0)
-
-
 def skr_vec(d_array: np.ndarray, **kwargs) -> np.ndarray:
-    """Vectorised wrapper for skr_bb84."""
-    return np.array([skr_bb84(float(d), **kwargs) for d in d_array])
+    """Vectorised wrapper for the canonical ideal asymptotic model."""
+    return np.array([skr_bb84_asymptotic(float(d), **kwargs)
+                     for d in d_array])
 
 
 # ── Haversine distance ────────────────────────────────────────────────────────
@@ -158,9 +102,9 @@ for _, row in coords_raw.iterrows():
     except (ValueError, KeyError):
         pass
 
-# ── Compute edge distances and SKR using full BB84 model ─────────────────────
+# ── Compute edge distances and SKR using the canonical model ─────────────────
 
-print('Computing edge distances and SKR (η_det=0.10, full BB84+decoy model)...')
+print('Computing edge distances and SKR (canonical ideal asymptotic model)...')
 edge_data = []
 pos = {}
 for n in G.nodes():
@@ -173,7 +117,7 @@ for u, v in G.edges():
         d_hav = haversine(coords[u][0], coords[u][1],
                           coords[v][0], coords[v][1])
         d_fibre = d_hav * RHO_F   # apply routing factor
-        skr_val = skr_bb84(d_fibre)
+        skr_val = skr_bb84_asymptotic(d_fibre)
         edge_data.append({'u': u, 'v': v,
                           'dist_km': d_fibre,
                           'skr': skr_val})
@@ -187,7 +131,7 @@ print(f'  Median: {p50:.1f} km  |  P90: {p90:.1f} km  |  Max: {distances.max():.
 
 # ── Figure 1: SKR vs distance (skr_vs_distancia.pdf) ─────────────────────────
 # Paper caption: SKR vs fibre distance with shaded region d > Δ = 45 km,
-# calibrated parameters α=0.2, η_det=0.10, μ=0.5, e_det=0.015,
+# declared parameters α=0.2, η_det=0.10, μ=0.5, e_det=0.015,
 # p_dark=1e-6, f_EC=1.16.
 
 print('\nGenerating Fig 1: skr_vs_distancia...')
@@ -200,7 +144,7 @@ fig, ax = plt.subplots(figsize=(8, 5))
 # Main SKR curve
 ax.semilogy(d_range[positive], r_range[positive],
             color='steelblue', lw=2.2,
-            label='BB84 + decoy states (lower bound)')
+            label='Ideal asymptotic BB84 (exact decoy estimate)')
 
 # Shaded region: d > Δ = 45 km  (excluded by network design threshold)
 d_max_plot = d_range[positive][-1] if positive.any() else 200.0
@@ -209,7 +153,7 @@ ax.axvspan(DELTA_KM, d_max_plot, alpha=0.12, color='red',
 ax.axvline(DELTA_KM, color='red', lw=1.4, ls='--', alpha=0.8)
 
 # Annotate the Δ = 45 km operating point
-r_delta = skr_bb84(DELTA_KM)
+r_delta = skr_bb84_asymptotic(DELTA_KM)
 ax.scatter([DELTA_KM], [r_delta], color='red', zorder=6, s=60)
 ax.annotate(
     rf'$\Delta = {DELTA_KM:.0f}$ km'
@@ -222,15 +166,16 @@ ax.annotate(
 
 # Annotate a few key operating points
 for d_pt, label in [(10, '10 km'), (20, '20 km'), (30, '30 km')]:
-    r_pt = skr_bb84(d_pt)
+    r_pt = skr_bb84_asymptotic(d_pt)
     ax.scatter([d_pt], [r_pt], color='darkorange', zorder=5, s=40, alpha=0.8)
 
 ax.set_xlabel('Fibre distance $d$ (km)', fontsize=12)
 ax.set_ylabel('SKR $R(d)$ (bits/pulse)', fontsize=12)
 ax.set_title(
-    r'Secret Key Rate vs. Fibre Distance \textemdash BB84 with Decoy States' '\n'
+    r'Secret Key Rate vs. Fibre Distance \textemdash Ideal Asymptotic BB84' '\n'
     r'($\alpha=0.2$ dB/km, $\eta_{\rm det}=0.10$, $\mu=0.5$, '
-    r'$e_{\rm det}=0.015$, $p_{\rm dark}=10^{-6}$, $f_{\rm EC}=1.16$)',
+    r'$e_{\rm det}=0.015$, $p_{\rm dark}=10^{-6}$, '
+    r'$f_{\rm EC}=1.16$, $q=1/2$)',
     fontsize=10
 )
 ax.set_xlim(0, 200)
@@ -240,15 +185,18 @@ fig.tight_layout()
 
 for ext in ('pdf', 'png'):
     out = os.path.join(PAPER_DIR, f'skr_vs_distancia.{ext}')
-    fig.savefig(out, dpi=150, bbox_inches='tight')
+    metadata = {'CreationDate': None, 'ModDate': None} if ext == 'pdf' else None
+    fig.savefig(out, dpi=150, bbox_inches='tight', metadata=metadata)
     print(f'  Saved: {out}')
 plt.close(fig)
 
-# Verify key operating points match paper Table (Section II.F)
-print('\n  Verification of key operating points (paper Section II.F):')
-for d_chk, r_expected in [(10, 1.19e-2), (20, 7.50e-3),
-                           (30, 4.72e-3), (40, 2.97e-3), (45, 2.36e-3)]:
-    r_got = skr_bb84(d_chk)
+# Verify key operating points computed from the canonical declared equations.
+print('\n  Verification of canonical operating points:')
+for d_chk, r_expected in [(10, 6.4664382800499395e-3),
+                           (45, 1.2834511689390389e-3),
+                           (50, 1.0188456107580379e-3),
+                           (100, 9.996046924682088e-5)]:
+    r_got = skr_bb84_asymptotic(d_chk)
     match = 'OK' if abs(r_got - r_expected) / r_expected < 0.05 else 'MISMATCH'
     print(f'  d={d_chk:3d} km: R={r_got:.3e} (expected {r_expected:.2e}) [{match}]')
 
@@ -256,7 +204,7 @@ for d_chk, r_expected in [(10, 1.19e-2), (20, 7.50e-3),
 # ── Figure 4: Physical metrics 2-panel (benchmarks_qkd_metricas.pdf) ─────────
 # Paper caption (Fig 4): Top: edge distance distribution.
 #                        Bottom: SKR distribution.
-# Both computed with full BB84+decoy-state model, η_det=0.10.
+# Both computed with the canonical ideal asymptotic model, η_det=0.10.
 
 print('\nGenerating Fig 4: benchmarks_qkd_metricas...')
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 7))
@@ -284,7 +232,7 @@ ax1.grid(True, alpha=0.25)
 skr_positive = skr_vals[skr_vals > 0]
 ax2.hist(skr_positive, bins=55, color='#4393c3', alpha=0.78,
          edgecolor='white', linewidth=0.4)
-skr_delta = skr_bb84(DELTA_KM)
+skr_delta = skr_bb84_asymptotic(DELTA_KM)
 skr_p50   = np.percentile(skr_positive, 50)
 ax2.axvline(skr_delta, color='red', lw=1.2, ls='--',
             label=rf'$R(\Delta={DELTA_KM:.0f}$ km$) = {skr_delta:.2e}$ bits/pulse')
@@ -293,7 +241,8 @@ ax2.axvline(skr_p50,   color='#d95f02', lw=1.4, ls=':',
 ax2.set_xlabel('SKR $R(d)$ (bits/pulse)', fontsize=11)
 ax2.set_ylabel('Edge count', fontsize=11)
 ax2.set_title(
-    r'(b) SKR distribution — BB84+decoy, $\eta_{\rm det}=0.10$, $\mu=0.5$',
+    r'(b) SKR distribution — ideal asymptotic BB84, '
+    r'$\eta_{\rm det}=0.10$, $\mu=0.5$, $q=1/2$',
     fontsize=10
 )
 ax2.legend(fontsize=9)
@@ -302,7 +251,8 @@ ax2.grid(True, alpha=0.25)
 fig.tight_layout()
 for ext in ('pdf', 'png'):
     out = os.path.join(PAPER_DIR, f'benchmarks_qkd_metricas.{ext}')
-    fig.savefig(out, dpi=150, bbox_inches='tight')
+    metadata = {'CreationDate': None, 'ModDate': None} if ext == 'pdf' else None
+    fig.savefig(out, dpi=150, bbox_inches='tight', metadata=metadata)
     print(f'  Saved: {out}')
 plt.close(fig)
 
@@ -384,7 +334,8 @@ else:
 
     for ext in ('png', 'pdf'):
         out = os.path.join(PAPER_DIR, f'esp_topologia.{ext}')
-        fig.savefig(out, dpi=150, bbox_inches='tight')
+        metadata = {'CreationDate': None, 'ModDate': None} if ext == 'pdf' else None
+        fig.savefig(out, dpi=150, bbox_inches='tight', metadata=metadata)
         print(f'  Saved: {out}')
     plt.close(fig)
 

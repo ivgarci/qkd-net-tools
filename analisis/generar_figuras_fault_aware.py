@@ -1,7 +1,8 @@
 """
 Figures for the Fault-Aware QKD paper (P8, Journal of Systems Architecture).
 
-Generates (PDF + PNG) into articulos/QKD-Fault-Aware-JSA/Figures/:
+Generates (PDF + PNG) into ``figuras/qkd_fault_aware/`` by default.
+Set ``QKD_FAULT_FIGURE_DIR`` for an explicit external export.
 
   fig_s1_s3.{pdf,png}        (Fig 1, double column, ~7 in)
       Two panels.
@@ -29,7 +30,7 @@ Inputs (datos/resultados_papers/):
   contramedidas_cm2.csv (red, estrategia, m, C_rel, C_rel_std)
 
 Run with:
-    /Users/igarcia/my_env/bin/python analisis/generar_figuras_fault_aware.py
+    python analisis/generar_figuras_fault_aware.py
 """
 
 import os
@@ -41,8 +42,10 @@ import matplotlib.pyplot as plt
 
 BASE      = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR  = os.path.join(BASE, '..', 'datos', 'resultados_papers')
-PAPER_DIR = os.path.join(BASE, '..', '..', '..', 'articulos',
-                         'QKD-Fault-Aware-JSA', 'Figures')
+PAPER_DIR = os.environ.get(
+    'QKD_FAULT_FIGURE_DIR',
+    os.path.join(BASE, '..', 'figuras', 'qkd_fault_aware'),
+)
 os.makedirs(PAPER_DIR, exist_ok=True)
 
 # -- Style (consistent with generar_figuras_service_resilience.py) ------------
@@ -86,7 +89,8 @@ TWO_COL = 7.0    # double column (in)
 def save(fig, stem):
     for ext, dpi in (('pdf', None), ('png', 300)):
         out = os.path.join(PAPER_DIR, f'{stem}.{ext}')
-        fig.savefig(out, dpi=dpi, bbox_inches='tight')
+        metadata = {'CreationDate': None, 'ModDate': None} if ext == 'pdf' else {}
+        fig.savefig(out, dpi=dpi, bbox_inches='tight', metadata=metadata)
         print(f'  -> {out}')
     plt.close(fig)
 

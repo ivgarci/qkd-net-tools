@@ -1,7 +1,8 @@
 """
 Figures for the QKD-Service-Resilience paper (IEEE JSAC Quantum Series).
 
-Generates (PDF + PNG) into articulos/QKD-Service-Resilience/Figures/:
+Generates (PDF + PNG) into ``figuras/qkd_service_resilience/`` by default.
+Set ``QKD_SERVICE_FIGURE_DIR`` for an explicit external export.
 
   fig_cp_sp.{pdf,png}        (Fig 1, double column, 7.16 in)
       3 horizontal panels (CyL, Spain, ADIF). Per panel: S(p) (dashed) and
@@ -28,7 +29,7 @@ Inputs (datos/resultados_papers/):
   betweenness_ponderada.csv
 
 Run with:
-    /Users/igarcia/my_env/bin/python analisis/generar_figuras_service_resilience.py
+    python analisis/generar_figuras_service_resilience.py
 """
 
 import os
@@ -40,8 +41,10 @@ import matplotlib.pyplot as plt
 
 BASE      = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR  = os.path.join(BASE, '..', 'datos', 'resultados_papers')
-PAPER_DIR = os.path.join(BASE, '..', '..', '..', 'articulos',
-                         'QKD-Service-Resilience', 'Figures')
+PAPER_DIR = os.environ.get(
+    'QKD_SERVICE_FIGURE_DIR',
+    os.path.join(BASE, '..', 'figuras', 'qkd_service_resilience'),
+)
 os.makedirs(PAPER_DIR, exist_ok=True)
 
 # ── Style (consistent with generar_figuras_skr_routing.py) ───────────────────
@@ -75,7 +78,8 @@ TWO_COL = 7.16   # IEEE double column (in)
 def save(fig, stem):
     for ext, dpi in (('pdf', None), ('png', 300)):
         out = os.path.join(PAPER_DIR, f'{stem}.{ext}')
-        fig.savefig(out, dpi=dpi, bbox_inches='tight')
+        metadata = {'CreationDate': None, 'ModDate': None} if ext == 'pdf' else {}
+        fig.savefig(out, dpi=dpi, bbox_inches='tight', metadata=metadata)
         print(f'  -> {out}')
     plt.close(fig)
 
@@ -257,5 +261,12 @@ if __name__ == '__main__':
     print('Generating service-resilience figures ...')
     fig_cp_sp()
     fig_weighted_rank()
-    fig_null_model()
+    null_model_csv = os.path.join(DATA_DIR, 'null_model_er.csv')
+    if os.path.exists(null_model_csv):
+        fig_null_model()
+    else:
+        print(
+            '  Skipping fig_null_model: null_model_er.csv must be regenerated '
+            'with the current SKR model before this figure is valid.'
+        )
     print('Done.')

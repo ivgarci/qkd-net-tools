@@ -7,8 +7,9 @@ analisis/capacidad_servicio_ataques.py (atributo 'skr' por arista):
   1. C_B no ponderada: nx.betweenness_centrality (normalizada).
   2. C_B ponderada por SKR: misma función con weight = ℓ_e, donde la
      longitud QKD de cada arista es ℓ_e = 1/SKR_e. Para aristas con
-     SKR_e = 0 (existen 7 en ADIF, corredores >50 km fuera de rango
-     BB84+decoy) se usa ℓ_e = 1/max(SKR_e, 1e-12), de modo que esas
+     SKR_e = 0 (existen 7 en el proxy ADIF contraído, con longitudes
+     ferroviarias acumuladas por encima del alcance numérico del modelo
+     asintótico ideal) se usa ℓ_e = 1/max(SKR_e, 1e-12), de modo que esas
      aristas son "casi infinitamente largas" sin romper el cálculo.
   3. Comparación de rankings: overlap top-10 y top-25 (|∩|/k) y
      Kendall-τ (scipy.stats.kendalltau) sobre los valores de
@@ -22,10 +23,9 @@ Salidas:
       red, n, m, n_aristas_skr0, overlap_top10, overlap_top25,
       kendall_tau, p_value, top1_unweighted, top1_weighted
 
-Log: /Users/igarcia/doctorado/2025_2026/experimentos/exp9_betweenness_ponderada.log
+Log: ``logs/exp9_betweenness_ponderada.log`` por defecto.
 
 Uso:
-    cd /Users/igarcia/doctorado/2025_2026/codigo/qkd-net-tools
     python analisis/betweenness_ponderada.py
 """
 

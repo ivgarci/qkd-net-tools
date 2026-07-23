@@ -1,6 +1,6 @@
 red,protocolo,p_star_topo,p_star_svc,C0_median
-adif,random,0.18,0.05,6.870944584597018e-05
-adif,degree_static,0.07,0.01,6.870944584597016e-05
-adif,degree_adaptive,0.06,0.03,6.870944584597016e-05
-adif,betweenness_static,0.1,0.07,6.870944584597016e-05
-adif,betweenness_adaptive,0.02,0.01,6.870944584597016e-05
+adif,random,0.18,0.05,3.657112903257548e-05
+adif,degree_static,0.07,0.01,3.657112903257548e-05
+adif,degree_adaptive,0.06,0.03,3.657112903257548e-05
+adif,betweenness_static,0.1,0.07,3.657112903257548e-05
+adif,betweenness_adaptive,0.02,0.01,3.657112903257548e-05

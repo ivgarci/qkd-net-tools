@@ -1,431 +1,309 @@
-"""
-Δ (link-distance threshold) sensitivity analysis — Spain QKD network.
+"""Escenario alternativo de sensibilidad al umbral de enlace en España.
 
-For each Δ ∈ {35, 40, 45, 50} km, the Spain graph is rebuilt from scratch
-using ONLY the 950 PAM relay nodes from AdjacencyMatrixNamed45.csv.  An edge
-(u,v) exists iff haversine(u,v) ≤ Δ km.  Each edge is annotated with the BB84
-decoy SKR using fibre distance d_fibre = haversine_km × ρ_f.
+Este análisis NO modifica ni reproduce el snapshot base de encaminamiento.
+Reconstruye grafos geométricos alternativos sobre los mismos 950 nodos PAM:
+existe una arista cuando la distancia haversine es menor o igual que ``delta``.
+La longitud evaluada por el modelo SKR es ``rho * haversine``; ``rho`` es un
+supuesto explícito y vale 1 por defecto.
 
-This ensures consistency with Tables 1–4, which are computed on the same 950-node
-PAM-generated Spain relay backbone.
+Las dos políticas de encaminamiento y sus desempates proceden de
+``analisis/routing_core.py``. La salida es propia y determinista:
 
-At Δ=45, the rebuilt graph is verified against AdjacencyMatrixNamed45.csv
-(expected ~5681 edges).
+``datos/resultados_papers/delta_sensitivity_espana.json``
 
-Outputs:
-  - Prints Table 5 to stdout
-  - Updates datos/resultados_papers/tablas_skr_routing.json
-    (replaces the 'table5_sensitivity_delta' key with correct values)
+Nunca se escribe ``tablas_skr_routing.json``.
 """
 
-import os
-import sys
-import math
-import time
+from __future__ import annotations
+
+import argparse
+import hashlib
+import itertools
 import json
-import heapq
+import math
+import os
+from pathlib import Path
+
+import networkx as nx
 import numpy as np
 import pandas as pd
-import networkx as nx
 
-BASE     = os.path.dirname(os.path.abspath(__file__))
-DATA_ESP = os.path.join(BASE, '..', 'datos', 'espana')
-OUT_DIR  = os.path.join(BASE, '..', 'datos', 'resultados_papers')
-os.makedirs(OUT_DIR, exist_ok=True)
+BASE = Path(__file__).resolve().parent
+ROOT = BASE.parent
+DATA_ESP = ROOT / "datos" / "espana"
+OUT_DIR = ROOT / "datos" / "resultados_papers"
+COORDS_CSV = DATA_ESP / "peninsula_1000.csv"
+ADJ_MAT_CSV = DATA_ESP / "AdjacencyMatrixNamed45.csv"
+JSON_OUT = OUT_DIR / "delta_sensitivity_espana.json"
 
-sys.path.insert(0, os.path.join(BASE, '..'))
-from protocols.skr_bb84 import skr_bb84_decoy, _haversine
+import sys
 
-COORDS_CSV   = os.path.join(DATA_ESP, 'peninsula_1000.csv')
-ADJ_MAT_CSV  = os.path.join(DATA_ESP, 'AdjacencyMatrixNamed45.csv')
-JSON_OUT     = os.path.join(OUT_DIR, 'tablas_skr_routing.json')
-
-# Physical / routing constants (must match enrutamiento_espana_completo.py)
-RHO_F       = 1.25   # routing factor: fibre_km = haversine_km * RHO_F
-ETA_DET_NOM = 0.10
-P_DARK_NOM  = 1e-6
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(BASE))
+from protocols.skr_bb84 import _haversine, skr_bb84_asymptotic  # noqa: E402
+from routing_core import compare_route_metrics, node_key  # noqa: E402
 
 
-# ---------------------------------------------------------------------------
-# Haversine wrapper
-# ---------------------------------------------------------------------------
-def haversine(lat1, lon1, lat2, lon2):
-    return _haversine(lat1, lon1, lat2, lon2)
+def sha256_file(path: str | Path) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
-# ---------------------------------------------------------------------------
-# Load PAM relay node names from the 950×950 adjacency matrix
-# ---------------------------------------------------------------------------
-def load_pam_node_names(adj_csv=ADJ_MAT_CSV):
-    """Returns the list of 950 PAM relay node names (row index of the adj matrix)."""
-    adj = pd.read_csv(adj_csv, index_col=0)
-    return list(adj.index)
+def canonical_edge(first: object, second: object) -> tuple[str, str]:
+    left, right = str(first), str(second)
+    return (left, right) if left <= right else (right, left)
 
 
-# ---------------------------------------------------------------------------
-# Load coordinates, filtered to the 950 PAM nodes
-# ---------------------------------------------------------------------------
-def load_coords(csv_path=COORDS_CSV, pam_nodes=None):
-    """Returns dict: poblacion -> (lat, lon), restricted to pam_nodes if given."""
-    df = pd.read_csv(csv_path, delimiter=';')
-    df.columns = [c.strip().lstrip('﻿').lstrip('﻿') for c in df.columns]
-    df['Latitud']  = df['Latitud'].astype(str).str.replace(',', '.').astype(float)
-    df['Longitud'] = df['Longitud'].astype(str).str.replace(',', '.').astype(float)
-    coords = {row['Población']: (row['Latitud'], row['Longitud'])
-              for _, row in df.iterrows()}
-    if pam_nodes is not None:
-        # Keep only the 950 PAM relay nodes (in the order they appear in adj matrix)
-        missing = [n for n in pam_nodes if n not in coords]
-        if missing:
-            print(f"  WARNING: {len(missing)} PAM nodes not found in coords CSV: {missing[:5]}")
-        coords = {n: coords[n] for n in pam_nodes if n in coords}
-    return coords
+def edge_set(graph: nx.Graph) -> set[tuple[str, str]]:
+    return {canonical_edge(first, second) for first, second in graph.edges}
 
 
-# ---------------------------------------------------------------------------
-# Build graph for a given Δ
-# ---------------------------------------------------------------------------
-def build_graph_for_delta(coords, delta_km,
-                           eta_det=ETA_DET_NOM, p_dark=P_DARK_NOM):
-    """
-    Builds an undirected graph from municipality coordinates.
-    Edge (u,v) exists iff haversine(u,v) <= delta_km.
-    Edge weight 'SKR' uses fibre distance = haversine_km * RHO_F.
-    """
-    pops = list(coords.keys())
-    n    = len(pops)
-
-    G = nx.Graph()
-    G.add_nodes_from(pops)
-
-    n_edges = 0
-    for i in range(n):
-        lat1, lon1 = coords[pops[i]]
-        for j in range(i + 1, n):
-            lat2, lon2 = coords[pops[j]]
-            hav_km = haversine(lat1, lon1, lat2, lon2)
-            if hav_km <= delta_km:
-                fibre_km = hav_km * RHO_F
-                skr = skr_bb84_decoy(fibre_km, eta_det=eta_det, p_dark=p_dark)
-                G.add_edge(pops[i], pops[j],
-                           haversine_km=hav_km,
-                           dist_km=fibre_km,
-                           SKR=max(skr, 1e-15))
-                n_edges += 1
-
-    return G
+def edge_set_sha256(edges: set[tuple[str, str]]) -> str:
+    payload = "".join(f"{first}\t{second}\n" for first, second in sorted(edges))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
-# ---------------------------------------------------------------------------
-# Widest-path (max-min bottleneck) Dijkstra — single source
-# (identical to enrutamiento_espana_completo.py)
-# ---------------------------------------------------------------------------
-def widest_path_dijkstra(G, source, weight='SKR'):
-    nodes = list(G.nodes())
-    bottleneck = {n: -1.0 for n in nodes}
-    bottleneck[source] = float('inf')
-    prev = {n: None for n in nodes}
-    heap = [(-float('inf'), source)]
-    visited = set()
-
-    while heap:
-        neg_b, u = heapq.heappop(heap)
-        if u in visited:
-            continue
-        visited.add(u)
-        for v in G.neighbors(u):
-            if v in visited:
-                continue
-            w = G[u][v].get(weight, 0.0)
-            new_b = min(-neg_b, w)
-            if new_b > bottleneck[v]:
-                bottleneck[v] = new_b
-                prev[v] = u
-                heapq.heappush(heap, (-new_b, v))
-
-    return bottleneck, prev
+def load_snapshot(
+    adjacency_csv: str | Path = ADJ_MAT_CSV,
+) -> tuple[nx.Graph, list[str]]:
+    adjacency = pd.read_csv(adjacency_csv, index_col=0)
+    if list(adjacency.index) != list(adjacency.columns):
+        raise ValueError("El snapshot no tiene iguales filas y columnas")
+    values = adjacency.to_numpy()
+    if not np.array_equal(values, values.T):
+        raise ValueError("El snapshot no es simétrico")
+    graph = nx.from_pandas_adjacency(adjacency)
+    return graph, list(adjacency.index)
 
 
-def reconstruct_path(prev, source, target):
-    path = []
-    cur  = target
-    while cur is not None:
-        path.append(cur)
-        cur = prev[cur]
-    path.reverse()
-    if not path or path[0] != source:
-        return []
-    return path
+def load_coordinates(
+    coordinates_csv: str | Path = COORDS_CSV,
+    nodes: list[str] | None = None,
+) -> dict[str, tuple[float, float]]:
+    frame = pd.read_csv(coordinates_csv, delimiter=";")
+    frame.columns = [str(column).strip().lstrip("\ufeff") for column in frame]
+    required = {"Población", "Latitud", "Longitud"}
+    missing_columns = required - set(frame.columns)
+    if missing_columns:
+        raise ValueError(f"Faltan columnas: {sorted(missing_columns)}")
 
-
-# ---------------------------------------------------------------------------
-# All-pairs computation on a (possibly disconnected) graph
-# ---------------------------------------------------------------------------
-def compute_all_pairs(G, label=""):
-    """
-    Runs all-pairs widest-path + hop-shortest Dijkstra.
-    If the graph is disconnected the computation is restricted to pairs
-    within the same connected component.
-    Returns a DataFrame of per-pair metrics.
-    """
-    nodes = list(G.nodes())
-    N = len(nodes)
-    print(f"  [{label}] |V|={N}, |E|={G.number_of_edges()}", flush=True)
-
-    # Connectivity check
-    comps = list(nx.connected_components(G))
-    n_comps = len(comps)
-    if n_comps > 1:
-        sizes = sorted([len(c) for c in comps], reverse=True)
-        print(f"  [{label}] DISCONNECTED — {n_comps} components, "
-              f"sizes: {sizes[:5]}{'...' if len(sizes) > 5 else ''}", flush=True)
-        # Work on largest connected component
-        lcc_nodes = max(comps, key=len)
-        G = G.subgraph(lcc_nodes).copy()
-        nodes = list(G.nodes())
-        N = len(nodes)
-        print(f"  [{label}] Using largest component: |V|={N}, |E|={G.number_of_edges()}", flush=True)
-    else:
-        print(f"  [{label}] Connected: yes", flush=True)
-
-    n_pairs_expected = N * (N - 1) // 2
-    print(f"  [{label}] Expected pairs: {n_pairs_expected:,}", flush=True)
-
-    t1 = time.time()
-    rows = []
-
-    for i, src in enumerate(nodes):
-        if i % 100 == 0:
-            elapsed = time.time() - t1
-            eta = elapsed / max(i, 1) * (N - i) if i > 0 else 0
-            print(f"    [{label}] source {i}/{N}  elapsed={elapsed:.0f}s  ETA={eta:.0f}s",
-                  flush=True)
-
-        # Widest-path from src
-        btl_wide, prev_wide = widest_path_dijkstra(G, src, weight='SKR')
-
-        # Hop-count Dijkstra from src
-        hop_lengths, hop_paths = nx.single_source_dijkstra(
-            G, src, weight=lambda u, v, d: 1)
-
-        for tgt in nodes:
-            if tgt <= src:
-                continue
-            if hop_lengths.get(tgt) is None:
-                continue
-            if btl_wide.get(tgt, -1) < 0:
-                continue
-
-            # Hop-count path
-            h_path = hop_paths[tgt]
-            hop_n  = len(h_path) - 1
-            skr_hop = (min(G[h_path[k]][h_path[k + 1]].get('SKR', 0)
-                           for k in range(len(h_path) - 1))
-                       if hop_n > 0 else 0.0)
-
-            # Widest path
-            w_path = reconstruct_path(prev_wide, src, tgt)
-            if not w_path:
-                continue
-            hop_w  = len(w_path) - 1
-            skr_w  = btl_wide[tgt]
-
-            I  = skr_w / skr_hop if skr_hop > 0 else np.nan
-            dh = hop_w - hop_n
-
-            rows.append({
-                'node_s':       src,
-                'node_t':       tgt,
-                'hop_shortest': hop_n,
-                'hop_widest':   hop_w,
-                'delta_h':      dh,
-                'skr_hop':      skr_hop,
-                'skr_widest':   skr_w,
-                'I':            I,
-            })
-
-    elapsed_total = time.time() - t1
-    df = pd.DataFrame(rows)
-    print(f"  [{label}] Done in {elapsed_total:.1f}s — {len(df):,} pairs", flush=True)
-    return df, G   # return the (possibly trimmed) graph
-
-
-# ---------------------------------------------------------------------------
-# Aggregate statistics (same as enrutamiento_espana_completo.py)
-# ---------------------------------------------------------------------------
-def aggregate_stats(df, label=""):
-    I  = df['I'].dropna()
-    dh = df['delta_h'].dropna()
-    return {
-        'label':     label,
-        'n_pairs':   len(df),
-        'I_mean':    round(float(I.mean()), 4),
-        'I_median':  round(float(I.median()), 4),
-        'I_std':     round(float(I.std()), 4),
-        'I_P90':     round(float(I.quantile(0.90)), 4),
-        'I_P99':     round(float(I.quantile(0.99)), 4),
-        'I_max':     round(float(I.max()), 4),
-        'dh_mean':   round(float(dh.mean()), 4),
-        'dh_median': round(float(dh.median()), 4),
-        'dh_std':    round(float(dh.std()), 4),
-        'dh_P90':    round(float(dh.quantile(0.90)), 4),
-        'dh_P99':    round(float(dh.quantile(0.99)), 4),
-        'dh_max':    int(dh.max()),
+    coordinates = {
+        str(row["Población"]): (
+            float(str(row["Latitud"]).replace(",", ".")),
+            float(str(row["Longitud"]).replace(",", ".")),
+        )
+        for _, row in frame.iterrows()
     }
+    if nodes is None:
+        return coordinates
+    missing_nodes = sorted(set(nodes) - set(coordinates), key=node_key)
+    if missing_nodes:
+        raise ValueError(
+            f"Faltan coordenadas para {len(missing_nodes)} nodos: "
+            f"{missing_nodes[:5]}"
+        )
+    return {node: coordinates[node] for node in nodes}
 
 
-# ---------------------------------------------------------------------------
-# Print Table 5
-# ---------------------------------------------------------------------------
-def print_table5(results):
-    print()
-    print("=" * 90)
-    print("TABLE 5 — Sensitivity to Δ (link-distance threshold)")
-    print("  Graph rebuilt from raw coordinates for each Δ")
-    print("=" * 90)
-    hdr = (f"{'Δ (km)':<8} {'|V|':>6} {'|E|':>8} {'Connected?':>12} "
-           f"{'n_pairs':>10} {'Mean I':>8} {'Median I':>10} "
-           f"{'Std I':>8} {'P90 I':>8} {'P99 I':>8} {'Mean Δh':>10}")
-    print(hdr)
-    print("-" * 90)
-    for r in results:
-        conn = "yes" if r['connected'] else f"LCC={r['lcc_size']}"
-        print(f"{r['delta']:<8} {r['n_nodes']:>6} {r['n_edges']:>8} {conn:>12} "
-              f"{r['n_pairs']:>10,} {r['I_mean']:>8.4f} {r['I_median']:>10.4f} "
-              f"{r['I_std']:>8.4f} {r['I_P90']:>8.4f} {r['I_P99']:>8.4f} "
-              f"{r['dh_mean']:>10.4f}")
-    print("=" * 90)
+def build_alternative_graph(
+    coordinates: dict[str, tuple[float, float]],
+    delta_km: float,
+    rho: float = 1.0,
+) -> nx.Graph:
+    """Reconstruye un grafo geométrico; no reutiliza aristas del snapshot."""
+    if not math.isfinite(delta_km) or delta_km <= 0:
+        raise ValueError("delta_km debe ser finito y positivo")
+    if not math.isfinite(rho) or rho <= 0:
+        raise ValueError("rho debe ser finito y positivo")
+
+    graph = nx.Graph()
+    nodes = sorted(coordinates, key=node_key)
+    graph.add_nodes_from(nodes)
+    for first, second in itertools.combinations(nodes, 2):
+        lat1, lon1 = coordinates[first]
+        lat2, lon2 = coordinates[second]
+        haversine_km = float(_haversine(lat1, lon1, lat2, lon2))
+        if haversine_km <= delta_km:
+            model_distance = rho * haversine_km
+            graph.add_edge(
+                first,
+                second,
+                haversine_km=haversine_km,
+                dist_km=model_distance,
+                SKR=skr_bb84_asymptotic(model_distance),
+            )
+    return graph
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-if __name__ == '__main__':
-    t_global = time.time()
-
-    print("=" * 65)
-    print("Δ-Sensitivity Analysis — Spain QKD Network")
-    print("Using 950 PAM relay nodes (consistent with Tables 1–4)")
-    print("Rebuilding edges from coordinates for each threshold")
-    print("=" * 65)
-
-    # Load the 950 PAM relay node names from the adjacency matrix
-    print(f"\nLoading PAM node names from: {ADJ_MAT_CSV}")
-    pam_nodes = load_pam_node_names()
-    print(f"  Found {len(pam_nodes)} PAM relay nodes")
-
-    # Load coordinates for those 950 nodes only
-    print(f"Loading coordinates from: {COORDS_CSV}")
-    coords = load_coords(pam_nodes=pam_nodes)
-    print(f"  Loaded coordinates for {len(coords)} PAM nodes")
-
-    delta_values = [35, 40, 45, 50]
-    sensitivity_results = []   # for JSON (matches table5_sensitivity_delta format)
-    table5_rows = []           # for pretty-print
-
-    for delta in delta_values:
-        print(f"\n{'='*50}")
-        print(f"  Δ = {delta} km")
-        print(f"{'='*50}")
-
-        # Build graph
-        t0 = time.time()
-        G = build_graph_for_delta(coords, delta_km=delta)
-        t_build = time.time() - t0
-        n_nodes_full = G.number_of_nodes()
-        n_edges_full = G.number_of_edges()
-        print(f"  Graph built in {t_build:.1f}s — |V|={n_nodes_full}, |E|={n_edges_full}",
-              flush=True)
-
-        # Verify at Δ=45: rebuilt graph should match AdjacencyMatrixNamed45.csv
-        if delta == 45:
-            adj_mat = pd.read_csv(ADJ_MAT_CSV, index_col=0)
-            expected_edges = int(adj_mat.values.sum() / 2)
-            match = "MATCH" if n_edges_full == expected_edges else f"MISMATCH (expected {expected_edges})"
-            print(f"  VERIFICATION Δ=45: rebuilt edges={n_edges_full}, "
-                  f"AdjacencyMatrix edges={expected_edges} — {match}", flush=True)
-
-        # Remove isolated nodes (nodes with no edges — they don't participate)
-        isolated = [v for v in G.nodes() if G.degree(v) == 0]
-        if isolated:
-            print(f"  Removing {len(isolated)} isolated nodes (degree=0)", flush=True)
-            G.remove_nodes_from(isolated)
-
-        # Check connectivity
-        comps = list(nx.connected_components(G))
-        is_connected = (len(comps) == 1)
-        n_nodes_active = G.number_of_nodes()
-
-        # Compute all pairs
-        df, G_used = compute_all_pairs(G, label=f"Δ={delta}")
-
-        # After compute_all_pairs G_used may be restricted to LCC
-        n_nodes_used = G_used.number_of_nodes()
-        n_edges_used = G_used.number_of_edges()
-
-        # Aggregate stats
-        s = aggregate_stats(df, label=str(delta))
-        s['param'] = 'delta'
-        s['value'] = delta
-
-        # Build table5 display row
-        row = {
-            'delta':      delta,
-            'n_nodes':    n_nodes_used,
-            'n_edges':    n_edges_used,
-            'connected':  is_connected,
-            'lcc_size':   n_nodes_used,
-            'n_pairs':    s['n_pairs'],
-            'I_mean':     s['I_mean'],
-            'I_median':   s['I_median'],
-            'I_std':      s['I_std'],
-            'I_P90':      s['I_P90'],
-            'I_P99':      s['I_P99'],
-            'I_max':      s['I_max'],
-            'dh_mean':    s['dh_mean'],
-            'dh_median':  s['dh_median'],
-            'dh_std':     s['dh_std'],
-            'dh_max':     s['dh_max'],
-        }
-        table5_rows.append(row)
-
-        # Enrich stats for JSON output
-        s['n_nodes_full']   = n_nodes_full    # before removing isolated
-        s['n_edges_full']   = n_edges_full
-        s['n_nodes_active'] = n_nodes_used    # after LCC selection
-        s['n_edges_active'] = n_edges_used
-        s['connected']      = is_connected
-        sensitivity_results.append(s)
-
-        print(f"\n  -> I_mean={s['I_mean']:.4f}, dh_mean={s['dh_mean']:.4f}")
-
-    # Print Table 5
-    print_table5(table5_rows)
-
-    # ---- Update JSON ----
-    print(f"\nUpdating JSON: {JSON_OUT}")
-    if os.path.exists(JSON_OUT):
-        with open(JSON_OUT, 'r', encoding='utf-8') as f:
-            json_data = json.load(f)
-    else:
-        json_data = {}
-
-    json_data['table5_sensitivity_delta'] = sensitivity_results
-    json_data['table5_sensitivity_delta_meta'] = {
-        'generated':   time.strftime('%Y-%m-%dT%H:%M:%S'),
-        'description': (
-            'Graph rebuilt using the 950 PAM relay nodes from AdjacencyMatrixNamed45.csv '
-            '(consistent with Tables 1-4). Coordinates from peninsula_1000.csv. '
-            'Edge exists iff haversine(u,v) <= Δ km. '
-            'SKR uses fibre_km = haversine_km * 1.25 with BB84 decoy model. '
-            'If disconnected, computation uses the largest connected component.'
+def select_largest_component(graph: nx.Graph) -> tuple[nx.Graph, dict[str, object]]:
+    isolated = sorted(nx.isolates(graph), key=node_key)
+    active = graph.copy()
+    active.remove_nodes_from(isolated)
+    components = sorted(
+        nx.connected_components(active),
+        key=lambda component: (
+            -len(component),
+            [node_key(n) for n in sorted(component, key=node_key)],
         ),
+    )
+    if not components:
+        raise ValueError("El escenario no contiene ninguna arista")
+    largest = active.subgraph(components[0]).copy()
+    return largest, {
+        "isolated_nodes": len(isolated),
+        "components_after_isolates": len(components),
+        "component_sizes": sorted((len(c) for c in components), reverse=True),
+        "used_largest_component": len(components) > 1,
     }
 
-    with open(JSON_OUT, 'w', encoding='utf-8') as f:
-        json.dump(json_data, f, indent=2, default=str)
-    print(f"  Saved: {JSON_OUT}")
 
-    t_total = time.time() - t_global
-    print(f"\nTotal runtime: {t_total:.1f}s")
-    print("Done.")
+def aggregate(rows: list[dict[str, object]]) -> dict[str, object]:
+    gains = np.asarray([float(row["skr_gain"]) for row in rows], dtype=float)
+    overhead = np.asarray(
+        [int(row["hop_overhead"]) for row in rows], dtype=float
+    )
+    finite = np.isfinite(gains)
+    return {
+        "unordered_pairs": len(rows),
+        "finite_gain_pairs": int(finite.sum()),
+        "non_finite_gain_pairs": int((~finite).sum()),
+        "mean_skr_gain": float(gains[finite].mean()) if finite.any() else None,
+        "median_skr_gain": (
+            float(np.median(gains[finite])) if finite.any() else None
+        ),
+        "max_skr_gain": float(gains[finite].max()) if finite.any() else None,
+        "mean_hop_overhead": float(overhead.mean()),
+        "median_hop_overhead": float(np.median(overhead)),
+        "max_hop_overhead": int(overhead.max()),
+    }
+
+
+def edge_diff_record(
+    rebuilt: nx.Graph,
+    snapshot_edges: set[tuple[str, str]],
+) -> dict[str, object]:
+    rebuilt_edges = edge_set(rebuilt)
+    added = rebuilt_edges - snapshot_edges
+    removed = snapshot_edges - rebuilt_edges
+    return {
+        "snapshot_edges": len(snapshot_edges),
+        "rebuilt_edges": len(rebuilt_edges),
+        "common_edges": len(rebuilt_edges & snapshot_edges),
+        "added_edges": len(added),
+        "removed_edges": len(removed),
+        "snapshot_edge_set_sha256": edge_set_sha256(snapshot_edges),
+        "rebuilt_edge_set_sha256": edge_set_sha256(rebuilt_edges),
+        "added_edge_set_sha256": edge_set_sha256(added),
+        "removed_edge_set_sha256": edge_set_sha256(removed),
+        "added_sample": [list(edge) for edge in sorted(added)[:10]],
+        "removed_sample": [list(edge) for edge in sorted(removed)[:10]],
+    }
+
+
+def run_sensitivity(
+    deltas: tuple[float, ...] = (35.0, 40.0, 45.0, 50.0),
+    rho: float = 1.0,
+    adjacency_csv: str | Path = ADJ_MAT_CSV,
+    coordinates_csv: str | Path = COORDS_CSV,
+) -> dict[str, object]:
+    snapshot, nodes = load_snapshot(adjacency_csv)
+    coordinates = load_coordinates(coordinates_csv, nodes)
+    snapshot_edges = edge_set(snapshot)
+    scenarios = []
+
+    for delta in deltas:
+        rebuilt = build_alternative_graph(coordinates, delta, rho)
+        used, component_info = select_largest_component(rebuilt)
+        rows = compare_route_metrics(used)
+        scenarios.append({
+            "delta_km": float(delta),
+            "rho": float(rho),
+            "model_distance": "rho * haversine_km",
+            "full_nodes": rebuilt.number_of_nodes(),
+            "full_edges": rebuilt.number_of_edges(),
+            "active_nodes": used.number_of_nodes(),
+            "active_edges": used.number_of_edges(),
+            "connected_full_graph": nx.is_connected(rebuilt),
+            "component_selection": component_info,
+            "edge_diff_vs_snapshot": edge_diff_record(rebuilt, snapshot_edges),
+            "routing": aggregate(rows),
+        })
+
+    return {
+        "schema_version": 1,
+        "analysis": "alternative_geometric_delta_sensitivity_spain",
+        "warning": (
+            "Cada escenario reconstruye un grafo alternativo desde coordenadas; "
+            "no sustituye ni modifica el snapshot base."
+        ),
+        "routing_policies": {
+            "min_hops": "min hops, then max bottleneck",
+            "max_min": "max bottleneck, then min hops",
+        },
+        "inputs": {
+            "adjacency_csv": os.path.relpath(adjacency_csv, ROOT),
+            "adjacency_sha256": sha256_file(adjacency_csv),
+            "coordinates_csv": os.path.relpath(coordinates_csv, ROOT),
+            "coordinates_sha256": sha256_file(coordinates_csv),
+            "skr_model_sha256": sha256_file(ROOT / "protocols" / "skr_bb84.py"),
+            "routing_core_sha256": sha256_file(BASE / "routing_core.py"),
+        },
+        "scenarios": scenarios,
+    }
+
+
+def write_json_deterministic(payload: dict[str, object], output: str | Path) -> None:
+    path = Path(output)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            payload,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+            allow_nan=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--delta",
+        nargs="+",
+        type=float,
+        default=[35.0, 40.0, 45.0, 50.0],
+        help="Umbrales geométricos en km",
+    )
+    parser.add_argument(
+        "--rho",
+        type=float,
+        default=1.0,
+        help="Factor explícito entre haversine y distancia del modelo",
+    )
+    parser.add_argument("--output", type=Path, default=JSON_OUT)
+    args = parser.parse_args()
+
+    result = run_sensitivity(tuple(args.delta), args.rho)
+    write_json_deterministic(result, args.output)
+    for scenario in result["scenarios"]:
+        routing = scenario["routing"]
+        diff = scenario["edge_diff_vs_snapshot"]
+        print(
+            f"Δ={scenario['delta_km']:g} km, rho={scenario['rho']:g}: "
+            f"|V|={scenario['active_nodes']}, |E|={scenario['active_edges']}, "
+            f"pares={routing['unordered_pairs']}, "
+            f"gain={routing['mean_skr_gain']:.6f}, "
+            f"Δh={routing['mean_hop_overhead']:.6f}, "
+            f"aristas +{diff['added_edges']}/-{diff['removed_edges']}"
+        )
+    print(f"Guardado: {args.output}")
+
+
+if __name__ == "__main__":
+    main()

@@ -31,10 +31,9 @@ Genera:
   datos/resultados_papers/fallos_sanity_skr.csv
   datos/resultados_papers/fallos_s1.csv
   datos/resultados_papers/fallos_s2.csv
-  /Users/igarcia/doctorado/2025_2026/experimentos/exp11_fallos_dispositivo.log
+  logs/exp11_fallos_dispositivo.log (o $QKD_LOG_DIR)
 
 Uso:
-    cd /Users/igarcia/doctorado/2025_2026/codigo/qkd-net-tools
     python analisis/fallos_dispositivo.py
 """
 
@@ -51,15 +50,14 @@ BASE    = os.path.dirname(os.path.abspath(__file__))
 ROOT    = os.path.abspath(os.path.join(BASE, '..'))
 DATA    = os.path.join(ROOT, 'datos')
 OUT_DIR = os.path.join(DATA, 'resultados_papers')
-LOG_DIR = '/Users/igarcia/doctorado/2025_2026/experimentos'
+LOG_DIR = os.environ.get('QKD_LOG_DIR', os.path.join(ROOT, 'logs'))
 os.makedirs(OUT_DIR, exist_ok=True)
-os.makedirs(LOG_DIR, exist_ok=True)
 
 sys.path.insert(0, ROOT)
 sys.path.insert(0, BASE)
 
 # Maquinaria canónica existente — NO se duplica
-from protocols.skr_bb84 import (skr_bb84_decoy, qber,            # noqa: E402
+from protocols.skr_bb84 import (skr_bb84_asymptotic, qber,       # noqa: E402
                                 ETA_DET, P_DARK, E_DETECTOR)
 from capacidad_servicio_ataques import (CARGADORES,               # noqa: E402
                                         bottlenecks_pares)
@@ -78,7 +76,6 @@ SANITY_DS     = [10.0, 30.0, 45.0]                     # km
 SANITY_DELTAS = [0.3, 0.6, 0.9]
 SANITY_KAPPAS = [10.0, 100.0, 1000.0]
 SANITY_DES    = [0.01, 0.02, 0.05]
-C0_ESPERADO   = {'cyl': 4.162e-3, 'espana': 6.0175e-3, 'adif': 6.871e-5}  # P7
 PRESUPUESTO_S = 3 * 3600                               # 3 h → si se proyecta más, R=50
 
 LOG_FH = None
@@ -98,7 +95,7 @@ def log(msg):
 
 def skr_con_fallo(dist_km, delta=0.0, kappa=1.0, d_e=0.0):
     """
-    SKR BB84+decoy con dispositivo degradado:
+    SKR BB84 asintótico ideal con dispositivo degradado:
       M1: η' = (1−δ)·η_det ;  M2: p' = κ·p_dark ;  M3: e' = e_det + Δe.
     Corte: SKR = 0 si QBER ≥ 0.11 o si la fórmula da ≤ 0.
     """
@@ -109,7 +106,9 @@ def skr_con_fallo(dist_km, delta=0.0, kappa=1.0, d_e=0.0):
         return 0.0
     if qber(dist_km, eta, p_d, e_d) >= QBER_CUT:
         return 0.0
-    return skr_bb84_decoy(dist_km, eta_det=eta, p_dark=p_d, e_det=e_d)
+    return skr_bb84_asymptotic(
+        dist_km, eta_det=eta, p_dark=p_d, e_det=e_d
+    )
 
 
 def aplicar_fallos(G, fallos):
@@ -162,15 +161,20 @@ def cargar_red(red):
         df = df[df['caso'] == caso]
         tabla = {frozenset((r.nodo_u, r.nodo_v)): float(r.dist_km)
                  for r in df.itertuples()}
-        faltan = 0
+        faltan = [
+            (u, v) for u, v in sin_dist
+            if frozenset((u, v)) not in tabla
+        ]
+        if faltan:
+            muestra = ', '.join(f'{u!r}--{v!r}' for u, v in faltan[:5])
+            raise ValueError(
+                f"{red}: {len(faltan)} aristas sin distancia en "
+                f"datos/skr_per_link.csv; primeras: {muestra}"
+            )
         for u, v in sin_dist:
-            d = tabla.get(frozenset((u, v)))
-            if d is None:
-                d = 45.0   # mismo valor por defecto que el cargador para 'skr'
-                faltan += 1
-            G[u][v]['dist_km'] = d
+            G[u][v]['dist_km'] = tabla[frozenset((u, v))]
         log(f"  dist_km recuperada de skr_per_link.csv para "
-            f"{len(sin_dist)} aristas ({faltan} sin registro → 45 km)")
+            f"{len(sin_dist)} aristas")
 
     # Consistencia: SKR recalculado con parámetros sanos == SKR almacenado
     desv = max(abs(skr_con_fallo(d['dist_km']) - d['skr'])
@@ -367,6 +371,7 @@ def escenario_s2(red, G, pares, c0, modos, R):
 
 def main():
     global LOG_FH
+    os.makedirs(LOG_DIR, exist_ok=True)
     LOG_FH = open(os.path.join(LOG_DIR, 'exp11_fallos_dispositivo.log'), 'w')
     t_inicio = time.time()
     log("=" * 70)
@@ -393,17 +398,16 @@ def main():
         log(f"  |V|={G.number_of_nodes()}, |E|={G.number_of_edges()}, "
             f"conexo={nx.is_connected(G)}")
 
-        # C(0) y check contra P7
+        # C(0) se deriva del grafo, del modelo y de los pares versionados.
         t = time.time()
         c0, c0_mean, frac0, S0 = medir_C(G, pares)
         t_eval = time.time() - t
-        ok = abs(c0 - C0_ESPERADO[red]) / C0_ESPERADO[red] < 1e-3
-        log(f"  C(0)={c0:.4e} (P7: {C0_ESPERADO[red]:.4e}) "
-            f"{'— COINCIDE' if ok else '— [ERROR] NO COINCIDE'}; "
+        if not np.isfinite(c0) or c0 <= 0.0:
+            raise RuntimeError(
+                f"{red}: C(0) inválida ({c0!r}); revisar modelo, grafo y pares"
+            )
+        log(f"  C(0) derivada={c0:.4e}; "
             f"S(0)={S0:.3f}; t_eval_C={t_eval:.2f} s")
-        if not ok:
-            raise RuntimeError(f"{red}: C(0)={c0:.4e} != P7 "
-                               f"{C0_ESPERADO[red]:.4e} — abortando")
 
         # Presupuesto: nº de evaluaciones de C en S2 con esta red
         R = S2_R
