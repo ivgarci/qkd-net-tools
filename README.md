@@ -8,7 +8,12 @@
 
 ---
 
-This repository contains all Python and R scripts used across three case studies in the thesis: generation of trusted-relay QKD network topologies from territorial data (Castile and León, Peninsular Spain), analysis of real dark-fibre infrastructure (ADIF railway network), and structural validation via complex network analysis.
+This repository contains Python and R scripts for three thesis case studies:
+generation of trusted-relay QKD topology candidates from territorial data
+(Castile and León and Peninsular Spain), analysis of a topological proxy
+derived from ADIF open railway data, and structural validation via complex
+network analysis. The ADIF data used here do not establish the existence,
+continuity or availability of dark fibre.
 
 ---
 
@@ -18,7 +23,7 @@ This repository contains all Python and R scripts used across three case studies
 qkd-net-tools/
 ├── analisis/          Network metrics: centrality, clustering, connectivity, degree distribution
 ├── ataques/           Resilience simulations: random failures and targeted attacks
-├── adif/              ADIF dark-fibre case study: junction graph, resilience, figures, maps
+├── adif/              ADIF-derived railway proxy: junction graph, resilience, figures, maps
 ├── generacion/        Topology generation: k-medoids (R/PAM), network builder (Python)
 ├── datos/             Input data files
 │   ├── cyl/           Castile and León: adjacency matrix, node measures, failure/attack results
@@ -41,7 +46,7 @@ qkd-net-tools/
 │   │   └── incremental_targeted_attack_results.csv — targeted attack curve (0–49%, step 1%)
 │   ├── adif/          ADIF railway network data and analysis results
 │   │   ├── nodos_red_adif.csv                     — 3,085 ADIF dependencies with coordinates
-│   │   ├── adyacencia_red_adif.csv                — 3,099 fibre segments with lengths (km)
+│   │   ├── adyacencia_red_adif.csv                — railway adjacency records with reported lengths
 │   │   └── resultados_adif_junctions.json         — pre-computed metrics, failure/attack curves
 │   ├── cyl_1000.csv          — (legacy path) Castile and León municipalities
 │   └── peninsula_1000.csv    — (legacy path) Peninsular Spain municipalities
@@ -61,6 +66,17 @@ qkd-net-tools/
 
 ```bash
 pip install -r requirements.txt
+```
+
+For the exact environment used to regenerate and audit the thesis SKR and CyL
+routing artefacts:
+
+```bash
+python -m venv .venv
+.venv/bin/pip install -r requirements-reproducibility.txt
+.venv/bin/python -m pytest -q
+.venv/bin/python protocols/skr_bb84.py
+.venv/bin/python analisis/enrutamiento_qkd.py
 ```
 
 | Package | Role |
@@ -115,8 +131,8 @@ pip install -r requirements.txt
 
 | Script | Directory | Description |
 |--------|-----------|-------------|
-| `skr_bb84.py` | `protocols/` | BB84 decoy-state SKR(d) model (Lo-Ma-Chen 2005); QBER(d); SKR per link for CyL/España; `figuras/skr_vs_distancia.pdf` |
-| `enrutamiento_qkd.py` | `analisis/` | Key-aware routing: Dijkstra (hops) vs max-SKR path; top-10 SKR bottleneck pairs; `figuras/comparacion_rutas_qkd.pdf` |
+| `skr_bb84.py` | `protocols/` | Ideal asymptotic BB84 SKR(d) model (Lo-Ma-Chen 2005; exact single-photon estimate, not a finite-decoy implementation); QBER(d); SKR per link for CyL/España; `figuras/skr_vs_distancia.pdf` |
+| `enrutamiento_qkd.py` | `analisis/` | Deterministic key-aware routing over all 4,950 unordered CyL pairs: minimum hops (tie: maximum bottleneck) vs max-min SKR (tie: minimum hops); full paths in `datos/enrutamiento_qkd_allpairs.csv`, summary and top-10 bottlenecks; `figuras/comparacion_rutas_qkd.pdf` |
 | `benchmarks_qkd.py` | `analisis/` | Compare same metrics with real published QKD networks (Tokyo 2011, SECOQC 2009, China 2021); `datos/benchmarks_qkd_comparacion.csv` |
 
 ---
@@ -146,7 +162,11 @@ pip install -r requirements.txt
 
 ---
 
-### Case III — ADIF dark-fibre network (real infrastructure)
+### Case III — Topological proxy derived from ADIF railway data
+
+This case characterises a graph built from open railway-node and adjacency
+records. It is not an inventory of deployable telecommunications links and
+does not verify fibre continuity, optical loss or site availability.
 
 | Script | Directory | Description |
 |--------|-----------|-------------|
@@ -162,14 +182,14 @@ pip install -r requirements.txt
 | File | Description |
 |------|-------------|
 | `datos/adif/nodos_red_adif.csv` | ADIF node catalogue: 3,085 dependencies with geo-coordinates, category (P/S), connection status |
-| `datos/adif/adyacencia_red_adif.csv` | ADIF adjacency: 3,099 fibre segments with lengths (km) |
+| `datos/adif/adyacencia_red_adif.csv` | ADIF railway adjacency records with reported lengths (km) |
 | `datos/adif/resultados_adif_junctions.json` | Pre-computed analysis results: metrics, random failure statistics, attack curves, top-10 betweenness nodes |
 
 **Key parameters (ADIF case):**
 
 | Parameter | Value | Description |
 |-----------|-------|-------------|
-| `Δ_eff` | 50 km | Operational threshold (absorbs <7% margin on AVE segments) |
+| `Δ_eff` | 50 km | Model classification assumption; not a calibrated operational threshold |
 | `R` | 1,000 | Random failure replications |
 | `p_0` | 13% | Fraction removed per trial |
 | `p*` (degree attack) | 5% | Fragmentation threshold |
@@ -242,6 +262,11 @@ python skr_bb84.py
 - **Louvain communities**: `seed=42` passed to `nx_comm.louvain_communities()`.
 - **Shared utilities**: `qkd_utils.py` at repo root exposes `load_graph()`, `relative_gcc()`,
   `robustness_index()`, `p_star()`, `validate_adjacency_matrix()` and `get_thesis_style()`.
+- **Thesis SKR/routing artefacts**: the source data, equations, tie-breaking rules,
+  expected numerical checks and current provenance limitations are recorded in
+  [`docs/THESIS_SKR_ROUTING_REPRODUCIBILITY.md`](docs/THESIS_SKR_ROUTING_REPRODUCIBILITY.md).
+  Run `python -m unittest tests.test_thesis_skr_routing_audit` for an
+  implementation-independent audit based only on the Python standard library.
 
 ---
 

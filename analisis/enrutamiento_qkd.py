@@ -1,253 +1,420 @@
 """
-Enrutamiento consciente de QKD (key-aware routing).
+Análisis reproducible de enrutamiento consciente de QKD para Castilla y León.
 
-Compara dos estrategias de enrutamiento entre pares de nodos:
-  1. Ruta más corta en saltos (Dijkstra clásico — sin física QKD)
-  2. Ruta máxima-SKR (maximizar la SKR agregada del camino)
+Para cada uno de los 4.950 pares no ordenados de los 100 nodos se comparan:
 
-La SKR agregada de una ruta es el mínimo de los SKR de las aristas
-que la componen (cuello de botella del canal cuántico).
+1. ``min_hops``: mínimo número de saltos y, entre esos caminos, máximo
+   cuello de botella SKR.
+2. ``max_min_skr``: máximo cuello de botella SKR y, entre esos caminos,
+   mínimo número de saltos.
 
-Genera:
+Si todavía existe un empate, se elige el camino lexicográficamente menor
+según el nombre Unicode de los nodos. Esta última regla no cambia las métricas,
+pero hace que el camino publicado sea independiente del orden de inserción de
+NetworkX.
+
+Salidas:
+  datos/enrutamiento_qkd_allpairs.csv
+  datos/enrutamiento_qkd_summary.csv
+  datos/enrutamiento_qkd_bottleneck.csv
   figuras/comparacion_rutas_qkd.pdf/.png
-  datos/enrutamiento_qkd_bottleneck.csv — top-10 pares más limitados por SKR
 """
 
-import os
-import math
+from __future__ import annotations
+
 import heapq
+import hashlib
+import itertools
+import math
+import os
+import platform
+import sys
+from typing import Hashable
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import networkx as nx
 import numpy as np
 import pandas as pd
-import networkx as nx
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 
-BASE      = os.path.dirname(os.path.abspath(__file__))
-DATA_CYL  = os.path.join(BASE, '..', 'datos', 'cyl')
-DATA_ESP  = os.path.join(BASE, '..', 'datos', 'espana')
-FIGS_OUT  = os.path.join(BASE, '..', 'figuras')
+BASE = os.path.dirname(os.path.abspath(__file__))
+DATA_CYL = os.path.join(BASE, "..", "datos", "cyl")
+DATA_OUT = os.path.join(BASE, "..", "datos")
+FIGS_OUT = os.path.join(BASE, "..", "figuras")
 os.makedirs(FIGS_OUT, exist_ok=True)
 
-# Importar modelo SKR (relativo al paquete protocols/)
-import sys
-sys.path.insert(0, os.path.join(BASE, '..'))
-from protocols.skr_bb84 import skr_bb84_decoy, _haversine
+sys.path.insert(0, os.path.join(BASE, ".."))
+from protocols.skr_bb84 import _haversine, skr_bb84_asymptotic  # noqa: E402
+
+def _node_key(node: Hashable) -> tuple[str, str]:
+    """Clave total y estable incluso si un grafo mezcla tipos de nodo."""
+    return type(node).__name__, str(node)
 
 
-# ---------------------------------------------------------------------------
-# Construcción del grafo con atributos de distancia y SKR
-# ---------------------------------------------------------------------------
+def _path_distance(G: nx.Graph, path: list[Hashable]) -> float:
+    return sum(
+        float(G[u][v]["dist_km"])
+        for u, v in itertools.pairwise(path)
+    )
 
-def build_qkd_graph(adj_csv, coords_csv, coords_sep=','):
-    """Carga grafo, asigna dist_km y SKR a cada arista."""
+
+def _path_bottleneck(G: nx.Graph, path: list[Hashable]) -> float:
+    if len(path) < 2:
+        return math.inf
+    return min(
+        float(G[u][v]["SKR"])
+        for u, v in itertools.pairwise(path)
+    )
+
+
+def build_qkd_graph(
+    adj_csv: str,
+    coords_csv: str,
+    coords_sep: str = ";",
+) -> nx.Graph:
+    """Carga el grafo y asigna distancia geodésica y SKR a cada arista.
+
+    No se imputan distancias. Una coordenada ausente invalidaría el análisis y
+    por ello se informa como error.
+    """
     adj = pd.read_csv(adj_csv, index_col=0)
+    if list(adj.index) != list(adj.columns):
+        raise ValueError("La matriz de adyacencia no tiene iguales filas y columnas")
+    if not np.array_equal(adj.to_numpy(), adj.to_numpy().T):
+        raise ValueError("La matriz de adyacencia no es simétrica")
+
     G = nx.from_pandas_adjacency(adj)
+    coords_df = pd.read_csv(coords_csv, delimiter=coords_sep)
+    coords_df.columns = [str(c).strip().lstrip("\ufeff") for c in coords_df.columns]
+    required = {"Población", "Latitud", "Longitud"}
+    if not required.issubset(coords_df.columns):
+        raise ValueError(
+            f"Faltan columnas en {coords_csv}: {sorted(required - set(coords_df.columns))}"
+        )
 
-    if coords_csv and os.path.exists(coords_csv):
-        coords_df = pd.read_csv(coords_csv, delimiter=coords_sep)
-        col_pob = 'Población' if 'Población' in coords_df.columns else coords_df.columns[0]
-        coords = {row[col_pob]: (row['Latitud'], row['Longitud'])
-                  for _, row in coords_df.iterrows()
-                  if row[col_pob] in G.nodes()}
+    coords = {
+        row["Población"]: (float(row["Latitud"]), float(row["Longitud"]))
+        for _, row in coords_df.iterrows()
+    }
+    missing = sorted(set(G.nodes) - set(coords), key=_node_key)
+    if missing:
+        raise ValueError(f"Faltan coordenadas para {len(missing)} nodos: {missing[:5]}")
 
-        for u, v in G.edges():
-            if u in coords and v in coords:
-                lat1, lon1 = coords[u]
-                lat2, lon2 = coords[v]
-                dist = _haversine(lat1, lon1, lat2, lon2)
-                skr  = skr_bb84_decoy(dist)
-                G[u][v]['dist_km'] = dist
-                G[u][v]['SKR']     = skr
-            else:
-                G[u][v]['dist_km'] = 45.0
-                G[u][v]['SKR']     = skr_bb84_decoy(45.0)
+    for u, v in G.edges:
+        lat1, lon1 = coords[u]
+        lat2, lon2 = coords[v]
+        dist = _haversine(lat1, lon1, lat2, lon2)
+        G[u][v]["dist_km"] = dist
+        G[u][v]["SKR"] = skr_bb84_asymptotic(dist)
 
+    if not nx.is_connected(G):
+        raise ValueError("El grafo de CyL no es conexo; no existen los 4.950 pares")
     return G
 
 
-# ---------------------------------------------------------------------------
-# Algoritmo de ruta máxima-SKR (variante de Dijkstra)
-# ---------------------------------------------------------------------------
+def _shortest_preferred_path(
+    G: nx.Graph,
+    source: Hashable,
+    target: Hashable,
+) -> tuple[float, list[Hashable]]:
+    """Dijkstra por (saltos, -cuello de botella, camino lexicográfico)."""
+    if source not in G or target not in G:
+        raise nx.NodeNotFound(f"Nodo ausente: {source!r} o {target!r}")
+    if source == target:
+        return math.inf, [source]
 
-def max_skr_path(G, source, target):
-    """
-    Ruta entre source y target que maximiza la SKR mínima del camino.
-    Utiliza un heap máximo (negamos los valores para usar heapq).
-    Devuelve (skr_bottleneck, path). skr_bottleneck=0 si no hay ruta.
-    """
-    # {node: best_min_skr_reached}
-    best = {source: float('inf')}
-    # heap: (-min_skr_so_far, node, path)
-    heap = [(-float('inf'), source, [source])]
-    visited = set()
+    source_path_key = (_node_key(source),)
+    # heap: (prioridad primaria, secundaria, camino canónico, nodo, camino)
+    heap = [(0.0, -math.inf, source_path_key, source, [source])]
+    best: dict[Hashable, tuple[float, float, tuple[tuple[str, str], ...]]] = {
+        source: (0.0, -math.inf, source_path_key)
+    }
 
     while heap:
-        neg_skr, node, path = heapq.heappop(heap)
-        if node in visited:
+        first, second, path_key, node, path = heapq.heappop(heap)
+        label = (first, second, path_key)
+        if label != best.get(node):
             continue
-        visited.add(node)
-
         if node == target:
-            return -neg_skr, path
+            bottleneck = _path_bottleneck(G, path)
+            return bottleneck, path
 
-        for nbr in G.neighbors(node):
-            if nbr in visited:
-                continue
-            edge_skr = G[node][nbr].get('SKR', 0.0)
-            path_skr = min(-neg_skr, edge_skr)
-            if path_skr > best.get(nbr, 0.0):
-                best[nbr] = path_skr
-                heapq.heappush(heap, (-path_skr, nbr, path + [nbr]))
+        current_hops = len(path) - 1
+        current_bottleneck = _path_bottleneck(G, path)
+        for nbr in sorted(G.neighbors(node), key=_node_key):
+            edge_skr = float(G[node][nbr].get("SKR", 0.0))
+            candidate_bottleneck = min(current_bottleneck, edge_skr)
+            candidate_hops = current_hops + 1
+            candidate_path_key = path_key + (_node_key(nbr),)
+            candidate = (
+                float(candidate_hops),
+                -candidate_bottleneck,
+                candidate_path_key,
+            )
+            if candidate < best.get(nbr, (math.inf, math.inf, ())):
+                best[nbr] = candidate
+                heapq.heappush(
+                    heap,
+                    (*candidate, nbr, path + [nbr]),
+                )
 
     return 0.0, []
 
 
-# ---------------------------------------------------------------------------
-# Comparación de rutas para un grafo
-# ---------------------------------------------------------------------------
+def shortest_max_bottleneck_path(
+    G: nx.Graph,
+    source: Hashable,
+    target: Hashable,
+) -> tuple[float, list[Hashable]]:
+    """Camino de saltos mínimos; entre empates, mayor SKR mínima."""
+    return _shortest_preferred_path(G, source, target)
 
-def compare_routing(G, sample_pairs=None, max_pairs=200):
-    """
-    Compara Dijkstra (saltos) vs max-SKR para una muestra de pares.
-    Devuelve DataFrame con métricas por par.
-    """
-    nodes = list(G.nodes())
-    if sample_pairs is None:
-        # Muestra aleatoria reproducible
-        rng = np.random.default_rng(42)
-        idx = rng.choice(len(nodes), size=min(len(nodes), 50), replace=False)
-        sample_nodes = [nodes[i] for i in idx]
-        pairs = [(u, v) for i, u in enumerate(sample_nodes)
-                 for v in sample_nodes[i+1:]][:max_pairs]
-    else:
-        pairs = sample_pairs
+
+def max_skr_path(
+    G: nx.Graph,
+    source: Hashable,
+    target: Hashable,
+) -> tuple[float, list[Hashable]]:
+    """Camino max-min SKR; entre empates, menor número de saltos."""
+    if source not in G or target not in G:
+        raise nx.NodeNotFound(f"Nodo ausente: {source!r} o {target!r}")
+    if source == target:
+        return math.inf, [source]
+
+    # Fase 1: capacidad widest-path. Aquí una capacidad mayor sí domina a una
+    # menor para cualquier continuación, por lo que basta una etiqueta por nodo.
+    best = {source: math.inf}
+    heap = [(-math.inf, _node_key(source), source)]
+    while heap:
+        neg_capacity, _, node = heapq.heappop(heap)
+        capacity = -neg_capacity
+        if capacity != best.get(node):
+            continue
+        for nbr in sorted(G.neighbors(node), key=_node_key):
+            candidate = min(capacity, float(G[node][nbr].get("SKR", 0.0)))
+            if candidate > best.get(nbr, -math.inf):
+                best[nbr] = candidate
+                heapq.heappush(heap, (-candidate, _node_key(nbr), nbr))
+
+    max_bottleneck = best.get(target, 0.0)
+    if max_bottleneck <= 0:
+        return 0.0, []
+
+    # Fase 2: el camino con menos saltos dentro del subgrafo que conserva
+    # exactamente la capacidad max-min. _shortest_preferred_path añade el desempate
+    # lexicográfico final.
+    eligible = nx.subgraph_view(
+        G,
+        filter_edge=lambda u, v: float(G[u][v].get("SKR", 0.0))
+        >= max_bottleneck,
+    )
+    bottleneck, path = _shortest_preferred_path(eligible, source, target)
+    if not path:
+        raise AssertionError("La segunda fase no recuperó el camino max-min")
+    return bottleneck, path
+
+
+def compare_routing(
+    G: nx.Graph,
+    pairs: list[tuple[Hashable, Hashable]] | None = None,
+) -> pd.DataFrame:
+    """Compara ambos criterios para todos los pares no ordenados."""
+    nodes = sorted(G.nodes, key=_node_key)
+    if pairs is None:
+        pairs = list(itertools.combinations(nodes, 2))
 
     rows = []
     for u, v in pairs:
-        # Ruta corta en saltos
-        try:
-            sp_hops = nx.shortest_path(G, u, v)
-            sp_hops_n = len(sp_hops) - 1
-            sp_dist = sum(G[sp_hops[i]][sp_hops[i+1]].get('dist_km', 0)
-                          for i in range(len(sp_hops)-1))
-            sp_skr_btl = min(G[sp_hops[i]][sp_hops[i+1]].get('SKR', 0)
-                             for i in range(len(sp_hops)-1)) if sp_hops_n > 0 else 0.0
-        except nx.NetworkXNoPath:
-            continue
-
-        # Ruta máxima-SKR
+        sp_skr, sp_path = shortest_max_bottleneck_path(G, u, v)
         mqr_skr, mqr_path = max_skr_path(G, u, v)
+        if not sp_path or not mqr_path:
+            raise nx.NetworkXNoPath(f"No hay camino entre {u!r} y {v!r}")
+
+        sp_hops = len(sp_path) - 1
         mqr_hops = len(mqr_path) - 1
-        mqr_dist = sum(G[mqr_path[i]][mqr_path[i+1]].get('dist_km', 0)
-                       for i in range(len(mqr_path)-1))
-
         rows.append({
-            'origen': str(u),
-            'destino': str(v),
-            'sp_hops': sp_hops_n,
-            'sp_dist_km': round(sp_dist, 1),
-            'sp_skr_bottleneck': sp_skr_btl,
-            'mqr_hops': mqr_hops,
-            'mqr_dist_km': round(mqr_dist, 1),
-            'mqr_skr_bottleneck': mqr_skr,
-            'skr_gain': mqr_skr / sp_skr_btl if sp_skr_btl > 0 else np.inf,
-            'hop_overhead': mqr_hops - sp_hops_n,
+            "origen": str(u),
+            "destino": str(v),
+            "sp_hops": sp_hops,
+            "sp_dist_km": _path_distance(G, sp_path),
+            "sp_skr_bottleneck": sp_skr,
+            "sp_path": " -> ".join(map(str, sp_path)),
+            "mqr_hops": mqr_hops,
+            "mqr_dist_km": _path_distance(G, mqr_path),
+            "mqr_skr_bottleneck": mqr_skr,
+            "mqr_path": " -> ".join(map(str, mqr_path)),
+            "skr_gain": mqr_skr / sp_skr,
+            "hop_overhead": mqr_hops - sp_hops,
         })
-
     return pd.DataFrame(rows)
 
 
-# ---------------------------------------------------------------------------
-# Figura
-# ---------------------------------------------------------------------------
+def summarize(df: pd.DataFrame, G: nx.Graph) -> pd.DataFrame:
+    """Resumen de magnitudes verificables usado por texto y figura."""
+    improved = df["mqr_skr_bottleneck"] > df["sp_skr_bottleneck"]
+    same = np.isclose(
+        df["mqr_skr_bottleneck"],
+        df["sp_skr_bottleneck"],
+        rtol=1e-12,
+        atol=0.0,
+    )
+    return pd.DataFrame([{
+        "nodes": G.number_of_nodes(),
+        "edges": G.number_of_edges(),
+        "unordered_pairs": len(df),
+        "mean_skr_gain": df["skr_gain"].mean(),
+        "median_skr_gain": df["skr_gain"].median(),
+        "mean_hop_overhead": df["hop_overhead"].mean(),
+        "median_hop_overhead": df["hop_overhead"].median(),
+        "pairs_skr_improved": int(improved.sum()),
+        "pairs_same_skr": int(same.sum()),
+        "max_skr_gain": df["skr_gain"].max(),
+        "max_hop_overhead": int(df["hop_overhead"].max()),
+    }])
 
-def plot_routing_comparison(df, label, out_dir):
+
+def _sha256(path: str) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def validate_results(df: pd.DataFrame, G: nx.Graph) -> None:
+    expected_pairs = G.number_of_nodes() * (G.number_of_nodes() - 1) // 2
+    if len(df) != expected_pairs:
+        raise AssertionError(f"Se esperaban {expected_pairs} pares y hay {len(df)}")
+    if df[["origen", "destino"]].duplicated().any():
+        raise AssertionError("Hay pares duplicados")
+    if (df["mqr_skr_bottleneck"] + 1e-15 < df["sp_skr_bottleneck"]).any():
+        raise AssertionError("Una ruta max-min tiene menor cuello de botella")
+    if (df["hop_overhead"] < 0).any():
+        raise AssertionError("Una ruta max-min usa menos saltos que una ruta mínima")
+
+
+def plot_routing_comparison(df: pd.DataFrame, label: str, out_dir: str) -> None:
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
-    # Panel izquierdo: SKR Dijkstra vs max-SKR
     ax = axes[0]
-    valid = df[(df['sp_skr_bottleneck'] > 0) & (df['mqr_skr_bottleneck'] > 0)]
-    if not valid.empty:
-        ax.scatter(valid['sp_skr_bottleneck'], valid['mqr_skr_bottleneck'],
-                   alpha=0.5, s=20, color='steelblue')
-        lim_min = min(valid['sp_skr_bottleneck'].min(),
-                      valid['mqr_skr_bottleneck'].min()) * 0.5
-        lim_max = max(valid['sp_skr_bottleneck'].max(),
-                      valid['mqr_skr_bottleneck'].max()) * 2
-        ax.plot([lim_min, lim_max], [lim_min, lim_max],
-                'k--', lw=0.8, alpha=0.5, label='Igualdad')
-        ax.set_xscale('log')
-        ax.set_yscale('log')
-    ax.set_xlabel('SKR_bottleneck ruta corta (bits/pulso)')
-    ax.set_ylabel('SKR_bottleneck ruta máx-SKR (bits/pulso)')
-    ax.set_title(f'SKR de cuello de botella — {label}')
+    valid = df[
+        (df["sp_skr_bottleneck"] > 0)
+        & (df["mqr_skr_bottleneck"] > 0)
+    ]
+    ax.scatter(
+        valid["sp_skr_bottleneck"],
+        valid["mqr_skr_bottleneck"],
+        alpha=0.35,
+        s=14,
+        color="steelblue",
+    )
+    lim_min = min(
+        valid["sp_skr_bottleneck"].min(),
+        valid["mqr_skr_bottleneck"].min(),
+    ) * 0.8
+    lim_max = max(
+        valid["sp_skr_bottleneck"].max(),
+        valid["mqr_skr_bottleneck"].max(),
+    ) * 1.2
+    ax.plot(
+        [lim_min, lim_max],
+        [lim_min, lim_max],
+        "k--",
+        lw=0.8,
+        alpha=0.5,
+        label="Igualdad",
+    )
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlabel("Cuello de botella: mínimos saltos (bits/pulso)")
+    ax.set_ylabel("Cuello de botella: max-min (bits/pulso)")
+    ax.set_title("(a) Comparación por par")
     ax.legend(fontsize=8)
-    ax.grid(True, which='both', alpha=0.3)
+    ax.grid(True, which="both", alpha=0.3)
 
-    # Panel derecho: distribución de skr_gain
     ax2 = axes[1]
-    gains = df['skr_gain'].replace([np.inf, -np.inf], np.nan).dropna()
-    if not gains.empty:
-        ax2.hist(gains[gains <= 20], bins=30, color='steelblue', alpha=0.7,
-                 edgecolor='white')
-        ax2.axvline(1.0, color='black', lw=0.8, ls='--',
-                    label='Sin mejora (ratio=1)')
-        ax2.set_xlabel('Ratio SKR max-SKR / Dijkstra')
-        ax2.set_ylabel('Número de pares')
-        ax2.set_title('Mejora de SKR — ruta consciente vs saltos mínimos')
-        ax2.legend(fontsize=8)
-        ax2.grid(True, alpha=0.3)
+    gains = df["skr_gain"].replace([np.inf, -np.inf], np.nan).dropna()
+    ax2.hist(gains, bins=30, color="steelblue", alpha=0.7, edgecolor="white")
+    ax2.axvline(
+        1.0,
+        color="black",
+        lw=0.8,
+        ls="--",
+        label="Sin mejora",
+    )
+    mean_gain = gains.mean()
+    ax2.axvline(
+        mean_gain,
+        color="darkorange",
+        lw=1.0,
+        label=f"Media = {mean_gain:.2f}",
+    )
+    ax2.set_xlabel("Razón SKR max-min / mínimos saltos")
+    ax2.set_ylabel("Número de pares")
+    ax2.set_title("(b) Distribución de la mejora")
+    ax2.legend(fontsize=8)
+    ax2.grid(True, alpha=0.3)
 
-    fig.suptitle(f'Enrutamiento consciente de QKD — {label}', fontsize=12, y=1.01)
+    fig.suptitle(
+        f"Enrutamiento consciente del canal — {label}",
+        fontsize=12,
+        y=1.01,
+    )
     fig.tight_layout()
-
-    for ext in ('pdf', 'png'):
-        path = os.path.join(out_dir, f'comparacion_rutas_qkd.{ext}')
-        fig.savefig(path, dpi=150, bbox_inches='tight')
+    for ext in ("pdf", "png"):
+        path = os.path.join(out_dir, f"comparacion_rutas_qkd.{ext}")
+        metadata = {"CreationDate": None, "ModDate": None} if ext == "pdf" else {}
+        fig.savefig(path, dpi=150, bbox_inches="tight", metadata=metadata)
         print(f"Guardado: {path}")
     plt.close(fig)
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
+def main() -> None:
+    adj_csv = os.path.join(DATA_CYL, "AdjacencyMatrixNamed45.csv")
+    coords_csv = os.path.join(DATA_CYL, "cyl_1000.csv")
+    G = build_qkd_graph(adj_csv, coords_csv)
+    print(
+        f"Grafo CyL: |V|={G.number_of_nodes()}, "
+        f"|E|={G.number_of_edges()}"
+    )
 
-if __name__ == '__main__':
-    print("=" * 60)
-    print("Enrutamiento consciente de QKD — CyL")
-    print("=" * 60)
+    df = compare_routing(G)
+    validate_results(df, G)
+    summary = summarize(df, G)
+    summary = summary.assign(
+        adjacency_sha256=_sha256(adj_csv),
+        coordinates_sha256=_sha256(coords_csv),
+        skr_model_sha256=_sha256(
+            os.path.join(BASE, "..", "protocols", "skr_bb84.py")
+        ),
+        python_version=platform.python_version(),
+        networkx_version=nx.__version__,
+        pandas_version=pd.__version__,
+        numpy_version=np.__version__,
+        matplotlib_version=matplotlib.__version__,
+    )
 
-    adj_csv    = os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv')
-    coords_csv = os.path.join(DATA_CYL, 'cyl_1000.csv')
+    allpairs_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_allpairs.csv")
+    summary_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_summary.csv")
+    bottleneck_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_bottleneck.csv")
+    df.to_csv(allpairs_csv, index=False, float_format="%.17g")
+    summary.to_csv(summary_csv, index=False, float_format="%.17g")
+    df.nsmallest(10, "sp_skr_bottleneck").to_csv(
+        bottleneck_csv,
+        index=False,
+        float_format="%.17g",
+    )
 
-    if not os.path.exists(adj_csv):
-        print(f"No encontrado: {adj_csv}")
-        exit(1)
+    row = summary.iloc[0]
+    print(f"Pares analizados: {int(row['unordered_pairs'])}")
+    print(f"Mejora media SKR (ratio): {row['mean_skr_gain']:.12f}x")
+    print(f"Incremento medio de saltos: {row['mean_hop_overhead']:.12f}")
+    print(f"Guardado: {allpairs_csv}")
+    print(f"Guardado: {summary_csv}")
+    print(f"Guardado: {bottleneck_csv}")
+    plot_routing_comparison(df, "CyL (4.950 pares no ordenados)", FIGS_OUT)
 
-    G = build_qkd_graph(adj_csv, coords_csv, coords_sep=';')
-    print(f"Grafo CyL: |V|={G.number_of_nodes()}, |E|={G.number_of_edges()}")
 
-    print("Comparando rutas (Dijkstra vs max-SKR)...")
-    df = compare_routing(G, max_pairs=300)
-
-    if not df.empty:
-        print(f"\nPares analizados: {len(df)}")
-        print(f"Mejora media SKR (ratio): {df['skr_gain'].replace([np.inf], np.nan).mean():.2f}x")
-        print(f"Overhead de saltos (media): {df['hop_overhead'].mean():.2f}")
-
-        # Top-10 pares más limitados por SKR (cuello de botella más bajo)
-        bottleneck = df.nsmallest(10, 'sp_skr_bottleneck')[
-            ['origen', 'destino', 'sp_dist_km', 'sp_skr_bottleneck',
-             'mqr_skr_bottleneck', 'skr_gain']
-        ]
-        print("\nTop-10 pares más limitados (SKR_bottleneck Dijkstra):")
-        print(bottleneck.to_string(index=False))
-
-        out_csv = os.path.join(BASE, '..', 'datos', 'enrutamiento_qkd_bottleneck.csv')
-        df.to_csv(out_csv, index=False)
-        print(f"\nGuardado: {out_csv}")
-
-        plot_routing_comparison(df, 'CyL', FIGS_OUT)
-
-    print("Done.")
+if __name__ == "__main__":
+    main()
