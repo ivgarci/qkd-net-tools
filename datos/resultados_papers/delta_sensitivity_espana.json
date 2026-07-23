@@ -1,0 +1,373 @@
+{
+  "analysis": "alternative_geometric_delta_sensitivity_spain",
+  "inputs": {
+    "adjacency_csv": "datos/espana/AdjacencyMatrixNamed45.csv",
+    "adjacency_sha256": "bdc8557d059795c1fa60a581e4f7e5fa1995f3a97999462cb1d4126b9e67fa61",
+    "coordinates_csv": "datos/espana/peninsula_1000.csv",
+    "coordinates_sha256": "1009a225de825c1d318b798c6105e83263c8f0dfe8b0fe4cd718925ce7570a36",
+    "routing_core_sha256": "45b8211dbdd405f3097d9a4df859de3a267f3a8453e7948fcf07aef19eab2621",
+    "skr_model_sha256": "01bfdc3f0a49a6d55ac9c6936f9c3952792be7efef0290f44bdb1ab5ac2e2402"
+  },
+  "routing_policies": {
+    "max_min": "max bottleneck, then min hops",
+    "min_hops": "min hops, then max bottleneck"
+  },
+  "scenarios": [
+    {
+      "active_edges": 3494,
+      "active_nodes": 944,
+      "component_selection": {
+        "component_sizes": [
+          944
+        ],
+        "components_after_isolates": 1,
+        "isolated_nodes": 6,
+        "used_largest_component": false
+      },
+      "connected_full_graph": false,
+      "delta_km": 35.0,
+      "edge_diff_vs_snapshot": {
+        "added_edge_set_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "added_edges": 0,
+        "added_sample": [],
+        "common_edges": 3494,
+        "rebuilt_edge_set_sha256": "d84cdd67b1758f17e2293e68ac6c7aacd31fc94f9a410fec3f74721dcb376901",
+        "rebuilt_edges": 3494,
+        "removed_edge_set_sha256": "afe60a0c175a4492242bf52bd68157b7f5bebd13f215c3b3e00b0aa51c3dd50a",
+        "removed_edges": 2187,
+        "removed_sample": [
+          [
+            "Abadiño",
+            "Artziniega"
+          ],
+          [
+            "Abadiño",
+            "Irura"
+          ],
+          [
+            "Abadiño",
+            "Iruña Oka/Iruña de Oca"
+          ],
+          [
+            "Abadiño",
+            "Ordizia"
+          ],
+          [
+            "Abadiño",
+            "Plentzia"
+          ],
+          [
+            "Abadiño",
+            "Salvatierra/Agurain"
+          ],
+          [
+            "Abadiño",
+            "Santurtzi"
+          ],
+          [
+            "Abadiño",
+            "Zalla"
+          ],
+          [
+            "Abadiño",
+            "Zarautz"
+          ],
+          [
+            "Abadín",
+            "Castropol"
+          ]
+        ],
+        "snapshot_edge_set_sha256": "59a842e9f15b1419462741f418773c032c1e1a6660a1e5677b9d3c2bec678da0",
+        "snapshot_edges": 5681
+      },
+      "full_edges": 3494,
+      "full_nodes": 950,
+      "model_distance": "rho * haversine_km",
+      "rho": 1.0,
+      "routing": {
+        "finite_gain_pairs": 445096,
+        "max_hop_overhead": 93,
+        "max_skr_gain": 2.980810080916302,
+        "mean_hop_overhead": 24.469397613099197,
+        "mean_skr_gain": 1.4500117555198582,
+        "median_hop_overhead": 21.0,
+        "median_skr_gain": 1.485085897784109,
+        "non_finite_gain_pairs": 0,
+        "unordered_pairs": 445096
+      }
+    },
+    {
+      "active_edges": 4521,
+      "active_nodes": 947,
+      "component_selection": {
+        "component_sizes": [
+          947,
+          2
+        ],
+        "components_after_isolates": 2,
+        "isolated_nodes": 1,
+        "used_largest_component": true
+      },
+      "connected_full_graph": false,
+      "delta_km": 40.0,
+      "edge_diff_vs_snapshot": {
+        "added_edge_set_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "added_edges": 0,
+        "added_sample": [],
+        "common_edges": 4522,
+        "rebuilt_edge_set_sha256": "d1f753348cf8400ee054214f9ce0dfb2af9d43d2506dd306b3af2b0b069253c3",
+        "rebuilt_edges": 4522,
+        "removed_edge_set_sha256": "1585d99ce989b65308f9e0d2a06b7e0705b9067eccb6443d5594276dd7836967",
+        "removed_edges": 1159,
+        "removed_sample": [
+          [
+            "Abadiño",
+            "Artziniega"
+          ],
+          [
+            "Abadiño",
+            "Irura"
+          ],
+          [
+            "Abadiño",
+            "Iruña Oka/Iruña de Oca"
+          ],
+          [
+            "Abadiño",
+            "Zalla"
+          ],
+          [
+            "Abadín",
+            "Castropol"
+          ],
+          [
+            "Abadín",
+            "Fonsagrada (A)"
+          ],
+          [
+            "Abadín",
+            "Vicedo (O)"
+          ],
+          [
+            "Abenójar",
+            "Miguelturra"
+          ],
+          [
+            "Abrucena",
+            "Freila"
+          ],
+          [
+            "Abrucena",
+            "Purullena"
+          ]
+        ],
+        "snapshot_edge_set_sha256": "59a842e9f15b1419462741f418773c032c1e1a6660a1e5677b9d3c2bec678da0",
+        "snapshot_edges": 5681
+      },
+      "full_edges": 4522,
+      "full_nodes": 950,
+      "model_distance": "rho * haversine_km",
+      "rho": 1.0,
+      "routing": {
+        "finite_gain_pairs": 447931,
+        "max_hop_overhead": 93,
+        "max_skr_gain": 3.7381435512417176,
+        "mean_hop_overhead": 28.308788630391735,
+        "mean_skr_gain": 1.802472008081102,
+        "median_hop_overhead": 25.0,
+        "median_skr_gain": 1.8109841422215802,
+        "non_finite_gain_pairs": 0,
+        "unordered_pairs": 447931
+      }
+    },
+    {
+      "active_edges": 5690,
+      "active_nodes": 950,
+      "component_selection": {
+        "component_sizes": [
+          950
+        ],
+        "components_after_isolates": 1,
+        "isolated_nodes": 0,
+        "used_largest_component": false
+      },
+      "connected_full_graph": true,
+      "delta_km": 45.0,
+      "edge_diff_vs_snapshot": {
+        "added_edge_set_sha256": "130319b08a659df281d8c0e673fce65877564ef3ba186cb64685b8b7d4e959c4",
+        "added_edges": 14,
+        "added_sample": [
+          [
+            "Alhama de Aragón",
+            "Daroca"
+          ],
+          [
+            "Aretxabaleta",
+            "Sondika"
+          ],
+          [
+            "Benaoján",
+            "Bornos"
+          ],
+          [
+            "Benissanet",
+            "Valderrobres"
+          ],
+          [
+            "Béjar",
+            "Caminomorisco"
+          ],
+          [
+            "Campezo/Kanpezu",
+            "Ribera Baja/Erribera Beitia"
+          ],
+          [
+            "Chiva",
+            "Riola"
+          ],
+          [
+            "Fonsagrada (A)",
+            "Rábade"
+          ],
+          [
+            "Galapagar",
+            "Valdeolmos-Alalpardo"
+          ],
+          [
+            "Isona i Conca Dellà",
+            "Sant Llorenç de Morunys"
+          ]
+        ],
+        "common_edges": 5676,
+        "rebuilt_edge_set_sha256": "13960e090cf25a1c5d25bfddfc6b6e8ecbd09363ac6d89f4906ee06286929351",
+        "rebuilt_edges": 5690,
+        "removed_edge_set_sha256": "de9ec49ed243e76da5a4ca2c1ae74c178ef52c3e1bdd4d4ad43a990d96467bfc",
+        "removed_edges": 5,
+        "removed_sample": [
+          [
+            "Abrucena",
+            "Freila"
+          ],
+          [
+            "Alba de Tormes",
+            "Fuentesaúco"
+          ],
+          [
+            "Aroche",
+            "Puebla de Guzmán"
+          ],
+          [
+            "Carbonero el Mayor",
+            "Espinar (El)"
+          ],
+          [
+            "Jonquera (La)",
+            "Ullà"
+          ]
+        ],
+        "snapshot_edge_set_sha256": "59a842e9f15b1419462741f418773c032c1e1a6660a1e5677b9d3c2bec678da0",
+        "snapshot_edges": 5681
+      },
+      "full_edges": 5690,
+      "full_nodes": 950,
+      "model_distance": "rho * haversine_km",
+      "rho": 1.0,
+      "routing": {
+        "finite_gain_pairs": 450775,
+        "max_hop_overhead": 97,
+        "max_skr_gain": 4.667044550712791,
+        "mean_hop_overhead": 30.086127225334145,
+        "mean_skr_gain": 2.184496690757483,
+        "median_hop_overhead": 27.0,
+        "median_skr_gain": 2.178127757506145,
+        "non_finite_gain_pairs": 0,
+        "unordered_pairs": 450775
+      }
+    },
+    {
+      "active_edges": 6931,
+      "active_nodes": 950,
+      "component_selection": {
+        "component_sizes": [
+          950
+        ],
+        "components_after_isolates": 1,
+        "isolated_nodes": 0,
+        "used_largest_component": false
+      },
+      "connected_full_graph": true,
+      "delta_km": 50.0,
+      "edge_diff_vs_snapshot": {
+        "added_edge_set_sha256": "8d0289e226e0a8202d65dc588115a6f235fe839978e1f3fb5d6f7bef0ac1b95a",
+        "added_edges": 1250,
+        "added_sample": [
+          [
+            "Abadiño",
+            "Lasarte-Oria"
+          ],
+          [
+            "Abadiño",
+            "Olazti/Olazagutía"
+          ],
+          [
+            "Abadín",
+            "Aranga"
+          ],
+          [
+            "Abadín",
+            "Friol"
+          ],
+          [
+            "Abadín",
+            "Moeche"
+          ],
+          [
+            "Abenójar",
+            "Agudo"
+          ],
+          [
+            "Abenójar",
+            "Chillón"
+          ],
+          [
+            "Aceuchal",
+            "Badajoz"
+          ],
+          [
+            "Aceuchal",
+            "Bienvenida"
+          ],
+          [
+            "Aceuchal",
+            "Nava de Santiago (La)"
+          ]
+        ],
+        "common_edges": 5681,
+        "rebuilt_edge_set_sha256": "869c5d0c47e97d9ee664849f2ca1493b4b685c97b764702c21a1dfa65a62df82",
+        "rebuilt_edges": 6931,
+        "removed_edge_set_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removed_edges": 0,
+        "removed_sample": [],
+        "snapshot_edge_set_sha256": "59a842e9f15b1419462741f418773c032c1e1a6660a1e5677b9d3c2bec678da0",
+        "snapshot_edges": 5681
+      },
+      "full_edges": 6931,
+      "full_nodes": 950,
+      "model_distance": "rho * haversine_km",
+      "rho": 1.0,
+      "routing": {
+        "finite_gain_pairs": 450775,
+        "max_hop_overhead": 98,
+        "max_skr_gain": 5.779975799294357,
+        "mean_hop_overhead": 31.71222228384449,
+        "mean_skr_gain": 2.662456368650138,
+        "median_hop_overhead": 29.0,
+        "median_skr_gain": 2.618251916280587,
+        "non_finite_gain_pairs": 0,
+        "unordered_pairs": 450775
+      }
+    }
+  ],
+  "schema_version": 1,
+  "warning": "Cada escenario reconstruye un grafo alternativo desde coordenadas; no sustituye ni modifica el snapshot base."
+}

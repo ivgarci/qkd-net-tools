@@ -1,0 +1,155 @@
+{
+  "analysis": "adif_railway_graph_qkd_proxy_routing",
+  "graph": {
+    "component_sizes": [
+      2735,
+      15,
+      6,
+      2,
+      2
+    ],
+    "components": 5,
+    "connected_node_rows": 2761,
+    "distance_max_km": 53.2,
+    "distance_min_km": 0.0,
+    "edge_rows": 5862,
+    "edge_rows_outside_connected_nodes": 0,
+    "lcc_edges": 2910,
+    "lcc_nodes": 2735,
+    "node_rows": 3085,
+    "positive_skr_edges": 2910,
+    "skr_max": 0.010279084287739115,
+    "skr_min_positive": 0.0008788623070676662,
+    "unique_edges_before_lcc": 2931,
+    "zero_skr_edges": 0
+  },
+  "inputs": {
+    "edges_csv": "datos/adif/adyacencia_red_adif.csv",
+    "edges_sha256": "7789c15fd0b01874336b1a978f2ec6f56db4d412efe4b8a4db04c11b85a33dcb",
+    "nodes_csv": "datos/adif/nodos_red_adif.csv",
+    "nodes_sha256": "6ce5f5086b120b0d23e7d2cd868ea8215a6655650aa83cfde665466d8c375c6a",
+    "routing_core_sha256": "45b8211dbdd405f3097d9a4df859de3a267f3a8453e7948fcf07aef19eab2621",
+    "skr_model_sha256": "01bfdc3f0a49a6d55ac9c6936f9c3952792be7efef0290f44bdb1ab5ac2e2402"
+  },
+  "model": {
+    "distance_filter_applied": false,
+    "name": "ideal_asymptotic_bb84",
+    "zero_skr_edges_preserved": true
+  },
+  "routing": {
+    "finite_skr_gain": {
+      "count": 3738745,
+      "max": 6.231954608843877,
+      "mean": 2.8593050667271256,
+      "min": 1.0,
+      "std_population": 1.3793099156358923
+    },
+    "gain_status_counts": {
+      "both_zero": 0,
+      "finite": 3738745,
+      "rescued_from_zero": 0
+    },
+    "geographic_bins": {
+      "[0,100)": {
+        "finite_skr_gain": {
+          "count": 256907,
+          "max": 6.120903417412394,
+          "mean": 1.2565898976515506,
+          "min": 1.0,
+          "std_population": 0.6106441477852296
+        },
+        "hop_overhead": {
+          "count": 256907,
+          "max": 243.0,
+          "mean": 13.321921940624625,
+          "min": 0.0,
+          "std_population": 30.460316726873042
+        },
+        "pairs": 256907
+      },
+      "[100,300)": {
+        "finite_skr_gain": {
+          "count": 962633,
+          "max": 6.231954608843877,
+          "mean": 2.5329038560995003,
+          "min": 1.0,
+          "std_population": 1.4276629092109863
+        },
+        "hop_overhead": {
+          "count": 962633,
+          "max": 246.0,
+          "mean": 44.86196816439935,
+          "min": 0.0,
+          "std_population": 44.32856883302623
+        },
+        "pairs": 962633
+      },
+      "[300,500)": {
+        "finite_skr_gain": {
+          "count": 1167461,
+          "max": 6.231954608843877,
+          "mean": 3.0870697080834204,
+          "min": 1.0,
+          "std_population": 1.3244470024322237
+        },
+        "hop_overhead": {
+          "count": 1167461,
+          "max": 333.0,
+          "mean": 80.21622649493341,
+          "min": 0.0,
+          "std_population": 49.97976798168469
+        },
+        "pairs": 1167461
+      },
+      "[500,700)": {
+        "finite_skr_gain": {
+          "count": 954065,
+          "max": 5.5484937674964385,
+          "mean": 3.1152784351668728,
+          "min": 1.0,
+          "std_population": 1.1494231857999544
+        },
+        "hop_overhead": {
+          "count": 954065,
+          "max": 323.0,
+          "mean": 102.17522705475919,
+          "min": 0.0,
+          "std_population": 46.71212090519071
+        },
+        "pairs": 954065
+      },
+      "[700,+inf)": {
+        "finite_skr_gain": {
+          "count": 397679,
+          "max": 5.27531862219389,
+          "mean": 3.402033636274459,
+          "min": 1.0,
+          "std_population": 1.367796255546393
+        },
+        "hop_overhead": {
+          "count": 397679,
+          "max": 316.0,
+          "mean": 130.46508113327502,
+          "min": 0.0,
+          "std_population": 49.541253624270965
+        },
+        "pairs": 397679
+      }
+    },
+    "hop_overhead": {
+      "count": 3738745,
+      "max": 333.0,
+      "mean": 77.46515287883797,
+      "min": 0.0,
+      "std_population": 56.39997734811072
+    },
+    "ratio_policy": "skr_gain solo se calcula cuando el cuello de botella de la ruta min-hops es positivo; los casos ambos cero y rescatados desde cero se cuentan por separado.",
+    "unordered_pairs": 3738745
+  },
+  "routing_policies": {
+    "max_min": "max bottleneck, then min hops",
+    "min_hops": "min hops, then max bottleneck"
+  },
+  "schema_version": 1,
+  "warning": "Las longitudes son ferroviarias y se usan como proxy de escenario; no acreditan fibra ni viabilidad óptica."
+}

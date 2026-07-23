@@ -26,8 +26,10 @@ from math import radians, sin, cos, sqrt, atan2
 BASE      = os.path.dirname(os.path.abspath(__file__))
 DATA_CYL  = os.path.join(BASE, '..', 'datos', 'cyl')
 DATA_ESP  = os.path.join(BASE, '..', 'datos', 'espana')
-PAPER_DIR = os.path.join(BASE, '..', '..', '..', 'articulos',
-                         'QKD-PAM-Generation', 'Figures')
+PAPER_DIR = os.environ.get(
+    'QKD_PAM_FIGURE_DIR',
+    os.path.join(BASE, '..', 'figuras', 'qkd_pam_generation'),
+)
 os.makedirs(PAPER_DIR, exist_ok=True)
 
 

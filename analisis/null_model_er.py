@@ -32,10 +32,9 @@ Salidas:
       red, protocolo, n_realizaciones, p_star_topo_mean, p_star_topo_std,
       p_star_svc_mean, p_star_svc_std, n_sin_p_topo, n_sin_p_svc
 
-Log: /Users/igarcia/doctorado/2025_2026/experimentos/exp10_null_model_er.log
+Log: ``logs/exp10_null_model_er.log`` por defecto.
 
 Uso:
-    cd /Users/igarcia/doctorado/2025_2026/codigo/qkd-net-tools
     python analisis/null_model_er.py
 """
 

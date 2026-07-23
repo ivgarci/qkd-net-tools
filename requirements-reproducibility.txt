@@ -16,4 +16,5 @@ Pygments==2.20.0
 pyparsing==3.3.2
 pytest==9.1.1
 python-dateutil==2.9.0.post0
+scipy==1.18.0
 six==1.17.0

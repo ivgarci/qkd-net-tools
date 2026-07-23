@@ -132,7 +132,7 @@ python -m venv .venv
 | Script | Directory | Description |
 |--------|-----------|-------------|
 | `skr_bb84.py` | `protocols/` | Ideal asymptotic BB84 SKR(d) model (Lo-Ma-Chen 2005; exact single-photon estimate, not a finite-decoy implementation); QBER(d); SKR per link for CyL/España; `figuras/skr_vs_distancia.pdf` |
-| `enrutamiento_qkd.py` | `analisis/` | Deterministic key-aware routing over all 4,950 unordered CyL pairs: minimum hops (tie: maximum bottleneck) vs max-min SKR (tie: minimum hops); full paths in `datos/enrutamiento_qkd_allpairs.csv`, summary and top-10 bottlenecks; `figuras/comparacion_rutas_qkd.pdf` |
+| `enrutamiento_qkd.py` | `analisis/` | Shared deterministic routing for CyL (`--case cyl`, 4,950 pairs with full paths) and Peninsular Spain (`--case espana`, 450,775 pairs in exact metrics-only mode): minimum hops (tie: maximum bottleneck) vs max-min SKR (tie: minimum hops). |
 | `benchmarks_qkd.py` | `analisis/` | Compare same metrics with real published QKD networks (Tokyo 2011, SECOQC 2009, China 2021); `datos/benchmarks_qkd_comparacion.csv` |
 
 ---
@@ -154,11 +154,20 @@ python -m venv .venv
 
 | Script | Description | Run |
 |--------|-------------|-----|
-| `analisis/enrutamiento_espana_completo.py` | All-pairs widest-path routing on the Spain 950-node PAM backbone (450,775 pairs); compares hop-minimal Dijkstra vs max-SKR bottleneck path; produces Tables 1–4 and Fig 2 | `python analisis/enrutamiento_espana_completo.py` |
-| `analisis/delta_sensitivity_espana.py` | Δ-threshold sensitivity analysis (Table 5); rebuilds Spain graph from 950 PAM relay coordinates for each Δ ∈ {35, 40, 45, 50} km; consistent with PAM-generated backbone | `python analisis/delta_sensitivity_espana.py` |
-| `analisis/generar_figuras_skr_routing.py` | Generates Fig 1 (SKR vs distance with calibrated BB84+decoy model, η_det=0.10), Fig 3 (Spain topology coloured by edge distance), Fig 4 (edge-distance and SKR distributions) | `python analisis/generar_figuras_skr_routing.py` |
+| `analisis/enrutamiento_espana_completo.py` | Exact all-pairs routing on the Spain 950-node PAM backbone (450,775 unordered pairs): minimum hops (tie: maximum SKR bottleneck) vs max-min SKR (tie: minimum hops). The canonical scenario uses geodesic distance (`--distance-factor 1.0`); `1.25` is available only as an explicitly labelled hypothetical fibre-distance scenario. All outputs stay inside this repository. | `python analisis/enrutamiento_espana_completo.py` |
+| `analisis/enrutamiento_qkd.py --case espana` | Equivalent shared runner using the same `routing_core`; Spain uses the exact metrics-only engine to avoid reconstructing 450,775 full paths. CyL remains the default when `--case` is omitted. | `python analisis/enrutamiento_qkd.py --case espana` |
+| `analisis/delta_sensitivity_espana.py` | Rebuilds alternative Spain graphs for Δ ∈ {35, 40, 45, 50} km, records hashes and the exact edge-set differences against the archived snapshot, and writes an independent deterministic JSON. | `python analisis/delta_sensitivity_espana.py` |
+| `analisis/generar_figuras_skr_routing.py` | Generates the paper figures with the canonical ideal asymptotic BB84 model. Any distance scaling is an explicit scenario, not an experimental calibration. | `python analisis/generar_figuras_skr_routing.py` |
 
-**Results**: `datos/resultados_papers/tablas_skr_routing.json` (Tables 1–5 aggregate stats), `datos/resultados_papers/enrutamiento_espana_allpairs.csv` (450,775 pair-level routing results)
+**Canonical routing results (`distance_factor=1.0`)**:
+`datos/resultados_papers/enrutamiento_espana_allpairs.csv`,
+`datos/resultados_papers/enrutamiento_espana_summary.csv`, and
+`figuras/comparacion_rutas_qkd_espana.pdf/.png`. Δ-sensitivity and ADIF write
+their own summaries. The former mixed `tablas_skr_routing.json` was removed
+because it combined stale results, placeholders and incompatible models.
+The exact scenario definitions, aggregate checks and long-running null-model
+status are documented in
+[`docs/ROUTING_SCENARIOS.md`](docs/ROUTING_SCENARIOS.md).
 
 ---
 

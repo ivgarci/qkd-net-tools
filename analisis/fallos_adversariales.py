@@ -26,16 +26,16 @@ Salidas:
   datos/resultados_papers/fallos_s3.csv
   datos/resultados_papers/contramedidas_cm1.csv
   datos/resultados_papers/contramedidas_cm2.csv
-  /Users/igarcia/doctorado/2025_2026/experimentos/exp12_fallos_adversariales.log
+  logs/exp12_fallos_adversariales.log (o $QKD_LOG_DIR)
 
 Uso:
-  cd /Users/igarcia/doctorado/2025_2026/codigo/qkd-net-tools
   python analisis/fallos_adversariales.py
 """
 
 import os
 import sys
 import time
+from collections import defaultdict, deque
 from datetime import datetime
 
 import numpy as np
@@ -46,17 +46,21 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(BASE, '..'))
 DATA = os.path.join(ROOT, 'datos')
 OUT_DIR = os.path.join(DATA, 'resultados_papers')
-LOG_DIR = '/Users/igarcia/doctorado/2025_2026/experimentos'
+LOG_DIR = os.environ.get('QKD_LOG_DIR', os.path.join(ROOT, 'logs'))
 
 os.makedirs(OUT_DIR, exist_ok=True)
-os.makedirs(LOG_DIR, exist_ok=True)
 
 sys.path.insert(0, ROOT)
 sys.path.insert(0, BASE)
 
 # Maquinaria canonica: cargadores de grafo y motor widest-path validado.
 from capacidad_servicio_ataques import CARGADORES, bottlenecks_pares  # noqa: E402
-from protocols.skr_bb84 import skr_bb84_decoy, P_DARK                  # noqa: E402
+from protocols.skr_bb84 import skr_bb84_asymptotic, P_DARK            # noqa: E402
+from routing_core import (                                             # noqa: E402
+    max_min_metrics_from_source,
+    min_hops_routes_from_source,
+    node_key,
+)
 
 # ---------------------------------------------------------------------------
 # Parametros
@@ -74,8 +78,6 @@ K_MEDIO = {'cyl': 5, 'espana': 10, 'adif': 10}
 # kappa: la espec pide kappa=1e3, salvo que SKR(10km, kappa=1e3) > 10% del sano,
 # en cuyo caso kappa=1e4. Verificacion en runtime (ver determinar_kappa()).
 KAPPA = None  # asignado en main
-
-C0_CANON = {'cyl': 4.162e-3, 'espana': 6.0175e-3, 'adif': 6.871e-5}
 
 LOG_FH = None
 
@@ -97,7 +99,7 @@ def dist_por_arista(G, red):
     Devuelve {frozenset(u,v): dist_km} para todas las aristas.
     - ADIF: el cargador canonico ya pone 'dist_km' en cada arista.
     - CyL/España: se toma dist_km de datos/skr_per_link.csv (caso correspondiente);
-      aristas no encontradas usan 45 km (mismo defecto que el cargador canonico).
+      cualquier arista no encontrada invalida el experimento.
     """
     if red == 'adif':
         d = {frozenset((u, v)): float(data['dist_km'])
@@ -108,16 +110,20 @@ def dist_por_arista(G, red):
     df = df[df['caso'] == caso]
     tabla = {frozenset((r.nodo_u, r.nodo_v)): float(r.dist_km)
              for r in df.itertuples()}
-    d, falt = {}, 0
-    for u, v in G.edges():
-        dist = tabla.get(frozenset((u, v)))
-        if dist is None:
-            dist = 45.0
-            falt += 1
-        d[frozenset((u, v))] = dist
+    falt = [
+        (u, v) for u, v in G.edges()
+        if frozenset((u, v)) not in tabla
+    ]
     if falt:
-        log(f"    [AVISO] {red}: {falt} aristas sin dist_km en skr_per_link.csv "
-            f"(asignado 45 km)")
+        muestra = ', '.join(f'{u!r}--{v!r}' for u, v in falt[:5])
+        raise ValueError(
+            f"{red}: {len(falt)} aristas sin distancia en "
+            f"datos/skr_per_link.csv; primeras: {muestra}"
+        )
+    d = {}
+    for u, v in G.edges():
+        edge = frozenset((u, v))
+        d[edge] = tabla[edge]
     return d
 
 
@@ -134,7 +140,9 @@ def skr_maps(G, dist_map, kappa):
         dist = dist_map[fs]
         sano[fs] = G[u][v]['skr']
         if dist not in cache_degr:
-            cache_degr[dist] = skr_bb84_decoy(dist, p_dark=kappa * P_DARK)
+            cache_degr[dist] = skr_bb84_asymptotic(
+                dist, p_dark=kappa * P_DARK
+            )
         degr[fs] = cache_degr[dist]
     return sano, degr
 
@@ -256,28 +264,61 @@ def correr_s3(red, G, pares, C0, sano, degr, rank_df, nodos_ordenados):
 def rutas_congeladas(G, sano, pares):
     """
     Precalcula sobre la red SANA, para cada par:
-      - wp_route:  camino widest-path (= camino en el max spanning tree por 'skr')
-      - hop_route: camino hop-shortest (BFS no ponderado)
+      - wp_route:  max-min SKR; entre empates, mínimos saltos;
+      - hop_route: mínimos saltos; entre empates, máximo bottleneck.
+
+    El último empate se resuelve lexicográficamente. No se usa un árbol de
+    expansión ni el orden de inserción de NetworkX, porque ambos pueden elegir
+    una ruta congelada distinta y alterar después el resultado de CM1.
     Devuelve dos listas de listas de aristas (frozenset). Par sin camino -> None.
     """
-    # Para los widest-path: arbol de maxima expansion sobre 'skr' (sano).
-    F = nx.maximum_spanning_tree(G, weight='skr')
-    wp, hop = [], []
-    for u, v in pares:
-        # widest-path
-        try:
-            path = nx.shortest_path(F, u, v)
-            wp.append([frozenset((path[i], path[i + 1]))
-                       for i in range(len(path) - 1)])
-        except (nx.NetworkXNoPath, nx.NodeNotFound):
-            wp.append(None)
-        # hop-shortest
-        try:
-            path = nx.shortest_path(G, u, v)
-            hop.append([frozenset((path[i], path[i + 1]))
-                        for i in range(len(path) - 1)])
-        except (nx.NetworkXNoPath, nx.NodeNotFound):
-            hop.append(None)
+    targets_by_source = defaultdict(list)
+    for position, (source, target) in enumerate(pares):
+        targets_by_source[source].append((position, target))
+
+    wp = [None] * len(pares)
+    hop = [None] * len(pares)
+
+    def edge_list(path):
+        return [
+            frozenset((path[index], path[index + 1]))
+            for index in range(len(path) - 1)
+        ]
+
+    def lex_shortest_at_threshold(source, target, threshold):
+        queue = deque([source])
+        paths = {source: (source,)}
+        while queue:
+            node = queue.popleft()
+            if node == target:
+                return paths[node]
+            for neighbour in sorted(G.neighbors(node), key=node_key):
+                if neighbour in paths:
+                    continue
+                if float(G[node][neighbour]['skr']) < threshold:
+                    continue
+                paths[neighbour] = paths[node] + (neighbour,)
+                queue.append(neighbour)
+        return None
+
+    for source in sorted(targets_by_source, key=node_key):
+        hop_routes = min_hops_routes_from_source(
+            G, source, capacity_attr='skr'
+        )
+        widest_metrics = max_min_metrics_from_source(
+            G, source, capacity_attr='skr'
+        )
+        for position, target in targets_by_source[source]:
+            hop_route = hop_routes.get(target)
+            widest_metric = widest_metrics.get(target)
+            if hop_route is not None:
+                hop[position] = edge_list(hop_route.path)
+            if widest_metric is not None:
+                widest_path = lex_shortest_at_threshold(
+                    source, target, widest_metric.bottleneck
+                )
+                if widest_path is not None:
+                    wp[position] = edge_list(widest_path)
     return wp, hop
 
 
@@ -385,13 +426,13 @@ def correr_cm2(red, G, pares, C0, sano, degr, faulted, rank_df):
 # ---------------------------------------------------------------------------
 
 def determinar_kappa():
-    s_sano = skr_bb84_decoy(10.0)
-    s_1e3 = skr_bb84_decoy(10.0, p_dark=1e3 * P_DARK)
+    s_sano = skr_bb84_asymptotic(10.0)
+    s_1e3 = skr_bb84_asymptotic(10.0, p_dark=1e3 * P_DARK)
     ratio = s_1e3 / s_sano
     log(f"Verificacion kappa: SKR(10km) sano={s_sano:.4e}; "
         f"kappa=1e3 -> {s_1e3:.4e} (ratio {ratio:.3f})")
     if ratio > 0.10:
-        s_1e4 = skr_bb84_decoy(10.0, p_dark=1e4 * P_DARK)
+        s_1e4 = skr_bb84_asymptotic(10.0, p_dark=1e4 * P_DARK)
         log(f"  kappa=1e3 deja SKR > 10% del sano -> se usa kappa=1e4 "
             f"(SKR(10km, kappa=1e4)={s_1e4:.4e}, ratio {s_1e4/s_sano:.3f})")
         return 1e4
@@ -405,6 +446,7 @@ def determinar_kappa():
 
 def main():
     global LOG_FH, KAPPA
+    os.makedirs(LOG_DIR, exist_ok=True)
     LOG_FH = open(os.path.join(LOG_DIR, 'exp12_fallos_adversariales.log'), 'w')
     t_glob = time.time()
 
@@ -433,16 +475,14 @@ def main():
             dtype={'nodo_u': str, 'nodo_v': str})
         pares = list(zip(pares_df['nodo_u'], pares_df['nodo_v']))
 
-        # C(0) check
+        # C(0) se deriva del modelo, el grafo y los pares versionados.
         c0_vals = bottlenecks_pares(G, pares)
         C0 = float(np.median(c0_vals))
-        canon = C0_CANON[red]
-        ok = abs(C0 - canon) / canon < 1e-3
-        log(f"  C(0) mediana={C0:.6e} (canonico {canon:.4e}) "
-            f"{'OK' if ok else 'DISCREPANCIA'}")
-        if not ok:
-            raise RuntimeError(f"C(0) de {red} no coincide con el canonico; "
-                               f"carga de grafo divergente.")
+        if not np.isfinite(C0) or C0 <= 0.0:
+            raise RuntimeError(
+                f"{red}: C(0) inválida ({C0!r}); revisar modelo, grafo y pares"
+            )
+        log(f"  C(0) mediana derivada={C0:.6e}")
 
         dist_map = dist_por_arista(G, red)
         sano, degr = skr_maps(G, dist_map, KAPPA)

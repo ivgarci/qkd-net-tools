@@ -1,7 +1,7 @@
 """
-Análisis reproducible de enrutamiento consciente de QKD para Castilla y León.
+Análisis reproducible de enrutamiento consciente de QKD para CyL y España.
 
-Para cada uno de los 4.950 pares no ordenados de los 100 nodos se comparan:
+Para todos los pares no ordenados del caso elegido se comparan:
 
 1. ``min_hops``: mínimo número de saltos y, entre esos caminos, máximo
    cuello de botella SKR.
@@ -13,18 +13,23 @@ según el nombre Unicode de los nodos. Esta última regla no cambia las métrica
 pero hace que el camino publicado sea independiente del orden de inserción de
 NetworkX.
 
-Salidas:
-  datos/enrutamiento_qkd_allpairs.csv
-  datos/enrutamiento_qkd_summary.csv
-  datos/enrutamiento_qkd_bottleneck.csv
+CyL es el caso predeterminado y conserva rutas completas para sus 4.950 pares.
+España usa el mismo núcleo exacto en modo métrico para sus 450.775 pares, sin
+almacenar centenares de miles de secuencias de nodos.
+
+Salidas CyL:
+  datos/enrutamiento_qkd_{allpairs,summary,bottleneck}.csv
   figuras/comparacion_rutas_qkd.pdf/.png
+
+Salidas España:
+  datos/resultados_papers/enrutamiento_espana_{allpairs,summary}.csv
+  figuras/comparacion_rutas_qkd_espana.pdf/.png
 """
 
 from __future__ import annotations
 
-import heapq
+import argparse
 import hashlib
-import itertools
 import math
 import os
 import platform
@@ -40,214 +45,67 @@ import pandas as pd
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATA_CYL = os.path.join(BASE, "..", "datos", "cyl")
+DATA_ESP = os.path.join(BASE, "..", "datos", "espana")
 DATA_OUT = os.path.join(BASE, "..", "datos")
+PAPER_OUT = os.path.join(DATA_OUT, "resultados_papers")
 FIGS_OUT = os.path.join(BASE, "..", "figuras")
 os.makedirs(FIGS_OUT, exist_ok=True)
 
 sys.path.insert(0, os.path.join(BASE, ".."))
 from protocols.skr_bb84 import _haversine, skr_bb84_asymptotic  # noqa: E402
-
-def _node_key(node: Hashable) -> tuple[str, str]:
-    """Clave total y estable incluso si un grafo mezcla tipos de nodo."""
-    return type(node).__name__, str(node)
-
-
-def _path_distance(G: nx.Graph, path: list[Hashable]) -> float:
-    return sum(
-        float(G[u][v]["dist_km"])
-        for u, v in itertools.pairwise(path)
-    )
-
-
-def _path_bottleneck(G: nx.Graph, path: list[Hashable]) -> float:
-    if len(path) < 2:
-        return math.inf
-    return min(
-        float(G[u][v]["SKR"])
-        for u, v in itertools.pairwise(path)
-    )
+from analisis.routing_core import (  # noqa: E402
+    compare_route_metrics,
+    compare_routes,
+    load_qkd_graph,
+    max_bottleneck_min_hops_path,
+    shortest_max_bottleneck_path,
+)
 
 
 def build_qkd_graph(
     adj_csv: str,
     coords_csv: str,
     coords_sep: str = ";",
+    distance_factor: float = 1.0,
 ) -> nx.Graph:
-    """Carga el grafo y asigna distancia geodésica y SKR a cada arista.
+    """Carga el grafo y asigna distancia de enlace y SKR a cada arista.
 
     No se imputan distancias. Una coordenada ausente invalidaría el análisis y
-    por ello se informa como error.
+    por ello se informa como error. ``distance_factor=1`` conserva la distancia
+    geodésica canónica; otros factores son escenarios explícitos.
     """
-    adj = pd.read_csv(adj_csv, index_col=0)
-    if list(adj.index) != list(adj.columns):
-        raise ValueError("La matriz de adyacencia no tiene iguales filas y columnas")
-    if not np.array_equal(adj.to_numpy(), adj.to_numpy().T):
-        raise ValueError("La matriz de adyacencia no es simétrica")
-
-    G = nx.from_pandas_adjacency(adj)
-    coords_df = pd.read_csv(coords_csv, delimiter=coords_sep)
-    coords_df.columns = [str(c).strip().lstrip("\ufeff") for c in coords_df.columns]
-    required = {"Población", "Latitud", "Longitud"}
-    if not required.issubset(coords_df.columns):
-        raise ValueError(
-            f"Faltan columnas en {coords_csv}: {sorted(required - set(coords_df.columns))}"
-        )
-
-    coords = {
-        row["Población"]: (float(row["Latitud"]), float(row["Longitud"]))
-        for _, row in coords_df.iterrows()
-    }
-    missing = sorted(set(G.nodes) - set(coords), key=_node_key)
-    if missing:
-        raise ValueError(f"Faltan coordenadas para {len(missing)} nodos: {missing[:5]}")
-
-    for u, v in G.edges:
-        lat1, lon1 = coords[u]
-        lat2, lon2 = coords[v]
-        dist = _haversine(lat1, lon1, lat2, lon2)
-        G[u][v]["dist_km"] = dist
-        G[u][v]["SKR"] = skr_bb84_asymptotic(dist)
-
-    if not nx.is_connected(G):
-        raise ValueError("El grafo de CyL no es conexo; no existen los 4.950 pares")
-    return G
-
-
-def _shortest_preferred_path(
-    G: nx.Graph,
-    source: Hashable,
-    target: Hashable,
-) -> tuple[float, list[Hashable]]:
-    """Dijkstra por (saltos, -cuello de botella, camino lexicográfico)."""
-    if source not in G or target not in G:
-        raise nx.NodeNotFound(f"Nodo ausente: {source!r} o {target!r}")
-    if source == target:
-        return math.inf, [source]
-
-    source_path_key = (_node_key(source),)
-    # heap: (prioridad primaria, secundaria, camino canónico, nodo, camino)
-    heap = [(0.0, -math.inf, source_path_key, source, [source])]
-    best: dict[Hashable, tuple[float, float, tuple[tuple[str, str], ...]]] = {
-        source: (0.0, -math.inf, source_path_key)
-    }
-
-    while heap:
-        first, second, path_key, node, path = heapq.heappop(heap)
-        label = (first, second, path_key)
-        if label != best.get(node):
-            continue
-        if node == target:
-            bottleneck = _path_bottleneck(G, path)
-            return bottleneck, path
-
-        current_hops = len(path) - 1
-        current_bottleneck = _path_bottleneck(G, path)
-        for nbr in sorted(G.neighbors(node), key=_node_key):
-            edge_skr = float(G[node][nbr].get("SKR", 0.0))
-            candidate_bottleneck = min(current_bottleneck, edge_skr)
-            candidate_hops = current_hops + 1
-            candidate_path_key = path_key + (_node_key(nbr),)
-            candidate = (
-                float(candidate_hops),
-                -candidate_bottleneck,
-                candidate_path_key,
-            )
-            if candidate < best.get(nbr, (math.inf, math.inf, ())):
-                best[nbr] = candidate
-                heapq.heappush(
-                    heap,
-                    (*candidate, nbr, path + [nbr]),
-                )
-
-    return 0.0, []
-
-
-def shortest_max_bottleneck_path(
-    G: nx.Graph,
-    source: Hashable,
-    target: Hashable,
-) -> tuple[float, list[Hashable]]:
-    """Camino de saltos mínimos; entre empates, mayor SKR mínima."""
-    return _shortest_preferred_path(G, source, target)
+    return load_qkd_graph(
+        adj_csv,
+        coords_csv,
+        skr_bb84_asymptotic,
+        coordinates_sep=coords_sep,
+        distance_factor=distance_factor,
+        haversine=_haversine,
+    )
 
 
 def max_skr_path(
     G: nx.Graph,
-    source: Hashable,
-    target: Hashable,
-) -> tuple[float, list[Hashable]]:
+    source,
+    target,
+):
     """Camino max-min SKR; entre empates, menor número de saltos."""
-    if source not in G or target not in G:
-        raise nx.NodeNotFound(f"Nodo ausente: {source!r} o {target!r}")
-    if source == target:
-        return math.inf, [source]
-
-    # Fase 1: capacidad widest-path. Aquí una capacidad mayor sí domina a una
-    # menor para cualquier continuación, por lo que basta una etiqueta por nodo.
-    best = {source: math.inf}
-    heap = [(-math.inf, _node_key(source), source)]
-    while heap:
-        neg_capacity, _, node = heapq.heappop(heap)
-        capacity = -neg_capacity
-        if capacity != best.get(node):
-            continue
-        for nbr in sorted(G.neighbors(node), key=_node_key):
-            candidate = min(capacity, float(G[node][nbr].get("SKR", 0.0)))
-            if candidate > best.get(nbr, -math.inf):
-                best[nbr] = candidate
-                heapq.heappush(heap, (-candidate, _node_key(nbr), nbr))
-
-    max_bottleneck = best.get(target, 0.0)
-    if max_bottleneck <= 0:
-        return 0.0, []
-
-    # Fase 2: el camino con menos saltos dentro del subgrafo que conserva
-    # exactamente la capacidad max-min. _shortest_preferred_path añade el desempate
-    # lexicográfico final.
-    eligible = nx.subgraph_view(
-        G,
-        filter_edge=lambda u, v: float(G[u][v].get("SKR", 0.0))
-        >= max_bottleneck,
-    )
-    bottleneck, path = _shortest_preferred_path(eligible, source, target)
-    if not path:
-        raise AssertionError("La segunda fase no recuperó el camino max-min")
-    return bottleneck, path
+    return max_bottleneck_min_hops_path(G, source, target)
 
 
 def compare_routing(
     G: nx.Graph,
     pairs: list[tuple[Hashable, Hashable]] | None = None,
+    *,
+    metrics_only: bool = False,
 ) -> pd.DataFrame:
-    """Compara ambos criterios para todos los pares no ordenados."""
-    nodes = sorted(G.nodes, key=_node_key)
-    if pairs is None:
-        pairs = list(itertools.combinations(nodes, 2))
+    """Compara ambos criterios para todos los pares no ordenados.
 
-    rows = []
-    for u, v in pairs:
-        sp_skr, sp_path = shortest_max_bottleneck_path(G, u, v)
-        mqr_skr, mqr_path = max_skr_path(G, u, v)
-        if not sp_path or not mqr_path:
-            raise nx.NetworkXNoPath(f"No hay camino entre {u!r} y {v!r}")
-
-        sp_hops = len(sp_path) - 1
-        mqr_hops = len(mqr_path) - 1
-        rows.append({
-            "origen": str(u),
-            "destino": str(v),
-            "sp_hops": sp_hops,
-            "sp_dist_km": _path_distance(G, sp_path),
-            "sp_skr_bottleneck": sp_skr,
-            "sp_path": " -> ".join(map(str, sp_path)),
-            "mqr_hops": mqr_hops,
-            "mqr_dist_km": _path_distance(G, mqr_path),
-            "mqr_skr_bottleneck": mqr_skr,
-            "mqr_path": " -> ".join(map(str, mqr_path)),
-            "skr_gain": mqr_skr / sp_skr,
-            "hop_overhead": mqr_hops - sp_hops,
-        })
-    return pd.DataFrame(rows)
+    El modo métrico evita reconstruir 450.775 caminos completos en España,
+    pero conserva exactamente los dos criterios y sus desempates cuantitativos.
+    """
+    runner = compare_route_metrics if metrics_only else compare_routes
+    return pd.DataFrame(runner(G, pairs))
 
 
 def summarize(df: pd.DataFrame, G: nx.Graph) -> pd.DataFrame:
@@ -294,7 +152,13 @@ def validate_results(df: pd.DataFrame, G: nx.Graph) -> None:
         raise AssertionError("Una ruta max-min usa menos saltos que una ruta mínima")
 
 
-def plot_routing_comparison(df: pd.DataFrame, label: str, out_dir: str) -> None:
+def plot_routing_comparison(
+    df: pd.DataFrame,
+    label: str,
+    out_dir: str,
+    *,
+    output_stem: str = "comparacion_rutas_qkd",
+) -> None:
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
     ax = axes[0]
@@ -302,12 +166,16 @@ def plot_routing_comparison(df: pd.DataFrame, label: str, out_dir: str) -> None:
         (df["sp_skr_bottleneck"] > 0)
         & (df["mqr_skr_bottleneck"] > 0)
     ]
+    scatter = valid
+    if len(scatter) > 5_000:
+        scatter = scatter.sample(n=5_000, random_state=42)
     ax.scatter(
-        valid["sp_skr_bottleneck"],
-        valid["mqr_skr_bottleneck"],
+        scatter["sp_skr_bottleneck"],
+        scatter["mqr_skr_bottleneck"],
         alpha=0.35,
         s=14,
         color="steelblue",
+        rasterized=len(valid) > 5_000,
     )
     lim_min = min(
         valid["sp_skr_bottleneck"].min(),
@@ -363,30 +231,80 @@ def plot_routing_comparison(df: pd.DataFrame, label: str, out_dir: str) -> None:
     )
     fig.tight_layout()
     for ext in ("pdf", "png"):
-        path = os.path.join(out_dir, f"comparacion_rutas_qkd.{ext}")
+        path = os.path.join(out_dir, f"{output_stem}.{ext}")
         metadata = {"CreationDate": None, "ModDate": None} if ext == "pdf" else {}
         fig.savefig(path, dpi=150, bbox_inches="tight", metadata=metadata)
         print(f"Guardado: {path}")
     plt.close(fig)
 
 
-def main() -> None:
-    adj_csv = os.path.join(DATA_CYL, "AdjacencyMatrixNamed45.csv")
-    coords_csv = os.path.join(DATA_CYL, "cyl_1000.csv")
-    G = build_qkd_graph(adj_csv, coords_csv)
+def run_case(case: str, distance_factor: float = 1.0) -> pd.DataFrame:
+    """Ejecuta un caso con rutas completas (CyL) o métricas exactas (España)."""
+    if case == "cyl":
+        if not math.isclose(distance_factor, 1.0, rel_tol=0.0, abs_tol=0.0):
+            raise ValueError(
+                "CyL solo admite el escenario canónico distance_factor=1.0; "
+                "no se sobrescribirán sus artefactos con una escala alternativa"
+            )
+        adj_csv = os.path.join(DATA_CYL, "AdjacencyMatrixNamed45.csv")
+        coords_csv = os.path.join(DATA_CYL, "cyl_1000.csv")
+        network_label = "CyL"
+        metrics_only = False
+        allpairs_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_allpairs.csv")
+        summary_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_summary.csv")
+        bottleneck_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_bottleneck.csv")
+        figure_stem = "comparacion_rutas_qkd"
+        figure_label = "CyL (4.950 pares no ordenados)"
+    elif case == "espana":
+        adj_csv = os.path.join(DATA_ESP, "AdjacencyMatrixNamed45.csv")
+        coords_csv = os.path.join(DATA_ESP, "peninsula_1000.csv")
+        network_label = "España"
+        metrics_only = True
+        os.makedirs(PAPER_OUT, exist_ok=True)
+        allpairs_csv = os.path.join(
+            PAPER_OUT, "enrutamiento_espana_allpairs.csv"
+        )
+        summary_csv = os.path.join(
+            PAPER_OUT, "enrutamiento_espana_summary.csv"
+        )
+        bottleneck_csv = None
+        figure_stem = "comparacion_rutas_qkd_espana"
+        figure_label = "España (450.775 pares no ordenados)"
+    else:
+        raise ValueError(f"Caso no admitido: {case!r}")
+
+    G = build_qkd_graph(
+        adj_csv,
+        coords_csv,
+        distance_factor=distance_factor,
+    )
     print(
-        f"Grafo CyL: |V|={G.number_of_nodes()}, "
-        f"|E|={G.number_of_edges()}"
+        f"Grafo {network_label}: |V|={G.number_of_nodes()}, "
+        f"|E|={G.number_of_edges()}, factor de distancia={distance_factor:g}"
     )
 
-    df = compare_routing(G)
+    df = compare_routing(G, metrics_only=metrics_only)
     validate_results(df, G)
     summary = summarize(df, G)
+    if case == "espana":
+        summary = summary.assign(
+            case=case,
+            distance_factor=distance_factor,
+            distance_scenario=(
+                "geodesic_canonical"
+                if distance_factor == 1.0
+                else "explicit_scaled_distance_scenario"
+            ),
+            routing_output_mode="metrics_only",
+        )
     summary = summary.assign(
         adjacency_sha256=_sha256(adj_csv),
         coordinates_sha256=_sha256(coords_csv),
         skr_model_sha256=_sha256(
             os.path.join(BASE, "..", "protocols", "skr_bb84.py")
+        ),
+        routing_core_sha256=_sha256(
+            os.path.join(BASE, "routing_core.py")
         ),
         python_version=platform.python_version(),
         networkx_version=nx.__version__,
@@ -395,16 +313,14 @@ def main() -> None:
         matplotlib_version=matplotlib.__version__,
     )
 
-    allpairs_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_allpairs.csv")
-    summary_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_summary.csv")
-    bottleneck_csv = os.path.join(DATA_OUT, "enrutamiento_qkd_bottleneck.csv")
     df.to_csv(allpairs_csv, index=False, float_format="%.17g")
     summary.to_csv(summary_csv, index=False, float_format="%.17g")
-    df.nsmallest(10, "sp_skr_bottleneck").to_csv(
-        bottleneck_csv,
-        index=False,
-        float_format="%.17g",
-    )
+    if bottleneck_csv is not None:
+        df.nsmallest(10, "sp_skr_bottleneck").to_csv(
+            bottleneck_csv,
+            index=False,
+            float_format="%.17g",
+        )
 
     row = summary.iloc[0]
     print(f"Pares analizados: {int(row['unordered_pairs'])}")
@@ -412,8 +328,44 @@ def main() -> None:
     print(f"Incremento medio de saltos: {row['mean_hop_overhead']:.12f}")
     print(f"Guardado: {allpairs_csv}")
     print(f"Guardado: {summary_csv}")
-    print(f"Guardado: {bottleneck_csv}")
-    plot_routing_comparison(df, "CyL (4.950 pares no ordenados)", FIGS_OUT)
+    if bottleneck_csv is not None:
+        print(f"Guardado: {bottleneck_csv}")
+    plot_routing_comparison(
+        df,
+        figure_label,
+        FIGS_OUT,
+        output_stem=figure_stem,
+    )
+    return summary
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Enrutamiento QKD reproducible para CyL o España."
+    )
+    parser.add_argument(
+        "--case",
+        choices=("cyl", "espana"),
+        default="cyl",
+        help="Caso de estudio (por defecto: cyl).",
+    )
+    parser.add_argument(
+        "--distance-factor",
+        type=float,
+        default=1.0,
+        help=(
+            "Multiplicador explícito de la distancia geodésica. "
+            "El escenario canónico usa 1.0; para España, 1.25 está disponible "
+            "solo como escenario hipotético de longitud de fibra. CyL rechaza "
+            "factores no canónicos para no sobrescribir sus artefactos."
+        ),
+    )
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> None:
+    args = parse_args(argv)
+    run_case(args.case, distance_factor=args.distance_factor)
 
 
 if __name__ == "__main__":
