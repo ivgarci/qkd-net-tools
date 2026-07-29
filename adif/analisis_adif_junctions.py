@@ -178,6 +178,8 @@ print(f"  Grado: min={min(degrees)}, max={max(degrees)}, medio={np.mean(degrees)
 dists = [d['dist_km'] for _, _, d in J.edges(data=True) if d.get('dist_km') is not None]
 print(f"  Dist. aristas (km): min={min(dists):.1f}, max={max(dists):.1f}, "
       f"media={np.mean(dists):.1f}, p90={np.percentile(dists, 90):.1f}")
+print(f"  Dist. aristas (km), percentiles: p25={np.percentile(dists, 25):.1f}, "
+      f"mediana={np.percentile(dists, 50):.1f}, p75={np.percentile(dists, 75):.1f}")
 long_j = [(u, J.nodes[u]['nombre'], v, J.nodes[v]['nombre'], J[u][v]['dist_km'])
           for u, v in J.edges() if J[u][v].get('dist_km', 0) > DELTA_REF]
 print(f"  Aristas > {DELTA_REF} km en junctions: {len(long_j)}")
