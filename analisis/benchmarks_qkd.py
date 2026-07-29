@@ -220,6 +220,19 @@ def compute_metrics(G, label):
 # Figura comparativa
 # ---------------------------------------------------------------------------
 
+def _draw_metric_panel(ax, df, metric, colors_palette, with_title=True, fontsize_title=8,
+                        fontsize_ticks=7, title_sep='\n'):
+    vals  = df[metric].values
+    casos = df['caso'].values
+    colors = [colors_palette[j % 10] for j in range(len(casos))]
+    ax.bar(range(len(casos)), vals, color=colors, alpha=0.8, edgecolor='white')
+    ax.set_xticks(range(len(casos)))
+    ax.set_xticklabels(casos, rotation=45, ha='right', fontsize=fontsize_ticks)
+    if with_title:
+        ax.set_title(metric.replace('_', title_sep), fontsize=fontsize_title)
+    ax.grid(True, axis='y', alpha=0.3)
+
+
 def plot_benchmarks(df_full, out_dir):
     """Figura de radar/barras comparando métricas entre casos."""
     metrics_to_plot = ['eficiencia_global', 'asortatividad',
@@ -236,14 +249,7 @@ def plot_benchmarks(df_full, out_dir):
     colors_palette = plt.cm.tab10.colors
 
     for i, (ax, metric) in enumerate(zip(axes, metrics_to_plot)):
-        vals  = df[metric].values
-        casos = df['caso'].values
-        colors = [colors_palette[j % 10] for j in range(len(casos))]
-        bars = ax.bar(range(len(casos)), vals, color=colors, alpha=0.8, edgecolor='white')
-        ax.set_xticks(range(len(casos)))
-        ax.set_xticklabels(casos, rotation=45, ha='right', fontsize=7)
-        ax.set_title(metric.replace('_', '\n'), fontsize=8)
-        ax.grid(True, axis='y', alpha=0.3)
+        _draw_metric_panel(ax, df, metric, colors_palette)
 
     fig.suptitle('Comparación de métricas — redes QKD reales vs casos de tesis',
                  fontsize=11, y=1.02)
@@ -254,6 +260,27 @@ def plot_benchmarks(df_full, out_dir):
         fig.savefig(path, dpi=150, bbox_inches='tight')
         print(f"Guardado: {path}")
     plt.close(fig)
+
+    # Paneles individuales, uno por métrica, más grandes (para la tesis)
+    metric_stems = {
+        'eficiencia_global': 'benchmarks_qkd_eficiencia_global',
+        'asortatividad':     'benchmarks_qkd_asortatividad',
+        'clustering_medio':  'benchmarks_qkd_clustering_medio',
+        'lambda2':           'benchmarks_qkd_lambda2',
+        'densidad':          'benchmarks_qkd_densidad',
+    }
+    for metric in metrics_to_plot:
+        fig, ax = plt.subplots(figsize=(6, 5.5))
+        _draw_metric_panel(ax, df, metric, colors_palette, with_title=False,
+                            fontsize_ticks=9)
+        ax.set_ylabel(metric.replace('_', ' '))
+        fig.tight_layout()
+        stem = metric_stems[metric]
+        for ext in ('pdf', 'png'):
+            path = os.path.join(out_dir, f'{stem}.{ext}')
+            fig.savefig(path, dpi=150, bbox_inches='tight')
+            print(f"Guardado (panel individual): {path}")
+        plt.close(fig)
 
 
 # ---------------------------------------------------------------------------

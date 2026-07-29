@@ -112,29 +112,34 @@ def load_static_results(data_dir, N):
 # Figura comparativa dinámico vs estático
 # ---------------------------------------------------------------------------
 
+def _draw_case(ax, caso, with_title=True):
+    df_din = caso['df_dynamic']
+    ax.plot(df_din['p_pct'], df_din['S_rel'], '-',
+            color='darkred', lw=2.0, label='Dinámico ($C_B$ recalculada)')
+
+    df_est = caso.get('df_static')
+    if df_est is not None:
+        ax.plot(df_est['p_pct'], df_est['S_rel'], '--',
+                color='steelblue', lw=1.8, label='Estático ($C_B$ fija)')
+
+    ax.axhline(0.5, color='black', lw=0.8, ls=':', alpha=0.5)
+    if with_title:
+        ax.set_title(caso['label'])
+    ax.set_xlabel(r'Fracción eliminada $p$ (%)')
+    ax.set_xlim(0, df_din['p_pct'].max())
+    ax.set_ylim(0, 1.05)
+    ax.xaxis.set_major_locator(mticker.MultipleLocator(10))
+    ax.legend(loc='upper right')
+    ax.grid(True, alpha=0.3)
+
+
 def plot_dynamic_vs_static(casos, out_dir):
     fig, axes = plt.subplots(1, len(casos), figsize=(7 * len(casos), 5), sharey=True)
     if len(casos) == 1:
         axes = [axes]
 
     for ax, caso in zip(axes, casos):
-        df_din = caso['df_dynamic']
-        ax.plot(df_din['p_pct'], df_din['S_rel'], '-',
-                color='darkred', lw=2.0, label='Dinámico ($C_B$ recalculada)')
-
-        df_est = caso.get('df_static')
-        if df_est is not None:
-            ax.plot(df_est['p_pct'], df_est['S_rel'], '--',
-                    color='steelblue', lw=1.8, label='Estático ($C_B$ fija)')
-
-        ax.axhline(0.5, color='black', lw=0.8, ls=':', alpha=0.5)
-        ax.set_title(caso['label'])
-        ax.set_xlabel(r'Fracción eliminada $p$ (%)')
-        ax.set_xlim(0, df_din['p_pct'].max())
-        ax.set_ylim(0, 1.05)
-        ax.xaxis.set_major_locator(mticker.MultipleLocator(10))
-        ax.legend(loc='upper right')
-        ax.grid(True, alpha=0.3)
+        _draw_case(ax, caso)
 
     axes[0].set_ylabel(r'$S(p) = |GCC| / |V|$')
     fig.suptitle('Ataque dinámico vs estático por intermediación — redes QKD',
@@ -145,6 +150,22 @@ def plot_dynamic_vs_static(casos, out_dir):
         path = os.path.join(out_dir, f'dinamico_vs_estatico.{ext}')
         fig.savefig(path, dpi=150, bbox_inches='tight')
         print(f"Guardado: {path}")
+    plt.close(fig)
+
+
+def plot_dynamic_vs_static_single(caso, out_dir, filename_stem):
+    """Guarda un único panel (caso) como figura independiente y más grande,
+    para su uso en la tesis (una figura por instancia en vez de subplots
+    compartidos)."""
+    fig, ax = plt.subplots(figsize=(8, 5.5))
+    _draw_case(ax, caso, with_title=True)
+    ax.set_ylabel(r'$S(p) = |GCC| / |V|$')
+    fig.tight_layout()
+
+    for ext in ('pdf', 'png'):
+        path = os.path.join(out_dir, f'{filename_stem}.{ext}')
+        fig.savefig(path, dpi=150, bbox_inches='tight')
+        print(f"Guardado (panel individual): {path}")
     plt.close(fig)
 
 
@@ -159,12 +180,19 @@ if __name__ == '__main__':
         {'label': r'CyL ($|V|=100$)',
          'adj': os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv'),
          'out': os.path.join(DATA_CYL, 'dynamic_betweenness_attack_results.csv'),
-         'data_dir': DATA_CYL},
+         'data_dir': DATA_CYL,
+         'stem': 'dinamico_vs_estatico_cyl'},
         {'label': r'España ($|V|=950$)',
          'adj': os.path.join(DATA_ESP, 'AdjacencyMatrixNamed45.csv'),
          'out': os.path.join(DATA_ESP, 'dynamic_betweenness_attack_results.csv'),
-         'data_dir': DATA_ESP},
+         'data_dir': DATA_ESP,
+         'stem': 'dinamico_vs_estatico_esp'},
     ]
+
+    # Si el CSV del ataque dinámico ya está archivado (el barrido completo
+    # tarda 20-60 min para España), se reutiliza en lugar de recalcularlo.
+    # Fijar USE_CACHE=0 en el entorno para forzar la recomputación completa.
+    USE_CACHE = os.environ.get('USE_CACHE', '1') != '0'
 
     results_plot = []
 
@@ -177,14 +205,18 @@ if __name__ == '__main__':
         N = G.number_of_nodes()
         print(f"  |V|={N}, |E|={G.number_of_edges()}")
 
-        df_dynamic = simulate_dynamic_attack(
-            G,
-            centrality_func=nx.betweenness_centrality,
-            p_steps=p_steps,
-            label=caso['label'],
-        )
-        df_dynamic.to_csv(caso['out'], index=False)
-        print(f"\n  Guardado: {caso['out']}")
+        if USE_CACHE and os.path.exists(caso['out']):
+            df_dynamic = pd.read_csv(caso['out'])
+            print(f"  Cargado de caché: {caso['out']} ({len(df_dynamic)} filas)")
+        else:
+            df_dynamic = simulate_dynamic_attack(
+                G,
+                centrality_func=nx.betweenness_centrality,
+                p_steps=p_steps,
+                label=caso['label'],
+            )
+            df_dynamic.to_csv(caso['out'], index=False)
+            print(f"\n  Guardado: {caso['out']}")
 
         df_static = load_static_results(caso['data_dir'], N)
 
@@ -192,6 +224,7 @@ if __name__ == '__main__':
             'label': caso['label'],
             'df_dynamic': df_dynamic,
             'df_static': df_static,
+            'stem': caso['stem'],
         })
 
         # Resumen p*
@@ -206,4 +239,8 @@ if __name__ == '__main__':
 
     print("\nGenerando figura comparativa...")
     plot_dynamic_vs_static(results_plot, FIGS_OUT)
+
+    print("\nGenerando paneles individuales (para la tesis)...")
+    for caso in results_plot:
+        plot_dynamic_vs_static_single(caso, FIGS_OUT, caso['stem'])
     print("Done.")

@@ -264,8 +264,8 @@ python skr_bb84.py
 
 ## Reproducibility notes | Reproducibilidad
 
-- **ADIF junction graph**: fully deterministic given the input CSVs (no random seed needed for the graph structure itself).
-- **Random failures**: seed fixed via `random.seed(42)` + `numpy.random.seed(42)` in all simulation scripts.
+- **ADIF junction graph**: the graph *structure* (nodes, edges, degrees, k-core values) is fully deterministic given the input CSVs. Node *order* was not, until 2026-07-29: `adif/analisis_adif_junctions.py` built the set of kept nodes with a Python `set` comprehension, whose iteration order depends on `PYTHONHASHSEED` (randomised per process). Since most of the 485 junction nodes are degree 1 or 2, that unstable order propagated into the degree-attack tie-break (`sorted(..., key=degree)` is stable, so ties fall back to insertion order) and into the random-failure sampling order, producing a different $p^\star$ across runs (5%, 6%, 8% observed). Fixed by building `keep` as a deterministic sorted list instead of a set; verified byte-identical JSON output across three separate process runs.
+- **Random failures**: seed fixed via `random.seed(42)` + `numpy.random.seed(42)` in all simulation scripts. Note that a fixed seed alone does not guarantee reproducibility if the *input sequence* it samples from (e.g. the node list) is itself built from an unordered collection — see the ADIF note above for a concrete case that was fixed.
 - **PAM clustering**: seed fixed in `medoids.R` — see inline comment.
 - **Girvan–Newman**: deterministic given the graph.
 - **Louvain communities**: `seed=42` passed to `nx_comm.louvain_communities()`.

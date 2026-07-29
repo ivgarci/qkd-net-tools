@@ -1,7 +1,11 @@
 """
-Versión en español para la tesis, con paneles individuales por caso.
-El fork en inglés para reutilización en otro artículo está en
-k_core_decomposition_en.py (sin las adiciones específicas de la tesis).
+Bifurcado el 2026-07-29 de analisis/k_core_decomposition.py (etiquetas en
+inglés para reutilización en otro artículo). k_core_decomposition.py pasó
+a tener etiquetas en español y paneles individuales para la tesis; este
+fichero conserva el comportamiento e idioma previos, sin las adiciones
+específicas de la tesis. Mantener sincronizados manualmente los cambios
+que no sean de idioma (correcciones de datos, nuevas métricas) si aplican
+a ambos.
 
 Descomposición k-core para los tres casos de estudio QKD.
 
@@ -154,7 +158,7 @@ def plot_kcore_panel(ax, G, core_numbers, label):
         labels = {n: str(n)[:10] for n in inner}
         nx.draw_networkx_labels(G, pos, labels=labels, ax=ax, font_size=4.5)
 
-    ax.set_title(f'{label}\n$k_{{max}}={max_k}$, núcleo interno: {len(inner)} nodos',
+    ax.set_title(f'{label}\n$k_{{max}}={max_k}$, inner core: {len(inner)} nodes',
                  fontsize=9)
     ax.axis('off')
 
@@ -162,19 +166,6 @@ def plot_kcore_panel(ax, G, core_numbers, label):
                                norm=plt.Normalize(vmin=0, vmax=max_k))
     sm.set_array([])
     plt.colorbar(sm, ax=ax, fraction=0.03, pad=0.02, label='k-core')
-
-
-def plot_kcore_single(G, core_numbers, label, out_dir, filename_stem):
-    """Panel individual, más grande, de un único caso (para la tesis)."""
-    fig, ax = plt.subplots(figsize=(8, 7))
-    plot_kcore_panel(ax, G, core_numbers, label)
-    fig.tight_layout()
-
-    for ext in ('pdf', 'png'):
-        path = os.path.join(out_dir, f'{filename_stem}.{ext}')
-        fig.savefig(path, dpi=150, bbox_inches='tight')
-        print(f"Guardado (panel individual): {path}")
-    plt.close(fig)
 
 
 # ---------------------------------------------------------------------------
@@ -187,15 +178,15 @@ if __name__ == '__main__':
     print("=" * 60)
 
     grafos = [
-        ('CyL (|V|=100)',    load_cyl,               'cyl',    'k_core_jerarquia_cyl'),
-        ('España (|V|=950)', load_espana,             'espana', 'k_core_jerarquia_esp'),
-        ('ADIF (|V|≈485)',   load_adif_junction_graph, 'adif',  'k_core_jerarquia_adif'),
+        ('CyL (|V|=100)',    load_cyl,               'cyl'),
+        ('Spain (|V|=950)',  load_espana,             'espana'),
+        ('ADIF (|V|≈485)',   load_adif_junction_graph, 'adif'),
     ]
 
     all_rows = []
     results = []
 
-    for label, loader, tag, stem in grafos:
+    for label, loader, tag in grafos:
         try:
             G = loader()
         except Exception as e:
@@ -203,7 +194,7 @@ if __name__ == '__main__':
             continue
 
         core_numbers, max_k, shells = kcore_stats(G, label)
-        results.append((label, G, core_numbers, stem))
+        results.append((label, G, core_numbers))
 
         for node, k in core_numbers.items():
             all_rows.append({'caso': label, 'nodo': str(node), 'k_core_index': k})
@@ -220,10 +211,10 @@ if __name__ == '__main__':
         if len(results) == 1:
             axes = [axes]
 
-        for ax, (label, G, core_numbers, stem) in zip(axes, results):
+        for ax, (label, G, core_numbers) in zip(axes, results):
             plot_kcore_panel(ax, G, core_numbers, label)
 
-        fig.suptitle('Jerarquía k-core — casos de estudio QKD',
+        fig.suptitle('k-core hierarchy — QKD case studies',
                      fontsize=12, y=1.01)
         fig.tight_layout()
 
@@ -232,9 +223,5 @@ if __name__ == '__main__':
             fig.savefig(path, dpi=150, bbox_inches='tight')
             print(f"Guardado: {path}")
         plt.close(fig)
-
-        print("\nGenerando paneles individuales (para la tesis)...")
-        for label, G, core_numbers, stem in results:
-            plot_kcore_single(G, core_numbers, label, FIGS_OUT, stem)
 
     print("\nDone.")

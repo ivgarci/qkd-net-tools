@@ -1,7 +1,10 @@
 """
-Versión en español para la tesis, con paneles individuales por caso.
-El fork en inglés para reutilización en otro artículo está en
-ataques_aristas_en.py (sin las adiciones específicas de la tesis).
+Bifurcado el 2026-07-29 de ataques/ataques_aristas.py (etiquetas en inglés
+para reutilización en otro artículo). ataques_aristas.py pasó a tener
+etiquetas en español y paneles individuales para la tesis; este fichero
+conserva el comportamiento e idioma previos, sin las adiciones específicas
+de la tesis. Mantener sincronizados manualmente los cambios que no sean de
+idioma (correcciones de datos, nuevas métricas) si aplican a ambos.
 
 Ataques sobre aristas (enlaces) de redes QKD.
 
@@ -114,10 +117,32 @@ def plot_edge_attacks(casos, out_dir):
         axes = [axes]
 
     for ax, caso in zip(axes, casos):
-        _draw_edge_attack_case(ax, caso)
+        df = caso['df']
+        ax.plot(df['p_pct'], df['S_rel'], '-',
+                color='darkorange', lw=2.0, label='Edge attack ($C_B^e$)')
+        ax.axhline(0.5, color='black', lw=0.8, ls=':', alpha=0.5)
 
-    axes[0].set_ylabel(r'$S(p) = |\mathrm{GCC}| / |V|$')
-    fig.suptitle('Resiliencia bajo ataques a enlaces — redes QKD',
+        ps = next(
+            (int(row.p_pct) for row in df.itertuples() if row.S_rel < 0.5),
+            None
+        )
+        if ps is not None:
+            ax.axvline(ps, color='darkorange', lw=0.8, ls=':', alpha=0.6)
+            ax.text(ps + 0.5, 0.53, rf'$p^*={ps}\%$',
+                    color='darkorange', fontsize=8)
+
+        n_bridges = caso.get('n_bridges', 0)
+        ax.set_title(f"{caso['label']}\n"
+                     f"Bridges: {n_bridges}  |  Top edge: {caso.get('top_edge', '—')}")
+        ax.set_xlabel(r'Fraction of edges removed $p$ (%)')
+        ax.set_xlim(0, df['p_pct'].max())
+        ax.set_ylim(0, 1.05)
+        ax.xaxis.set_major_locator(mticker.MultipleLocator(10))
+        ax.legend(loc='upper right')
+        ax.grid(True, alpha=0.3)
+
+    axes[0].set_ylabel(r'$S(p) = |\mathrm{LCC}| / |V|$')
+    fig.suptitle('Resilience under edge attacks — QKD networks',
                  fontsize=12, y=1.01)
     fig.tight_layout()
 
@@ -125,47 +150,6 @@ def plot_edge_attacks(casos, out_dir):
         path = os.path.join(out_dir, f'ataques_aristas_3casos.{ext}')
         fig.savefig(path, dpi=150, bbox_inches='tight')
         print(f"Guardado: {path}")
-    plt.close(fig)
-
-
-def _draw_edge_attack_case(ax, caso, with_title=True):
-    df = caso['df']
-    ax.plot(df['p_pct'], df['S_rel'], '-',
-            color='darkorange', lw=2.0, label=r'Ataque aristas ($C_B^e$)')
-    ax.axhline(0.5, color='black', lw=0.8, ls=':', alpha=0.5)
-
-    ps = next(
-        (int(row.p_pct) for row in df.itertuples() if row.S_rel < 0.5),
-        None
-    )
-    if ps is not None:
-        ax.axvline(ps, color='darkorange', lw=0.8, ls=':', alpha=0.6)
-        ax.text(ps + 0.5, 0.53, rf'$p^*={ps}\%$',
-                color='darkorange', fontsize=8)
-
-    n_bridges = caso.get('n_bridges', 0)
-    if with_title:
-        ax.set_title(f"{caso['label']}\n"
-                     f"Puentes: {n_bridges}  |  Top arista: {caso.get('top_edge', '—')}")
-    ax.set_xlabel(r'Fracción de aristas eliminadas $p$ (%)')
-    ax.set_xlim(0, df['p_pct'].max())
-    ax.set_ylim(0, 1.05)
-    ax.xaxis.set_major_locator(mticker.MultipleLocator(10))
-    ax.legend(loc='upper right')
-    ax.grid(True, alpha=0.3)
-
-
-def plot_edge_attack_single(caso, out_dir, filename_stem):
-    """Panel individual, más grande, de un único caso (para la tesis)."""
-    fig, ax = plt.subplots(figsize=(8, 5.5))
-    _draw_edge_attack_case(ax, caso, with_title=True)
-    ax.set_ylabel(r'$S(p) = |\mathrm{GCC}| / |V|$')
-    fig.tight_layout()
-
-    for ext in ('pdf', 'png'):
-        path = os.path.join(out_dir, f'{filename_stem}.{ext}')
-        fig.savefig(path, dpi=150, bbox_inches='tight')
-        print(f"Guardado (panel individual): {path}")
     plt.close(fig)
 
 
@@ -183,12 +167,10 @@ if __name__ == '__main__':
     casos_config = [
         {'label': r'CyL ($|V|=100$)',
          'adj': os.path.join(DATA_CYL, 'AdjacencyMatrixNamed45.csv'),
-         'out': os.path.join(DATA_CYL, 'edge_attack_results.csv'),
-         'stem': 'ataques_aristas_cyl'},
+         'out': os.path.join(DATA_CYL, 'edge_attack_results.csv')},
         {'label': r'España ($|V|=950$)',
          'adj': os.path.join(DATA_ESP, 'AdjacencyMatrixNamed45.csv'),
-         'out': os.path.join(DATA_ESP, 'edge_attack_results.csv'),
-         'stem': 'ataques_aristas_esp'},
+         'out': os.path.join(DATA_ESP, 'edge_attack_results.csv')},
     ]
 
     casos_plot = []
@@ -216,19 +198,9 @@ if __name__ == '__main__':
             'df': df,
             'n_bridges': len(bridges),
             'top_edge': top_edge_str,
-            'stem': cfg['stem'],
         })
 
-    # Añadir ADIF desde el JSON pre-computado si existe.
-    #
-    # NOTA DE REPRODUCIBILIDAD (actualizado 2026-07-29): datos/adif/resultados_adif_junctions.json
-    # dependía antes del orden de iteración de un `set` de Python (PYTHONHASHSEED) en
-    # adif/analisis_adif_junctions.py, lo que hacía que p* (ataque por grado) variara entre
-    # ejecuciones (se observaron 5 %, 6 % y 8 % en distintos runs; ver pendientes.md §2.1).
-    # Corregido fijando un orden canónico determinista de los nodos conservados en la
-    # contracción de cadenas: el JSON actual es ahora reproducible de forma exacta
-    # (p*=8 % verificado estable en múltiples ejecuciones), por lo que ya no hace falta
-    # fijar un snapshot archivado aparte.
+    # Intentar añadir ADIF desde JSON pre-computado si existe
     adif_json = os.path.join(DATA_ADIF, 'resultados_adif_junctions.json')
     if os.path.exists(adif_json):
         with open(adif_json) as f:
@@ -245,13 +217,8 @@ if __name__ == '__main__':
                 'df': df_adif,
                 'n_bridges': 138,
                 'top_edge': 'ver JSON',
-                'stem': 'ataques_aristas_adif',
             })
 
     print("\nGenerando figura...")
     plot_edge_attacks(casos_plot, FIGS_OUT)
-
-    print("\nGenerando paneles individuales (para la tesis)...")
-    for caso in casos_plot:
-        plot_edge_attack_single(caso, FIGS_OUT, caso['stem'])
     print("Done.")

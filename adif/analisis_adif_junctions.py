@@ -112,8 +112,12 @@ def build_junction_graph(G):
     grado = 1 (extremos). El peso de cada arista resultante es la
     suma de dist_km a lo largo del camino contraído.
     """
-    # Identificar nodos que se conservan
-    keep = {n for n in G.nodes() if G.degree(n) != 2}
+    # Identificar nodos que se conservan.
+    # Orden determinista (no un `set`): un `set` de cadenas depende de
+    # PYTHONHASHSEED, que Python aleatoriza por proceso, y ese orden se
+    # propaga a J.nodes() y de ahí al desempate de grado en los ataques
+    # dirigidos y al muestreo de fallos aleatorios (ver pendientes.md §2.1).
+    keep = sorted(n for n in G.nodes() if G.degree(n) != 2)
 
     J = nx.Graph()
     for n in keep:
