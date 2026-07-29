@@ -157,7 +157,10 @@ def _construir_junctions(G):
     nodos con grado ≠ 2; el peso de cada arista resultante es la suma de
     dist_km del camino contraído (si hay rutas paralelas, la más corta).
     """
-    keep = {n for n in G.nodes() if G.degree(n) != 2}
+    # Orden determinista (no un `set`): evita dependencia de PYTHONHASHSEED
+    # en J.nodes() (mismo arreglo que adif/analisis_adif_junctions.py; ver
+    # pendientes.md §2).
+    keep = sorted(n for n in G.nodes() if G.degree(n) != 2)
     J = nx.Graph()
     for n in keep:
         J.add_node(n, **G.nodes[n])

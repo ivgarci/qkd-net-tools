@@ -77,7 +77,10 @@ print(f"  LCC: {G_lcc.number_of_nodes()} nodos, {G_lcc.number_of_edges()} arista
 print("Construyendo grafo de junctions...")
 
 def build_junction_graph(G):
-    keep = {n for n in G.nodes() if G.degree(n) != 2}
+    # Orden determinista (no un `set`): evita dependencia de PYTHONHASHSEED
+    # en J.nodes() (mismo arreglo que adif/analisis_adif_junctions.py; ver
+    # pendientes.md §2).
+    keep = sorted(n for n in G.nodes() if G.degree(n) != 2)
     J = nx.Graph()
     for n in keep:
         J.add_node(n, **G.nodes[n])

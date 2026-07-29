@@ -82,8 +82,11 @@ def load_adif_junction_graph():
     comps = sorted(nx.connected_components(G_full), key=len, reverse=True)
     G_lcc = G_full.subgraph(comps[0]).copy()
 
-    # Contracción de nodos grado 2 → junctions
-    keep = {n for n in G_lcc.nodes() if G_lcc.degree(n) != 2}
+    # Contracción de nodos grado 2 → junctions.
+    # Orden determinista (no un `set`): evita dependencia de PYTHONHASHSEED
+    # en J.nodes() (mismo arreglo que adif/analisis_adif_junctions.py; ver
+    # pendientes.md §2).
+    keep = sorted(n for n in G_lcc.nodes() if G_lcc.degree(n) != 2)
     J = nx.Graph()
     for n in keep:
         J.add_node(n, **G_lcc.nodes[n])
